@@ -1,7 +1,7 @@
 <div align="center">
 
 # ANTEPROYECTO PARA SOLICITAR LA REALIZACIÓN DEL MÓDULO
-# QuickCart
+# PROYECTO
 
 </div>
 
@@ -24,10 +24,13 @@
 ### 1. IDENTIFICACIÓN <a name="id1"></a>
 
 
-+ Nombre del proyecto:
-+ Alumno:
-+ Curso:
-+ Tutor:
++ Nombre del proyecto: QuickCart
++ Alumnos:
+  - Alejandro Pérez Martín
+  - Raúl González Martín
+  - Javier García Domínguez
++ Curso: 2º Desarrollo de Aplicaciones Web
++ Tutor: Alejandro Martín Zarza
 
 ### 2. OBJETIVOS <a name="id2"></a>
 
