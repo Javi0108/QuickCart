@@ -38,7 +38,7 @@ siempre y cuando no sean seres vivos. Esta aplicación estará pensada también 
 envíos a estos lugares, los cuales sufren de muchos problemas para el envío de productos.
 
 ### 3. PREANÁLISIS DE LO EXISTENTE <a name="id3"></a>
-Este mercado está liderado por grandes multinacionales así como, Amazon, Ebay o Wallapop, por lo que es difícil destacar ante ellos, es por eso por lo que nosotros pretendemos cambiar un poco el sentido del mercado. Nuestra instención es ayudar al comercio local de --nuestro país/de todo el mundo-- ya que asi ayudaríamos a la economía provincial y nacional. 
+Este mercado está liderado por grandes multinacionales así como, Amazon, Ebay o Wallapop, por lo que es difícil destacar ante ellos, es por eso por lo que nosotros pretendemos cambiar un poco el sentido del mercado. Nuestra instención es ayudar al comercio local de **nuestro país/de todo el mundo** ya que asi ayudaríamos a la economía provincial y nacional. 
 
 ### 4. PRE-ANÁLISIS DEL SISTEMA <a name="id4"></a>
 Los requisitos que nuestro equipo está dispuesto a satisfacer para el cliente son los siguientes:
