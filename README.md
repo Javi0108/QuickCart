@@ -55,7 +55,7 @@ Los requisitos que nuestro equipo está dispuesto a satisfacer para el cliente s
 
   En cuanto al despliegue del sistema, tenemos pensado utilizar las máquinas virtuales de Azure. Ya que ofrece una amplia gama de servicios y herramientas que facilitan el despliegue y la gestión de la infraestructura.
 
-  También se ha tenido en cuenta el hardware necesarío y se ha contemplado que no necesitaremos hardware adicional por el momento, el único coste extra el cual ha sido la maquina virtual para el despliegue ya ha sido tomado en cuenta y está especificado en el desglose de costos totales.
+  También se ha tenido en cuenta el hardware necesario y se ha contemplado que no necesitaremos hardware adicional por el momento, el único coste extra el cual ha sido la maquina virtual para el despliegue ya ha sido tomado en cuenta y está especificado en el desglose de costos totales.
 
 ### 6. ESTIMACIÓN DE COSTES <a name="id6"></a>
 
@@ -63,7 +63,7 @@ Los requisitos que nuestro equipo está dispuesto a satisfacer para el cliente s
 
   Este proyecto tomará en su totalidad 78 días, siendo un total de 156 horas de trabajo aproximadamente por componente. Comenzando el 4 de marzo y finalizando el 21 de mayo.  Se comenzará por  la creación del anteproyecto con fecha límite el 4 de marzo.
 
-  Después se continuará con el análisis y posterior diseño de la aplicación desde el 6 de marzo hasta el 9 de ese mismo mes. En este apartado se crearán diferentes diagramas. S realizarán los diagramas de casos de uso, de clases y el modelo de Entidad-Relación de la base de datos. Así tambien emepzando y finalizando el diseño de los modelos para dar paso a la siguiente etapa.
+  Después se continuará con el análisis y posterior diseño de la aplicación desde el 6 de marzo hasta el 9 de ese mismo mes. En este apartado se crearán diferentes diagramas. S realizarán los diagramas de casos de uso, de clases y el modelo de Entidad-Relación de la base de datos. Así tambien empezando y finalizando el diseño de los modelos para dar paso a la siguiente etapa.
 
   Seguidamente comenzará la etapa de codificación abarcando desde el 9 de marzo hasta el 17 de mayo. Esta está inicialmente dividida en diferentes apartados.
 
