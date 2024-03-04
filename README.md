@@ -61,7 +61,7 @@ Los requisitos que nuestro equipo está dispuesto a satisfacer para el cliente s
 >
 
 #### 6.2 ESTIMACIÓN ECONÓMICA
-Coste aproximado de la página web: **6.427**€
+Coste aproximado de la página web: **6.427€**
 
 - Dominio y servidor. Los precios pueden variar en función de tus necesidades y el tráfico que esperes tener.
   - Coste aproximado del dominio por 10 años $\rightarrow$ ~69.50€
