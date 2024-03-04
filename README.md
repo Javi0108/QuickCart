@@ -53,18 +53,19 @@ Los requisitos que nuestro equipo está dispuesto a satisfacer para el cliente s
 
 ### 6. ESTIMACIÓN DE COSTES <a name="id6"></a>
 
+#### 6.1 ESTIMACIÓN TEMPORAL
+
 >Estimar el coste que representará la creación del proyecto para la empresa. Esta estimación será temporal y económica si procede.
 >
 >    • Temporal: Tiempo le llevará la realización del proyecto que propone, incluyendo el tiempo para el desarrollo del proyecto y el tiempo para la preparación de la documentación. 
 >
->    • Económica: Cálculo de la inversión material que se precisaría para realizar el proyecto. En este apartado solo se considerará el material del que aun no disponga la empresa y que por lo tanto precisase comprar. Debemos también considerar el cambio de uso de determinados elementos que también podrían tener un coste. Ejemplo: Dedicar unordenador a la función de servidor, privándolo de la posibilidad de usarlo como escritorio.
 
-**Cosas a tener en cuenta**
+#### 6.2 ESTIMACIÓN ECONÓMICA
 Coste aproximado de la página web: 6.427€
 
 - Dominio y servidor. Los precios pueden variar en función de tus necesidades y el tráfico que esperes tener.
-  - Dominio por 10 años $\rightarrow$ ~69.50€
-  - Servidor por 10 años $\rightarrow$ ~390.00€
+  - Coste aproximado del dominio por 10 años $\rightarrow$ ~69.50€
+  - Coste aproximado del servidor por 10 años $\rightarrow$ ~390.00€
 - Redacción de textos. Alguien debe encargarse de preparar todos los textos de tu web, quizás incluso en más de un idioma.
   - Contrato de 75€/h con un plus de 0,60 €/palabra por cambio de idioma.
 - Multimedia. Vídeos, imágenes, iconos, logos y cualquier otro material visual que tengas que comprar o crear.
