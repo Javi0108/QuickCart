@@ -51,4 +51,5 @@ Este mercado está liderado por grandes multinacionales así como, Amazon, Ebay 
 
 >Estimar el coste que representará la creación del proyecto para la empresa. Esta estimación será temporal y económica si procede.
 >    • Temporal: Tiempo le llevará la realización del proyecto que propone, incluyendo el tiempo para el desarrollo del proyecto y el tiempo para la preparación de la documentación. 
+>
 >    • Económica: Cálculo de la inversión material que se precisaría para realizar el proyecto. En este apartado solo se considerará el material del que aun no disponga la empresa y que por lo tanto precisase comprar. Debemos también considerar el cambio de uso de determinados elementos que también podrían tener un coste. Ejemplo: Dedicar unordenador a la función de servidor, privándolo de la posibilidad de usarlo como escritorio. 
