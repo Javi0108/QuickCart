@@ -63,14 +63,15 @@ Los requisitos que nuestro equipo está dispuesto a satisfacer para el cliente s
 #### 6.2 ESTIMACIÓN ECONÓMICA
 Coste aproximado de la página web: **6.427€**
 
-- Dominio y servidor.
-  - Coste aproximado del dominio por 10 años $\rightarrow$ ~69.50€
-  - Coste aproximado del servidor por 10 años $\rightarrow$ ~390.00€
-- Redacción de textos.
+- Dominio y servidor:
+  - Coste aproximado del dominio por 10 años $\rightarrow$ ~69.50€.
+  - Coste aproximado del servidor por 10 años $\rightarrow$ ~390.00€.
+- Redacción de textos:
   - Contrato de 75€/h con un plus de 0,60 €/palabra por cambio de idioma.
-- Multimedia.
-  - Licencias multimedia aproximadamente 300€ 
-- Marketing. Ten en cuenta el gasto que supondrá las distintas estrategias y canales que utilizarás para atraer visitas.
-- Mantenimiento.
-  - 300€ de mantenimiento (plus de 50 €/hora si supera la jornada de 8 horas) 
+- Multimedia:
+  - Licencias multimedia aproximadamente 300€.
+- Marketing:
+  - Emplearemos la técnica de optimización para Motores de Búsqueda (SEO), emplearemos aproximadamente 500€.
+- Mantenimiento:
+  - 300€ de mantenimiento (plus de 50 €/hora si supera la jornada de 8 horas).
 
