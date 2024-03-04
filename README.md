@@ -49,16 +49,33 @@ Los requisitos que nuestro equipo está dispuesto a satisfacer para el cliente s
 
 ### 5. PRE-DISEÑO DEL SISTEMA <a name="id5"></a>
 
->Si el sistema precisa de nuevo material, hardware o software, indicar las características de este: dispositivos hardware, sistemas operativos, lenguajes, bases de datos, etc.
+  En este proyecto, utilizaremos Django con Python y Laravel con PHP como frameworks de backend, junto con PostgreSQL como sistema de gestión de bases de datos. Para la aplicación cliente, optaremos por React con TypeScript, brindando así un entorno de desarrollo estructurado y tipado para una mejor mantenibilidad del código.
+
+  El proceso de desarrollo se llevará a cabo bajo las mejores prácticas de control de versiones, utilizando GitHub como plataforma central para la colaboración y la gestión de código fuente. Esto permitirá un flujo de trabajo colaborativo, así como una adecuada gestión de cambios y versiones del código.
+
+  En cuanto al despliegue del sistema, tenemos pensado utilizar las máquinas virtuales de Azure. Ya que ofrece una amplia gama de servicios y herramientas que facilitan el despliegue y la gestión de la infraestructura.
+
+  También se ha tenido en cuenta el hardware necesarío y se ha contemplado que no necesitaremos hardware adicional por el momento, el único coste extra el cual ha sido la maquina virtual para el despliegue ya ha sido tomado en cuenta y está especificado en el desglose de costos totales.
 
 ### 6. ESTIMACIÓN DE COSTES <a name="id6"></a>
 
 #### 6.1 ESTIMACIÓN TEMPORAL
 
->Estimar el coste que representará la creación del proyecto para la empresa. Esta estimación será temporal y económica si procede.
->
->    • Temporal: Tiempo le llevará la realización del proyecto que propone, incluyendo el tiempo para el desarrollo del proyecto y el tiempo para la preparación de la documentación. 
->
+  Este proyecto tomará en su totalidad 78 días, siendo un total de 156 horas de trabajo aproximadamente por componente. Comenzando el 4 de marzo y finalizando el 21 de mayo.  Se comenzará por  la creación del anteproyecto con fecha límite el 4 de marzo.
+
+  Después se continuará con el análisis y posterior diseño de la aplicación desde el 6 de marzo hasta el 9 de ese mismo mes. En este apartado se crearán diferentes diagramas. S realizarán los diagramas de casos de uso, de clases y el modelo de Entidad-Relación de la base de datos. Así tambien emepzando y finalizando el diseño de los modelos para dar paso a la siguiente etapa.
+
+  Seguidamente comenzará la etapa de codificación abarcando desde el 9 de marzo hasta el 17 de mayo. Esta está inicialmente dividida en diferentes apartados.
+
+1) Backend/Servidor. Abarcando desde el 9 de marzo hasta el 6 de mayo. Este apartado al ser más amplio estará dividido en varios apartados.
+   1. Backend en DJango: Desde el 9 de marzo
+   2. Backend en Laravel
+
+2) Aplicación cliente en React. Esta comenzará el 6 de abril y finalizará el 17 de mayo.
+
+Testing. Este apartado se desarrollará a lo largo del periodo de codificación así que no se representa como un plazo fijo.
+
+Y a partir del 17 de mayo hasta el 21 de ese mismo mes se realizará toda la documentación para la entrega de este proyecto.
 
 #### 6.2 ESTIMACIÓN ECONÓMICA
 Coste aproximado de la página web: **6.427€**
