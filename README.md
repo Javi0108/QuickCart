@@ -34,13 +34,12 @@
 
 ### 2. OBJETIVOS <a name="id2"></a>
 Este proyecto pretende acercar grandes o pequeñas a empresas a la población de todo el mundo, haciendo que puedan vender sus productos de primera mano, no importa el producto,
-siempre y cuando no sean alimentos o seres vivos. Esta aplicación estará pensada también para los pueblos y ciudades más alejados del continente, así como, Las Islas Canarias o Cabo Verde ya que se permitirán
+siempre y cuando no sean alimentos o seres vivos. Esta aplicación estará pensada también para los pueblos y ciudades más alejados de los continentes, así como, Las Islas Canarias o Cabo Verde ya que se permitirán
 envíos a estos lugares, los cuales sufren de muchos problemas para el envío de productos.
->Falta mas
->
 >Se indicará de forma genérica y si entrar en concreciones el objetivo que se pretende alcanzar al realizar el proyecto. Se indicará igualmente dónde será utilizado el proyecto obtenido
 >
 ### 3. PREANÁLISIS DE LO EXISTENTE <a name="id3"></a>
+
 
 >Si procede, se informará brevemente sobre el funcionamiento del sistema actual, el que vamos a reemplazar. Este sistema no tiene por qué estar necesariamente automatizado pudiendo realizarse actualmente de forma manual por personas. 
 
