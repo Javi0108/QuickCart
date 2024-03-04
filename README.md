@@ -42,7 +42,7 @@ Este mercado está liderado por grandes multinacionales así como, Amazon, Ebay 
 
 ### 4. PRE-ANÁLISIS DEL SISTEMA <a name="id4"></a>
   - Gestión de cuentas $\rightarrow$ Inicio de sesión/Registrar/Editar perfil
-  - Gestión de productos --> Productos/Categorías/Reviews
+  - Gestión de productos $\rightarrow$ Productos/Categorías/Reviews
   - Carrito
   - Búsqueda de productos/empresas/etc
 
