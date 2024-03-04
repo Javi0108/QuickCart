@@ -33,12 +33,12 @@
 + Tutor: Alejandro Martín Zarza
 
 ### 2. OBJETIVOS <a name="id2"></a>
-Este proyecto pretende acercar grandes o pequeñas a empresas a la población de todo el mundo, haciendo que puedan vender sus productos de primera mano, no importa el producto,
+Este proyecto pretende acercar grandes o pequeñas a empresas a la población de todo el país, haciendo que puedan vender sus productos de primera mano, no importa el producto,
 siempre y cuando no sean seres vivos. Esta aplicación estará pensada también para los pueblos y ciudades más alejados de los continentes, así como, Las Islas Canarias o Cabo Verde ya que se permitirán
 envíos a estos lugares, los cuales sufren de muchos problemas para el envío de productos.
 
 ### 3. PREANÁLISIS DE LO EXISTENTE <a name="id3"></a>
-Este mercado está liderado por grandes multinacionales así como, Amazon, Ebay o Wallapop, por lo que es difícil destacar ante ellos, es por eso por lo que nosotros pretendemos cambiar un poco el sentido del mercado. Nuestra instención es ayudar al comercio local de **nuestro país/de todo el mundo** ya que asi ayudaríamos a la economía provincial y nacional. 
+Este mercado está liderado por grandes multinacionales así como, Amazon, Ebay o Wallapop, por lo que es difícil destacar ante ellos, es por eso por lo que nosotros pretendemos cambiar un poco el sentido del mercado. Nuestra intención es ayudar al comercio local de nuestro país, así ayudaríamos a la economía tanto provincial como nacional. 
 
 ### 4. PRE-ANÁLISIS DEL SISTEMA <a name="id4"></a>
 Los requisitos que nuestro equipo está dispuesto a satisfacer para el cliente son los siguientes:
