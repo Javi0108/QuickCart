@@ -43,8 +43,8 @@ Este mercado está liderado por grandes multinacionales así como, Amazon, Ebay 
 ### 4. PRE-ANÁLISIS DEL SISTEMA <a name="id4"></a>
   - Gestión de cuentas $\rightarrow$ Inicio de sesión/Registrar/Editar perfil
   - Gestión de productos $\rightarrow$ Productos/Categorías/Reviews
-  - Carrito
-  - Búsqueda de productos/empresas/etc
+  - Gestión del carrito $\rightarrow$ Aumentar cantidad de un mismo producto, eliminar producto de carrito 
+  - Barra de búsqueda por productos o empresas
 
 >Indicar con brevedad las partes del sistema sobre las que trabajarás, identificando de forma genérica los requisitos que pretendes satisfacer. 
 ### 5. PRE-DISEÑO DEL SISTEMA <a name="id5"></a>
