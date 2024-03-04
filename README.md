@@ -36,12 +36,9 @@
 Este proyecto pretende acercar grandes o pequeñas a empresas a la población de todo el mundo, haciendo que puedan vender sus productos de primera mano, no importa el producto,
 siempre y cuando no sean seres vivos. Esta aplicación estará pensada también para los pueblos y ciudades más alejados de los continentes, así como, Las Islas Canarias o Cabo Verde ya que se permitirán
 envíos a estos lugares, los cuales sufren de muchos problemas para el envío de productos.
->Se indicará de forma genérica y si entrar en concreciones el objetivo que se pretende alcanzar al realizar el proyecto. Se indicará igualmente dónde será utilizado el proyecto obtenido
->
+
 ### 3. PREANÁLISIS DE LO EXISTENTE <a name="id3"></a>
 Este mercado está liderado por grandes multinacionales así como, Amazon, Ebay o Wallapop, por lo que es difícil destacar ante ellos, es por eso por lo que nosotros pretendemos cambiar un poco el sentido del mercado. Nuestra instención es ayudar al comercio local de --nuestro país/de todo el mundo-- ya que asi ayudaríamos a la economía provincial y nacional. 
-
->Si procede, se informará brevemente sobre el funcionamiento del sistema actual, el que vamos a reemplazar. Este sistema no tiene por qué estar necesariamente automatizado pudiendo realizarse actualmente de forma manual por personas. 
 
 ### 4. PRE-ANÁLISIS DEL SISTEMA <a name="id4"></a>
 
