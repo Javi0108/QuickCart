@@ -71,7 +71,6 @@ Coste aproximado de la página web: **6.427€**
 - Multimedia. Vídeos, imágenes, iconos, logos y cualquier otro material visual que tengas que comprar o crear.
   - Licencias multimedia 300€ 
 - Marketing. Ten en cuenta el gasto que supondrá las distintas estrategias y canales que utilizarás para atraer visitas.
-- Consultoría. Este servicio está recomendado si no sabes por dónde empezar ni cómo gestionar tu proyecto web.
 - Mantenimiento. Una vez hayas lanzado tu web, es crucial seguir arreglando cualquier fallo, optimizando su velocidad, mejorando el contenido, etc.
   - 300€ de mantenimiento (plus de 50 €/hora si supera la jornada de 8 horas) 
 
