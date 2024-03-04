@@ -41,12 +41,12 @@ envíos a estos lugares, los cuales sufren de muchos problemas para el envío de
 Este mercado está liderado por grandes multinacionales así como, Amazon, Ebay o Wallapop, por lo que es difícil destacar ante ellos, es por eso por lo que nosotros pretendemos cambiar un poco el sentido del mercado. Nuestra instención es ayudar al comercio local de --nuestro país/de todo el mundo-- ya que asi ayudaríamos a la economía provincial y nacional. 
 
 ### 4. PRE-ANÁLISIS DEL SISTEMA <a name="id4"></a>
+Los requisitos que nuestro equipo está dispuesto a satisfacer para el cliente son los siguientes:
   - Gestión de cuentas $\rightarrow$ Inicio de sesión/Registrar/Editar perfil
   - Gestión de productos $\rightarrow$ Productos/Categorías/Reviews
   - Gestión del carrito $\rightarrow$ Aumentar cantidad de un mismo producto, eliminar producto de carrito 
   - Barra de búsqueda por productos o empresas
 
->Indicar con brevedad las partes del sistema sobre las que trabajarás, identificando de forma genérica los requisitos que pretendes satisfacer. 
 ### 5. PRE-DISEÑO DEL SISTEMA <a name="id5"></a>
 
 >Si el sistema precisa de nuevo material, hardware o software, indicar las características de este: dispositivos hardware, sistemas operativos, lenguajes, bases de datos, etc.
