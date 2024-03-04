@@ -71,7 +71,7 @@ Coste aproximado de la página web: **6.427€**
 - Multimedia:
   - Licencias multimedia aproximadamente 300€.
 - Marketing:
-  - Emplearemos la técnica de optimización para Motores de Búsqueda (SEO), emplearemos aproximadamente 500€.
+  - Emplearemos la técnica de optimización para Motores de Búsqueda (SEO), invertiremos aproximadamente 500€.
 - Mantenimiento:
   - 300€ de mantenimiento (plus de 50 €/hora si supera la jornada de 8 horas).
 
