@@ -57,4 +57,15 @@ Los requisitos que nuestro equipo está dispuesto a satisfacer para el cliente s
 >
 >    • Temporal: Tiempo le llevará la realización del proyecto que propone, incluyendo el tiempo para el desarrollo del proyecto y el tiempo para la preparación de la documentación. 
 >
->    • Económica: Cálculo de la inversión material que se precisaría para realizar el proyecto. En este apartado solo se considerará el material del que aun no disponga la empresa y que por lo tanto precisase comprar. Debemos también considerar el cambio de uso de determinados elementos que también podrían tener un coste. Ejemplo: Dedicar unordenador a la función de servidor, privándolo de la posibilidad de usarlo como escritorio. 
+>    • Económica: Cálculo de la inversión material que se precisaría para realizar el proyecto. En este apartado solo se considerará el material del que aun no disponga la empresa y que por lo tanto precisase comprar. Debemos también considerar el cambio de uso de determinados elementos que también podrían tener un coste. Ejemplo: Dedicar unordenador a la función de servidor, privándolo de la posibilidad de usarlo como escritorio.
+
+**Cosas a tener en cuenta**
+Coste de la página web: 6.427€
+
+Dominio y servidor. Los precios pueden variar en función de tus necesidades y el tráfico que esperes tener.
+Redacción de textos. Alguien debe encargarse de preparar todos los textos de tu web, quizás incluso en más de un idioma.
+Multimedia. Vídeos, imágenes, iconos, logos y cualquier otro material visual que tengas que comprar o crear.
+Marketing. Ten en cuenta el gasto que supondrá las distintas estrategias y canales que utilizarás para atraer visitas.
+Consultoría. Este servicio está recomendado si no sabes por dónde empezar ni cómo gestionar tu proyecto web.
+Mantenimiento. Una vez hayas lanzado tu web, es crucial seguir arreglando cualquier fallo, optimizando su velocidad, mejorando el contenido, etc.
+
