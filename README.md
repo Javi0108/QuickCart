@@ -41,7 +41,7 @@ envíos a estos lugares, los cuales sufren de muchos problemas para el envío de
 Este mercado está liderado por grandes multinacionales así como, Amazon, Ebay o Wallapop, por lo que es difícil destacar ante ellos, es por eso por lo que nosotros pretendemos cambiar un poco el sentido del mercado. Nuestra instención es ayudar al comercio local de --nuestro país/de todo el mundo-- ya que asi ayudaríamos a la economía provincial y nacional. 
 
 ### 4. PRE-ANÁLISIS DEL SISTEMA <a name="id4"></a>
-  - Gestión de cuentas --> Inicio de sesión/Registrar/Editar perfil
+  - Gestión de cuentas $\rightarrow$ Inicio de sesión/Registrar/Editar perfil
   - Gestión de productos --> Productos/Categorías/Reviews
   - Carrito
   - Búsqueda de productos/empresas/etc
