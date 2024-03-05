@@ -44,7 +44,7 @@ Este mercado está liderado por grandes multinacionales así como, Amazon, Ebay 
 Los requisitos que nuestro equipo está dispuesto a satisfacer para el cliente son los siguientes:
   - Gestión de cuentas $\rightarrow$ Inicio de sesión/Registrar/Editar perfil
   - Gestión de productos $\rightarrow$ Productos/Categorías/Reviews
-  - Gestión del carrito $\rightarrow$ Aumentar cantidad de un mismo producto, eliminar producto de carrito 
+  - Gestión del carrito $\rightarrow$ Aumentar cantidad de un mismo producto, eliminar producto de carrito, etc.
   - Barra de búsqueda por productos o empresas
 
 ### 5. PRE-DISEÑO DEL SISTEMA <a name="id5"></a>
