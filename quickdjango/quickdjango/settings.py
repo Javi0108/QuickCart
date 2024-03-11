@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
     'accounts.apps.AccountsConfig',
+    'orders.apps.OrdersConfig',
+    'invoices.apps.InvoicesConfig',
+    'shops.apps.ShopsConfig',
 ]
 
 MIDDLEWARE = [
