@@ -1,7 +1,0 @@
-{
-  "name": "quick-angular",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular"
-}
