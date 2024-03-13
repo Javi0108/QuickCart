@@ -1,0 +1,12 @@
+/* app.component.scss */
+
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Establece una altura mínima para ocupar toda la pantalla */
+  }
+  
+  ion-router-outlet {
+    flex: 1; /* Hace que el contenido tome todo el espacio disponible */
+  }
+  
