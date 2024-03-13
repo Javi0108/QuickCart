@@ -1,6 +1,8 @@
+ 
 <app-header></app-header>
-
-<ion-router-outlet style="z-index: -999 !important;"></ion-router-outlet>
-
-
-<!-- <app-footer></app-footer>   -->
+<ion-content style="height: calc(100vh - 56px) !important;">
+    <ion-content>
+        <ion-router-outlet></ion-router-outlet>
+    </ion-content>    
+    <app-footer></app-footer>
+</ion-content>
