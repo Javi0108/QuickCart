@@ -7,7 +7,6 @@ import { IonicModule } from '@ionic/angular';
 import { HomePageRoutingModule } from './home-routing.module';
 
 import { HomePage } from './home.page';
-import { HeaderPageModule } from 'src/app/components/header/header.module';
 
 @NgModule({
   imports: [
@@ -15,7 +14,6 @@ import { HeaderPageModule } from 'src/app/components/header/header.module';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    HeaderPageModule,
   ],
   declarations: [HomePage]
 })
