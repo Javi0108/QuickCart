@@ -1,0 +1,193 @@
+ion-header {
+    .row {
+        .l-col {
+            display: flex;
+            align-items: center;
+
+            ion-icon {
+                cursor: pointer;
+                margin-left: 21px;
+            }
+        }
+
+        .r-col {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 33px;
+
+            ul {
+                margin: 0;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+
+                li {
+                    list-style: none;
+
+                    a {
+                        cursor: pointer;
+                        margin-left: 16px;
+                        text-decoration: none;
+
+                    }
+                }
+            }
+        }
+    }
+}
+
+.hide-sidebar {
+    display: none;
+}
+
+.sidebar {
+    height: 100vh;
+    display: flex;
+    background-color: red !important;
+    width: 333px;
+    padding: 33px 0 33px 0;
+    ul {
+        display: flow;
+        li {
+            margin-bottom: 15px;
+            list-style: none;
+
+            a {
+                cursor: pointer;
+                margin-left: 16px;
+                text-decoration: none;
+
+            }
+        }
+    }
+}
+
+// Extra small devices (portrait phones, less than 576px)
+@media (max-width: 575.98px) {
+    ion-header {
+        .row {
+            .l-col {
+
+
+                ion-icon {}
+            }
+
+            .r-col {
+
+                display: none;
+
+                ul {
+                    li {
+
+
+                        a {}
+                    }
+                }
+            }
+        }
+    }
+
+    .hide-sidebar {}
+
+    .sidebar {
+
+        ul {
+
+
+            li {
+
+
+                a {}
+            }
+        }
+    }
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) and (max-width: 767.98px) {
+    ion-header {
+        .row {
+            .l-col {
+
+
+                ion-icon {}
+            }
+
+            .r-col {
+
+                display: none;
+
+                ul {
+                    li {
+
+
+                        a {}
+                    }
+                }
+            }
+        }
+    }
+
+    .hide-sidebar {}
+
+    .sidebar {
+
+        ul {
+
+
+            li {
+
+
+                a {}
+            }
+        }
+    }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) and (max-width: 991.98px) {
+    ion-header {
+        .row {
+            .l-col {
+
+
+                ion-icon {}
+            }
+
+            .r-col {
+
+                display: none;
+
+                ul {
+                    li {
+
+
+                        a {}
+                    }
+                }
+            }
+        }
+    }
+
+    .hide-sidebar {}
+
+    .sidebar {
+
+        ul {
+
+
+            li {
+
+
+                a {}
+            }
+        }
+    }
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) and (max-width: 1199.98px) {}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {}

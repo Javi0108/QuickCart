@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>    
+    <div class="row">
+      <div class="col-6 l-col">
+        <ion-icon name="menu-outline" (click)="openSidebar()"></ion-icon>
+        <ion-title>Menu</ion-title>
+      </div>
+      <div class="col-6 r-col">
+        <ul>
+          <li>
+            <a [routerLink]="['/home']">home</a>
+          </li>
+          <li>
+            <ion-button [routerLink]="['/login']">login</ion-button>
+          </li>
+          <li>
+            <ion-button [routerLink]="['/register']">register</ion-button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<div [ngClass]="isSidebar ? 'sidebar' : 'hide-sidebar'" >
+  <ul>
+    <li>
+      <a [routerLink]="['/home']">home</a>
+    </li>
+    <li>
+      <ion-button [routerLink]="['/login']">login</ion-button>
+    </li>
+    <li>
+      <ion-button [routerLink]="['/register']">register</ion-button>
+    </li>
+  </ul>
+</div>

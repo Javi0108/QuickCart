@@ -5,15 +5,17 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 
-import { HeaderPage } from './header.page';
+import { MenuPage } from './menu.page';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    RouterModule
   ],
-  declarations: [HeaderPage],
-  exports: [HeaderPage],
+  declarations: [MenuPage],
+  exports:[MenuPage],
 })
-export class HeaderPageModule {}
+export class MenuPageModule {}
