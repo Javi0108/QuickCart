@@ -1,3 +1,4 @@
+import { AuthService } from '../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterPage implements OnInit {
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
+
+  registerUser(username: string, type: string): void {
+    const user = { username, type };
+    this.authService.register(user).subscribe(
+      response => {
+        console.log('registro exitoso', response);
+      },
+      error => {
+        console.error('Error en el registro:', error)
+      }
+    )
+  }
 
   ngOnInit() {
   }
