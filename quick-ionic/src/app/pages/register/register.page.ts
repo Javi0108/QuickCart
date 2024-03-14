@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,18 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterPage implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  email: string;
+  password: string;
+  confirmPassword: string;
+  passwordError: boolean;
 
-  registerUser(username: string, password: string, email: string, name: string, type: string) {
-    this.authService.register(username, password, email, name, type)
-      .subscribe(
-        response => {
-          // Manejar la respuesta del servidor, por ejemplo, redirigir a la página de inicio de sesión
-        },
-        error => {
-          // Manejar el error, por ejemplo, mostrar un mensaje de error al usuario
-        }
-      );
+  constructor(private authService: AuthService, public router: Router) {
+    this.email = "";
+    this.password = "";
+    this.confirmPassword = "";
+    this.passwordError = false;
+  }
+
+  register(){
+    const user = {email: this.email, password: this.password}
+    this.authService.register(user).subscribe((data) =>{
+      this.authService.setToken(data.token);
+    })
   }
 
   ngOnInit() {
