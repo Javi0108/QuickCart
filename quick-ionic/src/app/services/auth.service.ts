@@ -20,8 +20,8 @@ export class AuthService {
     return this.http.post(URLAPI+"accounts/register/", user);
   }
 
-  getUser() {
-    return this.http.get(URLAPI+"accounts/profile/")
+  getUser(id: any) {
+    return this.http.get(URLAPI+"accounts/profile/", id)
   }
 
   getUserLogged() {
