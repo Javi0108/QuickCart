@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'orders.apps.OrdersConfig',
     'invoices.apps.InvoicesConfig',
     'shops.apps.ShopsConfig',
+    'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -53,6 +55,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'quickdjango.urls'
@@ -75,6 +79,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'quickdjango.wsgi.application'
 
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:8100',
+]
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases

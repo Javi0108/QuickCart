@@ -1,34 +1,28 @@
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.models import User
-from django.http import JsonResponse
+from rest_framework import generics, status
+from .models import Profile
+from .serializers import ProfileSerializer
+from rest_framework.response import Response
+from django.contrib.auth import authenticate
 from django.views.decorators.csrf import csrf_exempt
-import json
+from rest_framework.views import APIView
 
-@csrf_exempt
-def register(request):
-    if request.method == 'POST':
-        data = json.loads(request.body)
-        username = data.get('username')
-        password = data.get('password')
-        if not User.objects.filter(username=username).exists():
-            user = User.objects.create_user(username, password=password)
-            return JsonResponse({'message': 'User created successfully'})
-        else:
-            return JsonResponse({'message': 'Username already exists'}, status=400)
-    else:
-        return JsonResponse({'message': 'Method not allowed'}, status=405)
 
-@csrf_exempt
-def user_login(request):
-    if request.method == 'POST':
-        data = json.loads(request.body)
-        username = data.get('username')
-        password = data.get('password')
+class Register(APIView):
+    def post(self, request):
+        serializer = ProfileSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+class Login(generics.CreateAPIView):
+    def post(self, request, *args, **kwargs):
+        username = request.data.get('username')
+        password = request.data.get('password')
         user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return JsonResponse({'message': 'Login successful'})
+        if user:
+            profile = Profile.objects.get(user=user)
+            serializer = ProfileSerializer(profile)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         else:
-            return JsonResponse({'message': 'Invalid credentials'}, status=400)
-    else:
-        return JsonResponse({'message': 'Method not allowed'}, status=405)
+            return Response({'error': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
