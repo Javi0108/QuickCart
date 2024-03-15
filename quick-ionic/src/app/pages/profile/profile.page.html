@@ -1,0 +1,11 @@
+<ion-content>
+  <ion-card *ngIf="profile">
+    <ion-card-header>
+      Información del Perfil
+    </ion-card-header>
+    <ion-card-content>
+      <p>Nombre: {{ profile.user.username }}</p>
+      <p>Email: {{ profile.user.email }}</p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

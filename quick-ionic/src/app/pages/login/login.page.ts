@@ -25,13 +25,11 @@ export class LoginPage implements OnInit {
       const user = this.loginForm.value;
 
       this.authService.login(user).subscribe((data) => {
-        this.authService.setToken(data.token);
         this.router.navigateByUrl("/");
       },
-        error => {
-          console.log(error)
-        }
-      )
+      error => {
+        console.log(error)
+      });
     }
   }
 

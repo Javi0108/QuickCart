@@ -2,7 +2,6 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { timeout } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -32,8 +31,7 @@ export class RegisterPage implements OnInit {
     if (this.registerForm.valid) {
       const user = this.registerForm.value;
       this.authService.register(user).subscribe((data) => {
-        this.authService.setToken(data.token);
-        console.log(data.token)
+        console.log(data)
         this.router.navigate(['/']);
       });
     }
@@ -44,6 +42,6 @@ export class RegisterPage implements OnInit {
   }
 
   ngAfterViewInit() {
-      this.pageloaded = true;
+    this.pageloaded = true;
   }
 }

@@ -24,16 +24,4 @@ export class AuthService {
     return this.http.get(URLAPI+"accounts/profile/", id)
   }
 
-  getUserLogged() {
-    const token = this.getToken();
-  }
-
-  setToken(token: string) {
-    this.cookies.set("token", token);
-  }
-
-  getToken(){
-    return this.cookies.get("token")
-  }
-
 }

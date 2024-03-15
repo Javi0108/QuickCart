@@ -88,15 +88,6 @@ CORS_ALLOWED_ORIGINS = [
 
 # TOKEN
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ],
-}
-JWT_AUTH = {
-    'JWT_SECRET_KEY': 'miclavesecreta123',
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),
-}
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
