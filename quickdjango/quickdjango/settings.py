@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+import datetime
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -81,7 +82,21 @@ WSGI_APPLICATION = 'quickdjango.wsgi.application'
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8100',
+    "http://localhost:4200",
+
 ]
+
+# TOKEN
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+}
+JWT_AUTH = {
+    'JWT_SECRET_KEY': 'miclavesecreta123',
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),
+}
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
