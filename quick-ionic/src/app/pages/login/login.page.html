@@ -1,20 +1,25 @@
-<div class="login">
-    <form class="custom-form" method="post">
-      <h1>Login</h1>
-      <input
-        type="email"
-        [(ngModel)]="email"
-        name="email"
-        placeholder="Email"
-        required="required"
-      />
-      <input
-        type="password"
-        [(ngModel)]="password"
-        name="password"
-        placeholder="Password"
-        required="required"
-      />
-      <button type="submit" (click)="login()">Log in</button>
+<body>
+  <ion-spinner *ngIf="!pageloaded"></ion-spinner>
+
+  <div *ngIf="pageloaded">
+
+    <div class="background">
+      <div class="shape"></div>
+      <div class="shape"></div>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <h3>Login Here</h3>
+      <ion-input type="text" formControlName="username" placeholder="Username" labelPlacement="floating"
+        label="username" fill="outline"></ion-input>
+      <ion-input type="password" formControlName="password" placeholder="Password" labelPlacement="floating"
+        label="password" fill="outline"></ion-input>
+
+      <button type="submit" [disabled]="!loginForm.valid">Log In</button>
+      <div class="social">
+        <div class="go"><i class="fab fa-google"></i> Google</div>
+        <div class="fb"><i class="fab fa-facebook"></i> Facebook</div>
+      </div>
     </form>
   </div>
+</body>
