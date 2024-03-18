@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CookieService } from "ngx-cookie-service";
 
-const URLAPI = 'http://localhost:8000/';
+const URLAPI = 'http://localhost:8000/api/';
 
 @Injectable({
   providedIn: 'root'
