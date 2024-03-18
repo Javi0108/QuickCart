@@ -4,4 +4,12 @@ from django.db import models
 class Profile(models.Model):
     id_profile = models.AutoField(primary_key=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    user_type = models.CharField(max_length=10, default='')
+
+    CLIENTE = 'Cliente'
+    EMPRESA = 'Empresa'
+    ROLES = [
+        (CLIENTE, 'Cliente'),
+        (EMPRESA, 'Empresa'),
+    ]
+
+    user_type = models.CharField(max_length=10, choices=ROLES, default=CLIENTE)
