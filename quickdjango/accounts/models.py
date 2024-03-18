@@ -5,11 +5,11 @@ class Profile(models.Model):
     id_profile = models.AutoField(primary_key=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
-    CLIENTE = 'Cliente'
-    EMPRESA = 'Empresa'
+    CLIENT = 'Client'
+    SELLER = 'Seller'
     ROLES = [
-        (CLIENTE, 'Cliente'),
-        (EMPRESA, 'Empresa'),
+        (CLIENT, 'Client'),
+        (SELLER, 'Seller'),
     ]
 
-    user_type = models.CharField(max_length=10, choices=ROLES, default=CLIENTE)
+    user_type = models.CharField(max_length=10, choices=ROLES, default=CLIENT)
