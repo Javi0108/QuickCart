@@ -1,37 +1,56 @@
-<ion-header>
-  <ion-toolbar>    
-    <div class="row">
-      <div class="col-6 l-col">
-        <ion-icon name="menu-outline" size="large" (click)="openSidebar()"></ion-icon>
-        <ion-title>Menu</ion-title>
-      </div>
-      <div class="col-6 r-col">
-        <ul>
-          <li>
-            <a [routerLink]="['/home']">home</a>
-          </li>
-          <li>
-            <ion-button [routerLink]="['/login']">login</ion-button>
-          </li>
-          <li>
-            <ion-button [routerLink]="['/register']">register</ion-button>
-          </li>
-        </ul>
-      </div>
+<ion-menu contentId="main-content">
+  <ion-header>
+    <ion-toolbar color="tertiary">
+      <ion-title>Menu Content</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <div class="col-6 r-col">
+      <ul>
+        <li>
+          <a [routerLink]="['/home']">home</a>
+        </li>
+        <li *ngIf="!isLoggedIn()">
+          <ion-button [routerLink]="['/login']">login</ion-button>
+        </li>
+        <li *ngIf="!isLoggedIn()">
+          <ion-button [routerLink]="['/register']">register</ion-button>
+        </li>
+        <li *ngIf="isLoggedIn()">
+          <ion-button [routerLink]="['/logout']">logout</ion-button>
+        </li>
+      </ul>
     </div>
-  </ion-toolbar>
-</ion-header>
+  </ion-content>
+</ion-menu>
 
-<div [ngClass]="isSidebar ? 'sidebar' : 'hide-sidebar'" >
-  <ul>
-    <li>
-      <a [routerLink]="['/home']">home</a>
-    </li>
-    <li>
-      <ion-button [routerLink]="['/login']">login</ion-button>
-    </li>
-    <li>
-      <ion-button [routerLink]="['/register']">register</ion-button>
-    </li>
-  </ul>
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <div class="row">
+        <div class="col-6 l-col">
+          <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+          <ion-title>Menu</ion-title>
+        </div>
+        <div class="col-6 r-col">
+          <ul>
+            <li>
+              <a [routerLink]="['/home']">home</a>
+            </li>
+            <li *ngIf="!isLoggedIn()">
+              <ion-button [routerLink]="['/login']">login</ion-button>
+            </li>
+            <li *ngIf="!isLoggedIn()">
+              <ion-button [routerLink]="['/register']">register</ion-button>
+            </li>
+            <li *ngIf="isLoggedIn()">
+              <ion-button [routerLink]="['/logout']">logout</ion-button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </ion-toolbar>
+  </ion-header>
 </div>
