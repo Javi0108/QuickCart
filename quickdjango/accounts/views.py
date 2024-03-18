@@ -3,7 +3,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from django.contrib.auth import authenticate
 from rest_framework.views import APIView
-from .serializers import  ProfileSerializer, UserSerializer
+from .serializers import  ProfileSerializerRegister, UserSerializerRegister, ProfileSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -16,10 +16,21 @@ class RegisterView(APIView):
     permission_classes = [AllowAny]
     
     def post(self, request):
-        serializer = UserSerializer(data=request.data)
+        serializer = UserSerializerRegister(data=request.data)
+         
         if serializer.is_valid():
             user = serializer.save()
-            return Response({'user': user.email}, status=status.HTTP_201_CREATED)
+            
+            #provicional
+            profile_data = {'user_id': user.id, 'user_type': 'Client'}
+            profile_serializer = ProfileSerializerRegister(data=profile_data)
+            
+            if profile_serializer.is_valid():
+                profile = profile_serializer.save()
+                return Response({'user': user.email}, status=status.HTTP_201_CREATED)
+            else: 
+                user.delete()
+                return Response(profile_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class LoginView(APIView):
