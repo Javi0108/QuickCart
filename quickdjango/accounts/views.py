@@ -6,9 +6,14 @@ from rest_framework.views import APIView
 from .serializers import  ProfileSerializer, UserSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework_simplejwt.tokens import RefreshToken
+
 
 
 class RegisterView(APIView):
+    
+    permission_classes = [AllowAny]
     
     def post(self, request):
         serializer = UserSerializer(data=request.data)
@@ -19,30 +24,40 @@ class RegisterView(APIView):
 
 class LoginView(APIView):
     
+    permission_classes = [AllowAny]
+
     def post(self, request):
-        username = request.data.get('username')
-        password = request.data.get('password')
+        user_data = request.data.get('user')
+        if user_data:
+            username = user_data.get('username')
+            password = user_data.get('password')
 
-        user = authenticate(username=username, password=password)
+            print(request.data)
+            print(username, password)
 
-        if user is not None:
-            return Response(status=status.HTTP_200_OK)
+            user = authenticate(username=username, password=password)
+
+            if user is not None:
+                refresh = RefreshToken.for_user(user)
+                return Response({
+                    'refresh': str(refresh),
+                    'access': str(refresh.access_token),
+                }, status=status.HTTP_200_OK)
+            else:
+                return Response({'error': 'Invalid username or password'}, status=status.HTTP_401_UNAUTHORIZED)
         else:
-            return Response({'error': 'Invalid username or password'}, status=status.HTTP_401_UNAUTHORIZED)
+            return Response({'error': 'Invalid request data'}, status=status.HTTP_400_BAD_REQUEST)
 
 class ProfileView(APIView):
-   
+
+    permission_classes = [IsAuthenticated]
+
     def get(self, request):
-        # Verificar si el usuario está autenticado
-        print(request.user)
         if request.user.is_authenticated:
-            # Obtener el perfil del usuario logeado
             profile = Profile.objects.get(user=request.user)
-            # Serializar el perfil
             serializer = ProfileSerializer(profile)
-            # Devolver el perfil serializado en la respuesta
+            print(serializer.data)
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
-            # Devolver un mensaje indicando que el usuario no está autenticado
             return Response({'error': 'Usuario no autenticado'}, status=status.HTTP_401_UNAUTHORIZED)
 
