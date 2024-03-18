@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'invoices.apps.InvoicesConfig',
     'shops.apps.ShopsConfig',
     'rest_framework',
+    'rest_framework_simplejwt',
     'corsheaders',
 ]
 
@@ -88,6 +89,11 @@ CORS_ALLOWED_ORIGINS = [
 
 # TOKEN
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+}
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
