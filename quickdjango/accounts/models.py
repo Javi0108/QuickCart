@@ -20,7 +20,6 @@ class Profile(models.Model):
         ('LinkedIn', 'LinkedIn'),
     ]
     socials = models.TextField(null=True)
-
     
     CLIENT = 'Client'
     SELLER = 'Seller'

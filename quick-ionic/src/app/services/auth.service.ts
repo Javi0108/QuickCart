@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { CookieService } from "ngx-cookie-service";
 import { tap } from 'rxjs/operators';
 import { User } from '../interfaces/user.interface';
+import { jwtDecode } from "jwt-decode";
 
 
 @Injectable({
@@ -48,4 +49,18 @@ export class AuthService {
     return this.http.get(`${this.baseURL}` + "accounts/profile/", id);
   }
 
+  // Método para verificar si el token de acceso está caducado
+  isAccessTokenExpired(): boolean {
+    const accessToken = localStorage.getItem('token');
+    if (!accessToken) {
+      return true;
+    }
+    const decodedToken: any = jwtDecode(accessToken);
+    const expiration = decodedToken.exp * 1000; // convertir a milisegundos
+    return Date.now() >= expiration;
+  }
+
+  refreshToken(refreshToken: string): Observable<any> {
+    return this.http.post<any>(`${this.baseURL}token/refresh/`, { refresh: refreshToken });
+  }
 }
