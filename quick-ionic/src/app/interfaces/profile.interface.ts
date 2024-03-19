@@ -5,6 +5,9 @@ export interface Profile {
   id_profile: number;
   user: User;
   user_type: string;
+  phone: string;
+  mobile: string;
+  address: string;
 }
 
 export interface ProfileSeller {

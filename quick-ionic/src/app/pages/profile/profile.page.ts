@@ -21,6 +21,7 @@ export class ProfilePage implements OnInit {
     this.profileService.getProfile().subscribe({
       next: (profile: Profile) => {
         this.profile = profile;
+        console.log(profile);
       },
       error: (error) => {
         console.error('Error al obtener el perfil:', error);
