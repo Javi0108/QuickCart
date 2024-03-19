@@ -1,5 +1,5 @@
 import { AuthService } from './auth.service';
-import { HttpClient,HttpHeaders  } from '@angular/common/http';
+import { HttpClient, HttpHeaders  } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Profile } from '../interfaces/profile.interface';

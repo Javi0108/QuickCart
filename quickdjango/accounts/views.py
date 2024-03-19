@@ -7,7 +7,7 @@ from .serializers import  ProfileSerializerRegister, UserSerializerRegister, Pro
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
-from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.tokens import RefreshToken, BlacklistMixin
 
 
 
@@ -58,6 +58,22 @@ class LoginView(APIView):
                 return Response({'error': 'Invalid username or password'}, status=status.HTTP_401_UNAUTHORIZED)
         else:
             return Response({'error': 'Invalid request data'}, status=status.HTTP_400_BAD_REQUEST)
+
+class LogoutView(APIView):
+    permission_classes = [IsAuthenticated]
+    
+    def post(self, request):
+        try:
+            print(request.data)
+            refresh_token = request.data["refresh_token"]
+            print(refresh_token)
+            token = RefreshToken(refresh_token)
+            print("token", token)
+            token.blacklist()
+            return Response(status=status.HTTP_205_RESET_CONTENT)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
 
 class ProfileView(APIView):
 

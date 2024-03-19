@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'invoices.apps.InvoicesConfig',
     'shops.apps.ShopsConfig',
     'rest_framework',
-    'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
 ]
 

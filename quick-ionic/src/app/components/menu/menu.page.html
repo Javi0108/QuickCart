@@ -17,7 +17,7 @@
           <ion-button [routerLink]="['/register']">register</ion-button>
         </li>
         <li *ngIf="isLoggedIn()">
-          <ion-button [routerLink]="['/logout']">logout</ion-button>
+          <ion-button (click)="logout()">logout</ion-button>
         </li>
       </ul>
     </div>
@@ -46,7 +46,7 @@
               <ion-button [routerLink]="['/register']">register</ion-button>
             </li>
             <li *ngIf="isLoggedIn()">
-              <ion-button [routerLink]="['/logout']">logout</ion-button>
+              <ion-button (click)="logout()">logout</ion-button>
             </li>
           </ul>
         </div>
