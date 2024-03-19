@@ -29,7 +29,7 @@
     <ion-toolbar>
       <div class="row">
         <div class="col-6 l-col">
-          <ion-buttons slot="start">
+          <ion-buttons slot="start" *ngIf="isLoggedIn()">
             <ion-menu-button></ion-menu-button>
           </ion-buttons>
           <ion-title>Menu</ion-title>
