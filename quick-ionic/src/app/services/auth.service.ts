@@ -37,6 +37,9 @@ export class AuthService {
     const token = localStorage.getItem('token');
     const headers = token ? new HttpHeaders({ 'Authorization': `Bearer ${token}` }) : new HttpHeaders();
     const refreshToken = localStorage.getItem('token_refresh');
+    localStorage.removeItem('token');
+    localStorage.removeItem('token_refresh');
+    localStorage.removeItem('user');
     return this.http.post<any>(`${this.baseURL}accounts/logout/`, { refresh_token: refreshToken }, { headers: headers });
   }
 
