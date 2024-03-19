@@ -32,7 +32,7 @@ export class RegisterPage implements OnInit {
       const user = this.registerForm.value;
       this.authService.register(user).subscribe((data) => {
         console.log(data)
-        this.router.navigate(['/']);
+        this.router.navigate(['/login']);
       });
     }
   }
