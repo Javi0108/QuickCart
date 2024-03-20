@@ -9,8 +9,6 @@ from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken, BlacklistMixin
 
-
-
 class RegisterView(APIView):
     
     permission_classes = [AllowAny]
@@ -22,9 +20,8 @@ class RegisterView(APIView):
             user = serializer.save()
             
             #provicional
-            profile_data = {'user_id': user.id, 'user_type': 'Client'}
+            profile_data = {'user_id': user.id, 'user_type': request.data.get('user_type')}
             profile_serializer = ProfileSerializerRegister(data=profile_data)
-            
             if profile_serializer.is_valid():
                 profile = profile_serializer.save()
                 return Response({'user': user.email}, status=status.HTTP_201_CREATED)
