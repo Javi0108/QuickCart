@@ -8,8 +8,9 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { FooterPageModule } from './components/footer/footer.module';
 import { MenuPageModule } from './components/menu/menu.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CookieService } from "ngx-cookie-service";
+import { TokenInterceptor } from './interceptors/token.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,11 +22,9 @@ import { CookieService } from "ngx-cookie-service";
     MenuPageModule,
     HttpClientModule],
   providers: [
-    CookieService, 
-    { 
-      provide: RouteReuseStrategy,
-      useClass: IonicRouteStrategy 
-    },
+    CookieService,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true } // Registra el interceptor aquí
   ],
   bootstrap: [AppComponent],
 })
