@@ -24,3 +24,24 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+.alert-wrapper.sc-ion-alert-md {
+    color: #fff;
+    background-color: black !important;
+    .alert-title  {
+        color: white !important;
+    }
+    .alert-radio-group {
+        border-top: 2px solid grey !important;
+        border-bottom: 2px solid grey !important;
+        .alert-radio-label {
+            color: #fff;
+        }
+    }
+    .alert-button {
+        background-color: red !important;
+    }
+    .alert-button-inner.sc-ion-alert-md {
+        color: white !important;
+    }
+}
