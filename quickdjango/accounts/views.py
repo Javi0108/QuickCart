@@ -88,3 +88,4 @@ class ProfileView(APIView):
         else:
             return Response({'error': 'Usuario no autenticado'}, status=status.HTTP_401_UNAUTHORIZED)
 
+        
