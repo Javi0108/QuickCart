@@ -28,6 +28,10 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'seller-shops',
+    loadChildren: () => import('./pages/seller-shops/seller-shops.module').then( m => m.SellerShopsPageModule)
+  },
 ];
 
 @NgModule({
