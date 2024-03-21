@@ -13,7 +13,7 @@ export class SellerService {
   private token: string | null;
 
   constructor(private http: HttpClient, private cookies: CookieService) {
-    this.token = this.cookies.get('token');
+    this.token = localStorage.getItem('token');
   }
 
   getshops(): Observable<any> {
