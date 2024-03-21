@@ -19,6 +19,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
   },
   {
+    path: 'seller-shops',
+    loadChildren: () => import('./pages/seller-shops/seller-shops.module').then( m => m.SellerShopsPageModule)
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
@@ -27,10 +31,6 @@ const routes: Routes = [
     path: '**',
     redirectTo: 'home',
     pathMatch: 'full'
-  },
-  {
-    path: 'seller-shops',
-    loadChildren: () => import('./pages/seller-shops/seller-shops.module').then( m => m.SellerShopsPageModule)
   },
 ];
 
