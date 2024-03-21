@@ -14,7 +14,7 @@
                 {{ profile.user.first_name }} {{ profile.user.last_name }}
               </h1>
               <p>{{ profile.user_type }}</p>
-              <button class="btn btn-primary m-2">Follow</button>
+              <button *ngIf='profile.user_type == "Seller"' class="btn btn-primary m-2">My Shops</button>
               <button class="btn btn-outline-primary">Message</button>
             </div>
         </ion-card-content>
@@ -66,6 +66,8 @@
     <div class="col-md-8">
       <div class="card mt-2">
         <ion-list class="card-body">
+          <!-- Formulario Client -->
+          <form [formGroup]="editProfileForm" (ngSubmit)="editProfile()">
           <ion-item>
             <ion-input
               labelPlacement="floating"
@@ -104,9 +106,11 @@
 
           <div class="row mt-4">
             <div class="col-sm-12">
-              <a class="btn btn-primary" target="__blank" href="#">Edit</a>
+              <a class="btn btn-primary" target="__blank">Edit</a>
             </div>
           </div>
+        </form>
+        <!-- /Formulario Client -->
         </ion-list>
       </div>
     </div>
