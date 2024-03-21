@@ -14,7 +14,7 @@
                 {{ profile.user.first_name }} {{ profile.user.last_name }}
               </h1>
               <p>{{ profile.user_type }}</p>
-              <button *ngIf='profile.user_type == "Seller"' class="btn btn-primary m-2">My Shops</button>
+              <button *ngIf='profile.user_type == "Seller"' [routerLink]="['/seller-shops']" class="btn btn-primary m-2">My Shops</button>
               <button class="btn btn-outline-primary">Message</button>
             </div>
         </ion-card-content>
