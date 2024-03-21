@@ -15,6 +15,8 @@ class CreateShopsView(APIView):
         return Response(serializer.errors, status=400)
 
 class DetailShopView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, id_shop):
         try:
             shop = Shop.objects.get(id_shop=id_shop)
@@ -24,6 +26,8 @@ class DetailShopView(APIView):
             return Response({"message": "Tienda no encontrada"}, status=404)
 
 class ShopView(APIView):
+    permission_classes = [IsAuthenticated]    
+
     def get(self, request):
         shops = Shop.objects.all()
         serializer = ShopSerializer(shops, many=True)
@@ -35,5 +39,5 @@ class SellerShopsView(APIView):
     def get(self, request):
         profile = request.user.profile
         shops = Shop.objects.filter(profile=profile)
-        serializer = ShopSerializer(Shop, many=True)
+        serializer = ShopSerializer(shops, many=True)
         return Response(serializer.data, status=200)

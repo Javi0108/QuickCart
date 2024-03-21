@@ -21,5 +21,5 @@ class ShopSerializer(serializers.ModelSerializer):
 class ShopDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Shop
-        excude = ['products']
+        exclude = ['products']
 

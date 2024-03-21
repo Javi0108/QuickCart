@@ -8,9 +8,9 @@ class Shop(models.Model):
     profile = models.OneToOneField(Profile, on_delete=models.CASCADE)
     shop_name = models.CharField(max_length=100)
     title = models.CharField(max_length=255)
-    description = models.CharField(max_length=500)
-    address = models.CharField(max_length=255)
-    logoUrl = models.CharField(max_length=255)
+    description = models.CharField(max_length=500, null=True)
+    address = models.CharField(max_length=255, null=True)
+    logoUrl = models.CharField(max_length=255, null=True)
 
 class Product(models.Model):
     id_product = models.AutoField(primary_key=True)
