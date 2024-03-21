@@ -84,5 +84,8 @@ class ProfileView(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
             return Response({'error': 'Usuario no autenticado'}, status=status.HTTP_401_UNAUTHORIZED)
+        
+    def post(self, request):
+        return Response(status=200)
 
         

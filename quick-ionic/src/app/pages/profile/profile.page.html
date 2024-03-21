@@ -20,10 +20,10 @@
         </ion-card-content>
       </ion-card>
 
-      <!-- Falta pasar las redes sociales pero no entendi el concepto en el modelo de django --Javi-- -->
+      <!-- Formualrio Sociales -->
       <ion-card class="mt-4">
-        <ion-card-content>
-          <ion-list>
+        <ion-card-content *ngIf='profile.user_type == "Seller"'>
+          <ion-list >
             <ion-item>
               <i
                 class="bi bi-globe2"
@@ -62,14 +62,16 @@
           </ion-list>
         </ion-card-content>
       </ion-card>
+      <!-- Redes Sociales -->
     </div>
+
     <div class="col-md-8">
       <div class="card mt-2">
         <ion-list class="card-body">
-          <!-- Formulario Client -->
-          <form [formGroup]="editProfileForm" (ngSubmit)="editProfile()">
+          <form [formGroup]="editProfileForm" (ngSubmit)="saveChanges()">
           <ion-item>
             <ion-input
+              formControlName="username"
               labelPlacement="floating"
               value="{{ profile.user.username }}"
             >
@@ -79,6 +81,7 @@
 
           <ion-item>
             <ion-input
+              formControlName="email"
               labelPlacement="floating"
               value="{{ profile.user.email }}"
             >
@@ -87,30 +90,32 @@
           </ion-item>
 
           <ion-item>
-            <ion-input labelPlacement="floating" value="{{ profile.phone }}">
+            <ion-input formControlName="phone" labelPlacement="floating" value="{{ profile.phone }}">
               <div slot="label">Phone</div>
             </ion-input>
           </ion-item>
 
           <ion-item>
-            <ion-input labelPlacement="floating" value="{{ profile.mobile }}">
+            <ion-input formControlName="mobile" labelPlacement="floating" value="{{ profile.mobile }}">
               <div slot="label">Mobile</div>
             </ion-input>
           </ion-item>
 
           <ion-item>
-            <ion-input labelPlacement="floating" value="{{ profile.address }}">
+            <ion-input formControlName="address" labelPlacement="floating" value="{{ profile.address }}">
               <div slot="label">Address</div>
             </ion-input>
           </ion-item>
 
           <div class="row mt-4">
             <div class="col-sm-12">
-              <a class="btn btn-primary" target="__blank">Edit</a>
+              <button class="btn btn-success" *ngIf='this.enableEdit == true' type="submit" [disabled]="!editProfileForm.valid">Save</button>
+              <button class="btn btn-danger" *ngIf='this.enableEdit == true' (click)="cancelChanges()">Cancel</button>
             </div>
           </div>
         </form>
-        <!-- /Formulario Client -->
+        <button class="btn btn-primary" *ngIf='this.enableEdit == false' (click)="editProfile()" >Edit</button>
+    
         </ion-list>
       </div>
     </div>
