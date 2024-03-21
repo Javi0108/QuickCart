@@ -5,7 +5,7 @@ from accounts.models import Profile
 
 class Shop(models.Model):
     id_shop = models.AutoField(primary_key=True)
-    profile = models.OneToOneField(Profile, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     shop_name = models.CharField(max_length=100)
     title = models.CharField(max_length=255)
     description = models.CharField(max_length=500, null=True)

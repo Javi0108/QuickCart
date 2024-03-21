@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Shop } from 'src/app/interfaces/shop.interface';
+import { Shop, ShopData } from 'src/app/interfaces/shop.interface';
 import { SellerService } from 'src/app/services/seller.service';
 
 @Component({
@@ -8,18 +8,26 @@ import { SellerService } from 'src/app/services/seller.service';
   styleUrls: ['./seller-shops.page.scss'],
 })
 export class SellerShopsPage implements OnInit {
-  shops: Shop[] = [];
+  pageloaded: boolean;
+  shops: ShopData[] = [];
 
-  constructor(private sellerService: SellerService) { }
+  constructor(private sellerService: SellerService) { 
+    this.pageloaded = false;
+  }
 
   ngOnInit() {
     this.getShops();
+  }
+
+  ngAfterViewInit() {
+    this.pageloaded = true;
   }
 
   getShops() {
     this.sellerService.getshops().subscribe({
       next: (response) => {
         this.shops = response; // Asignar los datos de las tiendas al arreglo 'shops'
+        console.log(this.shops)
       },
       error: (error) => {
         console.error('Error al obtener las tiendas:', error);

@@ -1,3 +1,51 @@
 <ion-content>
 
+    <ion-spinner *ngIf="!pageloaded"></ion-spinner>
+
+    <div *ngIf="pageloaded" class="container mt-3">
+        <div class="head-container ion-text-end"
+            style="display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="font-weight: 900; color: black;">Web sites</h3>
+            <ion-button style="height: 15px;">
+                <ion-icon slot="start" name="add-circle-outline"></ion-icon>
+                Add web site
+            </ion-button>
+        </div>
+        <div class="search-container mt-3"
+            style="padding: 10px; background-color: rgb(238, 238, 238); border-radius: 10px;">
+            <ion-searchbar style="border-radius: 10px;"></ion-searchbar>
+        </div>
+        <div class="mt-3" style="padding: 10px; background-color: rgb(238, 238, 238); border-radius: 10px;">
+            <!-- Verifica que la lista de tiendas tenga datos y luego itera sobre ella -->
+            <ng-container *ngIf="shops && shops.length">
+                <div class="row">
+                    <div *ngFor="let shop of shops" class="mb-3">
+                        <ion-card class="d-flex flex-row h-100">
+
+                            <ion-img [src]="shop.logoUrl" class="align-self-start"
+                                style="height: 100px; padding: 15px;"></ion-img>
+
+                            <ion-card-header class="flex-grow-1">
+                                <ion-card-title>{{ shop.shop_name }}</ion-card-title>
+                                <ion-card-subtitle>{{ shop.title }}</ion-card-subtitle>
+                            </ion-card-header>
+
+                            <ion-card-content class="flex-grow-1">
+                                {{ shop.description }}
+                            </ion-card-content>
+
+                            <ion-card-content>
+                                <ion-button>Edit web site</ion-button>
+                            </ion-card-content>
+                            
+                        </ion-card>
+                    </div>
+                </div>
+            </ng-container>
+
+            <ion-text *ngIf="!shops || shops.length === 0" class="ion-text-center">
+                No shops available.
+            </ion-text>
+        </div>
+    </div>
 </ion-content>

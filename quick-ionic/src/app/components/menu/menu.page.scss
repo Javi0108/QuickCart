@@ -46,12 +46,15 @@ ion-header {
     top: 56;
     left: 0;
     height: 100%;
-    width: 333px; /* Ancho del sidebar */
-    background-color: red; /* Color de fondo del sidebar */
-    padding: 33px 0; /* Ajusta el relleno según sea necesario */
-    z-index: 100; /* Asegura que el sidebar esté por encima del contenido */
+    width: 333px;
+    padding: 33px 0;
+    /* Ajusta el relleno según sea necesario */
+    z-index: 100;
+
+    /* Asegura que el sidebar esté por encima del contenido */
     ul {
         display: flow;
+
         li {
             margin-bottom: 15px;
             list-style: none;
