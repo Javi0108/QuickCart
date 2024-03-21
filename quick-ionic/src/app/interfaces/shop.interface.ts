@@ -1,19 +1,19 @@
-// export interface Shop {
-//     name: string;
-//     title: string;
-//     logoUrl: string;
-//     description: string;
-//     address: string;
-//     products: Product[];
-// }
+export interface ShopData {
+    name: string;
+    title: string;
+    description: string;
+    address: string;
+    logoUrl: string;
+    products: ProductData[];
+}
 
-// export interface Product {
-//     id_product: number;
-//     product_name: string;
-//     price: number;
-//     description: string;
-//     stock_quantity: number;
-// }
+export interface ProductData {
+    id_product: number;
+    product_name: string;
+    price: number;
+    description: string;
+    stock_quantity: number;
+}
 
 export interface Shop{
     name: string;

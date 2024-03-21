@@ -7,7 +7,10 @@ class Shop(models.Model):
     id_shop = models.AutoField(primary_key=True)
     profile = models.OneToOneField(Profile, on_delete=models.CASCADE)
     shop_name = models.CharField(max_length=100)
-    location = models.CharField(max_length=255)
+    title = models.CharField(max_length=255)
+    description = models.CharField(max_length=500)
+    address = models.CharField(max_length=255)
+    logoUrl = models.CharField(max_length=255)
 
 class Product(models.Model):
     id_product = models.AutoField(primary_key=True)
