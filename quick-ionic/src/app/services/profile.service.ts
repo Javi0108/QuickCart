@@ -23,8 +23,9 @@ export class ProfileService {
     return this.http.get<Profile>(`${this.baseURL}`, { headers: this.getHeaders() });
   }
 
-  editProfile(profile: Profile): Observable<any>{
-    return this.http.post<Profile>(`${this.baseURL}`, profile ,{headers: this.getHeaders()});
+  putEditProfile(profile: Profile): Observable<any> {
+    console.log(profile)
+    return this.http.put<Profile>(`${this.baseURL}`, {profile: profile}, { headers: this.getHeaders() });
   }
 
   private getHeaders(): HttpHeaders {

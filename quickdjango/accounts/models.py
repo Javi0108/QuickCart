@@ -41,5 +41,16 @@ class Profile(models.Model):
     # Método para establecer las redes sociales a partir de un diccionario
     def set_socials_from_dict(self, socials_dict):
         self.socials = json.dumps(socials_dict)
+
+    def __str__(self) -> str:
+        return f"Profile:\n\
+            id_profile: {self.id_profile}\n\
+            user: {self.user.username}\n\
+            phone: {self.phone}\n\
+            mobile: {self.mobile}\n\
+            address: {self.address}\n\
+            sales: {self.sales}\n\
+            socials: {self.socials}\n\
+            user_type: {self.user_type}"
     
     

@@ -1,5 +1,11 @@
 <ion-content *ngIf="profile">
-  <div class="row gutters-sm m-3">
+
+  <div *ngIf='!pageLoaded'>
+    <ion-spinner></ion-spinner>
+  </div>
+  
+  
+  <div class="row gutters-sm m-3" *ngIf='pageLoaded'>
     <div class="col-md-4">
       <ion-card class="mt-2">
         <ion-card-content class="d-flex flex-column align-items-center text-center">
