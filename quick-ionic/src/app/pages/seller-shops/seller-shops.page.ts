@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Shop, ShopData } from 'src/app/interfaces/shop.interface';
+import { AddWebsiteModalComponent } from 'src/app/components/add-website-modal/add-website-modal.component';
+import { ModalController } from '@ionic/angular';
+import { ShopData } from 'src/app/interfaces/shop.interface';
 import { SellerService } from 'src/app/services/seller.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-seller-shops',
@@ -10,9 +13,23 @@ import { SellerService } from 'src/app/services/seller.service';
 export class SellerShopsPage implements OnInit {
   pageloaded: boolean;
   shops: ShopData[] = [];
+  createWebSiteForm: FormGroup; // Declara createWebSiteForm como FormGroup
 
-  constructor(private sellerService: SellerService) { 
+  constructor(
+    private sellerService: SellerService, 
+    private modalController: ModalController,
+    private formBuilder: FormBuilder,
+    
+    ) { 
     this.pageloaded = false;
+
+    this.createWebSiteForm = this.formBuilder.group({
+      shopName: ['', Validators.required],
+      title: ['', Validators.required],
+      description: [''],
+      address: [''],
+      image: ['']
+    });
   }
 
   ngOnInit() {
@@ -22,6 +39,22 @@ export class SellerShopsPage implements OnInit {
   ngAfterViewInit() {
     this.pageloaded = true;
   }
+
+
+  /**
+   * LLamada al modal para crear una nueva web
+   * @returns modal
+   */
+  async openAddWebsiteModal() {
+    const modal = await this.modalController.create({
+      component: AddWebsiteModalComponent,
+      cssClass: 'add-website-modal',
+      componentProps: {createWebSiteForm: this.createWebSiteForm}
+    });
+    return await modal.present();
+  }
+
+  //llamadas al Service
 
   getShops() {
     this.sellerService.getshops().subscribe({

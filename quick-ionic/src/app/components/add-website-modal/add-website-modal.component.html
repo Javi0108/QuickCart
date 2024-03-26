@@ -1,0 +1,21 @@
+<!-- add-shop-modal.component.html -->
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add Shop</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="createWebSiteForm" (ngSubmit)="submitForm()">
+    <ion-input label="Shop name" label-placement="floating" fill="outline" formControlName="shopName"></ion-input>
+    <ion-input label="Title" label-placement="floating" fill="outline" formControlName="title"></ion-input>
+    <ion-input label="Description" label-placement="floating" fill="outline" formControlName="description"></ion-input>
+    <ion-input label="Address" label-placement="floating" fill="outline" formControlName="address"></ion-input>
+    <ion-input label="Logo" label-placement="floating" fill="outline" type="file" formControlName="image" (change)="onFileSelected($event)" ></ion-input>
+    <ion-button type="submit" [disabled]="createWebSiteForm.invalid">Submit</ion-button>
+  </form>
+</ion-content>
