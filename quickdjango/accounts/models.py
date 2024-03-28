@@ -5,6 +5,7 @@ import json
 class Profile(models.Model):
     id_profile = models.AutoField(primary_key=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user_name = models.CharField(max_length=20, null=False,blank=True)
     phone = models.CharField(max_length=20, null=True)
     mobile = models.CharField(max_length=20, null=False, blank=True)
     address = models.CharField(max_length=55, null=True, blank=True)
@@ -46,6 +47,7 @@ class Profile(models.Model):
         return f"Profile:\n\
             id_profile: {self.id_profile}\n\
             user: {self.user.username}\n\
+            user_name: {self.user_name}\n\
             phone: {self.phone}\n\
             mobile: {self.mobile}\n\
             address: {self.address}\n\

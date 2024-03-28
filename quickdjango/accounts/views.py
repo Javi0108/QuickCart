@@ -96,9 +96,3 @@ class ProfileView(APIView):
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         except Profile.DoesNotExist:
             return Response({'error': 'El perfil no existe'}, status=status.HTTP_404_NOT_FOUND)
-
-    
-    
-
-
-        

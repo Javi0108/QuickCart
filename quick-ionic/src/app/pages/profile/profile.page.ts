@@ -32,25 +32,41 @@ export class ProfilePage implements OnInit {
   }
 
   mapFormToProfile(formValue: any): Profile {
-    const user: User = {
-      id: formValue.userId, // Asegúrate de obtener el ID del usuario desde el formulario
-      username: formValue.username,
-      first_name: formValue.first_name,
-      last_name: formValue.last_name,
-      email: formValue.email
-    };
-
     const profile: Profile = {
       id_profile: formValue.id_profile,
-      user: user,
+      //user: null, // Set user to null so it won't be sent in the request
+      user_name: formValue.user_name,
       user_type: formValue.user_type,
       phone: formValue.phone,
       mobile: formValue.mobile,
       address: formValue.address
     };
-
+  
     return profile;
   }
+  
+
+  // mapFormToProfile(formValue: any): Profile {
+  //   const user: User = {
+  //     id: formValue.userId,
+  //     username: formValue.username,
+  //     first_name: formValue.first_name,
+  //     last_name: formValue.last_name,
+  //     email: formValue.email
+  //   };
+
+  //   const profile: Profile = {
+  //     id_profile: formValue.id_profile,
+  //     user: user,
+  //     user_name: formValue.user_name,
+  //     user_type: formValue.user_type,
+  //     phone: formValue.phone,
+  //     mobile: formValue.mobile,
+  //     address: formValue.address
+  //   };
+
+  //   return profile;
+  // }
 
   saveChanges() {
     const profileData: Profile = this.mapFormToProfile(this.editProfileForm.value);
@@ -82,9 +98,10 @@ export class ProfilePage implements OnInit {
 
   buildForm() {
     this.editProfileForm = this.formBuilder.group({
-      userId: [this.profile?.user.id],
-      username: [{ value: this.profile?.user.username, disabled: true }, Validators.required],
-      email: [{ value: this.profile?.user.email, disabled: true }, [Validators.required, Validators.email]],
+     // userId: [this.profile?.user.id],
+     // username: [{ value: this.profile?.user.username, disabled: true }, Validators.required],
+      user_name: [{ value: this.profile?.user_name, disabled: true }, Validators.required],
+      //email: [{ value: this.profile?.user.email, disabled: true }, [Validators.required, Validators.email]],
       phone: [{ value: this.profile?.phone, disabled: true }, [Validators.required, Validators.pattern(/^[0-9]{9}$/)]],
       mobile: [{ value: this.profile?.mobile, disabled: true }, [Validators.required, Validators.pattern(/^[0-9]{9}$/)]],
       address: [{ value: this.profile?.address, disabled: true }, [Validators.required]]

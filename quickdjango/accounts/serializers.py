@@ -40,32 +40,33 @@ class ProfileSerializer(serializers.ModelSerializer):
 #         model = Profile
 #         fields = ['user', 'phone', 'mobile', 'address']
 
-
 class ProfileSerializerWithoutSocials(serializers.ModelSerializer):
-    user = UserSerializer()  
-    
     class Meta:
         model = Profile
-        fields = ['user', 'phone', 'mobile', 'address']
+        fields = ['id_profile', 'user_name', 'user_type', 'phone', 'mobile', 'address']
+
+# class ProfileSerializerWithoutSocials(serializers.ModelSerializer):
+#     user = UserSerializer()  
+    
+#     class Meta:
+#         model = Profile
+#         fields = [#'user',
+#              'phone', 'mobile', 'address'
+#              ]
         
-    def update(self, instance, validated_data):
-        # Actualizar los campos del perfil
-        instance.phone = validated_data.get('phone', instance.phone)
-        instance.mobile = validated_data.get('mobile', instance.mobile)
-        instance.address = validated_data.get('address', instance.address)
+#     def update(self, instance, validated_data):
+#         instance.phone = validated_data.get('phone', instance.phone)
+#         instance.mobile = validated_data.get('mobile', instance.mobile)
+#         instance.address = validated_data.get('address', instance.address)
         
-        # Obtener los datos del usuario
-        user_data = validated_data.pop('user', None)
-        if user_data:
-            # Actualizar el usuario asociado
-            user_instance = instance.user
-            user_serializer = UserSerializer(user_instance, data=user_data)
-            if user_serializer.is_valid():
-                user_serializer.save()
-            else:
-                # Si hay errores de validación en el serializador del usuario,
-                # lanza una excepción de validación para que la vista pueda manejarla.
-                raise serializers.ValidationError(user_serializer.errors)
+#         # user_data = validated_data.pop('user', None)
+#         # if user_data:
+#         #     user_instance = instance.user
+#         #     user_serializer = UserSerializer(user_instance, data=user_data)
+#         #     if user_serializer.is_valid():
+#         #         user_serializer.save()
+#         #     else:
+#         #         raise serializers.ValidationError(user_serializer.errors)
         
-        instance.save()
-        return instance
+#         instance.save()
+#         return instance
