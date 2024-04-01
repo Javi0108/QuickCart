@@ -8,7 +8,8 @@ class CreateShopsView(APIView):
     permission_classes = [IsAuthenticated]
     
     def post(self, request):
-        serializer = ShopDetailSerializer(data=request.data)
+        print("Datos de la solicitud:", request.data)  # Imprimir los datos de la solicitud
+        serializer = ShopSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(profile=request.user.profile)  # Asignamos el perfil del usuario autenticado a la tienda
             return Response(serializer.data, status=201)

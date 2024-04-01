@@ -15,7 +15,7 @@
     <ion-input label="Title" label-placement="floating" fill="outline" formControlName="title"></ion-input>
     <ion-input label="Description" label-placement="floating" fill="outline" formControlName="description"></ion-input>
     <ion-input label="Address" label-placement="floating" fill="outline" formControlName="address"></ion-input>
-    <ion-input label="Logo" label-placement="floating" fill="outline" type="file" formControlName="image" (change)="onFileSelected($event)" ></ion-input>
+    <ion-input label="Logo" fill="outline" type="file" formControlName="image" (change)="onFileSelected($event)" ></ion-input>
     <ion-button type="submit" [disabled]="createWebSiteForm.invalid">Submit</ion-button>
   </form>
 </ion-content>

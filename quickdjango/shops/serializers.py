@@ -21,5 +21,5 @@ class ShopSerializer(serializers.ModelSerializer):
 class ShopDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Shop
-        exclude = ['products']
+        fields = '__all__'
 

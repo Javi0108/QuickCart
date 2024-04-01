@@ -18,7 +18,7 @@ class Shop(models.Model):
     title = models.CharField(max_length=255)
     description = models.CharField(max_length=500, null=True)
     address = models.CharField(max_length=255, null=True)
-    logoUrl = models.ImageField(upload_to='shop_logos', null=True, blank=True)
+    logo = models.ImageField(upload_to='shop_logos', null=True, blank=True)
     template = models.ForeignKey(Template, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):

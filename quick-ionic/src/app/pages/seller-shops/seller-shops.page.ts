@@ -26,9 +26,9 @@ export class SellerShopsPage implements OnInit {
     this.createWebSiteForm = this.formBuilder.group({
       shopName: ['', Validators.required],
       title: ['', Validators.required],
-      description: [''],
-      address: [''],
-      image: ['']
+      description: ['', Validators.required],
+      address: ['', Validators.required],
+      image: [null, Validators.required]
     });
   }
 
@@ -57,7 +57,7 @@ export class SellerShopsPage implements OnInit {
   //llamadas al Service
 
   getShops() {
-    this.sellerService.getshops().subscribe({
+    this.sellerService.getShops().subscribe({
       next: (response) => {
         this.shops = response; // Asignar los datos de las tiendas al arreglo 'shops'
         console.log(this.shops)
@@ -69,7 +69,7 @@ export class SellerShopsPage implements OnInit {
   }
 
   addShop(newShopData: any) {
-    this.sellerService.addshop(newShopData).subscribe({
+    this.sellerService.addShop(newShopData).subscribe({
       next: (response) => {
         // Si la tienda se agrega correctamente, actualiza la lista de tiendas
         this.getShops();
@@ -81,7 +81,7 @@ export class SellerShopsPage implements OnInit {
   }
 
   removeShop(shopId: number) {
-    this.sellerService.removeshop(shopId).subscribe({
+    this.sellerService.removeShop(shopId).subscribe({
       next: (response) => {
         // Si la tienda se elimina correctamente, actualiza la lista de tiendas
         this.getShops();
@@ -93,7 +93,7 @@ export class SellerShopsPage implements OnInit {
   }
 
   editShop(shopId: number, updatedShopData: any) {
-    this.sellerService.editshop(shopId, updatedShopData).subscribe({
+    this.sellerService.editShop(shopId, updatedShopData).subscribe({
       next: (response) => {
         // Si la tienda se edita correctamente, actualiza la lista de tiendas
         this.getShops();

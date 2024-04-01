@@ -37,6 +37,9 @@
         <div class="col-6 r-col">
           <ul>
             <li *ngIf="isLoggedIn()">
+              <ion-button [routerLink]="['/seller-shops']">My Shops</ion-button>
+            </li>
+            <li *ngIf="isLoggedIn()">
               <ion-button [routerLink]="['/profile']">Profile</ion-button>
             </li>
             <li *ngIf="!isLoggedIn()">

@@ -16,22 +16,22 @@ export class SellerService {
     this.token = localStorage.getItem('token');
   }
 
-  getshops(): Observable<any> {
+  getShops(): Observable<any> {
     // Obtener las tiendas del vendedor actual
     return this.http.get<any>(`${this.baseURL}my-shops/`, { headers: this.getHeaders() });
   }
 
-  addshop(newShopData: Shop): Observable<any> {
+  addShop(newShopData: Shop): Observable<any> {
     // Agregar una nueva tienda
     return this.http.post<any>(`${this.baseURL}create-shop/`, newShopData, {headers: this.getHeaders()})
   }
 
-  removeshop(shopId: number): Observable<any> {
+  removeShop(shopId: number): Observable<any> {
     // Eliminar una tienda por su ID
     return this.http.delete<any>(`${this.baseURL}${shopId}/`, { headers: this.getHeaders() });
   }
 
-  editshop(shopId: number, updatedShopData: any): Observable<any> {
+  editShop(shopId: number, updatedShopData: any): Observable<any> {
     // Editar una tienda por su ID
     return this.http.put<any>(`${this.baseURL}shop/${shopId}/`, updatedShopData, { headers: this.getHeaders() });
   }
