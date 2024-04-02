@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
-import { Shop } from '../interfaces/shop.interface';
+import { Shop, ShopCreate } from '../interfaces/shop.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +21,9 @@ export class SellerService {
     return this.http.get<any>(`${this.baseURL}my-shops/`, { headers: this.getHeaders() });
   }
 
-  addShop(newShopData: Shop): Observable<any> {
+  addShop(newShopData: ShopCreate): Observable<any> {
     // Agregar una nueva tienda
+    console.log(newShopData)
     return this.http.post<any>(`${this.baseURL}create-shop/`, newShopData, {headers: this.getHeaders()})
   }
 

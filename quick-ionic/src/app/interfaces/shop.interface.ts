@@ -20,3 +20,12 @@ export interface Shop{
     name: string;
     logoUrl: string;
 }
+
+
+export interface ShopCreate {
+    shop_name: string;
+    title: string;
+    description: string;
+    address: string;
+    logo: string;
+}
