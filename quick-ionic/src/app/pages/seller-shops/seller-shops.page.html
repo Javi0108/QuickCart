@@ -40,7 +40,7 @@
                                             <ion-list>
                                                 <ion-item [button]="true" [detail]="false">Edit</ion-item>
                                                 <ion-item [button]="true" [detail]="false">Enable</ion-item>
-                                                <ion-item [button]="true" [detail]="false">Delete</ion-item>
+                                                <ion-item [button]="true" [detail]="false" (click)="removeShop(shop.id_shop)" color="danger">Delete</ion-item>
                                             </ion-list>
                                         </ion-content>
                                     </ng-template>

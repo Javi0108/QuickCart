@@ -1,4 +1,5 @@
 export interface ShopData {
+    id_shop: number;
     shop_name: string;
     title: string;
     description: string;

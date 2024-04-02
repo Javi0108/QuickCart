@@ -39,10 +39,6 @@ class LoginView(APIView):
         if user_data:
             username = user_data.get('username')
             password = user_data.get('password')
-
-            print(request.data)
-            print(username, password)
-
             user = authenticate(username=username, password=password)
 
             if user is not None:
@@ -61,11 +57,8 @@ class LogoutView(APIView):
     
     def post(self, request):
         try:
-            print(request.data)
             refresh_token = request.data["refresh_token"]
-            print(refresh_token)
             token = RefreshToken(refresh_token)
-            print("token", token)
             token.blacklist()
             return Response(status=status.HTTP_205_RESET_CONTENT)
         except Exception as e:
@@ -80,7 +73,6 @@ class ProfileView(APIView):
         if request.user.is_authenticated:
             profile = Profile.objects.get(user=request.user)
             serializer = ProfileSerializer(profile)
-            print(serializer.data)
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
             return Response({'error': 'Usuario no autenticado'}, status=status.HTTP_401_UNAUTHORIZED)

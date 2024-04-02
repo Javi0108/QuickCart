@@ -28,7 +28,7 @@ export class SellerService {
 
   removeShop(shopId: number): Observable<any> {
     // Eliminar una tienda por su ID
-    return this.http.delete<any>(`${this.baseURL}${shopId}/`, { headers: this.getHeaders() });
+    return this.http.delete<any>(`${this.baseURL}delete/${shopId}/`, { headers: this.getHeaders() });
   }
 
   editShop(shopId: number, updatedShopData: any): Observable<any> {
