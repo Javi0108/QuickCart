@@ -37,7 +37,6 @@ export class AddWebsiteModalComponent{
     }
   }
 
-
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
     console.log(file);

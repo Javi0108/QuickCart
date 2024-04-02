@@ -3,7 +3,7 @@ export interface ShopData {
     title: string;
     description: string;
     address: string;
-    logoUrl: string;
+    logo: string;
     products: ProductData[];
 }
 

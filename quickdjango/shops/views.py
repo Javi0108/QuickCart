@@ -4,16 +4,27 @@ from rest_framework.permissions import IsAuthenticated
 from .models import Shop
 from .serializers import ShopSerializer, ShopDetailSerializer
 
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from .serializers import ShopSerializer  # Importa tu serializador de tienda aquí
+
 class CreateShopsView(APIView):
     permission_classes = [IsAuthenticated]
     
     def post(self, request):
-        print("Datos de la solicitud:", request.data)  # Imprimir los datos de la solicitud
-        serializer = ShopSerializer(data=request.data)
+        print("Datos de la solicitud:", request.data)
+        profile = request.user.profile
+        request_data = request.data.copy() 
+        request_data['profile'] = profile.id_profile 
+        serializer = ShopSerializer(data=request_data)
+        
         if serializer.is_valid():
-            serializer.save(profile=request.user.profile)  # Asignamos el perfil del usuario autenticado a la tienda
+            serializer.save()
             return Response(serializer.data, status=201)
-        return Response(serializer.errors, status=400)
+        else:
+            return Response(serializer.errors, status=400)
+
 
 class DetailShopView(APIView):
     permission_classes = [IsAuthenticated]

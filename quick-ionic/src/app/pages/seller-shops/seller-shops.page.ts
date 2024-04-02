@@ -24,7 +24,7 @@ export class SellerShopsPage implements OnInit {
     this.pageloaded = false;
 
     this.createWebSiteForm = this.formBuilder.group({
-      shopName: ['', Validators.required],
+      shop_name: ['', Validators.required],
       title: ['', Validators.required],
       description: ['', Validators.required],
       address: ['', Validators.required],
@@ -60,7 +60,7 @@ export class SellerShopsPage implements OnInit {
     this.sellerService.getShops().subscribe({
       next: (response) => {
         this.shops = response; // Asignar los datos de las tiendas al arreglo 'shops'
-        console.log(this.shops)
+        console.log("tiendas",this.shops)
       },
       error: (error) => {
         console.error('Error al obtener las tiendas:', error);
