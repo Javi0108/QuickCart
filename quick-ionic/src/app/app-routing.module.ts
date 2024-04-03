@@ -27,6 +27,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/web-page/web-page.module').then( m => m.WebPagePageModule)
   },
   {
+    path: 'web-page-edit/:id',
+    loadChildren: () => import('./pages/web-page-edit/web-page-edit.module').then( m => m.WebPageEditPageModule)
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'

@@ -23,7 +23,6 @@ export class SellerService {
 
   addShop(newShopData: ShopCreate): Observable<any> {
     // Agregar una nueva tienda
-    console.log(newShopData)
     return this.http.post<any>(`${this.baseURL}create-shop/`, newShopData, {headers: this.getHeaders()})
   }
 

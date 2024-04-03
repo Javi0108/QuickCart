@@ -54,6 +54,10 @@ export class SellerShopsPage implements OnInit {
     return await modal.present();
   }
 
+  editWebSite(shopId: number) {
+
+  }
+
   //llamadas al Service
 
   getShops() {

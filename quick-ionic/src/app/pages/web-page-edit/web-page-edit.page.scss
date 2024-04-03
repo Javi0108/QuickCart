@@ -1,0 +1,22 @@
+// Estilo para el contenido principal
+ion-col[size="9"] {
+    width: 100%; // Ajustar el ancho del contenido principal al 100%
+    flex: 1; // Ocupar todo el espacio disponible
+    height: 93vh; // Ajustar la altura para que se ajuste a la altura de la ventana
+    overflow-y: auto; // Permitir desplazamiento vertical si es necesario
+    padding: 10px;
+    margin-bottom: 1000px;
+//    border: 3px solid black;
+    border-radius: 5px;
+}
+
+// Estilo para el toolbar
+ion-col[size="3"] {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 25%; // El tamaño del toolbar será el complemento del contenido principal
+    background-color: rgb(107, 107, 107);
+    z-index: 1000;
+}
