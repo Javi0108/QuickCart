@@ -23,6 +23,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/seller-shops/seller-shops.module').then( m => m.SellerShopsPageModule)
   },
   {
+    path: 'web-page/:name/:id',
+    loadChildren: () => import('./pages/web-page/web-page.module').then( m => m.WebPagePageModule)
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'

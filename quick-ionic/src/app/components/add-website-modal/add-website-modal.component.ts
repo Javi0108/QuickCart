@@ -24,13 +24,12 @@ export class AddWebsiteModalComponent {
 
   async submitForm() {
     if (this.createWebSiteForm.valid) {
-      const logoBase64 = await this.convertImageToBase64(this.createWebSiteForm.get('image')?.value);
       const shopData: ShopCreate = {
         shop_name: this.createWebSiteForm.get('shop_name')?.value,
         title: this.createWebSiteForm.get('title')?.value,
         description: this.createWebSiteForm.get('description')?.value,
         address: this.createWebSiteForm.get('address')?.value,
-        logo: logoBase64,
+        logo: this.createWebSiteForm.get('image')?.value, // Utilizar directamente el valor de la imagen
       };
   
       this.sellerService.addShop(shopData).subscribe({
@@ -43,23 +42,34 @@ export class AddWebsiteModalComponent {
       });
     }
   }
+  
 
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
+    console.log('Archivo seleccionado:', file);
     if (file) {
-      this.createWebSiteForm.patchValue({
-        image: file // Establece el objeto File completo como el valor del campo de entrada de archivos
-      });
-      this.createWebSiteForm.get('image')?.updateValueAndValidity(); // Actualiza la validez del control de formulario
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        console.log('Imagen convertida a base64:', reader.result);
+        this.createWebSiteForm.patchValue({
+          image: reader.result // Establecer la URL de datos como el valor del campo de entrada de archivos
+        });
+        this.createWebSiteForm.get('image')?.updateValueAndValidity(); // Actualizar la validez del control de formulario
+      };
     }
   }
+  
 
   // Función para convertir la imagen a base64
   private convertImageToBase64(file: File): Promise<string> {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result as string);
+      reader.onload = () => {
+        console.log('Imagen convertida a base64:', reader.result);
+        resolve(reader.result as string);
+      };
       reader.onerror = error => reject(error);
     });
   }

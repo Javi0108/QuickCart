@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
-import { Shop, ShopCreate } from '../interfaces/shop.interface';
+import { ShopCreate } from '../interfaces/shop.interface';
 
 @Injectable({
   providedIn: 'root'

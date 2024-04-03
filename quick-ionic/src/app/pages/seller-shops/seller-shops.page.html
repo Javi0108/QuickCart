@@ -1,60 +1,61 @@
 <ion-content>
 
     <ion-spinner *ngIf="!pageloaded"></ion-spinner>
-
+  
     <div *ngIf="pageloaded" class="container mt-3">
-        <div class="head-container ion-text-end">
-            <h3>Web sites</h3>
-            <ion-button (click)="openAddWebsiteModal()">
-                <ion-icon slot="start" name="add-circle-outline"></ion-icon>
-                Add web site
-            </ion-button>
-        </div>
-        <div class="search-container mt-3">
-            <ion-searchbar></ion-searchbar>
-        </div>
-        <div class="shops-container mt-3">
-            <ng-container *ngIf="shops && shops.length">
-                <div class="row">
-                    <div *ngFor="let shop of shops; let i = index" class="mb-3">
-                        <ion-card class="d-flex flex-row h-100">
-                            <ion-img [src]="'http://localhost:8000' + shop.logo"></ion-img>
-            
-                            <ion-card-header class="flex-grow-1">
-                                <ion-card-title>{{ shop.shop_name }}</ion-card-title>
-                                <ion-card-subtitle>{{ shop.title }}</ion-card-subtitle>
-                            </ion-card-header>
-            
-                            <ion-card-content class="flex-grow-1">
-                                {{ shop.description }}
-                            </ion-card-content>
-            
-                            <ion-card-content class="flex">
-                                <ion-button>Edit web site</ion-button>
-                                <ion-button [id]="'options-shop-' + i">
-                                    <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
-                                </ion-button>
-                                <ion-popover [trigger]="'options-shop-' + i" [dismissOnSelect]="true">
-                                    <ng-template>
-                                        <ion-content>
-                                            <ion-list>
-                                                <ion-item [button]="true" [detail]="false">Edit</ion-item>
-                                                <ion-item [button]="true" [detail]="false">Enable</ion-item>
-                                                <ion-item [button]="true" [detail]="false" (click)="removeShop(shop.id_shop)" color="danger">Delete</ion-item>
-                                            </ion-list>
-                                        </ion-content>
-                                    </ng-template>
-                                </ion-popover>
-                            </ion-card-content>
-                        </ion-card>
-                    </div>
-                </div>
-            </ng-container>
-            
-
-            <ion-text *ngIf="!shops || shops.length === 0" class="ion-text-center">
-                No shops available.
-            </ion-text>
-        </div>
+      <div class="head-container ion-text-end">
+        <h3>Web sites</h3>
+        <ion-button (click)="openAddWebsiteModal()">
+          <ion-icon slot="start" name="add-circle-outline"></ion-icon>
+          Add web site
+        </ion-button>
+      </div>
+      <div class="search-container mt-3">
+        <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="onSearchChange($event)"></ion-searchbar>
+      </div>
+      <div class="shops-container mt-3">
+        <ng-container *ngIf="filteredShops && filteredShops.length">
+          <div class="row">
+            <div *ngFor="let shop of filteredShops; let i = index" class="mb-3">
+              <ion-card class="d-flex flex-row h-100">
+                <ion-img [src]="'http://localhost:8000' + shop.logo"></ion-img>
+  
+                <ion-card-header class="flex-grow-1">
+                  <ion-card-title>{{ shop.shop_name }}</ion-card-title>
+                  <ion-card-subtitle>{{ shop.title }}</ion-card-subtitle>
+                </ion-card-header>
+  
+                <ion-card-content class="flex-grow-1">
+                  {{ shop.description }}
+                </ion-card-content>
+  
+                <ion-card-content class="flex">
+                  <ion-button [routerLink]="['/web-page', shop.shop_name, shop.id_shop]">Visit web site</ion-button>
+                  <ion-button [id]="'options-shop-' + i">
+                    <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+                  </ion-button>
+                  <ion-popover [trigger]="'options-shop-' + i" [dismissOnSelect]="true">
+                    <ng-template>
+                      <ion-content>
+                        <ion-list>
+                          <ion-item [button]="true" [detail]="false">Edit</ion-item>
+                          <ion-item [button]="true" [detail]="false">Enable</ion-item>
+                          <ion-item [button]="true" [detail]="false" (click)="removeShop(shop.id_shop)" color="danger">Delete</ion-item>
+                        </ion-list>
+                      </ion-content>
+                    </ng-template>
+                  </ion-popover>
+                </ion-card-content>
+              </ion-card>
+            </div>
+          </div>
+        </ng-container>
+  
+  
+        <ion-text *ngIf="!filteredShops || filteredShops.length === 0" class="ion-text-center">
+          No shops available.
+        </ion-text>
+      </div>
     </div>
-</ion-content>
+  </ion-content>
+  

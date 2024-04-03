@@ -59,6 +59,7 @@ class SellerShopsView(APIView):
     
     def get(self, request, id_shop=None):
         # Si no se proporciona un ID de tienda, devuelve todas las tiendas del vendedor
+        print(id_shop)
         if id_shop is None:
             profile = request.user.profile
             shops = Shop.objects.filter(profile=profile)
