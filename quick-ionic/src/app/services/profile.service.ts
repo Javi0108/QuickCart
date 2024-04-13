@@ -18,4 +18,11 @@ export class ProfileService {
 
     return this.http.get<Profile>('http://localhost:8000/api/accounts/profile/', { headers });
   }
+
+  updateProfile(profileData: Profile): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = token ? new HttpHeaders({ 'Authorization': `Bearer ${token}` }) : new HttpHeaders();
+    console.log(profileData.user.username);
+    return this.http.put<Profile>('http://localhost:8000/api/accounts/profile/', profileData, { headers });
+  }
 }
