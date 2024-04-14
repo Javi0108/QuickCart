@@ -3,7 +3,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from django.contrib.auth import authenticate
 from rest_framework.views import APIView
-from .serializers import  ProfileSerializerRegister, UserSerializerRegister, ProfileSerializer
+from .serializers import  ProfileSerializerRegister, ProfileSerializerWithoutSocials, UserSerializerRegister, ProfileSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -76,15 +76,15 @@ class ProfileView(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
             return Response({'error': 'Usuario no autenticado'}, status=status.HTTP_401_UNAUTHORIZED)
-
+    
     def put(self, request):
-        if request.user.is_authenticated:
+        try:
             profile = Profile.objects.get(user=request.user)
-            serializer = ProfileSerializer(profile, data=request.data)
-            if serializer.is_valid():
+            serializer = ProfileSerializer(profile, data=request.data.get('profile'))
+            if serializer.is_valid():  
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_200_OK)
             else:
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        else:
-            return Response({'error': 'Usuario no autenticado'}, status=status.HTTP_401_UNAUTHORIZED)
+        except Profile.DoesNotExist:
+            return Response({'error': 'El perfil no existe'}, status=status.HTTP_404_NOT_FOUND)
