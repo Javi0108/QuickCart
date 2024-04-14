@@ -95,3 +95,12 @@ class ProfileView(APIView):
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         except Profile.DoesNotExist:
             return Response({'error': 'El perfil no existe'}, status=status.HTTP_404_NOT_FOUND)
+
+class ProfileByIdView(APIView):
+    
+    permission_classes = [AllowAny]
+
+    def get(self, request, id):
+        profile = Profile.objects.get(user=id)
+        serializer = ProfileSerializer(profile)
+        return Response(serializer.data, status=status.HTTP_200_OK)

@@ -23,6 +23,10 @@ export class ProfileService {
     return this.http.get<Profile>(`${this.baseURL}`, { headers: this.getHeaders() });
   }
 
+  getProfileById(profileId: number): Observable<any> {
+    return this.http.get<Profile>(`${this.baseURL}${profileId}`, { headers: this.getHeaders() });
+  }
+
   putEditProfile(profile: Profile): Observable<any> {
     console.log(profile)
     return this.http.put<Profile>(`${this.baseURL}`, {"profile": profile}, { headers: this.getHeaders() });

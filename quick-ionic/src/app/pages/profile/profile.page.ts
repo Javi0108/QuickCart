@@ -6,6 +6,7 @@ import { ProfileService } from 'src/app/services/profile.service';
 import { ToastController } from '@ionic/angular';
 import { User } from 'src/app/interfaces/user.interface';
 import { NotificationToastService } from 'src/app/services/notification-toast.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -17,6 +18,7 @@ export class ProfilePage implements OnInit {
   user!: User;
   pageLoaded: boolean;
   enableEdit: boolean;
+  edit: boolean;
 
   editProfileForm: FormGroup;
   userNameForm: FormGroup;
@@ -24,10 +26,12 @@ export class ProfilePage implements OnInit {
   constructor(
     private profileService: ProfileService,
     private formBuilder: FormBuilder,
-    private notificationToastService: NotificationToastService
+    private notificationToastService: NotificationToastService,
+    private route: ActivatedRoute
   ) {
     this.pageLoaded = false;
     this.enableEdit = false;
+    this.edit = false;
 
     this.editProfileForm = this.formBuilder.group({
       user: this.formBuilder.group({
@@ -40,13 +44,14 @@ export class ProfilePage implements OnInit {
       address: [''],
       user_type: [''],
     });
-    
+
     this.userNameForm = this.formBuilder.group({
       username: [''],
     });
   }
 
   ngOnInit() {
+    // Load user profile
     this.loadProfile();
   }
 
@@ -54,33 +59,59 @@ export class ProfilePage implements OnInit {
     const userString = localStorage.getItem('user');
     if (userString) {
       this.user = JSON.parse(userString);
-      if(this.userNameForm){
-        this.userNameForm.patchValue({username: this.user.username})
+      const currentUser = JSON.parse(userString);
+      console.log(this.user.username);
+      console.log(userString);
+      if (this.user.username == currentUser.username) {
+        this.edit = true;
+      }
+      if (this.userNameForm) {
+        this.userNameForm.patchValue({ username: this.user.username });
       }
     }
   }
 
   loadProfile() {
-    this.profileService.getProfile().subscribe({
-      next: (profile: Profile) => {
-        this.loadUsername();
-        this.editProfileForm.patchValue(profile);
-        this.profile = profile;
-      },
-      error: (error) => {
-        console.error(error);
-      },
-    } as Observer<Profile>);
+    const userId = this.route.snapshot.paramMap.get('id');
+    if (userId) {
+      this.profileService.getProfileById(parseInt(userId)).subscribe({
+        next: (profile: Profile) => {
+          this.loadUsername();
+          this.editProfileForm.patchValue(profile);
+          this.profile = profile;
+        },
+        error: (error) => {
+          console.error(error);
+        },
+      } as Observer<Profile>);
+    } else {
+      this.profileService.getProfile().subscribe({
+        next: (profile: Profile) => {
+          this.loadUsername();
+          this.editProfileForm.patchValue(profile);
+          this.profile = profile;
+        },
+        error: (error) => {
+          console.error(error);
+        },
+      } as Observer<Profile>);
+    }
   }
 
   saveChanges() {
     this.profileService.putEditProfile(this.editProfileForm.value).subscribe(
       (response) => {
-        this.notificationToastService.presentToast('Profile updated successfully', 'success')
-        this.loadProfile()
+        this.notificationToastService.presentToast(
+          'Profile updated successfully',
+          'success'
+        );
+        this.loadProfile();
       },
       (error) => {
-        this.notificationToastService.presentToast('Failed to update profile', 'danger')
+        this.notificationToastService.presentToast(
+          'Failed to update profile',
+          'danger'
+        );
       }
     );
   }
