@@ -19,6 +19,11 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'username', 'first_name', 'last_name', 'email')
 
+class UserSerializerUpdate(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'email')
+
 class ProfileSerializerRegister(serializers.ModelSerializer):
     user_id = serializers.PrimaryKeyRelatedField(source='user', queryset=User.objects.all())
 
@@ -27,11 +32,28 @@ class ProfileSerializerRegister(serializers.ModelSerializer):
         fields = ['id_profile', 'user_id', 'user_type']
         
 class ProfileSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
+    user = UserSerializerUpdate()
     
     class Meta:
         model = Profile
         fields = ['id_profile', 'user', 'phone', 'mobile', 'address', 'user_type']
+
+    def update(self, instance, validated_data):
+        instance.phone = validated_data.get('phone', instance.phone)
+        instance.mobile = validated_data.get('mobile', instance.mobile)
+        instance.address = validated_data.get('address', instance.address)
+            
+        user_data = validated_data.pop('user', None)
+        if user_data:
+            user_instance = instance.user
+            user_serializer = UserSerializerUpdate(user_instance, data=user_data)
+            if user_serializer.is_valid():
+                user_serializer.save()
+            else:
+                raise serializers.ValidationError(user_serializer.errors)
+            
+        instance.save()
+        return instance
 
 # class ProfileSerializerWithoutSocials(serializers.ModelSerializer):
 #     user = UserSerializer()  # No establecer como de solo lectura

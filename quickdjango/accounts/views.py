@@ -87,8 +87,7 @@ class ProfileView(APIView):
     def put(self, request):
         try:
             profile = Profile.objects.get(user=request.user)
-            serializer = ProfileSerializerWithoutSocials(profile, data=request.data.get('profile'))
-            
+            serializer = ProfileSerializer(profile, data=request.data.get('profile'))
             if serializer.is_valid():  
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_200_OK)

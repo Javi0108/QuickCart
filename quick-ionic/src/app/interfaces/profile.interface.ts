@@ -3,7 +3,7 @@ import { User } from './user.interface';
 
 export interface Profile {
   id_profile: number;
-  //user: User;
+  user: User;
   user_name: string;
   user_type: string;
   phone: string;
