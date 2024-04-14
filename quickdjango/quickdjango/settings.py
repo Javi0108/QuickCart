@@ -85,7 +85,6 @@ WSGI_APPLICATION = 'quickdjango.wsgi.application'
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8100',
     "http://localhost:4200",
-
 ]
 
 # TOKEN
