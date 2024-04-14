@@ -21,13 +21,13 @@ class RegisterView(APIView):
             
             #provicional
             profile_data = {'user_id': user.id, 'user_type': request.data.get('user_type')}
-            profile_serializer = ProfileSerializerRegister(data=profile_data)
-            if profile_serializer.is_valid():
-                profile = profile_serializer.save()
+            serializer = ProfileSerializerRegister(data=profile_data)
+            if serializer.is_valid():
+                profile = serializer.save()
                 return Response({'user': user.email}, status=status.HTTP_201_CREATED)
             else: 
                 user.delete()
-                return Response(profile_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class LoginView(APIView):
@@ -77,4 +77,14 @@ class ProfileView(APIView):
         else:
             return Response({'error': 'Usuario no autenticado'}, status=status.HTTP_401_UNAUTHORIZED)
 
-        
+    def put(self, request):
+        if request.user.is_authenticated:
+            profile = Profile.objects.get(user=request.user)
+            serializer = ProfileSerializer(profile, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response({'error': 'Usuario no autenticado'}, status=status.HTTP_401_UNAUTHORIZED)
