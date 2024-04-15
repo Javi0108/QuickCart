@@ -1,0 +1,67 @@
+<ion-content class="app-product-detail pt-5">
+  <div class="container">
+    <ion-card class="card-product">
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size-lg="6" size-md="12" size="12">
+            <div class="product-images">
+
+              <div class="image-selected">
+                <img [src]="selectedImage || product.avatar" id="current" alt="#">
+              </div>
+
+              <div class="images">
+                <img *ngFor="let image of product.images" [src]="image.img" id="current" alt="#"
+                  (click)="selectImage(image)">
+              </div>
+            </div>
+          </ion-col>
+          <ion-col size-lg="6" size-md="12" size="12">
+            <div class="product-info">
+              <h2 class="title">{{product.name}}</h2>
+              <p class="category">{{product.tags}}</p>
+              <h3 class="price">{{product.price}} $</h3>
+              <p class="info-text">{{product.shortDescription}}</p>
+              <ion-row>
+                <ion-col size-lg="4" size-md="4" size="12">
+                  <ion-item>
+                    <ion-label for="quantity">Quantity</ion-label>
+                    <ion-input type="number" id="quantity" min="1" value="1"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <div class="bottom-buttons">
+                <ion-row class="ion-align-items-end">
+                  <ion-col size-lg="6" size-md="6" size="12">
+                    <ion-button class="cart-button" expand="block" (click)="addToCart()">Add to Cart</ion-button>
+                  </ion-col>
+                  <ion-col size-lg="6" size-md="6" size="12">
+                    <ion-button class="wish-button" expand="block">
+                      <ion-icon name="heart-outline"></ion-icon>
+                      To Wishlist
+                    </ion-button>
+                  </ion-col>
+                </ion-row>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+
+    <ion-card class="product-extend-info">
+      <ion-card-content>
+        <ion-row>
+          <ion-col>
+            <h4>Details</h4>
+            <p>{{product.description}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="product-reviews">
+
+    </ion-card>
+  </div>
+</ion-content>
