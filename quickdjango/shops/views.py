@@ -1,13 +1,13 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
-from .models import Shop
+from .models import Shop, Product
 from .serializers import ShopSerializer, ShopDetailSerializer
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from .serializers import ShopSerializer  # Importa tu serializador de tienda aquí
+from .serializers import ShopSerializer,ProductSerializer
 from django.shortcuts import get_object_or_404
 from rest_framework import status
 from django.core.files.base import ContentFile
@@ -104,4 +104,23 @@ class SellerShopsView(APIView):
         return Response({'message': 'Shop deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
         
     
-    
+    # PRODUCTS
+
+class ProductsView(APIView):
+    permission_classes=[IsAuthenticated]
+
+    def get(self, request, id_product=None):
+        if id_product is None:
+            products = Product.objects.get()
+            serializer = ProductSerializer(products, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        
+        try:
+            product = Product.objects.get(id=id_product) 
+            serializer = ProductSerializer(product)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Product.DoesNotExist:
+            return Response({"message": "Producto no encontrado"}, status=status.HTTP_404_NOT_FOUND)
+
+    def post(self, request):
+        pass

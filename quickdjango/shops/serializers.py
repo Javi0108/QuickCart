@@ -1,12 +1,14 @@
 from rest_framework import serializers
 from .models import Shop, Product
+       
+ # PRODUCTS
 
-class ProductSerializer(serializers.ModelSerializer):
+class ProductSerializer(serializers.ModelSerializer):   
+    
     class Meta:
         model = Product
         fields = '__all__'
-        
-            
+                   
 # SHOP 
 
 class ShopSerializer(serializers.ModelSerializer):
@@ -22,4 +24,5 @@ class ShopDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Shop
         fields = '__all__'
+
 

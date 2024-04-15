@@ -31,11 +31,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/web-page-edit/web-page-edit.module').then( m => m.WebPageEditPageModule)
   },
   {
-    path: 'products-catalog',
+    path: 'catalog',
     loadChildren: () => import('./pages/products-catalog/products-catalog.module').then( m => m.ProductsCatalogPageModule)
   },
   {
-    path: 'product-detail',
+    path: 'product/:id',
     loadChildren: () => import('./pages/product-detail/product-detail.module').then( m => m.ProductDetailPageModule)
   },
   {
