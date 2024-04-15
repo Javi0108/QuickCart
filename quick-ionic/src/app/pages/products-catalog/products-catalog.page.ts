@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../services/product.service';
-import { Product } from '../interfaces/product.interface';
+import { Product } from 'src/app/interfaces/product.interface';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-products-catalog',
@@ -25,5 +25,9 @@ export class ProductsCatalogPage implements OnInit {
         console.error('Error loading products:', error);
       }
     );
+  }
+
+  addToCart(products: Product) {
+    return null;
   }
 }

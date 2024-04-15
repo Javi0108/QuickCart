@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { ProductsCatalogPageRoutingModule } from './products-catalog-routing.module';
-
 import { ProductsCatalogPage } from './products-catalog.page';
 
 @NgModule({
