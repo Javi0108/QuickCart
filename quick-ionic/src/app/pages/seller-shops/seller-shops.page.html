@@ -21,7 +21,7 @@
                 <ion-img [src]="'http://localhost:8000' + shop.logo"></ion-img>
   
                 <ion-card-header class="flex-grow-1">
-                  <ion-card-title>{{ shop.shop_name }}</ion-card-title>
+                  <ion-card-title>{{ shop.name }}</ion-card-title>
                   <ion-card-subtitle>{{ shop.title }}</ion-card-subtitle>
                 </ion-card-header>
   
@@ -30,7 +30,7 @@
                 </ion-card-content>
   
                 <ion-card-content class="flex">
-                  <ion-button [routerLink]="['/web-page', shop.shop_name, shop.id_shop]">Visit web site</ion-button>
+                  <ion-button [routerLink]="['/web-page', shop.name, shop.id_shop]">Visit web site</ion-button>
                   <ion-button [id]="'options-shop-' + i">
                     <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
                   </ion-button>

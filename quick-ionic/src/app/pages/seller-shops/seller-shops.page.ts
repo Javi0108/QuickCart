@@ -25,7 +25,7 @@ export class SellerShopsPage implements OnInit {
     this.pageloaded = false;
 
     this.createWebSiteForm = this.formBuilder.group({
-      shop_name: ['', Validators.required],
+      name: ['', Validators.required],
       title: ['', Validators.required],
       description: ['', Validators.required],
       address: ['', Validators.required],
@@ -119,7 +119,7 @@ export class SellerShopsPage implements OnInit {
       this.filteredShops = this.shops;
     } else {
       this.filteredShops = this.shops.filter((shop) => {
-        return shop.shop_name.toLowerCase().includes(searchTerm) ||
+        return shop.name.toLowerCase().includes(searchTerm) ||
                shop.title.toLowerCase().includes(searchTerm) ||
                shop.description.toLowerCase().includes(searchTerm);
       });

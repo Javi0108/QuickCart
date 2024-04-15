@@ -25,7 +25,7 @@ export class AddWebsiteModalComponent {
   async submitForm() {
     if (this.createWebSiteForm.valid) {
       const shopData: ShopCreate = {
-        shop_name: this.createWebSiteForm.get('shop_name')?.value,
+        name: this.createWebSiteForm.get('name')?.value,
         title: this.createWebSiteForm.get('title')?.value,
         description: this.createWebSiteForm.get('description')?.value,
         address: this.createWebSiteForm.get('address')?.value,
