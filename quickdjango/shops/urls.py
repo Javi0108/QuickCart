@@ -10,4 +10,8 @@ urlpatterns = [
     path('delete/<int:id_shop>/', views.SellerShopsView.as_view(), name='shop-detail'),
     
     path('shops/', views.ShopView.as_view(), name='all-shops'),
+
+    path('catalog/',views.ProductsView.as_view(), name="products"),
+    path('product/<int:id_shop>/', views.ProductsView.as_view(), name='product-detail'),
+
 ]

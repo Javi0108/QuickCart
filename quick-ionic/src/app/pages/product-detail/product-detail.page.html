@@ -7,21 +7,21 @@
             <div class="product-images">
 
               <div class="image-selected">
-                <img [src]="selectedImage || product.avatar" id="current" alt="#">
+                <img [src]="selectedImage || product.avatar" id="current" alt="Avatar del producto">
               </div>
 
               <div class="images">
-                <img *ngFor="let image of product.images" [src]="image.img" id="current" alt="#"
+                <img *ngFor="let image of product.images" [src]="image.img" id="current" alt="Imagenes del producto"
                   (click)="selectImage(image)">
               </div>
             </div>
           </ion-col>
           <ion-col size-lg="6" size-md="12" size="12">
             <div class="product-info">
-              <h2 class="title">{{product.name}}</h2>
-              <p class="category">{{product.tags}}</p>
-              <h3 class="price">{{product.price}} $</h3>
-              <p class="info-text">{{product.shortDescription}}</p>
+              <h2 class="title">Nombre: {{product.name}}</h2>
+              <p class="category">Etiquetas: {{product.tags}}</p>
+              <h3 class="price">Precio: {{product.price}} $</h3>
+              <p class="info-text">Descripcion Corta:{{product.shortDescription}}</p>
               <ion-row>
                 <ion-col size-lg="4" size-md="4" size="12">
                   <ion-item>

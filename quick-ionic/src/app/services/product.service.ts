@@ -9,7 +9,7 @@ import { ProductCreate } from '../interfaces/product.interface';
 })
 export class ProductService {
 
-  private baseURL = "http://localhost:8000/api/products/";
+  private baseURL = "http://localhost:8000/api/shops/";
   private token: string | null;
 
   constructor(private http: HttpClient, private cookies: CookieService) {
@@ -17,7 +17,7 @@ export class ProductService {
   }
 
   getProducts(): Observable<any> {
-    return this.http.get<any>(`${this.baseURL}/`, { headers: this.getHeaders() });
+    return this.http.get<any>(`${this.baseURL}catalog/`, { headers: this.getHeaders() });
   }
 
   addProduct(newProductData: ProductCreate): Observable<any> {
@@ -29,7 +29,7 @@ export class ProductService {
   }
 
   editProduct(ProductId: number, updatedProductData: any): Observable<any> {
-    return this.http.put<any>(`${this.baseURL}Product/${ProductId}/`, updatedProductData, { headers: this.getHeaders() });
+    return this.http.put<any>(`${this.baseURL}product/${ProductId}/`, updatedProductData, { headers: this.getHeaders() });
   }
 
   private getHeaders(): HttpHeaders {
