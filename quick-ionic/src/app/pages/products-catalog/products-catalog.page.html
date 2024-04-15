@@ -3,8 +3,8 @@
     <h2 class="title">Productos</h2>
     <ion-row>
       <ion-col size="12" size-md="6" size-lg="4" *ngFor="let product of products">
-        <ion-card>
-          <ion-img [src]="product.avatar" alt="Product Image"></ion-img>
+        <ion-card [routerLink]="['/product',product.id_product]">
+          <ion-img [src]="'http://localhost:8000' + product.avatar" alt="Product Image"></ion-img>
           <ion-card-header>
             <ion-card-title>{{ product.name }}</ion-card-title>
           </ion-card-header>

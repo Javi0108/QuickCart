@@ -111,12 +111,12 @@ class ProductsView(APIView):
 
     def get(self, request, id_product=None):
         if id_product is None:
-            products = Product.objects.get()
+            products = Product.objects.all()
             serializer = ProductSerializer(products, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
         
         try:
-            product = Product.objects.get(id=id_product) 
+            product = Product.objects.get(id_product=id_product) 
             serializer = ProductSerializer(product)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except Product.DoesNotExist:
