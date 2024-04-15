@@ -1,6 +1,6 @@
 export interface ShopData {
     id_shop: number;
-    shop_name: string;
+    name: string;
     title: string;
     description: string;
     address: string;
@@ -10,7 +10,7 @@ export interface ShopData {
 
 export interface ProductData {
     id_product: number;
-    product_name: string;
+    name: string;
     price: number;
     description: string;
     stock_quantity: number;
@@ -23,7 +23,7 @@ export interface Shop{
 
 
 export interface ShopCreate {
-    shop_name: string;
+    name: string;
     title: string;
     description: string;
     address: string;

@@ -91,7 +91,7 @@ export class WebPageEditPage implements OnInit {
   
   updateShopName(event: Event) {
     const inputElement = event.target as HTMLInputElement;
-    this.shopData!.shop_name = inputElement.value;
+    this.shopData!.name = inputElement.value;
   }
   
   updateDescription(event: Event) {
