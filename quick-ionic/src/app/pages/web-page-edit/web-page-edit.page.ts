@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ShopData } from 'src/app/interfaces/shop.interface';
 import { ShopService } from 'src/app/services/shop.service';
 import { ChangeDetectorRef } from '@angular/core';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { Section } from 'src/app/interfaces/section';
 
 @Component({
   selector: 'app-web-page-edit',
@@ -14,35 +16,13 @@ export class WebPageEditPage implements OnInit {
   shopData!: ShopData;
   shopId!: number;
 
+  sections: Section[] = [];
 
-  //CAMPOS EDITABLES QUE HAY QUE GUARDAR EN LA BASE DE DATOS PERO AUN SON PROVICIONALES
 
-  bannerImage: File | null;
-
-  //
-  products = [
-    { name: 'Fancy Product', price: '$40.00 - $80.00', image: 'https://pyxis.nymag.com/v1/imgs/96f/1ef/ac93d2b422a1c5de953dc39764579a306c-ONGold.jpg' },
-    { name: 'Special Item', price: '$18.00', image: 'https://pyxis.nymag.com/v1/imgs/96f/1ef/ac93d2b422a1c5de953dc39764579a306c-ONGold.jpg' },
-    { name: 'Sale Item', price: '$25.00', image: 'https://pyxis.nymag.com/v1/imgs/96f/1ef/ac93d2b422a1c5de953dc39764579a306c-ONGold.jpg' },
-    { name: 'Popular Item', price: '$40.00', image: 'https://pyxis.nymag.com/v1/imgs/96f/1ef/ac93d2b422a1c5de953dc39764579a306c-ONGold.jpg' },
-    { name: 'Sale Item', price: '$25.00', image: 'https://pyxis.nymag.com/v1/imgs/96f/1ef/ac93d2b422a1c5de953dc39764579a306c-ONGold.jpg' },
-    { name: 'Fancy Product', price: '$120.00 - $280.00', image: 'https://pyxis.nymag.com/v1/imgs/96f/1ef/ac93d2b422a1c5de953dc39764579a306c-ONGold.jpg' },
-    { name: 'Special Item', price: '$18.00', image: 'https://pyxis.nymag.com/v1/imgs/96f/1ef/ac93d2b422a1c5de953dc39764579a306c-ONGold.jpg' },
-    { name: 'Popular Item', price: '$40.00', image: 'https://pyxis.nymag.com/v1/imgs/96f/1ef/ac93d2b422a1c5de953dc39764579a306c-ONGold.jpg' },
-    { name: 'Fancy Product', price: '$40.00 - $80.00', image: 'https://pyxis.nymag.com/v1/imgs/96f/1ef/ac93d2b422a1c5de953dc39764579a306c-ONGold.jpg' },
-    { name: 'Special Item', price: '$18.00', image: 'https://pyxis.nymag.com/v1/imgs/96f/1ef/ac93d2b422a1c5de953dc39764579a306c-ONGold.jpg' },
-    { name: 'Sale Item', price: '$25.00', image: 'https://pyxis.nymag.com/v1/imgs/96f/1ef/ac93d2b422a1c5de953dc39764579a306c-ONGold.jpg' },
-    { name: 'Popular Item', price: '$40.00', image: 'https://pyxis.nymag.com/v1/imgs/96f/1ef/ac93d2b422a1c5de953dc39764579a306c-ONGold.jpg' },
-    { name: 'Sale Item', price: '$25.00', image: 'https://pyxis.nymag.com/v1/imgs/96f/1ef/ac93d2b422a1c5de953dc39764579a306c-ONGold.jpg' },
-    { name: 'Fancy Product', price: '$120.00 - $280.00', image: 'https://pyxis.nymag.com/v1/imgs/96f/1ef/ac93d2b422a1c5de953dc39764579a306c-ONGold.jpg' },
-    { name: 'Special Item', price: '$18.00', image: 'https://pyxis.nymag.com/v1/imgs/96f/1ef/ac93d2b422a1c5de953dc39764579a306c-ONGold.jpg' },
-    { name: 'Popular Item', price: '$40.00', image: 'https://pyxis.nymag.com/v1/imgs/96f/1ef/ac93d2b422a1c5de953dc39764579a306c-ONGold.jpg' }
-  ];
-
+  
   constructor(private route: ActivatedRoute, private shopService: ShopService, private cdr: ChangeDetectorRef) { 
-    this.bannerImage = null;
   }
-
+  
   ngOnInit() {
     const shopIdString = this.route.snapshot.paramMap.get('id');
     if (shopIdString) {
@@ -52,7 +32,7 @@ export class WebPageEditPage implements OnInit {
       console.error('No se proporcionó un ID de tienda válido.');
     }
   }
-
+  
   getShop() {
     this.shopService.getShopById(this.shopId!).subscribe({
       next: (shopData) => {
@@ -68,35 +48,19 @@ export class WebPageEditPage implements OnInit {
     });
   }
 
-  onFileSelected(event: any) {
-    const file: File = event.target.files[0];
-    if (file) {
-      this.bannerImage = file;
-      this.cdr.detectChanges(); // Notifica a Angular que se han producido cambios
-      console.log('Archivo seleccionado:', file);
-    }
-  }
 
-  getImageUrl(file: File | null): string {
-    if (file) {
-      return URL.createObjectURL(file);
-    }
-    return '';
-  }
-
-  updateTitle(event: Event) {
-    const inputElement = event.target as HTMLInputElement;
-    this.shopData!.title = inputElement.value;
+  addSection(sectionType: string) {
+    const newSection: Section = { type: sectionType, data: {} };
+    this.sections.push(newSection);
   }
   
-  updateShopName(event: Event) {
-    const inputElement = event.target as HTMLInputElement;
-    this.shopData!.name = inputElement.value;
+  editSection(event: any) {
+    const index = event.index;
+    const newData = event.newData;
   }
   
-  updateDescription(event: Event) {
-    const inputElement = event.target as HTMLInputElement;
-    this.shopData!.description = inputElement.value;
-  }
   
+  deleteSection(index: number) {
+    this.sections.splice(index, 1);
+  }
 }
