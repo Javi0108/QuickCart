@@ -5,7 +5,7 @@ from .models import Shop, Product
 
 @admin.register(Shop)
 class ShopAdmin(admin.ModelAdmin):
-    list_display = ('id_shop', 'name', 'title', 'description', 'address', 'logo', 'data')
+    list_display = ('id_shop', 'name', 'title', 'description', 'address', 'logo')
     search_fields = ('name', 'title', 'description', 'address')
     list_filter = ('name', 'title')
 
