@@ -109,18 +109,27 @@ class SellerShopsView(APIView):
 class ProductsView(APIView):
     permission_classes=[IsAuthenticated]
 
-    def get(self, request, id_product=None):
-        if id_product is None:
+    def get(self, request, id_product=None, id_shop=None):
+        if id_product is not None:
+            try:
+                product = Product.objects.get(id_product=id_product)
+                serializer = ProductSerializer(product)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            except Product.DoesNotExist:
+                return Response({"message": "Producto no encontrado"}, status=status.HTTP_404_NOT_FOUND)
+
+        elif id_shop is not None:
+            try:
+                products = Product.objects.filter(shop_id=id_shop)
+                serializer = ProductSerializer(products, many=True)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            except Product.DoesNotExist:
+                return Response({"message": "Productos no encontrados para esta tienda"}, status=status.HTTP_404_NOT_FOUND)
+
+        else:
             products = Product.objects.all()
             serializer = ProductSerializer(products, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
-        
-        try:
-            product = Product.objects.get(id_product=id_product) 
-            serializer = ProductSerializer(product)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        except Product.DoesNotExist:
-            return Response({"message": "Producto no encontrado"}, status=status.HTTP_404_NOT_FOUND)
 
     def post(self, request):
         pass
