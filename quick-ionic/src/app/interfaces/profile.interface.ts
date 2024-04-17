@@ -9,6 +9,13 @@ export interface Profile {
   phone: string;
   mobile: string;
   address: string;
+  socials: {
+    Webpage: string;
+    Instagram: string;
+    Facebook: string;
+    X: string;
+    Linkedin: string;
+  }
 }
 
 export interface ProfileSeller {

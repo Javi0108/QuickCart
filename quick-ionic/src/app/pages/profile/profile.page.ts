@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observer } from 'rxjs';
 import { Profile } from 'src/app/interfaces/profile.interface';
 import { ProfileService } from 'src/app/services/profile.service';
-import { ToastController } from '@ionic/angular';
 import { User } from 'src/app/interfaces/user.interface';
 import { NotificationToastService } from 'src/app/services/notification-toast.service';
 import { ActivatedRoute } from '@angular/router';
@@ -22,6 +21,7 @@ export class ProfilePage implements OnInit {
 
   editProfileForm: FormGroup;
   userNameForm: FormGroup;
+  social: FormGroup;
 
   constructor(
     private profileService: ProfileService,
@@ -48,6 +48,15 @@ export class ProfilePage implements OnInit {
     this.userNameForm = this.formBuilder.group({
       username: [''],
     });
+
+    this.social = this.formBuilder.group({
+      webpage: [''],
+      instagram: [''],
+      facebook: [''],
+      x: [''],
+      linkedin: [''],
+    });
+
   }
 
   ngOnInit() {
@@ -60,8 +69,6 @@ export class ProfilePage implements OnInit {
     if (userString) {
       this.user = JSON.parse(userString);
       const currentUser = JSON.parse(userString);
-      console.log(this.user.username);
-      console.log(userString);
       if (this.user.username == currentUser.username) {
         this.edit = true;
       }
@@ -90,6 +97,7 @@ export class ProfilePage implements OnInit {
           this.loadUsername();
           this.editProfileForm.patchValue(profile);
           this.profile = profile;
+          console.log(profile.socials.Facebook);
         },
         error: (error) => {
           console.error(error);

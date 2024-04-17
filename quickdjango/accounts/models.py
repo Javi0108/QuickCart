@@ -20,7 +20,7 @@ class Profile(models.Model):
         ('X', 'X'),
         ('LinkedIn', 'LinkedIn'),
     ]
-    socials = models.TextField(null=True)
+    socials = models.JSONField(default=dict)
     
     CLIENT = 'Client'
     SELLER = 'Seller'
