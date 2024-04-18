@@ -13,7 +13,7 @@ class Profile(models.Model):
     #seller
     
     sales = models.IntegerField(null=True)  # Campo para el número de ventas, que puede ser null
-    
+
     SOCIAL_CHOICES = [
         ('Instagram', 'Instagram'),
         ('Facebook', 'Facebook'),
