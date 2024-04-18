@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { ShopData } from 'src/app/interfaces/shop.interface';
 import { ShopService } from 'src/app/services/shop.service';
 import { ChangeDetectorRef } from '@angular/core';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-web-page-edit',
