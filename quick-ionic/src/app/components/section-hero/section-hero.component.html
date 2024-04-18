@@ -1,55 +1,76 @@
-<section class="hero pt-3">
+<section *ngIf="sectionData!" class="hero pt-3">
   <div class="row">
-    <div class="col-lg-8 col-12">
-      <div class="hero-banner-1"
-        [style.background-image]="'url(https://img.freepik.com/fotos-premium/collage-paisaje-montanas-magicas_23-2150800059.jpg?size=626&ext=jpg&ga=GA1.1.1687694167.1713222000)'">
-        <div class="content">
-          <h2>
-            <span>item.subtitle</span>
-            item.title
-          </h2>
-          <p>
-            item.content
-          </p>
-          <h3>
-            <span>item.price_text</span>
-            item.price
-          </h3>
-          <div class="button">
-            <a href="#" type="button" class="btn btn-primary">item.button</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-4 col-12">
+    <div class="col-lg-9">
       <div class="row">
-        <div class="col-lg-12 col-md-6 col-12">
-          <div class="hero-banner-2">
-            <div class="row content">
-              <div class="col-8">
-                <h5>
-                  data.hero.banner_2.subtitle
-                </h5>
-                <h2>
-                  data.hero.banner_2.title
-                </h2>
-                <h3>data.hero.banner_2.price</h3>
+        <div class="col-xl-8 col-lg-12 col-12">
+          <div class="hero-banner-1" [style.background-image]="'url(' + sectionData.banner_1.images + ')'">
+            <div class="content">
+              <h2>
+                <span>{{sectionData.banner_1.subtitle}}</span>
+                {{sectionData.banner_1.title}}
+              </h2>
+              <p>
+                {{sectionData.banner_1.content}}
+              </p>
+              <h3>
+                <span>{{sectionData.banner_1.price_text}}</span>
+                {{sectionData.banner_1.price}}
+              </h3>
+              <div class="button">
+                <a href="#" type="button" class="btn btn-primary">{{sectionData.banner_1.button}}</a>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-lg-12 col-md-6 col-12">
-          <div class="hero-banner-3">
-            <div class="content">
-              <h2>data.hero.banner_3.title</h2>
-              <p>data.hero.banner_3.content</p>
-              <div class="button">
-                <a href="#" type="button" class="btn btn-primary">data.hero.banner_3.button</a>
+        <div class="col-xl-4 col-lg-12 col-12">
+          <div class="row">
+            <div class="col-xl-12 col-lg-6 col-md-12 col-12">
+              <div class="hero-banner-2" [style.background-image]="'url(' + sectionData.banner_2.images + ')'">
+                <div class="row content">
+                  <div class="col-8">
+                    <h5>
+                      {{sectionData.banner_2.subtitle}}
+                    </h5>
+                    <h2>
+                      {{sectionData.banner_2.title}}
+                    </h2>
+                    <h3>{{sectionData.banner_2.price}}</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-12 col-lg-6 col-md-12 col-12">
+              <div class="hero-banner-3" [style.background-image]="'url(' + sectionData.banner_3.images + ')'">
+                <div class="content">
+                  <h2>{{sectionData.banner_3.title}}</h2>
+                  <p>{{sectionData.banner_3.content}}</p>
+                  <div class="button">
+                    <a href="#" type="button" class="btn btn-primary">{{sectionData.banner_3.button}}</a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <div class="col-lg-3 form-edit p-1">
+      <div class="form-wrapper">
+        <ion-input type="text" [(ngModel)]="sectionData.banner_1.subtitle" placeholder="Subtitle" label="Subtitle"
+          label-placement="floating" fill="outline"></ion-input>
+        <ion-input type="text" [(ngModel)]="sectionData.banner_1.title" placeholder="Title" label="Title"
+          label-placement="floating" fill="outline"></ion-input>
+        <ion-textarea [(ngModel)]="sectionData.banner_1.content" placeholder="Content" label="Content"
+          label-placement="floating" fill="outline" rows="8"></ion-textarea>
+        <ion-input type="text" [(ngModel)]="sectionData.banner_1.price_text" placeholder="Price Text" label="Price Text"
+          label-placement="floating" fill="outline"></ion-input>
+        <ion-input type="text" [(ngModel)]="sectionData.banner_1.price" placeholder="Price" label="Price"
+          label-placement="floating" fill="outline"></ion-input>
+        <ion-input type="text" [(ngModel)]="sectionData.banner_1.button" placeholder="Button Text" label="Button Text"
+          label-placement="floating" fill="outline"></ion-input>
+        <button (click)="saveChanges()">Save</button>
+      </div>
+    </div>
+
   </div>
 </section>

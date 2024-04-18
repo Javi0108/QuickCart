@@ -7,7 +7,7 @@ import { Section } from 'src/app/interfaces/section.interface';
   selector: 'app-section-container',
   template: `
     <div *ngFor="let section of sections">
-      <ng-container *ngComponentOutlet="sectionComponents[section.type]; injector: injector"></ng-container>
+      <ng-container *ngComponentOutlet="sectionComponents[section.type]; injector: createInjector(section)"></ng-container>
     </div>
   `,
 })
@@ -19,12 +19,15 @@ export class SectionContainerComponent implements OnInit {
     'products': SectionProductsComponent,
   };
 
-  injector: any;
+  constructor(private injector: Injector) { }
 
-  constructor() {
-    this.injector = Injector.create({providers: [], parent: this.injector});
-  }
-  
-  ngOnInit() {
+  ngOnInit() { }
+
+  createInjector(sectionData: Section): any {
+    //return Injector.create({ 
+    //   parent: this.injector, 
+    //   providers: [{ provide: 'SectionData', useValue: sectionData }], 
+    //   name: 'section-injector' 
+    // });
   }
 }
