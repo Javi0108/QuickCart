@@ -1,8 +1,8 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
-from .models import Shop, Product
-from .serializers import ShopSerializer, ShopDetailSerializer
+from .models import Shop, Product, ShopSectionOrder
+from .serializers import ShopSerializer, ShopDetailSerializer, ShopSectionSerializer
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -103,6 +103,28 @@ class SellerShopsView(APIView):
         shop.delete()
         return Response({'message': 'Shop deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
         
+
+
+class SellerShopSectionView(APIView):
+    permission_classes=[IsAuthenticated]
+
+    def post(self, request):
+        id_shop = request.data.get('id_shop')
+        shop_data = request.data.get('shop_data')
+
+        try:
+            shop = Shop.objects.get(id=id_shop)
+        except Shop.DoesNotExist:
+            return Response({"error": "La tienda no existe"}, status=status.HTTP_404_NOT_FOUND)
+        
+        section_serializer = ShopSectionSerializer(data=shop_data)
+        if section_serializer.is_valid():
+            section = section_serializer.save()
+
+            shop_section_order = ShopSectionOrder.objects.create(shop=shop, section=section)
+            return Response({"success": "Sección de tienda creada exitosamente"}, status=status.HTTP_201_CREATED)
+        else:
+            return Response({"error": "Datos de sección no válidos"}, status=status.HTTP_400_BAD_REQUEST)
     
     # PRODUCTS
 

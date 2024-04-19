@@ -1,5 +1,6 @@
-import { HeroSectionData } from './../../interfaces/section.interface';
-import { Component, OnInit, Injector } from '@angular/core';
+import { SectionEventService } from 'src/app/services/section-event.service';
+import { HeroSectionData, Section } from './../../interfaces/section.interface';
+import { Component, OnInit, Injector, EventEmitter, Output, Input } from '@angular/core';
 
 @Component({
   selector: 'app-section-hero',
@@ -7,14 +8,15 @@ import { Component, OnInit, Injector } from '@angular/core';
   styleUrls: ['./section-hero.component.scss'],
 })
 export class SectionHeroComponent implements OnInit {
-  
+
   sectionData!: HeroSectionData;
-
   editingMode = false;
-
-  constructor() {}
+  constructor(private sectionEventService: SectionEventService) { }
 
   ngOnInit() {
+
+    this.sectionEventService.changeSaved.subscribe((section: any) => {});
+
     this.sectionData = {
       banner_1:
       {
@@ -24,21 +26,21 @@ export class SectionHeroComponent implements OnInit {
         price_text: "Combo Only:",
         price: "590$",
         button: "Shop Now",
-        images: "http://localhost:8000/media/sections/default/banner1.png"
+        images: "http://localhost:8000/media/sections/default/hero_section/slider-bg1.jpg"
         //id de product?? o enlace
       },
       banner_2: {
         subtitle: "New line required",
         title: "iphone 13 pro max",
         price: "590$",
-        images: "http://localhost:8000/media/sections/default/banner2.png"
+        images: "http://localhost:8000/media/sections/default/hero_section/slider-bnr.jpg"
         //enlace
       },
       banner_3: {
         title: "Weekly Sale!",
         content: "Saving up to 50% off all online store items this week.",
         button: "Shop Now",
-        images: "http://localhost:8000/media/sections/default/banner3.png"
+        images: "http://localhost:8000/media/sections/default/hero_section/slider-bg2.jpg"
         //enlace
       }
     }
@@ -46,5 +48,8 @@ export class SectionHeroComponent implements OnInit {
 
   saveChanges() {
     this.editingMode = false;
+    this.sectionEventService.changeSaved.emit(this.sectionData); // Emite el evento utilizando el servicio
+    console.log("saveChanges")
   }
+
 }

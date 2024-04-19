@@ -2,9 +2,8 @@ import { HeroSectionData, Section } from './../../interfaces/section.interface';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ShopData } from 'src/app/interfaces/shop.interface';
+import { SectionEventService } from 'src/app/services/section-event.service';
 import { ShopService } from 'src/app/services/shop.service';
-import { ChangeDetectorRef } from '@angular/core';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-web-page-edit',
@@ -18,8 +17,7 @@ export class WebPageEditPage implements OnInit {
 
   sections: Section[] = [];
 
-  constructor(private route: ActivatedRoute, private shopService: ShopService) {
-  }
+  constructor(private route: ActivatedRoute, private shopService: ShopService, private sectionEventService: SectionEventService) {}
 
   ngOnInit() {
     const shopIdString = this.route.snapshot.paramMap.get('id');
@@ -29,6 +27,13 @@ export class WebPageEditPage implements OnInit {
     } else {
       console.error('No se proporcionó un ID de tienda válido.');
     }
+
+
+    // Suscríbete al evento changeSaved
+    this.sectionEventService.changeSaved.subscribe((section: Section) => {
+      // Llama al método handleChangesSaved con la sección recibida
+      this.handleChangesSaved(section);
+    });
   }
 
   getShop() {
@@ -73,5 +78,19 @@ export class WebPageEditPage implements OnInit {
 
   updateShopData() {
 
+  }
+
+  handleChangesSaved(section: Section) {
+
+    this.shopService.saveShopSection(this.shopId, section).subscribe({
+      next: (shopData) => {
+        console.log("Guardado correctamente", shopData)
+      },
+      error: (error) => {
+        console.error("Error al guarda la seccion", error)
+      }
+    })
+
+    console.log('Sección guardada ahora mismo:', section);
   }
 }

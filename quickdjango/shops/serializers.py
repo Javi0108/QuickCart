@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Shop, Product
+from .models import Shop, Product, Section
        
  # PRODUCTS
 
@@ -23,6 +23,12 @@ class ShopSerializer(serializers.ModelSerializer):
 class ShopDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Shop
+        fields = '__all__'
+
+
+class ShopSectionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Section
         fields = '__all__'
 
 
