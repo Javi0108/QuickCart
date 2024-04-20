@@ -21,7 +21,7 @@ export class ProfilePage implements OnInit {
 
   editProfileForm: FormGroup;
   userNameForm: FormGroup;
-  social: FormGroup;
+  socials: FormGroup;
 
   constructor(
     private profileService: ProfileService,
@@ -49,14 +49,13 @@ export class ProfilePage implements OnInit {
       username: [''],
     });
 
-    this.social = this.formBuilder.group({
+    this.socials = this.formBuilder.group({
       webpage: [''],
       instagram: [''],
       facebook: [''],
       x: [''],
       linkedin: [''],
     });
-
   }
 
   ngOnInit() {
@@ -97,7 +96,21 @@ export class ProfilePage implements OnInit {
           this.loadUsername();
           this.editProfileForm.patchValue(profile);
           this.profile = profile;
-          console.log(profile.socials.Facebook);
+          console.log(profile);
+
+          // Extract socials data
+          const socials = profile.socials;
+          console.log(socials);
+          if (socials) {
+            // Assign values to form controls
+            this.socials.patchValue({
+              webpage: socials['webpage'],
+              instagram: socials['instagram'],
+              facebook: socials['facebook'],
+              x: socials['x'],
+              linkedin: socials['linkedin'],
+            });
+          }
         },
         error: (error) => {
           console.error(error);
@@ -107,7 +120,17 @@ export class ProfilePage implements OnInit {
   }
 
   saveChanges() {
-    this.profileService.putEditProfile(this.editProfileForm.value).subscribe(
+    const updateProfile = {
+      ...this.editProfileForm.value,
+      socials: {
+        webpage: this.socials.value.webpage,
+        instagram: this.socials.value.instagram,
+        facebook: this.socials.value.facebook,
+        x: this.socials.value.x,
+        linkedin: this.socials.value.linkedin
+      }
+    }
+    this.profileService.putEditProfile(updateProfile).subscribe(
       (response) => {
         this.notificationToastService.presentToast(
           'Profile updated successfully',

@@ -10,11 +10,11 @@ export interface Profile {
   mobile: string;
   address: string;
   socials: {
-    Webpage: string;
-    Instagram: string;
-    Facebook: string;
-    X: string;
-    Linkedin: string;
+    webpage: string;
+    instagram: string;
+    facebook: string;
+    x: string;
+    linkedin: string;
   }
 }
 

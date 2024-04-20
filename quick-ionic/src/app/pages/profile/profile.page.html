@@ -41,35 +41,35 @@
                 class="bi bi-globe2"
                 style="font-size: x-large; margin-right: 1rem"
               ></i>
-              <a href="{{ profile.socials.Webpage }}">_javigd_</a> <!--- Cambiar al terminar-->
+              <a href="{{ profile.socials.webpage }}">_javigd_</a> <!--- Cambiar al terminar-->
             </ion-item>
             <ion-item>
               <i
                 class="bi bi-instagram"
                 style="font-size: x-large; margin-right: 1rem"
               ></i>
-              <a href="{{ profile.socials.Instagram }}">_javigd_</a> <!--- Cambiar al terminar-->
+              <a href="{{ profile.socials.instagram }}">_javigd_</a> <!--- Cambiar al terminar-->
             </ion-item>
             <ion-item>
               <i
                 class="bi bi-facebook"
                 style="font-size: x-large; margin-right: 1rem"
               ></i>
-              <a href="{{ profile.socials.Facebook }}">_javigd_</a> <!--- Cambiar al terminar-->
+              <a href="{{ profile.socials.facebook }}">_javigd_</a> <!--- Cambiar al terminar-->
             </ion-item>
             <ion-item>
               <i
                 class="bi bi-twitter-x"
                 style="font-size: x-large; margin-right: 1rem"
               ></i>
-              <a href="{{ profile.socials.X }}">_javigd_</a> <!--- Cambiar al terminar-->
+              <a href="{{ profile.socials.x }}">_javigd_</a> <!--- Cambiar al terminar-->
             </ion-item>
             <ion-item>
               <i
                 class="bi bi-linkedin"
                 style="font-size: x-large; margin-right: 1rem"
               ></i>
-              <a href="{{ profile.socials.Linkedin }}">_javigd_</a> <!--- Cambiar al terminar-->
+              <a href="{{ profile.socials.linkedin }}">_javigd_</a> <!--- Cambiar al terminar-->
             </ion-item>
           </ion-list>
         </ion-card-content>
@@ -220,41 +220,41 @@
       <!-- Formualrio Sociales -->
       <ion-card class="mt-4">
         <ion-card-content *ngIf="profile.user_type == 'Seller'">
-          <ion-list [formGroup]="social">
+          <ion-list [formGroup]="socials">
             <ion-item>
               <i
                 class="bi bi-globe2"
                 style="font-size: x-large; margin-right: 1rem"
               ></i>
-              <ion-input formControlName="Webpage" value="{{ profile.socials.Webpage }}"></ion-input>
+              <ion-input formControlName="webpage" value="{{ profile.socials.webpage }}"></ion-input>
             </ion-item>
             <ion-item>
               <i
                 class="bi bi-instagram"
                 style="font-size: x-large; margin-right: 1rem"
               ></i>
-              <ion-input formControlName="Instagram" value="{{ profile.socials.Instagram }}"></ion-input>
+              <ion-input formControlName="instagram" value="{{ profile.socials.instagram }}"></ion-input>
             </ion-item>
             <ion-item>
               <i
                 class="bi bi-facebook"
                 style="font-size: x-large; margin-right: 1rem"
               ></i>
-              <ion-input formControlName="Facebook" value="{{ profile.socials.Facebook }}"></ion-input>
+              <ion-input formControlName="facebook" value="{{ profile.socials.facebook }}"></ion-input>
             </ion-item>
             <ion-item>
               <i
                 class="bi bi-twitter-x"
                 style="font-size: x-large; margin-right: 1rem"
               ></i>
-              <ion-input formControlName="X" value="{{ profile.socials.X }}"></ion-input>
+              <ion-input formControlName="x" value="{{ profile.socials.x }}"></ion-input>
             </ion-item>
             <ion-item>
               <i
                 class="bi bi-linkedin"
                 style="font-size: x-large; margin-right: 1rem"
               ></i>
-              <ion-input formControlName="Linkedin" value="{{ profile.socials.Linkedin }}"></ion-input>
+              <ion-input formControlName="linkedin" value="{{ profile.socials.linkedin }}"></ion-input>
             </ion-item>
           </ion-list>
         </ion-card-content>
