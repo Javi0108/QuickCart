@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 import { SectionHeroComponent } from './section-hero.component';
@@ -8,7 +8,7 @@ import { SectionHeroComponent } from './section-hero.component';
 @NgModule({
     imports: [
         CommonModule,
-        FormsModule,
+        ReactiveFormsModule,
         IonicModule,
     ],
     declarations: [SectionHeroComponent],

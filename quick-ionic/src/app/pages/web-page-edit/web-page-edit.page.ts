@@ -23,15 +23,13 @@ export class WebPageEditPage implements OnInit {
     const shopIdString = this.route.snapshot.paramMap.get('id');
     if (shopIdString) {
       this.shopId = +shopIdString;
-      this.getShop(); // Llama al método para obtener los datos de la tienda
+      this.getShop();
     } else {
       console.error('No se proporcionó un ID de tienda válido.');
     }
 
 
-    // Suscríbete al evento changeSaved
     this.sectionEventService.changeSaved.subscribe((section: Section) => {
-      // Llama al método handleChangesSaved con la sección recibida
       this.handleChangesSaved(section);
     });
   }
@@ -39,9 +37,12 @@ export class WebPageEditPage implements OnInit {
   getShop() {
     this.shopService.getShopById(this.shopId!).subscribe({
       next: (shopData) => {
+        console.log(shopData);
         this.shopData = shopData;
         if (!this.shopData) {
           console.error('No se encontró la tienda con el ID proporcionado.');
+        } else {
+          this.sections = shopData.sections; // Asignar las secciones del objeto shopData a this.sections
         }
       },
       error: (error) => {

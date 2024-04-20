@@ -1,17 +1,37 @@
 from django.contrib import admin
-from .models import Shop, Product
+from .models import Shop, Section, ShopSectionOrder, Product, Tag, ProductImage
 
 # Register your models here.
 
 @admin.register(Shop)
 class ShopAdmin(admin.ModelAdmin):
-    list_display = ('id_shop', 'name', 'title', 'description', 'address', 'logo')
+    list_display = ('id_shop', 'profile', 'name', 'title', 'description', 'address', 'logo')
     search_fields = ('name', 'title', 'description', 'address')
     list_filter = ('name', 'title')
 
+@admin.register(Section)
+class SectionAdmin(admin.ModelAdmin):
+    list_display = ('id', 'type', 'data')
+    search_fields = ('type',)
+
+@admin.register(ShopSectionOrder)
+class ShopSectionOrderAdmin(admin.ModelAdmin):
+    list_display = ('id', 'section', 'order', 'shop')
+    #search_fields = ('shop__name',)
+    list_filter = ('shop',)
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('id_product', 'shop', 'name', 'price', 'description', 'stock_quantity')
     search_fields = ('name', 'description')
     list_filter = ('shop', 'price')
+
+@admin.register(Tag)
+class TagAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name')
+    search_fields = ('name',)
+
+@admin.register(ProductImage)
+class ProductImageAdmin(admin.ModelAdmin):
+    list_display = ('id', 'product', 'image')
+    search_fields = ('product__name',)

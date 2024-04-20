@@ -13,7 +13,7 @@ class Shop(models.Model):
     logo = models.ImageField(upload_to='shop_logos', null=True, blank=True)
     
     def __str__(self):
-        return self.shop_name
+        return self.name
     
 class Section(models.Model):
     type = models.CharField(max_length=100)

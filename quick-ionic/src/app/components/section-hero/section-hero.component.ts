@@ -1,6 +1,7 @@
 import { SectionEventService } from 'src/app/services/section-event.service';
 import { HeroSectionData, Section } from './../../interfaces/section.interface';
 import { Component, OnInit, Injector, EventEmitter, Output, Input } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-section-hero',
@@ -9,8 +10,10 @@ import { Component, OnInit, Injector, EventEmitter, Output, Input } from '@angul
 })
 export class SectionHeroComponent implements OnInit {
 
-  sectionData!: HeroSectionData;
+  sectionData?: HeroSectionData;
   editingMode = false;
+  sectionForm!: FormGroup;
+
   constructor(private sectionEventService: SectionEventService) { }
 
   ngOnInit() {
@@ -44,11 +47,29 @@ export class SectionHeroComponent implements OnInit {
         //enlace
       }
     }
+
+    this.sectionForm = new FormGroup({
+      subtitle: new FormControl(this.sectionData.banner_1.subtitle),
+      title: new FormControl(this.sectionData.banner_1.title),
+      content: new FormControl(this.sectionData.banner_1.content),
+      price_text: new FormControl(this.sectionData.banner_1.price_text),
+      price: new FormControl(this.sectionData.banner_1.price),
+      button: new FormControl(this.sectionData.banner_1.button)
+    })
+
+    this.sectionForm.valueChanges.subscribe((values) => {
+      this.sectionData!.banner_1 = { ...this.sectionData!.banner_1, ...values };
+    });
   }
 
   saveChanges() {
     this.editingMode = false;
-    this.sectionEventService.changeSaved.emit(this.sectionData); // Emite el evento utilizando el servicio
+
+    let section = {
+      type: "hero",
+      data: this.sectionData
+    }
+    this.sectionEventService.changeSaved.emit(section);
     console.log("saveChanges")
   }
 
