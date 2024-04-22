@@ -108,6 +108,17 @@ class SellerShopsView(APIView):
 
 class SellerShopSectionView(APIView):
     permission_classes=[IsAuthenticated]
+    
+    def get(self, request, id_shop):
+        if id_shop: 
+            try:
+                sections = Section.objects.filter(shopsectionorder__shop_id=id_shop)
+                serialized_sections = ShopSectionSerializer(sections, many=True)
+                return Response(serialized_sections.data, status=status.HTTP_200_OK)
+            except Section.DoesNotExist:
+                return Response({"error": "No se encontraron secciones para esta tienda"}, status=status.HTTP_404_NOT_FOUND)
+        else:
+            return Response({"message": "Tienda no encontrada"}, status=status.HTTP_404_NOT_FOUND)
 
     def post(self, request):
         id_shop = request.data.get('id_shop')
@@ -128,17 +139,21 @@ class SellerShopSectionView(APIView):
             print(section_serializer.errors)
             return Response({"error": "Datos de sección no válidos"}, status=status.HTTP_400_BAD_REQUEST)
         
-    def get(self, request, id_shop):
-        if id_shop: 
-            try:
-                sections = Section.objects.filter(shopsectionorder__shop_id=id_shop)
-                serialized_sections = ShopSectionSerializer(sections, many=True)
-                return Response(serialized_sections.data, status=status.HTTP_200_OK)
-            except Section.DoesNotExist:
-                return Response({"error": "No se encontraron secciones para esta tienda"}, status=status.HTTP_404_NOT_FOUND)
+    def put(self, request, id_shop_section): 
+        try:
+            section = Section.objects.get(pk=id_shop_section)
+        except Section.DoesNotExist: 
+            return Response({"error": "La sección de tienda no existe"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        shop_data = request.data.get('shop_data')
+        section_serializer = ShopSectionSerializer(instance=section, data=shop_data)
+        
+        if section_serializer.is_valid():
+            section_serializer.save()
+            return Response({"success": "Sección de tienda actualizada exitosamente"}, status=status.HTTP_200_OK)
         else:
-            return Response({"message": "Tienda no encontrada"}, status=status.HTTP_404_NOT_FOUND)
-    
+            print(section_serializer.errors)
+            return Response({"error": "Datos de sección no válidos"}, status=status.HTTP_400_BAD_REQUEST)
     # PRODUCTS
 
 class ProductsView(APIView):

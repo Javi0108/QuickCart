@@ -41,7 +41,6 @@ export class AuthService {
     localStorage.removeItem('token');
     localStorage.removeItem('token_refresh');
     localStorage.removeItem('user');
-    console.log(localStorage)
     return this.http.post<any>(`${this.baseURL}accounts/logout/`, { refresh_token: refreshToken }, { headers: headers });
   }
 

@@ -17,7 +17,6 @@ export class MenuPage implements OnInit {
     const userString = localStorage.getItem('user');
     if (userString) {
       this.user = JSON.parse(userString) as User;
-      console.log(this.user)
     }
   }
 
@@ -29,7 +28,6 @@ export class MenuPage implements OnInit {
   logout() { 
     this.authService.logout(this.user).subscribe(
       response => {
-        console.log('Logout succesful');
         localStorage.removeItem('user');
         localStorage.removeItem('token');
         this.router.navigate(['/home']);

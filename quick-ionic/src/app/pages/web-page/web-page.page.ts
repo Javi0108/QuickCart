@@ -50,7 +50,6 @@ export class WebPagePage implements OnInit {
     this.shopService.getShopById(this.shopId!).subscribe({
       next: (shopData) => {
         this.shopData = shopData;
-        console.log(shopData)
         if (!this.shopData) {
           console.error('No se encontró la tienda con el ID proporcionado.');
         }

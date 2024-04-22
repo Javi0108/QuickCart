@@ -46,12 +46,10 @@ export class AddWebsiteModalComponent {
 
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
-    console.log('Archivo seleccionado:', file);
     if (file) {
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = () => {
-        console.log('Imagen convertida a base64:', reader.result);
         this.createWebSiteForm.patchValue({
           image: reader.result // Establecer la URL de datos como el valor del campo de entrada de archivos
         });
@@ -67,7 +65,6 @@ export class AddWebsiteModalComponent {
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = () => {
-        console.log('Imagen convertida a base64:', reader.result);
         resolve(reader.result as string);
       };
       reader.onerror = error => reject(error);

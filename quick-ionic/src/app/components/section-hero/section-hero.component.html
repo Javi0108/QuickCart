@@ -62,7 +62,8 @@
         <ion-input formControlName="price_text" type="text" placeholder="Price Text" label="Price Text" label-placement="floating" fill="outline"></ion-input>
         <ion-input formControlName="price" type="text" placeholder="Price" label="Price" label-placement="floating" fill="outline"></ion-input>
         <ion-input formControlName="button" type="text" placeholder="Button Text" label="Button Text" label-placement="floating" fill="outline"></ion-input>
-        <button (click)="saveChanges()">Save</button>
+        <button *ngIf="section.id" (click)="updateChanges()">Update</button>
+        <button *ngIf="!section.id" (click)="saveChanges()" style="color: red;">Save</button>
       </div>
     </div>    
   </div>

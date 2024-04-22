@@ -24,7 +24,6 @@ export class ProfileService {
   }
 
   putEditProfile(profile: Profile): Observable<any> {
-    console.log(profile)
     return this.http.put<Profile>(`${this.baseURL}`, {"profile": profile}, { headers: this.getHeaders() });
   }
 

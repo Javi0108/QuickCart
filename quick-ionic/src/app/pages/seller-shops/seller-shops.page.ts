@@ -65,7 +65,6 @@ export class SellerShopsPage implements OnInit {
       next: (response) => {
         this.shops = response; // Asignar los datos de las tiendas al arreglo 'shops'
         this.filteredShops = response; // Inicializa las tiendas filtradas con todas las tiendas
-        console.log("tiendas", this.shops);
       },
       error: (error) => {
         console.error('Error al obtener las tiendas:', error);

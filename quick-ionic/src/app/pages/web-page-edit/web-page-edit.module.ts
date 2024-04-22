@@ -7,7 +7,6 @@ import { IonicModule } from '@ionic/angular';
 import { WebPageEditPageRoutingModule } from './web-page-edit-routing.module';
 
 import { WebPageEditPage } from './web-page-edit.page';
-import { BrowserModule } from '@angular/platform-browser';
 import { SectionContainerModule } from 'src/app/components/section-container/section-container.module';
 
 @NgModule({

@@ -1,4 +1,5 @@
 export interface Section {
+  id: number | undefined;
   type: string;
   data: any;
 }
