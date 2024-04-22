@@ -18,6 +18,8 @@ export class SectionHeroComponent implements OnInit {
   editingMode = false;
   sectionForm!: FormGroup;
 
+  selectedSegment: string = 'banner_1';
+
   constructor(private sectionEventService: SectionEventService) { }
 
   ngOnInit() {
@@ -45,6 +47,10 @@ export class SectionHeroComponent implements OnInit {
     this.sectionForm.valueChanges.subscribe((values) => {
       this.sectionData!.banner_1 = { ...this.sectionData!.banner_1, ...values };
     });
+  }
+
+  segmentChanged(event: CustomEvent) {
+    this.selectedSegment = event.detail.value;
   }
 
   updateChanges() {

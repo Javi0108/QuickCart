@@ -1,5 +1,6 @@
 .hero {
 
+    
     .hero-banner-1 {
         background-repeat: no-repeat;
         background-size: cover;
@@ -130,13 +131,28 @@
 
         .form-wrapper{
             padding: 16px;
-            ion-input {
+            ::ng-deep ion-input {
                 margin-bottom: 15px;
+                .input-bottom {
+                    padding-right: 6px;
+                    margin-top: -25px !important;
+                }
+            
             }
     
-            ion-textarea{
+            ::ng-deep ion-textarea{
                 margin-bottom: 15px;
                 height: auto;
+
+                .native-wrapper{
+                    padding-bottom: 20px;
+                }
+
+                .textarea-bottom {
+                    
+                    padding-right: 6px;
+                    margin-top: -25px !important;
+                }
             }
         }
     }

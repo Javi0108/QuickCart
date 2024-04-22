@@ -9,6 +9,7 @@ import { SectionHeroComponent } from './section-hero.component';
     imports: [
         CommonModule,
         ReactiveFormsModule,
+        FormsModule,
         IonicModule,
     ],
     declarations: [SectionHeroComponent],

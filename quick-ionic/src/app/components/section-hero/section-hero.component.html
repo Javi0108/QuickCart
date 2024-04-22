@@ -54,14 +54,27 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-3 form-edit p-1">
-      <div class="form-wrapper" [formGroup]="sectionForm">
-        <ion-input formControlName="subtitle" type="text" placeholder="Subtitle" label="Subtitle" label-placement="floating" fill="outline"></ion-input>
-        <ion-input formControlName="title" type="text" placeholder="Title" label="Title" label-placement="floating" fill="outline"></ion-input>
-        <ion-textarea formControlName="content" placeholder="Content" label="Content" label-placement="floating" fill="outline" rows="8"></ion-textarea>
-        <ion-input formControlName="price_text" type="text" placeholder="Price Text" label="Price Text" label-placement="floating" fill="outline"></ion-input>
-        <ion-input formControlName="price" type="text" placeholder="Price" label="Price" label-placement="floating" fill="outline"></ion-input>
-        <ion-input formControlName="button" type="text" placeholder="Button Text" label="Button Text" label-placement="floating" fill="outline"></ion-input>
+    <div class="col-lg-3 p-1 form-edit">
+
+      <ion-segment [(ngModel)]="selectedSegment" (ionChange)="segmentChanged($event)">
+        <ion-segment-button value="banner_1" >
+          <ion-label>Banner 1</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="banner_2">
+          <ion-label>Banner 2</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="banner_3">
+          <ion-label>Banner 3</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+
+      <div class="form-wrapper" [formGroup]="sectionForm" *ngIf="selectedSegment === 'banner_1'">
+        <ion-input formControlName="subtitle" type="text" placeholder="Subtitle" label="Subtitle" label-placement="floating" fill="outline" [maxlength]="30" [counter]="true"></ion-input>
+        <ion-input formControlName="title" type="text" placeholder="Title" label="Title" label-placement="floating" fill="outline" [maxlength]="32" [counter]="true"></ion-input>
+        <ion-textarea formControlName="content" placeholder="Content" label="Content" labelPlacement="floating" fill="outline" rows="5" [maxlength]="200" [counter]="true"></ion-textarea>
+        <ion-input formControlName="price_text" type="text" placeholder="Price Text" label="Price Text" label-placement="floating" fill="outline" [maxlength]="15" [counter]="true"></ion-input>
+        <ion-input formControlName="price" type="text" placeholder="Price" label="Price" label-placement="floating" fill="outline" [maxlength]="10" [counter]="true"></ion-input>
+        <ion-input formControlName="button" type="text" placeholder="Button Text" label="Button Text" label-placement="floating" fill="outline" [maxlength]="25" [counter]="true"></ion-input>
         <button *ngIf="section.id" (click)="updateChanges()">Update</button>
         <button *ngIf="!section.id" (click)="saveChanges()" style="color: red;">Save</button>
       </div>
