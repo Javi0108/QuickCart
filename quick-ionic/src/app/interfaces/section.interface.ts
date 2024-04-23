@@ -12,7 +12,7 @@ export interface Banner1 {
   price_text: string;
   price: string;
   button: string;
-  images: string;
+  image: string;
 }
 
 // Interfaz para el objeto "banner_2" dentro de "hero"
@@ -20,7 +20,7 @@ export interface Banner2 {
   subtitle: string;
   title: string;
   price: string;
-  images: string;
+  image: string;
 }
 
 // Interfaz para el objeto "banner_3" dentro de "hero"
@@ -28,7 +28,7 @@ export interface Banner3 {
   title: string;
   content: string;
   button: string;
-  images: string;
+  image: string;
 }
 
 // Interfaz para el objeto "hero" completo

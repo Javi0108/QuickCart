@@ -111,13 +111,14 @@
 
             p {
                 margin-top: 20px;
+                max-width: 65%;
                 color: rgb(255, 255, 255);
             }
 
             .button {
 
                 a {
-                    margin-top: 30px;
+                    margin-top: 15px;
                     background-color: white;
                     color: blue;
                 }
@@ -129,8 +130,12 @@
 
         border-left:1px solid black;
 
+        ion-segment{
+            margin-top: -5px;
+        }
+
         .form-wrapper{
-            padding: 16px;
+            margin-top: 16px;
             ::ng-deep ion-input {
                 margin-bottom: 15px;
                 .input-bottom {

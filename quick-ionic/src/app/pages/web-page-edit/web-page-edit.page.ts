@@ -71,17 +71,15 @@ export class WebPageEditPage implements OnInit {
   }
 
   handleChangesSaved(section: Section) {
-
     this.shopService.saveShopSection(this.shopId, section).subscribe({
       next: (shopData) => {
         console.log("Guardado correctamente", shopData)
+        this.sectionEventService.shopDataChanged.emit(shopData);
       },
       error: (error) => {
         console.error("Error al guarda la seccion", error)
       }
     })
-
-    console.log('Sección guardada ahora mismo:', section);
   }
 
   updateSection(section: Section) {

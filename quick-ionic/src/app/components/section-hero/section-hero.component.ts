@@ -16,7 +16,10 @@ export class SectionHeroComponent implements OnInit {
   sectionType?: string;
   sectionData?: HeroSectionData;
   editingMode = false;
-  sectionForm!: FormGroup;
+
+  sectionFormBannerOne!: FormGroup;
+  sectionFormBannerTwo!: FormGroup;
+  sectionFormBannerThree!: FormGroup;
 
   selectedSegment: string = 'banner_1';
 
@@ -25,7 +28,6 @@ export class SectionHeroComponent implements OnInit {
   ngOnInit() {
 
     if (this.section) {
-      console.log("hola")
       this.sectionId = this.section.id
       this.sectionType = this.section.type
       if(this.section.data.defaultSectionHeroData){
@@ -33,20 +35,52 @@ export class SectionHeroComponent implements OnInit {
       }else{
         this.sectionData = this.section.data
       }
-    } 
+    }
 
-    this.sectionForm = new FormGroup({
+    this.sectionFormBannerOne = new FormGroup({
       subtitle: new FormControl(this.sectionData?.banner_1.subtitle),
       title: new FormControl(this.sectionData?.banner_1.title),
       content: new FormControl(this.sectionData?.banner_1.content),
       price_text: new FormControl(this.sectionData?.banner_1.price_text),
       price: new FormControl(this.sectionData?.banner_1.price),
-      button: new FormControl(this.sectionData?.banner_1.button)
-    })
+      button: new FormControl(this.sectionData?.banner_1.button),
+      image: new FormControl(this.sectionData?.banner_1.image)
+    });
 
-    this.sectionForm.valueChanges.subscribe((values) => {
+    this.sectionFormBannerTwo = new FormGroup({
+      subtitle: new FormControl(this.sectionData?.banner_2.subtitle),
+      title: new FormControl(this.sectionData?.banner_2.title),
+      price: new FormControl(this.sectionData?.banner_2.price),
+      image: new FormControl(this.sectionData?.banner_2.image)
+    });
+
+    this.sectionFormBannerThree = new FormGroup({
+      title: new FormControl(this.sectionData?.banner_3.title),
+      content: new FormControl(this.sectionData?.banner_3.content),
+      button: new FormControl(this.sectionData?.banner_3.button),
+      image: new FormControl(this.sectionData?.banner_3.image)
+    });
+
+    this.sectionFormBannerOne.valueChanges.subscribe((values) => {
       this.sectionData!.banner_1 = { ...this.sectionData!.banner_1, ...values };
     });
+
+    this.sectionFormBannerTwo.valueChanges.subscribe((values) => {
+      this.sectionData!.banner_2 = { ...this.sectionData!.banner_2, ...values };
+    });
+
+    this.sectionFormBannerThree.valueChanges.subscribe((values) => {
+      this.sectionData!.banner_3 = { ...this.sectionData!.banner_3, ...values };
+    });
+
+    this.sectionEventService.shopDataChanged.subscribe((shopData: any) => {
+      this.handleShopDataChanged(shopData);
+    });
+  }
+
+  handleShopDataChanged(shopData: any){
+    this.sectionId = shopData.id
+    console.log(shopData)
   }
 
   segmentChanged(event: CustomEvent) {
@@ -72,6 +106,15 @@ export class SectionHeroComponent implements OnInit {
       data: this.sectionData
     }
     this.sectionEventService.changeSaved.emit(section);
+  }
+
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file) {
+      this.sectionFormBannerThree.patchValue({
+        image: file
+      });
+    }
   }
 
 }

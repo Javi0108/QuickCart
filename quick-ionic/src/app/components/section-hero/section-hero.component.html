@@ -3,7 +3,7 @@
     <div class="col-lg-9">
       <div class="row">
         <div class="col-xl-8 col-lg-12 col-12">
-          <div class="hero-banner-1" [style.background-image]="'url(' + sectionData.banner_1.images + ')'">
+          <div class="hero-banner-1" [style.background-image]="'url(' + sectionData.banner_1.image + ')'">
             <div class="content">
               <h2>
                 <span>{{sectionData.banner_1.subtitle}}</span>
@@ -25,7 +25,7 @@
         <div class="col-xl-4 col-lg-12 col-12">
           <div class="row">
             <div class="col-xl-12 col-lg-6 col-md-12 col-12">
-              <div class="hero-banner-2" [style.background-image]="'url(' + sectionData.banner_2.images + ')'">
+              <div class="hero-banner-2" [style.background-image]="'url(' + sectionData.banner_2.image + ')'">
                 <div class="row content">
                   <div class="col-8">
                     <h5>
@@ -40,7 +40,7 @@
               </div>
             </div>
             <div class="col-xl-12 col-lg-6 col-md-12 col-12">
-              <div class="hero-banner-3" [style.background-image]="'url(' + sectionData.banner_3.images + ')'">
+              <div class="hero-banner-3" [style.background-image]="'url(' + sectionData.banner_3.image + ')'">
                 <div class="content">
                   <h2>{{sectionData.banner_3.title}}</h2>
                   <p>{{sectionData.banner_3.content}}</p>
@@ -54,10 +54,10 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-3 p-1 form-edit">
+    <div class="col-lg-3 p-1 form-edit p-3 pt-0">
 
       <ion-segment [(ngModel)]="selectedSegment" (ionChange)="segmentChanged($event)">
-        <ion-segment-button value="banner_1" >
+        <ion-segment-button value="banner_1">
           <ion-label>Banner 1</ion-label>
         </ion-segment-button>
         <ion-segment-button value="banner_2">
@@ -68,16 +68,75 @@
         </ion-segment-button>
       </ion-segment>
 
-      <div class="form-wrapper" [formGroup]="sectionForm" *ngIf="selectedSegment === 'banner_1'">
-        <ion-input formControlName="subtitle" type="text" placeholder="Subtitle" label="Subtitle" label-placement="floating" fill="outline" [maxlength]="30" [counter]="true"></ion-input>
-        <ion-input formControlName="title" type="text" placeholder="Title" label="Title" label-placement="floating" fill="outline" [maxlength]="32" [counter]="true"></ion-input>
-        <ion-textarea formControlName="content" placeholder="Content" label="Content" labelPlacement="floating" fill="outline" rows="5" [maxlength]="200" [counter]="true"></ion-textarea>
-        <ion-input formControlName="price_text" type="text" placeholder="Price Text" label="Price Text" label-placement="floating" fill="outline" [maxlength]="15" [counter]="true"></ion-input>
-        <ion-input formControlName="price" type="text" placeholder="Price" label="Price" label-placement="floating" fill="outline" [maxlength]="10" [counter]="true"></ion-input>
-        <ion-input formControlName="button" type="text" placeholder="Button Text" label="Button Text" label-placement="floating" fill="outline" [maxlength]="25" [counter]="true"></ion-input>
-        <button *ngIf="section.id" (click)="updateChanges()">Update</button>
-        <button *ngIf="!section.id" (click)="saveChanges()" style="color: red;">Save</button>
+      <div class="form-wrapper" [formGroup]="sectionFormBannerOne" *ngIf="selectedSegment === 'banner_1'">
+
+        <div class="inline-inputs">
+          <ion-input formControlName="subtitle" type="text" placeholder="Subtitle" label="Subtitle"
+            label-placement="floating" fill="outline" [maxlength]="30" [counter]="true"></ion-input>
+
+          <ion-input formControlName="title" type="text" placeholder="Title" label="Title" label-placement="floating"
+            fill="outline" [maxlength]="32" [counter]="true"></ion-input>
+        </div>
+        <ion-textarea formControlName="content" placeholder="Content" label="Content" labelPlacement="floating"
+          fill="outline" rows="5" [maxlength]="200" [counter]="true"></ion-textarea>
+
+        <div class="inline-inputs">
+          <ion-input formControlName="price_text" type="text" placeholder="Price Text" label="Price Text"
+            label-placement="floating" fill="outline" [maxlength]="15" [counter]="true"></ion-input>
+
+          <ion-input formControlName="price" type="text" placeholder="Price" label="Price" label-placement="floating"
+            fill="outline" [maxlength]="10" [counter]="true"></ion-input>
+        </div>
+
+        <ion-input formControlName="button" type="text" placeholder="Button Text" label="Button Text"
+          label-placement="floating" fill="outline" [maxlength]="15" [counter]="true"></ion-input>
+
+        <ion-input id="image-input" label="Image" label-placement="floating" placeholder="Image" fill="outline"
+          type="file" formControlName="image" (change)="onFileSelected($event)" class="file-input"></ion-input>
+
       </div>
-    </div>    
+
+      <div class="form-wrapper" [formGroup]="sectionFormBannerTwo" *ngIf="selectedSegment === 'banner_2'">
+        <ion-input formControlName="subtitle" type="text" placeholder="Subtitle" label="Subtitle"
+          label-placement="floating" fill="outline" [maxlength]="30" [counter]="true"></ion-input>
+
+        <ion-input formControlName="title" type="text" placeholder="Title" label="Title" label-placement="floating"
+          fill="outline" [maxlength]="32" [counter]="true"></ion-input>
+
+        <ion-input formControlName="price" type="text" placeholder="Price" label="Price" label-placement="floating"
+          fill="outline" [maxlength]="10" [counter]="true"></ion-input>
+
+        <ion-input id="image-input" label="Image" label-placement="floating" placeholder="Image" fill="outline"
+          type="file" formControlName="image" (change)="onFileSelected($event)" class="file-input"></ion-input>
+
+      </div>
+
+      <div class="form-wrapper" [formGroup]="sectionFormBannerThree" *ngIf="selectedSegment === 'banner_3'">
+        <ion-input formControlName="title" type="text" placeholder="Title" label="Title" label-placement="floating"
+          fill="outline" [maxlength]="15" [counter]="true"></ion-input>
+
+        <ion-input formControlName="content" type="text" placeholder="Content" label="Content"
+          label-placement="floating" fill="outline" [maxlength]="50" [counter]="true"></ion-input>
+
+        <ion-input formControlName="button" type="text" placeholder="Button Text" label="Button Text"
+          label-placement="floating" fill="outline" [maxlength]="15" [counter]="true"></ion-input>
+
+        <ion-input id="image-input" label="Image" label-placement="floating" placeholder="Image" fill="outline"
+          type="file" formControlName="image" (change)="onFileSelected($event)" class="file-input"></ion-input>
+      </div>
+
+      <div class="row">
+        <div *ngIf="section.id" class="col-6">
+          <button (click)="updateChanges()" class="btn btn-primary btn-block w-100">Update</button>
+        </div>
+        <div *ngIf="!section.id" class="col-6">
+          <button (click)="saveChanges()" class="btn btn-dangerous btn-block w-100">Save</button>
+        </div>
+        <div class="col-6">
+          <button (click)="updateChanges()" class="btn btn-danger btn-block w-100">Delete</button>
+        </div>
+      </div>
+      
+    </div>
   </div>
 </section>
