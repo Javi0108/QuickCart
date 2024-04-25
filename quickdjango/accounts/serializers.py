@@ -33,17 +33,18 @@ class ProfileSerializerRegister(serializers.ModelSerializer):
         
 class ProfileSerializer(serializers.ModelSerializer):
     user = UserSerializerUpdate()
-    
+
     class Meta:
         model = Profile
-        fields = ['id_profile', 'user', 'phone', 'mobile', 'address', 'socials', 'user_type']
+        fields = ['id_profile', 'user', 'phone', 'mobile', 'address', 'socials', 'avatar', 'user_type']
 
     def update(self, instance, validated_data):
         instance.phone = validated_data.get('phone', instance.phone)
         instance.mobile = validated_data.get('mobile', instance.mobile)
         instance.address = validated_data.get('address', instance.address)
         instance.socials = validated_data.get('socials', instance.socials)
-            
+        instance.avatar = validated_data.get('avatar', instance.avatar)
+
         user_data = validated_data.pop('user', None)
         if user_data:
             user_instance = instance.user
@@ -55,6 +56,14 @@ class ProfileSerializer(serializers.ModelSerializer):
             
         instance.save()
         return instance
+    
+
+class ProfileSerializerByCode(serializers.ModelSerializer):
+    user = UserSerializer()
+    
+    class Meta:
+        model = Profile
+        fields = ['user', 'phone', 'mobile', 'address', 'socials', 'avatar', 'user_type']
 
 # class ProfileSerializerWithoutSocials(serializers.ModelSerializer):
 #     user = UserSerializer()  # No establecer como de solo lectura

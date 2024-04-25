@@ -22,6 +22,8 @@ export class ProfilePage implements OnInit {
   editProfileForm: FormGroup;
   userNameForm: FormGroup;
   socials: FormGroup;
+  foreignProfileForm: FormGroup;
+  avatarFile: File | null = null;
 
   constructor(
     private profileService: ProfileService,
@@ -56,11 +58,26 @@ export class ProfilePage implements OnInit {
       x: [''],
       linkedin: [''],
     });
+
+    this.foreignProfileForm = this.formBuilder.group({
+      user: this.formBuilder.group({
+        username: [''],
+        email: [''],
+        first_name: [''],
+        last_name: [''],
+      }),
+      phone: [''],
+      mobile: [''],
+      address: [''],
+      user_type: [''],
+    });
   }
 
   ngOnInit() {
     // Load user profile
     this.loadProfile();
+    this.editProfileForm.disable();
+    this.socials.disable();
   }
 
   loadUsername() {
@@ -82,9 +99,9 @@ export class ProfilePage implements OnInit {
     if (userId) {
       this.profileService.getProfileById(parseInt(userId)).subscribe({
         next: (profile: Profile) => {
-          this.loadUsername();
-          this.editProfileForm.patchValue(profile);
+          this.foreignProfileForm.patchValue(profile);
           this.profile = profile;
+          this.getSocials(profile);
         },
         error: (error) => {
           console.error(error);
@@ -96,21 +113,7 @@ export class ProfilePage implements OnInit {
           this.loadUsername();
           this.editProfileForm.patchValue(profile);
           this.profile = profile;
-          console.log(profile);
-
-          // Extract socials data
-          const socials = profile.socials;
-          console.log(socials);
-          if (socials) {
-            // Assign values to form controls
-            this.socials.patchValue({
-              webpage: socials['webpage'],
-              instagram: socials['instagram'],
-              facebook: socials['facebook'],
-              x: socials['x'],
-              linkedin: socials['linkedin'],
-            });
-          }
+          this.getSocials(profile);
         },
         error: (error) => {
           console.error(error);
@@ -119,42 +122,87 @@ export class ProfilePage implements OnInit {
     }
   }
 
-  saveChanges() {
-    const updateProfile = {
-      ...this.editProfileForm.value,
-      socials: {
-        webpage: this.socials.value.webpage,
-        instagram: this.socials.value.instagram,
-        facebook: this.socials.value.facebook,
-        x: this.socials.value.x,
-        linkedin: this.socials.value.linkedin
-      }
+  onFileChange(event: Event):void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.avatarFile = input.files ? input.files[0] : null; // Store the file reference
     }
-    this.profileService.putEditProfile(updateProfile).subscribe(
+  }
+
+  saveChanges() {
+    const formData = new FormData();
+    formData.append(
+      'user.email',
+      this.editProfileForm.get('user.email')?.value
+    );
+    formData.append(
+      'user.first_name',
+      this.editProfileForm.get('user.first_name')?.value
+    );
+    formData.append(
+      'user.last_name',
+      this.editProfileForm.get('user.last_name')?.value
+    );
+    formData.append('phone', this.editProfileForm.get('phone')?.value);
+    formData.append('mobile', this.editProfileForm.get('mobile')?.value);
+    formData.append('address', this.editProfileForm.get('address')?.value);
+    formData.append('user_type', this.editProfileForm.get('user_type')?.value);
+
+    formData.append('socials.webpage', this.socials.get('webpage')?.value);
+    formData.append('socials.instagram', this.socials.get('instagram')?.value);
+    formData.append('socials.facebook', this.socials.get('facebook')?.value);
+    formData.append('socials.x', this.socials.get('x')?.value);
+    formData.append('socials.linkedin', this.socials.get('linkedin')?.value);
+
+    if (this.avatarFile) {
+      formData.append('avatar', this.avatarFile); // Add the file if it exists
+    }
+
+    this.profileService.putEditProfile(formData).subscribe(
       (response) => {
         this.notificationToastService.presentToast(
           'Profile updated successfully',
-          'success'
+          'success',
+          '../../assets/check.svg'
         );
         this.loadProfile();
       },
       (error) => {
+        console.log(error);
         this.notificationToastService.presentToast(
           'Failed to update profile',
-          'danger'
+          'danger',
+          '../../assets/exclamation.svg'
         );
+        this.loadProfile();
       }
     );
+  }
+
+  getSocials(profile: Profile) {
+    const socials = profile.socials;
+
+    if (socials) {
+      this.socials.patchValue({
+        webpage: socials['webpage'],
+        instagram: socials['instagram'],
+        facebook: socials['facebook'],
+        x: socials['x'],
+        linkedin: socials['linkedin'],
+      });
+    }
   }
 
   editProfile() {
     this.enableEdit = true;
     this.editProfileForm.enable();
+    this.socials.enable();
   }
 
   cancelChanges() {
     this.enableEdit = false;
     this.editProfileForm.disable();
+    this.socials.disable();
   }
 
   ngAfterViewInit() {

@@ -10,7 +10,7 @@
           class="d-flex flex-column align-items-center text-center"
         >
           <img
-            src="https://bootdey.com/img/Content/avatar/avatar7.png"
+            src="http://127.0.0.1:8000/{{ profile.avatar }}"
             alt="Admin"
             class="rounded-circle"
             width="150"
@@ -41,35 +41,45 @@
                 class="bi bi-globe2"
                 style="font-size: x-large; margin-right: 1rem"
               ></i>
-              <a href="{{ profile.socials.webpage }}">_javigd_</a> <!--- Cambiar al terminar-->
+              <a href="{{ profile.socials.webpage }}" target="_blank"
+                >{{ profile.socials.webpage }}</a
+              >
             </ion-item>
             <ion-item>
               <i
                 class="bi bi-instagram"
                 style="font-size: x-large; margin-right: 1rem"
               ></i>
-              <a href="{{ profile.socials.instagram }}">_javigd_</a> <!--- Cambiar al terminar-->
+              <a href="{{ profile.socials.instagram }}" target="_blank"
+                >{{ profile.socials.instagram }}</a
+              >
             </ion-item>
             <ion-item>
               <i
                 class="bi bi-facebook"
                 style="font-size: x-large; margin-right: 1rem"
               ></i>
-              <a href="{{ profile.socials.facebook }}">_javigd_</a> <!--- Cambiar al terminar-->
+              <a href="{{ profile.socials.facebook }}" target="_blank"
+                >{{ profile.socials.facebook }}</a
+              >
             </ion-item>
             <ion-item>
               <i
                 class="bi bi-twitter-x"
                 style="font-size: x-large; margin-right: 1rem"
               ></i>
-              <a href="{{ profile.socials.x }}">_javigd_</a> <!--- Cambiar al terminar-->
+              <a href="{{ profile.socials.x }}" target="_blank"
+                >{{ profile.socials.x }}</a
+              >
             </ion-item>
             <ion-item>
               <i
                 class="bi bi-linkedin"
                 style="font-size: x-large; margin-right: 1rem"
               ></i>
-              <a href="{{ profile.socials.linkedin }}">_javigd_</a> <!--- Cambiar al terminar-->
+              <a href="{{ profile.socials.linkedin }}" target="_blank"
+                >{{ profile.socials.linkedin }}</a
+              >
             </ion-item>
           </ion-list>
         </ion-card-content>
@@ -80,25 +90,24 @@
     <div class="col-md-8">
       <div class="card mt-2">
         <ion-list class="card-body">
-          <div [formGroup]="userNameForm">
-            <ion-item>
-              <ion-input
-                formControlName="username"
-                labelPlacement="floating"
-                value="{{ profile.user.username }}"
-                readonly="true"
-              >
-                <div slot="label">Username</div>
-              </ion-input>
-            </ion-item>
-          </div>
-          <form [formGroup]="editProfileForm" (ngSubmit)="saveChanges()">
+          <form [formGroup]="foreignProfileForm" (ngSubmit)="saveChanges()">
             <div formGroupName="user">
+              <ion-item>
+                <ion-input
+                  formControlName="username"
+                  labelPlacement="floating"
+                  value="{{ profile.user.username }}"
+                  readonly="true"
+                >
+                  <div slot="label">Username</div>
+                </ion-input>
+              </ion-item>
               <ion-item>
                 <ion-input
                   formControlName="email"
                   labelPlacement="floating"
                   value="{{ profile.user.email }}"
+                  readonly="true"
                 >
                   <div slot="label">Email</div>
                 </ion-input>
@@ -109,6 +118,7 @@
                   formControlName="first_name"
                   labelPlacement="floating"
                   value="{{ profile.user.first_name }}"
+                  readonly="true"
                 >
                   <div slot="label">First name</div>
                 </ion-input>
@@ -116,6 +126,7 @@
                   formControlName="last_name"
                   labelPlacement="floating"
                   value="{{ profile.user.last_name }}"
+                  readonly="true"
                 >
                   <div slot="label">Last name</div>
                 </ion-input>
@@ -127,6 +138,7 @@
                 formControlName="phone"
                 labelPlacement="floating"
                 value="{{ profile.phone }}"
+                readonly="true"
               >
                 <div slot="label">Phone</div>
               </ion-input>
@@ -135,6 +147,7 @@
                 formControlName="mobile"
                 labelPlacement="floating"
                 value="{{ profile.mobile }}"
+                readonly="true"
               >
                 <div slot="label">Mobile</div>
               </ion-input>
@@ -145,38 +158,12 @@
                 formControlName="address"
                 labelPlacement="floating"
                 value="{{ profile.address }}"
+                readonly="true"
               >
                 <div slot="label">Address</div>
               </ion-input>
             </ion-item>
-
-            <div class="row mt-4">
-              <div class="col-sm-12">
-                <button
-                  class="btn btn-primary"
-                  *ngIf="this.enableEdit == true"
-                  type="submit"
-                  [disabled]="!editProfileForm.valid"
-                >
-                  Save
-                </button>
-                <button
-                  class="btn btn-light ms-2"
-                  *ngIf="this.enableEdit == true"
-                  (click)="cancelChanges()"
-                >
-                  Cancel
-                </button>
-              </div>
-            </div>
           </form>
-          <button
-            class="btn btn-primary"
-            *ngIf="this.enableEdit == false"
-            (click)="editProfile()"
-          >
-            Edit
-          </button>
         </ion-list>
       </div>
     </div>
@@ -195,10 +182,16 @@
           class="d-flex flex-column align-items-center text-center"
         >
           <img
-            src="https://bootdey.com/img/Content/avatar/avatar7.png"
-            alt="Admin"
+            src="http://127.0.0.1:8000/{{ profile.avatar }}"
             class="rounded-circle"
             width="150"
+            id="avatar"
+          />
+            <input
+            type="file"
+            (change)="onFileChange($event)"
+            accept="image/*"
+            id="fileBtn"
           />
           <div class="mt-3">
             <h1 style="font-weight: 700">
@@ -222,39 +215,68 @@
         <ion-card-content *ngIf="profile.user_type == 'Seller'">
           <ion-list [formGroup]="socials">
             <ion-item>
-              <i
-                class="bi bi-globe2"
-                style="font-size: x-large; margin-right: 1rem"
-              ></i>
-              <ion-input formControlName="webpage" value="{{ profile.socials.webpage }}"></ion-input>
+              <a href="{{ profile.socials.webpage }}" target="_blank"
+                ><i
+                  class="bi bi-globe2"
+                  style="font-size: x-large; margin-right: 1rem; color: white"
+                ></i
+              ></a>
+              <ion-input
+                formControlName="webpage"
+                value="{{ profile.socials.webpage }}"
+              ></ion-input>
             </ion-item>
             <ion-item>
-              <i
-                class="bi bi-instagram"
-                style="font-size: x-large; margin-right: 1rem"
-              ></i>
-              <ion-input formControlName="instagram" value="{{ profile.socials.instagram }}"></ion-input>
+              <a
+                href="https://www.instagram.com/{{ profile.socials.instagram }}/"
+                target="_blank"
+                ><i
+                  class="bi bi-instagram"
+                  style="font-size: x-large; margin-right: 1rem; color: white"
+                ></i
+              ></a>
+              <ion-input
+                formControlName="instagram"
+                value="{{ profile.socials.instagram }}"
+              ></ion-input>
             </ion-item>
             <ion-item>
-              <i
-                class="bi bi-facebook"
-                style="font-size: x-large; margin-right: 1rem"
-              ></i>
-              <ion-input formControlName="facebook" value="{{ profile.socials.facebook }}"></ion-input>
+              <a href="{{ profile.socials.facebook }}" target="_blank"
+                ><i
+                  class="bi bi-facebook"
+                  style="font-size: x-large; margin-right: 1rem; color: white"
+                ></i
+              ></a>
+              <ion-input
+                formControlName="facebook"
+                value="{{ profile.socials.facebook }}"
+              ></ion-input>
             </ion-item>
             <ion-item>
-              <i
-                class="bi bi-twitter-x"
-                style="font-size: x-large; margin-right: 1rem"
-              ></i>
-              <ion-input formControlName="x" value="{{ profile.socials.x }}"></ion-input>
+              <a
+                href="https://twitter.com/{{ profile.socials.x }}/"
+                target="_blank"
+                ><i
+                  class="bi bi-twitter-x"
+                  style="font-size: x-large; margin-right: 1rem; color: white"
+                ></i
+              ></a>
+              <ion-input
+                formControlName="x"
+                value="{{ profile.socials.x }}"
+              ></ion-input>
             </ion-item>
             <ion-item>
-              <i
-                class="bi bi-linkedin"
-                style="font-size: x-large; margin-right: 1rem"
-              ></i>
-              <ion-input formControlName="linkedin" value="{{ profile.socials.linkedin }}"></ion-input>
+              <a href="{{ profile.socials.linkedin }}" target="_blank"
+                ><i
+                  class="bi bi-linkedin"
+                  style="font-size: x-large; margin-right: 1rem; color: white"
+                ></i
+              ></a>
+              <ion-input
+                formControlName="linkedin"
+                value="{{ profile.socials.linkedin }}"
+              ></ion-input>
             </ion-item>
           </ion-list>
         </ion-card-content>
@@ -277,7 +299,11 @@
               </ion-input>
             </ion-item>
           </div>
-          <form [formGroup]="editProfileForm" (ngSubmit)="saveChanges()">
+          <form
+            [formGroup]="editProfileForm"
+            (ngSubmit)="saveChanges()"
+            enctype="multipart/form-data"
+          >
             <div formGroupName="user">
               <ion-item>
                 <ion-input
