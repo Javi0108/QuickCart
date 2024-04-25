@@ -1,0 +1,25 @@
+<ion-content>
+  <ion-grid>
+    <h2 class="title">Products Management</h2>
+    <ion-button (click)="openAddModal()">Add Product</ion-button>
+    <ion-row>
+      <ion-col size="6" size-md="4" size-lg="3" *ngFor="let product of products">
+        <ion-card>
+            <ion-img [src]="'http://localhost:8000' + product.avatar" alt="Product Image"></ion-img>
+            <ion-card-header>
+              <ion-card-title>{{ product.name }}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <p>{{ product.short_description }}</p>
+              <p>Precio: {{ product.price }}</p>
+              <ion-button color="primary" slot="end" (click)="openEditModal(product)">Edit</ion-button>
+              <ion-button color="danger" slot="end" (click)="confirmDelete(product.id_product)">Delete</ion-button>
+            </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <div *ngIf="!products || products.length === 0">
+        <p class="title">No hay productos disponibles</p>
+      </div>
+    </ion-row>
+  </ion-grid>
+</ion-content>

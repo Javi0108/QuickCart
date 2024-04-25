@@ -1,0 +1,17 @@
+.image-input-container {
+    display: flex;
+    align-items: center;
+}
+
+.uploaded-image {
+    margin: 10px;
+    border: 1px solid rgba(70, 70, 70, 0.39);
+    width: 200px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.file-input {
+    flex: 1;
+}
+  
