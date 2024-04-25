@@ -8,6 +8,7 @@ export class SectionEventService {
   changeSaved: EventEmitter<any> = new EventEmitter<any>();
   sectionEdited: EventEmitter<any> = new EventEmitter<any>();
   shopDataChanged: EventEmitter<any> = new EventEmitter<any>();
+  deleteSection: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() { }
 }

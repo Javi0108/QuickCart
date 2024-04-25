@@ -87,25 +87,13 @@ export class SectionHeroComponent implements OnInit {
     this.selectedSegment = event.detail.value;
   }
 
-  updateChanges() {
+  deleteSection() {
     let section: Section = {
       id: this.sectionId,
       type: "hero",
       data: this.sectionData
     }
-
-    this.sectionEventService.sectionEdited.emit(section);
-  }
-
-  saveChanges() {
-    this.editingMode = false;
-
-    let section: Section = {
-      id: this.sectionId,
-      type: "hero",
-      data: this.sectionData
-    }
-    this.sectionEventService.changeSaved.emit(section);
+    this.sectionEventService.deleteSection.emit(section);
   }
 
   onFileSelected(event: any) {

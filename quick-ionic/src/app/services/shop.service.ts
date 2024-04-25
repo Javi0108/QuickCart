@@ -30,6 +30,10 @@ export class ShopService {
     return this.http.put<any>(`${this.baseURL}sections/edit/${idSection}/`, { shop_data }, { headers: this.getHeaders() })
   }
 
+  deleteShopSection(idSection: number){
+    return this.http.delete<any>(`${this.baseURL}sections/delete/${idSection}/`, {headers: this.getHeaders()})
+  }
+
   // Método para obtener los encabezados de la solicitud
   private getHeaders(): HttpHeaders {
     let headers = new HttpHeaders({

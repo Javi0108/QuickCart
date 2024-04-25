@@ -30,11 +30,15 @@ export class WebPageEditPage implements OnInit {
     }
 
     this.sectionEventService.changeSaved.subscribe((section: Section) => {
-      this.handleChangesSaved(section);
+      this.SaveSection(section);
     });
 
     this.sectionEventService.sectionEdited.subscribe((section: Section) => {
       this.updateSection(section);
+    })
+
+    this.sectionEventService.deleteSection.subscribe((section: Section) => {
+      this.deleteSection(section);
     })
   }
 
@@ -60,7 +64,7 @@ export class WebPageEditPage implements OnInit {
 
     if (sectionType === 'hero') {
       console.log(defaultSectionHeroData)
-      newSection = { id: undefined, type: sectionType, data: { defaultSectionHeroData }};
+      newSection = { id: undefined, type: sectionType, data: { defaultSectionHeroData } };
     } else if (sectionType === 'products') {
       newSection = { id: undefined, type: sectionType, data: {} };
     } else {
@@ -75,21 +79,21 @@ export class WebPageEditPage implements OnInit {
       console.log("No hay secciones para guardar.");
       return;
     }
-  
+
     this.sections.forEach((section: Section) => {
-      if(section.id){
+      if (section.id) {
         this.updateSection(section);
-      
+
         this.getShop() //esto hace muchas peticiones cambiar
-      }else{
-        this.handleChangesSaved(section);
-        
+      } else {
+        this.SaveSection(section);
+
         this.getShop()
       }
     });
   }
 
-  handleChangesSaved(section: Section) {
+  SaveSection(section: Section) {
     this.shopService.saveShopSection(this.shopId, section).subscribe({
       next: (shopData) => {
         console.log("Guardado correctamente", shopData)
@@ -112,4 +116,24 @@ export class WebPageEditPage implements OnInit {
 
     })
   }
+
+  deleteSection(section: Section) {
+    if (section.id) {
+      this.shopService.deleteShopSection(section.id).subscribe({
+        next: (data) => {
+          console.log("Borrada exitosamente");
+          const index = this.sections.findIndex(s => s.id === section.id);
+          if (index !== -1) {
+            this.sections.splice(index, 1);
+          }
+        }
+      });
+    } else {
+      const index = this.sections.indexOf(section);
+      if (index !== -1) {
+        this.sections.splice(index, 1);
+      }
+    }
+  }
+
 }

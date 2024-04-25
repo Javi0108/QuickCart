@@ -154,7 +154,17 @@ class SellerShopSectionView(APIView):
         else:
             print(section_serializer.errors)
             return Response({"error": "Datos de sección no válidos"}, status=status.HTTP_400_BAD_REQUEST)
-    # PRODUCTS
+        
+    def delete(self, request, id_shop_section):
+        try:
+            section = Section.objects.get(pk=id_shop_section)
+            section.delete()
+            return Response({"success": "Sección de tienda eliminada exitosamente"}, status=status.HTTP_204_NO_CONTENT)
+        except Section.DoesNotExist:
+            return Response({"error": "La sección de tienda no existe"}, status=status.HTTP_404_NOT_FOUND)
+    
+    
+# PRODUCTS
 
 class ProductsView(APIView):
     permission_classes=[IsAuthenticated]
