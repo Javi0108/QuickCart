@@ -1,10 +1,22 @@
 <ion-spinner *ngIf="!shopData"></ion-spinner>
 <ion-content>
-  <div class="p-5">
+
+
+  
+  <div class="p-5 pt-2">
     <div *ngIf="sections">
       <app-section-container [sections]="sections"></app-section-container>
     </div>
-    <button (click)="addSection('hero')">Añadir Sección de Productos</button>
-    <button (click)="addSection('products')">Añadir Sección de Banners</button>
   </div>
+
+
 </ion-content>
+<ion-toolbar color="light" style="position: sticky; top: 0">
+  <ion-buttons slot="start">
+    <button (click)="addSection('products')" class="btn btn-primary">Add Hero</button>
+    <button (click)="addSection('hero')" class="btn btn-primary">Añadir Sección de Productos</button>
+  </ion-buttons>
+  <ion-buttons slot="end">
+    <ion-button (click)="saveAllSections()" class="btn btn-primary">Save</ion-button>
+  </ion-buttons>
+</ion-toolbar>

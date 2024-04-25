@@ -70,6 +70,25 @@ export class WebPageEditPage implements OnInit {
     console.log(this.sections)
   }
 
+  saveAllSections() {
+    if (this.sections.length === 0) {
+      console.log("No hay secciones para guardar.");
+      return;
+    }
+  
+    this.sections.forEach((section: Section) => {
+      if(section.id){
+        this.updateSection(section);
+      
+        this.getShop() //esto hace muchas peticiones cambiar
+      }else{
+        this.handleChangesSaved(section);
+        
+        this.getShop()
+      }
+    });
+  }
+
   handleChangesSaved(section: Section) {
     this.shopService.saveShopSection(this.shopId, section).subscribe({
       next: (shopData) => {
@@ -83,10 +102,9 @@ export class WebPageEditPage implements OnInit {
   }
 
   updateSection(section: Section) {
-    console.log(section)
     this.shopService.updateShopSection(section.id!, section).subscribe({
       next: (shopData) => {
-        console.log("Guardado Correctamente", shopData)
+        console.log("Actualizado Correctamente", shopData)
       },
       error: (error) => {
         console.error("no se ha guardado correctamente", error)

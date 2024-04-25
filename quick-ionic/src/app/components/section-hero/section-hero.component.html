@@ -126,13 +126,7 @@
       </div>
 
       <div class="row">
-        <div *ngIf="section.id" class="col-6">
-          <button (click)="updateChanges()" class="btn btn-primary btn-block w-100">Update</button>
-        </div>
-        <div *ngIf="!section.id" class="col-6">
-          <button (click)="saveChanges()" class="btn btn-dangerous btn-block w-100">Save</button>
-        </div>
-        <div class="col-6">
+        <div class="col-12">
           <button (click)="updateChanges()" class="btn btn-danger btn-block w-100">Delete</button>
         </div>
       </div>
