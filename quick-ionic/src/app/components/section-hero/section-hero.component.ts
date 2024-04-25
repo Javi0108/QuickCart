@@ -30,6 +30,7 @@ export class SectionHeroComponent implements OnInit {
     if (this.section) {
       this.sectionId = this.section.id
       this.sectionType = this.section.type
+      
       if(this.section.data.defaultSectionHeroData){
         this.sectionData = this.section.data.defaultSectionHeroData
       }else{
@@ -72,15 +73,6 @@ export class SectionHeroComponent implements OnInit {
     this.sectionFormBannerThree.valueChanges.subscribe((values) => {
       this.sectionData!.banner_3 = { ...this.sectionData!.banner_3, ...values };
     });
-
-    this.sectionEventService.shopDataChanged.subscribe((shopData: any) => {
-      this.handleShopDataChanged(shopData);
-    });
-  }
-
-  handleShopDataChanged(shopData: any){
-    this.sectionId = shopData.id
-    console.log(shopData)
   }
 
   segmentChanged(event: CustomEvent) {

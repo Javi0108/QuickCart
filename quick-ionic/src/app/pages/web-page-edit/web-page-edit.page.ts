@@ -29,14 +29,6 @@ export class WebPageEditPage implements OnInit {
       console.error('No se proporcionó un ID de tienda válido.');
     }
 
-    this.sectionEventService.changeSaved.subscribe((section: Section) => {
-      this.SaveSection(section);
-    });
-
-    this.sectionEventService.sectionEdited.subscribe((section: Section) => {
-      this.updateSection(section);
-    })
-
     this.sectionEventService.deleteSection.subscribe((section: Section) => {
       this.deleteSection(section);
     })
@@ -61,18 +53,19 @@ export class WebPageEditPage implements OnInit {
 
   addSection(sectionType: string) {
     let newSection: Section;
-
+    
     if (sectionType === 'hero') {
-      console.log(defaultSectionHeroData)
-      newSection = { id: undefined, type: sectionType, data: { defaultSectionHeroData } };
+      newSection = { id: undefined, type: sectionType, data: defaultSectionHeroData };
     } else if (sectionType === 'products') {
       newSection = { id: undefined, type: sectionType, data: {} };
     } else {
       newSection = { id: undefined, type: "", data: {} };
     }
+    
     this.sections.push(newSection);
-    console.log(this.sections)
+    console.log(this.sections);
   }
+  
 
   saveAllSections() {
     if (this.sections.length === 0) {
@@ -83,21 +76,17 @@ export class WebPageEditPage implements OnInit {
     this.sections.forEach((section: Section) => {
       if (section.id) {
         this.updateSection(section);
-
-        this.getShop() //esto hace muchas peticiones cambiar
       } else {
-        this.SaveSection(section);
-
-        this.getShop()
+        this.saveSection(section);
       }
     });
   }
 
-  SaveSection(section: Section) {
+  saveSection(section: Section) {
     this.shopService.saveShopSection(this.shopId, section).subscribe({
       next: (shopData) => {
         console.log("Guardado correctamente", shopData)
-        this.sectionEventService.shopDataChanged.emit(shopData);
+        this.getShop() //esto hace muchas peticiones cambiar
       },
       error: (error) => {
         console.error("Error al guarda la seccion", error)
@@ -129,7 +118,9 @@ export class WebPageEditPage implements OnInit {
         }
       });
     } else {
+      console.log("flkjgbfxjgbfxjbgfdkj")
       const index = this.sections.indexOf(section);
+      console.log(index, section)
       if (index !== -1) {
         this.sections.splice(index, 1);
       }
