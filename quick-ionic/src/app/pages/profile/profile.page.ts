@@ -156,11 +156,6 @@ export class ProfilePage implements OnInit {
     }
 
     formData.append('socials', JSON.stringify(socialsJSON))
-    // formData.append('socials.webpage', this.socials.get('webpage')?.value);
-    // formData.append('socials.instagram', this.socials.get('instagram')?.value);
-    // formData.append('socials.facebook', this.socials.get('facebook')?.value);
-    // formData.append('socials.x', this.socials.get('x')?.value);
-    // formData.append('socials.linkedin', this.socials.get('linkedin')?.value);
     console.log();
 
     if (this.avatarFile) {
