@@ -147,12 +147,21 @@ export class ProfilePage implements OnInit {
     formData.append('mobile', this.editProfileForm.get('mobile')?.value);
     formData.append('address', this.editProfileForm.get('address')?.value);
     formData.append('user_type', this.editProfileForm.get('user_type')?.value);
+    const socialsJSON = {
+      "webpage": this.socials.get('webpage')?.value,
+      "instagram": this.socials.get('instagram')?.value,
+      "facebook": this.socials.get('facebook')?.value,
+      "x": this.socials.get('x')?.value,
+      "linkedin": this.socials.get('linkedin')?.value
+    }
 
-    formData.append('socials.webpage', this.socials.get('webpage')?.value);
-    formData.append('socials.instagram', this.socials.get('instagram')?.value);
-    formData.append('socials.facebook', this.socials.get('facebook')?.value);
-    formData.append('socials.x', this.socials.get('x')?.value);
-    formData.append('socials.linkedin', this.socials.get('linkedin')?.value);
+    formData.append('socials', JSON.stringify(socialsJSON))
+    // formData.append('socials.webpage', this.socials.get('webpage')?.value);
+    // formData.append('socials.instagram', this.socials.get('instagram')?.value);
+    // formData.append('socials.facebook', this.socials.get('facebook')?.value);
+    // formData.append('socials.x', this.socials.get('x')?.value);
+    // formData.append('socials.linkedin', this.socials.get('linkedin')?.value);
+    console.log();
 
     if (this.avatarFile) {
       formData.append('avatar', this.avatarFile); // Add the file if it exists

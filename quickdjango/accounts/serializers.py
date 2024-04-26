@@ -53,10 +53,11 @@ class ProfileSerializer(serializers.ModelSerializer):
                 user_serializer.save()
             else:
                 raise serializers.ValidationError(user_serializer.errors)
-            
+        print(instance)
         instance.save()
         return instance
     
+    # {"webpage": "google.es", "instagram": "_javigd_", "facebook": "facebook", "x": "_javigd_"}
 
 class ProfileSerializerByCode(serializers.ModelSerializer):
     user = UserSerializer()

@@ -238,10 +238,10 @@
         <ion-card-content *ngIf="profile.user_type == 'Seller'">
           <ion-list [formGroup]="socials">
             <ion-item>
-              <a href="{{ profile.socials.webpage }}" target="_blank"
+              <a href="http://{{ profile.socials.webpage }}" target="_blank"
                 ><i
                   class="bi bi-globe2"
-                  style="font-size: x-large; margin-right: 1rem; color: white"
+                  id="socialsLogo"
                 ></i
               ></a>
               <ion-input
@@ -255,7 +255,7 @@
                 target="_blank"
                 ><i
                   class="bi bi-instagram"
-                  style="font-size: x-large; margin-right: 1rem; color: white"
+                  id="socialsLogo"
                 ></i
               ></a>
               <ion-input
@@ -267,7 +267,7 @@
               <a href="{{ profile.socials.facebook }}" target="_blank"
                 ><i
                   class="bi bi-facebook"
-                  style="font-size: x-large; margin-right: 1rem; color: white"
+                  id="socialsLogo"
                 ></i
               ></a>
               <ion-input
@@ -281,7 +281,7 @@
                 target="_blank"
                 ><i
                   class="bi bi-twitter-x"
-                  style="font-size: x-large; margin-right: 1rem; color: white"
+                  id="socialsLogo"
                 ></i
               ></a>
               <ion-input
@@ -293,7 +293,7 @@
               <a href="{{ profile.socials.linkedin }}" target="_blank"
                 ><i
                   class="bi bi-linkedin"
-                  style="font-size: x-large; margin-right: 1rem; color: white"
+                  id="socialsLogo"
                 ></i
               ></a>
               <ion-input
