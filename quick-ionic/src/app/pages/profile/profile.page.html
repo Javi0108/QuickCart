@@ -385,7 +385,7 @@
             </ion-item>
 
             <div class="row mt-4">
-              <div class="col-sm-12">
+              <div class="col-sm-12" id="buttonGroup">
                 <button
                   class="btn btn-primary"
                   *ngIf="this.enableEdit == true"
@@ -395,22 +395,23 @@
                   Save
                 </button>
                 <button
-                  class="btn btn-light ms-2"
+                  class="btn btn-light"
                   *ngIf="this.enableEdit == true"
                   (click)="cancelChanges()"
                 >
                   Cancel
                 </button>
+                <button
+                  class="btn btn-primary"
+                  *ngIf="this.enableEdit == false"
+                  (click)="editProfile()"
+                >
+                  Edit
+                </button>
+                <button *ngIf="profile" class="btn btn-primary" [routerLink]="['/change-password']">Change Password</button>
               </div>
             </div>
           </form>
-          <button
-            class="btn btn-primary"
-            *ngIf="this.enableEdit == false"
-            (click)="editProfile()"
-          >
-            Edit
-          </button>
         </ion-list>
       </div>
     </div>

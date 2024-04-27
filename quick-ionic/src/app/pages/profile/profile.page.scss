@@ -80,3 +80,11 @@
   font-size: x-large;
   margin-right: 1rem;
 }
+
+#buttonGroup {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 1rem;
+}

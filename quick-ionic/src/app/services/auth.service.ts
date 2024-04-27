@@ -5,6 +5,7 @@ import { CookieService } from "ngx-cookie-service";
 import { tap } from 'rxjs/operators';
 import { User } from '../interfaces/user.interface';
 import { jwtDecode } from "jwt-decode";
+import { FormGroup } from '@angular/forms';
 
 
 @Injectable({
@@ -48,6 +49,26 @@ export class AuthService {
 
   getUser(id: any) {
     return this.http.get(`${this.baseURL}` + "accounts/profile/", id);
+  }
+
+  changeUserPassword(formValue: FormGroup, user: User) {
+    const updatePass = {
+      oldPassword: formValue.get('oldPassword')?.value,
+      newPassword: formValue.get('newPassword')?.value,
+      confirmPassword: formValue.get('confirmPassword')?.value,
+      user: user, // Ejemplo de cómo podrías pasar el ID de usuario
+    };
+    return this.http.post<User>(`${this.baseURL}` + `accounts/change-password/`, updatePass, { headers: this.getHeadersGet() });
+  }
+
+  private getHeadersGet(): HttpHeaders {
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    if (this.token) {
+      headers = headers.set('Authorization', `Bearer ${this.token}`);
+    }
+    return headers;
   }
 
   // Método para verificar si el token de acceso está caducado

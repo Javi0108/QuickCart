@@ -1,4 +1,5 @@
 from .models import Profile
+from django.contrib.auth.models import User
 from rest_framework import status
 from rest_framework.response import Response
 from django.contrib.auth import authenticate
@@ -9,6 +10,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken, BlacklistMixin
 from rest_framework.parsers import MultiPartParser, FormParser
+from django.contrib.auth.hashers import check_password
 
 class RegisterView(APIView):
     
@@ -90,8 +92,6 @@ class ProfileView(APIView):
     def put(self, request):    
         profile = Profile.objects.get(user=request.user) 
         serializer = ProfileSerializer(profile, data=request.data)
-        # print("REQUEST DATA\n", request.data)
-        print("\nSERIALIZER\n", serializer)
         if serializer.is_valid():  
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
@@ -107,3 +107,25 @@ class ProfileByIdView(APIView):
         profile = Profile.objects.get(user=id)
         serializer = ProfileSerializerByCode(profile)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+class PasswordUpdateView(APIView):
+
+    # permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        # if request.user.is_authenticated:
+        user = User.objects.get(username=request.data['user']['username'])
+        old_password = request.data['oldPassword']
+        new_password = request.data['newPassword']
+        confirm_new_password = request.data['confirmPassword']
+
+        if check_password(old_password, user.password):
+            if new_password == confirm_new_password:
+                user.set_password(new_password)
+                user.save()
+                return Response({'success': 'Password updated'}, status=status.HTTP_200_OK)
+            else:
+                return Response({'error'}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response({'error': 'Incorrect old password'}, status=status.HTTP_400_BAD_REQUEST)
+    
