@@ -12,10 +12,11 @@ export class SectionHeroComponent implements OnInit {
 
   @Input() section: any;
 
+  editMode: boolean = false;
+
   sectionId?: number;
   sectionType?: string;
   sectionData?: HeroSectionData;
-  editingMode = false;
 
   sectionFormBannerOne!: FormGroup;
   sectionFormBannerTwo!: FormGroup;
@@ -23,20 +24,29 @@ export class SectionHeroComponent implements OnInit {
 
   selectedSegment: string = 'banner_1';
 
-  constructor(private sectionEventService: SectionEventService) { }
+  constructor(
+    private sectionEventService: SectionEventService,
+  ) { }
 
   ngOnInit() {
-
     if (this.section) {
+      this.editMode = this.section.editMode
       this.sectionId = this.section.id
       this.sectionType = this.section.type
-      
-      if(this.section.data.defaultSectionHeroData){
+
+      if (this.section.data.defaultSectionHeroData) {
         this.sectionData = this.section.data.defaultSectionHeroData
-      }else{
+      } else {
         this.sectionData = this.section.data
       }
     }
+
+    if (this.editMode) {
+      this.initializeEditMode()
+    }
+  }
+
+  initializeEditMode() {
 
     this.sectionFormBannerOne = new FormGroup({
       subtitle: new FormControl(this.sectionData?.banner_1.subtitle),
@@ -73,6 +83,7 @@ export class SectionHeroComponent implements OnInit {
     this.sectionFormBannerThree.valueChanges.subscribe((values) => {
       this.sectionData!.banner_3 = { ...this.sectionData!.banner_3, ...values };
     });
+
   }
 
   segmentChanged(event: CustomEvent) {
@@ -83,6 +94,7 @@ export class SectionHeroComponent implements OnInit {
     let section: Section = {
       id: this.sectionId,
       type: "hero",
+      editMode: true,
       data: this.sectionData
     }
     this.sectionEventService.deleteSection.emit(section);

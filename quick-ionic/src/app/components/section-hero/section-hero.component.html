@@ -1,6 +1,6 @@
 <section *ngIf="sectionData!" class="hero pt-3">
   <div class="row">
-    <div class="col-lg-9">
+    <div [ngClass]="{'col-lg-12': !editMode, 'col-lg-9': editMode}">
       <div class="row">
         <div class="col-xl-8 col-lg-12 col-12">
           <div class="hero-banner-1" [style.background-image]="'url(' + sectionData.banner_1.image + ')'">
@@ -54,7 +54,8 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-3 p-1 form-edit p-3 pt-0">
+
+    <div *ngIf="editMode" class="col-lg-3 p-1 form-edit p-3 pt-0">
 
       <ion-segment [(ngModel)]="selectedSegment" (ionChange)="segmentChanged($event)">
         <ion-segment-button value="banner_1">

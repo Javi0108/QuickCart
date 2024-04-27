@@ -2,6 +2,7 @@ export interface Section {
   id: number | undefined;
   type: string;
   data: any;
+  editMode: boolean;
 }
 
 // Interfaz para el objeto "banner_1" dentro de "hero"

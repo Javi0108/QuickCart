@@ -1,15 +1,10 @@
 <ion-spinner *ngIf="!shopData"></ion-spinner>
 <ion-content>
-
-
-  
   <div class="p-5 pt-2">
     <div *ngIf="sections">
       <app-section-container [sections]="sections"></app-section-container>
     </div>
   </div>
-
-
 </ion-content>
 <ion-toolbar color="light" style="position: sticky; top: 0">
   <ion-buttons slot="start">

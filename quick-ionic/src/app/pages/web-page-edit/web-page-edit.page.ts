@@ -37,12 +37,12 @@ export class WebPageEditPage implements OnInit {
   getShop() {
     this.shopService.getShopById(this.shopId!).subscribe({
       next: (shopData) => {
-        console.log(shopData);
         this.shopData = shopData;
         if (!this.shopData) {
           console.error('No se encontró la tienda con el ID proporcionado.');
         } else {
           this.sections = shopData.sections;
+          this.setEditModeForSections();
         }
       },
       error: (error) => {
@@ -51,21 +51,27 @@ export class WebPageEditPage implements OnInit {
     });
   }
 
+  setEditModeForSections() {
+    this.sections.forEach((section: Section) => {
+      section.editMode = true;
+    });
+  }
+
   addSection(sectionType: string) {
     let newSection: Section;
-    
+
     if (sectionType === 'hero') {
-      newSection = { id: undefined, type: sectionType, data: defaultSectionHeroData };
+      newSection = { id: undefined, type: sectionType, editMode: true, data: { ...defaultSectionHeroData } };
     } else if (sectionType === 'products') {
-      newSection = { id: undefined, type: sectionType, data: {} };
+      newSection = { id: undefined, type: sectionType, editMode: true, data: {} };
     } else {
-      newSection = { id: undefined, type: "", data: {} };
+      newSection = { id: undefined, type: "", editMode: true, data: {} };
     }
-    
+
     this.sections.push(newSection);
     console.log(this.sections);
   }
-  
+
 
   saveAllSections() {
     if (this.sections.length === 0) {
@@ -86,7 +92,7 @@ export class WebPageEditPage implements OnInit {
     this.shopService.saveShopSection(this.shopId, section).subscribe({
       next: (shopData) => {
         console.log("Guardado correctamente", shopData)
-        this.getShop() //esto hace muchas peticiones cambiar
+        this.getShop()
       },
       error: (error) => {
         console.error("Error al guarda la seccion", error)
@@ -110,7 +116,6 @@ export class WebPageEditPage implements OnInit {
     if (section.id) {
       this.shopService.deleteShopSection(section.id).subscribe({
         next: (data) => {
-          console.log("Borrada exitosamente");
           const index = this.sections.findIndex(s => s.id === section.id);
           if (index !== -1) {
             this.sections.splice(index, 1);
@@ -118,7 +123,6 @@ export class WebPageEditPage implements OnInit {
         }
       });
     } else {
-      console.log("flkjgbfxjgbfxjbgfdkj")
       const index = this.sections.indexOf(section);
       console.log(index, section)
       if (index !== -1) {
