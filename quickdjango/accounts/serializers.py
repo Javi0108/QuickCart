@@ -57,7 +57,6 @@ class ProfileSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
     
-    # {"webpage": "google.es", "instagram": "_javigd_", "facebook": "facebook", "x": "_javigd_"}
 
 class ProfileSerializerByCode(serializers.ModelSerializer):
     user = UserSerializer()

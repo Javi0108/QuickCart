@@ -9,7 +9,6 @@ export interface Profile {
   mobile: string;
   address: string;
   socials: {
-    webpage: string;
     instagram: string;
     facebook: string;
     x: string;

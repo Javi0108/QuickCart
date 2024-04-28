@@ -38,15 +38,6 @@
           <ion-list>
             <ion-item>
               <i
-                class="bi bi-globe2"
-                style="font-size: x-large; margin-right: 1rem"
-              ></i>
-              <a href="{{ profile.socials.webpage }}" target="_blank"
-                >{{ profile.socials.webpage }}</a
-              >
-            </ion-item>
-            <ion-item>
-              <i
                 class="bi bi-instagram"
                 style="font-size: x-large; margin-right: 1rem"
               ></i>
@@ -175,7 +166,7 @@
     <ion-spinner></ion-spinner>
   </div>
 
-  <div class="row gutters-sm m-3" *ngIf="pageLoaded">
+  <div class="pageContent m-3" *ngIf="pageLoaded">
     <div class="col-md-4">
       <ion-card class="mt-2">
         <ion-card-content
@@ -238,18 +229,6 @@
         <ion-card-content *ngIf="profile.user_type == 'Seller'">
           <ion-list [formGroup]="socials">
             <ion-item>
-              <a href="http://{{ profile.socials.webpage }}" target="_blank"
-                ><i
-                  class="bi bi-globe2"
-                  id="socialsLogo"
-                ></i
-              ></a>
-              <ion-input
-                formControlName="webpage"
-                value="{{ profile.socials.webpage }}"
-              ></ion-input>
-            </ion-item>
-            <ion-item>
               <a
                 href="https://www.instagram.com/{{ profile.socials.instagram }}/"
                 target="_blank"
@@ -304,11 +283,10 @@
           </ion-list>
         </ion-card-content>
       </ion-card>
-      <!-- Redes Sociales -->
     </div>
 
     <div class="col-md-8">
-      <div class="card mt-2">
+      <ion-card class="mt-2">
         <ion-list class="card-body">
           <div [formGroup]="userNameForm">
             <ion-item>
@@ -413,7 +391,7 @@
             </div>
           </form>
         </ion-list>
-      </div>
+      </ion-card>
     </div>
   </div>
 </ion-content>

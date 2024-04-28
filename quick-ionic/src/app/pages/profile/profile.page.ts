@@ -52,7 +52,6 @@ export class ProfilePage implements OnInit {
     });
 
     this.socials = this.formBuilder.group({
-      webpage: [''],
       instagram: [''],
       facebook: [''],
       x: [''],
@@ -148,7 +147,6 @@ export class ProfilePage implements OnInit {
     formData.append('address', this.editProfileForm.get('address')?.value);
     formData.append('user_type', this.editProfileForm.get('user_type')?.value);
     const socialsJSON = {
-      "webpage": this.socials.get('webpage')?.value,
       "instagram": this.socials.get('instagram')?.value,
       "facebook": this.socials.get('facebook')?.value,
       "x": this.socials.get('x')?.value,
@@ -188,7 +186,6 @@ export class ProfilePage implements OnInit {
 
     if (socials) {
       this.socials.patchValue({
-        webpage: socials['webpage'],
         instagram: socials['instagram'],
         facebook: socials['facebook'],
         x: socials['x'],
