@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { SellerShopsPageRoutingModule } from './seller-shops-routing.module';
 
 import { SellerShopsPage } from './seller-shops.page';
+import { AddWebsiteModalModule } from 'src/app/components/add-website-modal/add-website-modal.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SellerShopsPageRoutingModule
+    SellerShopsPageRoutingModule,
+    AddWebsiteModalModule
   ],
   declarations: [SellerShopsPage]
 })

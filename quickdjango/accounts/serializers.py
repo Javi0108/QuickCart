@@ -39,6 +39,7 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = ['id_profile', 'user', 'phone', 'mobile', 'address', 'socials', 'avatar', 'user_type']
 
     def update(self, instance, validated_data):
+
         instance.phone = validated_data.get('phone', instance.phone)
         instance.mobile = validated_data.get('mobile', instance.mobile)
         instance.address = validated_data.get('address', instance.address)
@@ -65,40 +66,7 @@ class ProfileSerializerByCode(serializers.ModelSerializer):
         model = Profile
         fields = ['user', 'phone', 'mobile', 'address', 'socials', 'avatar', 'user_type']
 
-# class ProfileSerializerWithoutSocials(serializers.ModelSerializer):
-#     user = UserSerializer()  # No establecer como de solo lectura
-    
-#     class Meta:
-#         model = Profile
-#         fields = ['user', 'phone', 'mobile', 'address']
-
 class ProfileSerializerWithoutSocials(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = ['id_profile', 'user_name', 'user_type', 'phone', 'mobile', 'address']
-
-# class ProfileSerializerWithoutSocials(serializers.ModelSerializer):
-#     user = UserSerializer()  
-    
-#     class Meta:
-#         model = Profile
-#         fields = [#'user',
-#              'phone', 'mobile', 'address'
-#              ]
-        
-#     def update(self, instance, validated_data):
-#         instance.phone = validated_data.get('phone', instance.phone)
-#         instance.mobile = validated_data.get('mobile', instance.mobile)
-#         instance.address = validated_data.get('address', instance.address)
-        
-#         # user_data = validated_data.pop('user', None)
-#         # if user_data:
-#         #     user_instance = instance.user
-#         #     user_serializer = UserSerializer(user_instance, data=user_data)
-#         #     if user_serializer.is_valid():
-#         #         user_serializer.save()
-#         #     else:
-#         #         raise serializers.ValidationError(user_serializer.errors)
-        
-#         instance.save()
-#         return instance

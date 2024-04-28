@@ -11,6 +11,7 @@ import { MenuPageModule } from './components/menu/menu.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CookieService } from "ngx-cookie-service";
 import { TokenInterceptor } from './interceptors/token.interceptor';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,7 +21,9 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     AppRoutingModule,
     FooterPageModule,
     MenuPageModule,
-    HttpClientModule],
+    HttpClientModule,
+    ReactiveFormsModule,
+  ],
   providers: [
     CookieService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

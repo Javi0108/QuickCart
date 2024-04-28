@@ -23,6 +23,22 @@ const routes: Routes = [
     loadChildren: () => import('./pages/seller-shops/seller-shops.module').then( m => m.SellerShopsPageModule)
   },
   {
+    path: 'web-page/:name/:id',
+    loadChildren: () => import('./pages/web-page/web-page.module').then( m => m.WebPagePageModule)
+  },
+  {
+    path: 'web-page-edit/:id',
+    loadChildren: () => import('./pages/web-page-edit/web-page-edit.module').then( m => m.WebPageEditPageModule)
+  },
+  {
+    path: 'catalog',
+    loadChildren: () => import('./pages/products-catalog/products-catalog.module').then( m => m.ProductsCatalogPageModule)
+  },
+  {
+    path: 'product/:id',
+    loadChildren: () => import('./pages/product-detail/product-detail.module').then( m => m.ProductDetailPageModule)
+  },
+  {
     path: 'change-password',
     loadChildren: () => import('./pages/change-password/change-password.module').then( m => m.ChangePasswordModule)
   },

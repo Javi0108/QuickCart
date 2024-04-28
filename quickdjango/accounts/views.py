@@ -24,13 +24,13 @@ class RegisterView(APIView):
             
             #provicional
             profile_data = {'user_id': user.id, 'user_type': request.data.get('user_type')}
-            profile_serializer = ProfileSerializerRegister(data=profile_data)
-            if profile_serializer.is_valid():
-                profile = profile_serializer.save()
+            serializer = ProfileSerializerRegister(data=profile_data)
+            if serializer.is_valid():
+                profile = serializer.save()
                 return Response({'user': user.email}, status=status.HTTP_201_CREATED)
             else: 
                 user.delete()
-                return Response(profile_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class LoginView(APIView):
@@ -42,10 +42,6 @@ class LoginView(APIView):
         if user_data:
             username = user_data.get('username')
             password = user_data.get('password')
-
-            print(request.data)
-            print(username, password)
-
             user = authenticate(username=username, password=password)
 
             if user is not None:
@@ -64,11 +60,8 @@ class LogoutView(APIView):
     
     def post(self, request):
         try:
-            print(request.data)
             refresh_token = request.data["refresh_token"]
-            print(refresh_token)
             token = RefreshToken(refresh_token)
-            print("token", token)
             token.blacklist()
             return Response(status=status.HTTP_205_RESET_CONTENT)
         except Exception as e:

@@ -85,7 +85,6 @@ WSGI_APPLICATION = 'quickdjango.wsgi.application'
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8100',
     "http://localhost:4200",
-
 ]
 
 # TOKEN
@@ -155,3 +154,9 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+#MEDIA 
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
