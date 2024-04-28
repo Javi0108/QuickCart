@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 import { SectionHeroComponent } from './section-hero.component';
+import { TypeaheadModule } from '../typeahead/typeahead.module';
 
 @NgModule({
     imports: [
@@ -11,6 +12,7 @@ import { SectionHeroComponent } from './section-hero.component';
         ReactiveFormsModule,
         FormsModule,
         IonicModule,
+        TypeaheadModule
     ],
     declarations: [SectionHeroComponent],
     exports: [SectionHeroComponent]

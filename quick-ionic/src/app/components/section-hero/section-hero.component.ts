@@ -1,7 +1,9 @@
 import { SectionEventService } from 'src/app/services/section-event.service';
 import { HeroSectionData, Section } from './../../interfaces/section.interface';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Product } from 'src/app/interfaces/product.interface';
+import { IonModal } from '@ionic/angular';
 
 @Component({
   selector: 'app-section-hero',
@@ -10,6 +12,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class SectionHeroComponent implements OnInit {
 
+  @ViewChild('modal', { static: true }) modal!: IonModal;
   @Input() section: any;
 
   editMode: boolean = false;
@@ -22,7 +25,24 @@ export class SectionHeroComponent implements OnInit {
   sectionFormBannerTwo!: FormGroup;
   sectionFormBannerThree!: FormGroup;
 
-  selectedSegment: string = 'banner_1';
+  selectedSegment: 'banner_1' | 'banner_2' | 'banner_3' = 'banner_1';
+
+  selectedProductText = 'Releated Product';
+  selectedProduct: string | null = null;
+
+  products: any[] = [
+    { text: 'Apple', value: '1', img: "https://123cuidatuhogar.com/wp-content/uploads/2019/07/LAVALOZA-ENVASE-RECUPERADO-500-ML.png" },
+    { text: 'Apricot', value: '2' , img: "https://123cuidatuhogar.com/wp-content/uploads/2019/07/LAVALOZA-ENVASE-RECUPERADO-500-ML.png" },
+    { text: 'Banana', value: '3' , img: "https://123cuidatuhogar.com/wp-content/uploads/2019/07/LAVALOZA-ENVASE-RECUPERADO-500-ML.png" },
+    { text: 'Blackberry', value: '4' , img: "https://123cuidatuhogar.com/wp-content/uploads/2019/07/LAVALOZA-ENVASE-RECUPERADO-500-ML.png" },
+    { text: 'Blueberry', value: '5' , img: "https://123cuidatuhogar.com/wp-content/uploads/2019/07/LAVALOZA-ENVASE-RECUPERADO-500-ML.png" },
+    { text: 'Cherry', value: '6' , img: "https://123cuidatuhogar.com/wp-content/uploads/2019/07/LAVALOZA-ENVASE-RECUPERADO-500-ML.png" },
+    { text: 'Cranberry', value: '7' , img: "https://123cuidatuhogar.com/wp-content/uploads/2019/07/LAVALOZA-ENVASE-RECUPERADO-500-ML.png" },
+    { text: 'Grape', value: '7' , img: "https://123cuidatuhogar.com/wp-content/uploads/2019/07/LAVALOZA-ENVASE-RECUPERADO-500-ML.png" },
+    { text: 'Grapefruit', value: '8' , img: "https://123cuidatuhogar.com/wp-content/uploads/2019/07/LAVALOZA-ENVASE-RECUPERADO-500-ML.png" },
+    { text: 'Guava', value: '9' , img: "https://123cuidatuhogar.com/wp-content/uploads/2019/07/LAVALOZA-ENVASE-RECUPERADO-500-ML.png" },
+    { text: 'Jackfruit', value: '10' , img: "https://123cuidatuhogar.com/wp-content/uploads/2019/07/LAVALOZA-ENVASE-RECUPERADO-500-ML.png" },
+  ];
 
   constructor(
     private sectionEventService: SectionEventService,
@@ -103,10 +123,26 @@ export class SectionHeroComponent implements OnInit {
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
     if (file) {
-      this.sectionFormBannerThree.patchValue({
-        image: file
-      });
+      this.convertFileToDataURL(file);
     }
+  }
+
+  convertFileToDataURL(file: File) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const imageUrl: string = reader.result as string;
+      if (this.sectionData && this.sectionData[this.selectedSegment]) {
+        this.sectionData[this.selectedSegment].image = imageUrl;
+      }
+    };
+    reader.readAsDataURL(file);
+  }
+
+  productSelectionChanged(selectedValue: string | null) {
+    this.selectedProduct = selectedValue;
+    const product = this.products.find((product) => product.value === selectedValue);
+    this.selectedProductText = product ? product.text : 'No selection';
+    this.modal.dismiss();
   }
 
 }

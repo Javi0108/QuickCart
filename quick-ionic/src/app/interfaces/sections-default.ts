@@ -1,7 +1,7 @@
 export const defaultSectionHeroData = {
     banner_1:
     {
-        subtitle: "Big Sale Offer3",
+        subtitle: "Big Sale Offer",
         title: "Get The Best Deal on CCTV Camera",
         content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, asdasdasd sapiente exercitationem delectus quisquam incidunt voluptatibus ex accusamus, molestiae neque aspernatur. Por que simplemente ",
         price_text: "Combo Only:",

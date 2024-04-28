@@ -19,7 +19,6 @@ export class SectionContainerComponent implements OnInit {
   constructor() { }
 
   ngOnInit() { 
-    console.log("sections: ", this.sections)
   }
 
 }

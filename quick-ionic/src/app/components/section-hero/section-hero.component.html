@@ -89,8 +89,20 @@
             fill="outline" [maxlength]="10" [counter]="true"></ion-input>
         </div>
 
-        <ion-input formControlName="button" type="text" placeholder="Button Text" label="Button Text"
-          label-placement="floating" fill="outline" [maxlength]="15" [counter]="true"></ion-input>
+        <div class="inline-inputs">
+          <ion-input formControlName="button" type="text" placeholder="Button Text" label="Button Text"
+            label-placement="floating" fill="outline" [maxlength]="15" [counter]="true"></ion-input>
+<!-- codigo nuevo -->
+            <ion-list [inset]="true">
+              <ion-item [button]="true" [detail]="false" id="select-product">
+                <ion-label>Selectd Products</ion-label>
+                <div slot="end" id="selected-fruits">{{ selectedProductText }}</div>
+              </ion-item>
+            </ion-list>
+<!-- codigo nuevo -->
+
+        </div>
+
 
         <ion-input id="image-input" label="Image" label-placement="floating" placeholder="Image" fill="outline"
           type="file" formControlName="image" (change)="onFileSelected($event)" class="file-input"></ion-input>
@@ -131,7 +143,25 @@
           <button (click)="deleteSection()" class="btn btn-danger btn-block w-100">Delete</button>
         </div>
       </div>
-      
+
     </div>
   </div>
 </section>
+
+
+<!-- codigo nuevo -->
+
+<ion-modal trigger="select-product" #modal>
+  <ng-template>
+    <app-typeahead
+      class="ion-page"
+      title="Select a Releated Product "
+      [items]="products"
+      [selectedItem]="selectedProduct"
+      (selectionChange)="productSelectionChanged($event)"
+      (selectionCancel)="modal.dismiss()"
+    ></app-typeahead>
+  </ng-template>
+</ion-modal>
+
+<!-- codigo nuevo -->
