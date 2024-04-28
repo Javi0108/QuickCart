@@ -52,31 +52,22 @@ export class AddWebsiteModalComponent {
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        this.showImagePreview(reader.result as string);
-        this.createWebSiteForm.patchValue({
-          image: reader.result
-        });
-      };
+      this.convertFileToDataURL(file);
     }
   }
 
-  showImagePreview(imageData: string) {
-    // Aquí puedes mostrar la vista previa de la imagen, por ejemplo, asignándola a una variable en tu componente
-    this.imagePreview = imageData;
+  convertFileToDataURL(file: File) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const imageUrl: string = reader.result as string;
+      if (imageUrl) {
+        this.imagePreview = imageUrl
+      }
+    };
+    reader.readAsDataURL(file);
   }
 
-  // Función para convertir la imagen a base64
-  private convertImageToBase64(file: File): Promise<string> {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        resolve(reader.result as string);
-      };
-      reader.onerror = error => reject(error);
-    });
+  showImagePreview(imageData: string) {
+    this.imagePreview = imageData;
   }
 }

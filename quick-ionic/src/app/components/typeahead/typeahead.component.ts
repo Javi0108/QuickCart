@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-typeahead',
@@ -15,6 +16,9 @@ export class TypeaheadComponent implements OnInit {
 
   filteredItems: Item[] = [];
 
+  constructor(private modalController: ModalController) {}
+
+
   ngOnInit() {
     this.filteredItems = [...this.items];
     if (this.selectedItem) {
@@ -30,14 +34,21 @@ export class TypeaheadComponent implements OnInit {
     return item.value;
   }
 
+  // cancelChanges() {
+  //   this.selectionCancel.emit();
+  // }
+
+  // confirmChanges() {
+  //   this.selectionChange.emit(this.selectedItem);
+  // }
+
   cancelChanges() {
-    this.selectionCancel.emit();
+    this.modalController.dismiss(null, 'cancel');
   }
 
   confirmChanges() {
-    this.selectionChange.emit(this.selectedItem);
+    this.modalController.dismiss(this.selectedItem, 'confirm');
   }
-
   searchbarInput(ev: any) {
     this.filterList(ev.target.value);
   }

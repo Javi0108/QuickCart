@@ -2,8 +2,9 @@ import { SectionEventService } from 'src/app/services/section-event.service';
 import { HeroSectionData, Section } from './../../interfaces/section.interface';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Product } from 'src/app/interfaces/product.interface';
 import { IonModal } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
+import { TypeaheadComponent } from '../typeahead/typeahead.component';
 
 @Component({
   selector: 'app-section-hero',
@@ -12,7 +13,6 @@ import { IonModal } from '@ionic/angular';
 })
 export class SectionHeroComponent implements OnInit {
 
-  @ViewChild('modal', { static: true }) modal!: IonModal;
   @Input() section: any;
 
   editMode: boolean = false;
@@ -26,9 +26,12 @@ export class SectionHeroComponent implements OnInit {
   sectionFormBannerThree!: FormGroup;
 
   selectedSegment: 'banner_1' | 'banner_2' | 'banner_3' = 'banner_1';
-
-  selectedProductText = 'Releated Product';
-  selectedProduct: string | null = null;
+  selectedProductBannerOneText = 'Related Product';
+  selectedProductBannerTwoText = 'Related Product';
+  selectedProductBannerThreeText = 'Releated Product';
+  selectedProductBannerOne: string | null = null;
+  selectedProductBannerTwo: string | null = null;
+  selectedProductBannerThree: string | null = null;
 
   products: any[] = [
     { text: 'Apple', value: '1', img: "https://123cuidatuhogar.com/wp-content/uploads/2019/07/LAVALOZA-ENVASE-RECUPERADO-500-ML.png" },
@@ -46,6 +49,7 @@ export class SectionHeroComponent implements OnInit {
 
   constructor(
     private sectionEventService: SectionEventService,
+    private modalController: ModalController
   ) { }
 
   ngOnInit() {
@@ -139,10 +143,52 @@ export class SectionHeroComponent implements OnInit {
   }
 
   productSelectionChanged(selectedValue: string | null) {
-    this.selectedProduct = selectedValue;
+
+    this.sectionData![this.selectedSegment].related_product = selectedValue;
+    
+    if(this.selectedSegment == 'banner_1'){
+      this.selectedProductBannerOne = selectedValue;
+    }else if(this.selectedSegment == 'banner_2'){
+      this.selectedProductBannerTwo = selectedValue;
+    }else{
+      this.selectedProductBannerThree = selectedValue;
+    } 
+
     const product = this.products.find((product) => product.value === selectedValue);
-    this.selectedProductText = product ? product.text : 'No selection';
-    this.modal.dismiss();
+
+    if(this.selectedSegment == 'banner_1'){
+      this.selectedProductBannerOneText = product ? product.text : 'No selection';
+    }else if(this.selectedSegment == 'banner_2'){
+      this.selectedProductBannerTwoText = product ? product.text : 'No selection';
+    }else{
+      this.selectedProductBannerThreeText = product ? product.text : 'No selection';
+    }
+  }
+
+  async openModal() {
+    const modal = await this.modalController.create({
+      component: TypeaheadComponent,
+      cssClass: 'my-custom-class',
+      componentProps: {
+        'items': this.products,
+        'selectedItem': this.selectedProductBannerOne,
+        'title': 'Select a Related Product',
+        'selectionChange': this.productSelectionChanged.bind(this),
+        'selectionCancel': () => modal.dismiss()
+      }
+    });
+  
+    modal.onDidDismiss().then((data) => {
+      if (data.role === 'confirm') {
+        const selectedItem = data.data;
+        console.log(selectedItem)
+        this.productSelectionChanged(selectedItem)
+      } else if (data.role === 'cancel') {
+        // El usuario canceló la selección, puedes manejarlo aquí si es necesario
+      }
+    });
+
+    await modal.present();
   }
 
 }
