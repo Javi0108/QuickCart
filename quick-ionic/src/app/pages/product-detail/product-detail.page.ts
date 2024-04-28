@@ -1,20 +1,53 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Product } from 'src/app/interfaces/product.interface';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.page.html',
   styleUrls: ['./product-detail.page.scss'],
 })
-export class ProductDetailPage {
-  selectedImage: string | null = null; // Debes inicializar o definir según tus necesidades
-  product: any = {}; // Aquí deberías tener un tipo definido para 'product' según tu estructura de datos
-  // Otros miembros de la clase y métodos necesarios
+export class ProductDetailPage implements OnInit{
+  selectedImage: string | null = null;
+  productId!: number;
+  productData!: Product; 
+   
+  constructor(private route: ActivatedRoute, private productService: ProductService){
+    
+  } 
+
+  ngOnInit(): void {
+    const productId = this.route.snapshot.paramMap.get('id')
+    if (productId) {
+      this.productId =+ productId;
+      this.getProduct();
+    }else{
+      console.error("Invalid Product ID")
+    }
+  }
+
+  getProduct(){
+    this.productService.getProductById(this.productId!).subscribe({
+      next: (productData) => {
+        this.productData = productData;
+        console.log(productData)
+        if (!this.productData) {
+          console.error('No se encontró la tienda con el ID proporcionado.');
+        }
+      },
+      error: (error) => {
+        console.error('Error al obtener los datos de la tienda:', error);
+      }
+    });
+  }
 
   selectImage(image: any) {
     this.selectedImage = image.img;
   }
 
   addToCart() {
-    // Lógica para agregar al carrito
   }
+
+  
 }

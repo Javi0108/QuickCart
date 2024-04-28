@@ -31,8 +31,16 @@ const routes: Routes = [
     loadChildren: () => import('./pages/web-page-edit/web-page-edit.module').then( m => m.WebPageEditPageModule)
   },
   {
+    path: 'shop-catalog/:id',
+    loadChildren: () => import('./pages/shop-catalog/shop-catalog.module').then( m => m.ShopCatalogPageModule)
+  },
+  {
     path: 'catalog',
     loadChildren: () => import('./pages/products-catalog/products-catalog.module').then( m => m.ProductsCatalogPageModule)
+  },
+  {
+    path: 'products-management',
+    loadChildren: () => import('./pages/products-management/products-management.module').then( m => m.ProductsManagementPageModule)
   },
   {
     path: 'product/:id',
@@ -52,6 +60,7 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+ 
 ];
 
 @NgModule({

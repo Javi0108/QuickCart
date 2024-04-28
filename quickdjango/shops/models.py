@@ -26,6 +26,7 @@ class ShopSectionOrder(models.Model):
 
     class Meta:
         ordering = ['order'] 
+
     
 
 class Product(models.Model):
@@ -39,8 +40,8 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     avatar = models.ImageField(upload_to='product_images/', default='default_avatar.jpg')
     stock_quantity = models.IntegerField()
-    images = models.ManyToManyField('ProductImage', related_name='product_images')
-    tags = models.ManyToManyField('Tag')
+    images = models.ManyToManyField('ProductImage', related_name='product_images',blank=True)
+    tags = models.ManyToManyField('Tag',blank=True)
     
     #invoices = models.ManyToManyField(Invoice, through='InvoiceProduct')
     #orders = models.ManyToManyField(Order, through='OrderProduct')

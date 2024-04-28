@@ -20,6 +20,14 @@ export class ProductService {
     return this.http.get<any>(`${this.baseURL}catalog/`, { headers: this.getHeaders() });
   }
 
+  getShopProducts(shopId:number): Observable<any> {
+    return this.http.get<any>(`${this.baseURL}shop-catalog/${shopId}`, { headers: this.getHeaders() });
+  }
+
+  getProductById(ProductId: number): Observable<any> {
+    return this.http.get<any>(`${this.baseURL}product/${ProductId}/`, { headers: this.getHeaders() });
+  }
+
   addProduct(newProductData: ProductCreate): Observable<any> {
     return this.http.post<any>(`${this.baseURL}create-product/`, newProductData, {headers: this.getHeaders()})
   }
