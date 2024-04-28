@@ -79,7 +79,7 @@ class SellerShopsView(APIView):
     def post(self, request):
         profile = request.user.profile
         request_data = request.data.copy() 
-        
+                
         # Decodifica la imagen en base64 y la guarda en el campo 'logo'
         if 'logo' in request_data:
             image_data = request_data.pop('logo')

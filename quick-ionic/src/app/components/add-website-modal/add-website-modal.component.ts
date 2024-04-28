@@ -31,7 +31,7 @@ export class AddWebsiteModalComponent {
         title: this.createWebSiteForm.get('title')?.value,
         description: this.createWebSiteForm.get('description')?.value,
         address: this.createWebSiteForm.get('address')?.value,
-        logo: this.createWebSiteForm.get('image')?.value,
+        logo: this.imagePreview,
       };
       this.handleModalClose();
       this.addShop(shopData);
