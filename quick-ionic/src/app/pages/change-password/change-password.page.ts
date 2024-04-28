@@ -50,25 +50,25 @@ export class ChangePassword implements OnInit {
         '../../assets/exclamation.svg'
       );
     }
-    // this.authService.changeUserPassword(this.passwordForm, this.user).subscribe({
-    //   next: (user: User) => {
-    //     this.notificationToastService.presentToast(
-    //       'Password updated successfully',
-    //       'success',
-    //       '../../assets/check.svg'
-    //     );
-    //     this.authService.logout(this.user);
-    //     this.router.navigate(['/home']);
-    //   },
-    //   error: (error) => {
-    //     console.error(error);
-    //     this.notificationToastService.presentToast(
-    //       'Failed to update password',
-    //       'danger',
-    //       '../../assets/exclamation.svg'
-    //     );
-    //   },
-    // });
+    this.authService.changeUserPassword(this.passwordForm, this.user).subscribe({
+      next: (user: User) => {
+        this.notificationToastService.presentToast(
+          'Password updated successfully',
+          'success',
+          '../../assets/check.svg'
+        );
+        this.authService.logout(this.user);
+        this.router.navigate(['/home']);
+      },
+      error: (error) => {
+        console.error(error);
+        this.notificationToastService.presentToast(
+          'Failed to update password',
+          'danger',
+          '../../assets/exclamation.svg'
+        );
+      },
+    });
   }
 
   validatePassword(): boolean {
@@ -126,7 +126,7 @@ export class ChangePassword implements OnInit {
 
     // Valida espacios en blanco
     const blankSpacePattern = /(\s)/;
-    if (blankSpacePattern.test(newPassword)) {
+    if (!blankSpacePattern.test(newPassword)) {
       step5.style.color = '#2DD55B';
     } else {
       step5.style.color = '#DD465B';
