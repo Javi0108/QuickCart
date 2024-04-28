@@ -16,6 +16,7 @@ class Profile(models.Model):
     
 
     socials = models.JSONField(default=dict)
+
     
     CLIENT = 'Client'
     SELLER = 'Seller'

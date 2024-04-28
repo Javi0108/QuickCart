@@ -45,3 +45,19 @@
         color: white !important;
     }
 }
+
+.inline-inputs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    ion-input {
+        margin-right: 10px;
+    }
+
+    ion-input:last-child {
+        margin-right: 0;
+    }
+}
+

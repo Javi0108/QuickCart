@@ -46,12 +46,13 @@ export class MenuPage implements OnInit {
   }
 
   logout() {
-    this.authService.logout(this.user).subscribe((response) => {
-      console.log('Logout succesful');
-      localStorage.removeItem('user');
-      localStorage.removeItem('token');
-      this.router.navigate(['/home']);
-    });
+    this.authService.logout(this.user).subscribe(
+      response => {
+        localStorage.removeItem('user');
+        localStorage.removeItem('token');
+        this.router.navigate(['/home']);
+      }
+    )
   }
 
   loadProfile() {

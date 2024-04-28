@@ -1,0 +1,3 @@
+<div *ngFor="let section of sections">
+  <ng-container *ngComponentOutlet="sectionComponents[section.type]; inputs: { section: section }"></ng-container>
+</div>

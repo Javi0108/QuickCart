@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { WebPageEditPageRoutingModule } from './web-page-edit-routing.module';
 
 import { WebPageEditPage } from './web-page-edit.page';
+import { SectionContainerModule } from 'src/app/components/section-container/section-container.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    WebPageEditPageRoutingModule
+    WebPageEditPageRoutingModule,
+    SectionContainerModule
   ],
   declarations: [WebPageEditPage]
 })

@@ -23,8 +23,13 @@ export class ProfileService {
     return this.http.get<Profile>(`${this.baseURL}`, { headers: this.getHeadersGet() });
   }
 
+<<<<<<< HEAD
   getProfileById(profileId: number): Observable<any> {
     return this.http.get<Profile>(`${this.baseURL}${profileId}`, { headers: this.getHeadersGet() });
+=======
+  putEditProfile(profile: Profile): Observable<any> {
+    return this.http.put<Profile>(`${this.baseURL}`, {"profile": profile}, { headers: this.getHeaders() });
+>>>>>>> feature_seller-shops
   }
 
   putEditProfile(formData: FormData): Observable<any> {

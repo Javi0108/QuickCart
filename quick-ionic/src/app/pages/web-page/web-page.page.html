@@ -1,42 +1,8 @@
 <ion-spinner *ngIf="!shopData"></ion-spinner>
-
-<ion-content *ngIf="shopData" class="app-index">
-  <div class="container">
-    <section class="hero pt-3">
-      <div class="row">
-        <div class="row">
-          <div class="col-lg-8 col-12">
-            
-
-
-
-            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-              <div class="carousel-inner">
-                <div class="carousel-item active">
-                  <img class="d-block w-100" src="../../../assets/banner1.jpg" alt="First slide">
-                </div>
-                <div class="carousel-item">
-                  <img class="d-block w-100" src="..." alt="Second slide">
-                </div>
-                <div class="carousel-item">
-                  <img class="d-block w-100" src="..." alt="Third slide">
-                </div>
-              </div>
-              <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              </a>
-              <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              </a>
-            </div>
-
-
-
-
-
-          </div>
-        </div>
-      </div>
-    </section>
+<ion-content>
+  <div class="p-5 pt-2">
+    <div *ngIf="sections">
+      <app-section-container [sections]="sections"></app-section-container>
+    </div>
   </div>
 </ion-content>
