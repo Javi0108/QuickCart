@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -9,22 +9,14 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./add-product-modal.component.scss'],
 })
 export class AddProductModalComponent {
-  createProductForm: FormGroup;
+  @Input() createProductForm!: FormGroup;
+  imagePreview: any;
 
   constructor(
-    private formBuilder: FormBuilder,
     private modalController: ModalController,
     private productService: ProductService
   ) {
-    this.createProductForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      brand: [''],
-      shortDescription: [''],
-      description: ['', Validators.required],
-      price: ['', [Validators.required, Validators.min(0)]],
-      image: [''],
-      stockQuantity: ['', [Validators.required, Validators.min(0)]],
-    });
+
   }
 
   closeModal() {
@@ -33,9 +25,21 @@ export class AddProductModalComponent {
 
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
-    this.createProductForm.patchValue({
-      image: file,
-    });
+    if (file) {
+      this.convertFileToDataURL(file);
+    }
+
+  }
+
+  convertFileToDataURL(file: File) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const imageUrl: string = reader.result as string;
+      if(imageUrl){
+        this.imagePreview = imageUrl;
+      }
+    };
+    reader.readAsDataURL(file);
   }
 
   async submitForm() {

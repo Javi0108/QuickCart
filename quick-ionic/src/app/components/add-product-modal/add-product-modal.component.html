@@ -15,7 +15,7 @@
       <ion-input label="Description" label-placement="floating" fill="outline" formControlName="description"></ion-input>
       <ion-input label="Price" label-placement="floating" fill="outline" formControlName="price"></ion-input>
       <div class="image-input-container">
-        <ion-img *ngIf="createProductForm.get('image')?.value" [src]="createProductForm.get('image')?.value" class="uploaded-image"></ion-img>
+        <ion-img *ngIf="imagePreview" [src]="imagePreview" class="uploaded-image"></ion-img>
         <ion-input id="image-input" label="Logo" fill="outline" type="file" formControlName="image" (change)="onFileSelected($event)" class="file-input"></ion-input>
       </div>
       <ion-input label="Stock" label-placement="floating" fill="outline" formControlName="stockQuantity"></ion-input>

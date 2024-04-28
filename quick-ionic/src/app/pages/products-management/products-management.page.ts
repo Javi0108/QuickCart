@@ -29,10 +29,12 @@ export class ProductsManagementPage {
 
     this.createProductForm = this.formBuilder.group({
       name: ['', Validators.required],
-      title: ['', Validators.required],
+      brand: [''],
+      shortDescription: [''],
       description: ['', Validators.required],
-      address: ['', Validators.required],
-      image: [null, Validators.required]
+      price: ['', [Validators.required, Validators.min(0)]],
+      image: [''],
+      stockQuantity: ['', [Validators.required, Validators.min(0)]],
     });
   }
 
