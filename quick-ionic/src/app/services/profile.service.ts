@@ -20,18 +20,29 @@ export class ProfileService {
   }
 
   getProfile(): Observable<any> {
-    return this.http.get<Profile>(`${this.baseURL}`, { headers: this.getHeaders() });
+    return this.http.get<Profile>(`${this.baseURL}`, { headers: this.getHeadersGet() });
   }
 
-  putEditProfile(profile: Profile): Observable<any> {
-    console.log(profile)
-    return this.http.put<Profile>(`${this.baseURL}`, {"profile": profile}, { headers: this.getHeaders() });
+  getProfileById(profileId: number): Observable<any> {
+    return this.http.get<Profile>(`${this.baseURL}${profileId}`, { headers: this.getHeadersGet() });
   }
 
-  private getHeaders(): HttpHeaders {
+  putEditProfile(formData: FormData): Observable<any> {
+    return this.http.put<Profile>(`${this.baseURL}`, formData, { headers: this.getHeadersPut() });
+  }
+
+  private getHeadersGet(): HttpHeaders {
     let headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
+    if (this.token) {
+      headers = headers.set('Authorization', `Bearer ${this.token}`);
+    }
+    return headers;
+  }
+
+  private getHeadersPut(): HttpHeaders {
+    let headers = new HttpHeaders();
     if (this.token) {
       headers = headers.set('Authorization', `Bearer ${this.token}`);
     }

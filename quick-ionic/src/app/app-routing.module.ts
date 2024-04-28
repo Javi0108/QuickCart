@@ -39,6 +39,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/product-detail/product-detail.module').then( m => m.ProductDetailPageModule)
   },
   {
+    path: 'change-password',
+    loadChildren: () => import('./pages/change-password/change-password.module').then( m => m.ChangePasswordModule)
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'

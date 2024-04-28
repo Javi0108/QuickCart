@@ -5,22 +5,17 @@ import json
 class Profile(models.Model):
     id_profile = models.AutoField(primary_key=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    user_name = models.CharField(max_length=20, null=False,blank=True)
     phone = models.CharField(max_length=20, null=True)
     mobile = models.CharField(max_length=20, null=False, blank=True)
     address = models.CharField(max_length=55, null=True, blank=True)
+    avatar = models.ImageField(upload_to='avatar/', blank=True, null=True)
     
     #seller
     
     sales = models.IntegerField(null=True)  # Campo para el número de ventas, que puede ser null
     
-    SOCIAL_CHOICES = [
-        ('Instagram', 'Instagram'),
-        ('Facebook', 'Facebook'),
-        ('X', 'X'),
-        ('LinkedIn', 'LinkedIn'),
-    ]
-    socials = models.TextField(null=True)
+
+    socials = models.JSONField(default=dict)
     
     CLIENT = 'Client'
     SELLER = 'Seller'
@@ -36,18 +31,17 @@ class Profile(models.Model):
         return self.user_type == self.SELLER
 
     # Método para obtener las redes sociales como un diccionario
-    def get_socials_as_dict(self):
-        return json.loads(self.socials)
+    # def get_socials_as_dict(self):
+    #     return json.loads(self.socials)
 
-    # Método para establecer las redes sociales a partir de un diccionario
-    def set_socials_from_dict(self, socials_dict):
-        self.socials = json.dumps(socials_dict)
+    # # Método para establecer las redes sociales a partir de un diccionario
+    # def set_socials_from_dict(self, socials_dict):
+    #     self.socials = json.dumps(socials_dict)
 
     def __str__(self) -> str:
         return f"Profile:\n\
             id_profile: {self.id_profile}\n\
             user: {self.user.username}\n\
-            user_name: {self.user_name}\n\
             phone: {self.phone}\n\
             mobile: {self.mobile}\n\
             address: {self.address}\n\

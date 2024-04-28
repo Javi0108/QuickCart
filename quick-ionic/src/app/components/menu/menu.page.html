@@ -6,7 +6,7 @@
   </ion-header>
   <ion-content class="ion-padding">
     <div class="col-6 r-col">
-      <ul style="list-style-type: none;">
+      <ul style="list-style-type: none">
         <li *ngIf="!isLoggedIn()">
           <ion-button [routerLink]="['/login']">login</ion-button>
         </li>
@@ -32,26 +32,40 @@
           <ion-buttons slot="start" *ngIf="isLoggedIn()">
             <ion-menu-button></ion-menu-button>
           </ion-buttons>
-          <ion-title><a [routerLink]="['/home']" style="text-decoration: none;">Home</a></ion-title>
+          <ion-title
+            ><a [routerLink]="['/home']" style="text-decoration: none"
+              ><img
+                src="../../../assets/logo.webp"
+                width="40px"
+                class="rounded-circle" /></a
+          ></ion-title>
         </div>
         <div class="col-6 r-col">
-          <ul>
-            <li *ngIf="isLoggedIn()">
-              <ion-button [routerLink]="['/seller-shops']">My Shops</ion-button>
-            </li>
-            <li *ngIf="isLoggedIn()">
+          <ion-fab *ngIf="profile && isLoggedIn()" [formGroup]="userNameForm">
+            <ion-label formControlName="username" style="font-weight: 500"
+              >{{ user!.username }}</ion-label
+            >
+            <ion-fab-button size="small">
+              <img
+                src="http://127.0.0.1:8000/{{ profile.avatar }}"
+                width="40px"
+                class="rounded-circle"
+              />
+            </ion-fab-button>
+            <ion-fab-list side="start">
               <ion-button [routerLink]="['/profile']">Profile</ion-button>
-            </li>
+              <ion-button *ngIf="isLoggedIn()" (click)="logout()"
+                >logout</ion-button
+              >
+            </ion-fab-list>
+          </ion-fab>
+          <ul>
             <li *ngIf="!isLoggedIn()">
               <ion-button [routerLink]="['/login']">login</ion-button>
             </li>
             <li *ngIf="!isLoggedIn()">
               <ion-button [routerLink]="['/register']">register</ion-button>
             </li>
-            <li *ngIf="isLoggedIn()">
-              <ion-button (click)="logout()">logout</ion-button>
-            </li>
-            
           </ul>
         </div>
       </div>

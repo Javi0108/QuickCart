@@ -1,13 +1,16 @@
 from .models import Profile
+from django.contrib.auth.models import User
 from rest_framework import status
 from rest_framework.response import Response
 from django.contrib.auth import authenticate
 from rest_framework.views import APIView
-from .serializers import  ProfileSerializerRegister, ProfileSerializerWithoutSocials, UserSerializerRegister, ProfileSerializer
+from .serializers import  ProfileSerializerRegister, UserSerializerRegister, ProfileSerializer, ProfileSerializerByCode
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken, BlacklistMixin
+from rest_framework.parsers import MultiPartParser, FormParser
+from django.contrib.auth.hashers import check_password
 
 class RegisterView(APIView):
     
@@ -68,6 +71,7 @@ class LogoutView(APIView):
 class ProfileView(APIView):
 
     permission_classes = [IsAuthenticated]
+    parser_classes = [MultiPartParser, FormParser]
 
     def get(self, request):
         if request.user.is_authenticated:
@@ -77,14 +81,44 @@ class ProfileView(APIView):
         else:
             return Response({'error': 'Usuario no autenticado'}, status=status.HTTP_401_UNAUTHORIZED)
     
-    def put(self, request):
-        try:
-            profile = Profile.objects.get(user=request.user)
-            serializer = ProfileSerializer(profile, data=request.data.get('profile'))
-            if serializer.is_valid():  
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def put(self, request):    
+        profile = Profile.objects.get(user=request.user) 
+        serializer = ProfileSerializer(profile, data=request.data)
+        if serializer.is_valid():  
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+
+class ProfileByIdView(APIView):
+    
+    permission_classes = [AllowAny]
+
+    def get(self, request, id):
+        profile = Profile.objects.get(user=id)
+        serializer = ProfileSerializerByCode(profile)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+class PasswordUpdateView(APIView):
+
+    # permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        # if request.user.is_authenticated:
+        user = User.objects.get(username=request.data['user']['username'])
+        old_password = request.data['oldPassword']
+        new_password = request.data['newPassword']
+        confirm_new_password = request.data['confirmPassword']
+
+        if check_password(old_password, user.password):
+            if new_password == confirm_new_password:
+                user.set_password(new_password)
+                user.save()
+                return Response({'success': 'Password updated'}, status=status.HTTP_200_OK)
             else:
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        except Profile.DoesNotExist:
-            return Response({'error': 'El perfil no existe'}, status=status.HTTP_404_NOT_FOUND)
+                return Response({'error'}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response({'error': 'Incorrect old password'}, status=status.HTTP_400_BAD_REQUEST)
+    
