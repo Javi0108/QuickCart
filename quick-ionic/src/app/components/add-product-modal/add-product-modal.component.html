@@ -8,7 +8,7 @@
   </ion-header>
   
   <ion-content>
-    <form enctype="multipart/form-data" [formGroup]="createProductForm" (ngSubmit)="submitForm()">
+    <form enctype="multipart/form-data" [formGroup]="createProductForm" (ngSubmit)="createProduct()">
       <ion-input label="Name" label-placement="floating" fill="outline" formControlName="name"></ion-input>
       <ion-input label="Brand" label-placement="floating" fill="outline" formControlName="brand"></ion-input>
       <ion-input label="Short description" label-placement="floating" fill="outline" formControlName="shortDescription"></ion-input>

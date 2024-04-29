@@ -15,7 +15,8 @@ import { AddProductModalComponent } from 'src/app/components/add-product-modal/a
 export class ProductsManagementPage {
   pageloaded: boolean;
   products: any[] = [];
-  createProductForm: FormGroup; 
+  createProductForm: FormGroup;
+  shopId!: number;
 
 
   constructor(
@@ -40,13 +41,13 @@ export class ProductsManagementPage {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.loadProducts();
+      this.shopId = + params['id'];
+      this.loadProducts(this.shopId);
     });
   }
 
-
-  loadProducts() {
-    this.productService.getProducts().subscribe(
+  loadProducts(shopId: number) {
+    this.productService.getShopProducts(shopId).subscribe(
       (response) => {
         this.products = response;
       },
@@ -57,12 +58,30 @@ export class ProductsManagementPage {
   }
 
 
+
+  // async openAddModal() {
+  //   const modal = await this.modalController.create({
+  //     component: AddProductModalComponent,
+  //     cssClass: 'add-product-modal',
+  //     componentProps: { createProductForm: this.createProductForm , shopId: this.shopId}
+  //   });
+  //   return await modal.present();
+  // }
+
   async openAddModal() {
     const modal = await this.modalController.create({
       component: AddProductModalComponent,
       cssClass: 'add-product-modal',
-      componentProps: { createProductForm: this.createProductForm }
+      componentProps: { createProductForm: this.createProductForm, shopId: this.shopId }
     });
+  
+    modal.onDidDismiss().then((data) => {
+      if (data && data.data) {
+        this.products.push(data.data)
+        console.log('Data received from modal:', data.data);
+      }
+    });
+  
     return await modal.present();
   }
 

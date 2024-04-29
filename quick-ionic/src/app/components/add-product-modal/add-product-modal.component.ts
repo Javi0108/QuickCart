@@ -10,6 +10,7 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class AddProductModalComponent {
   @Input() createProductForm!: FormGroup;
+  @Input() shopId!: number;
   imagePreview: any;
 
   constructor(
@@ -19,8 +20,8 @@ export class AddProductModalComponent {
 
   }
 
-  closeModal() {
-    this.modalController.dismiss();
+  closeModal(dataToSend?: any) {
+    this.modalController.dismiss(dataToSend);
   }
 
   onFileSelected(event: any) {
@@ -42,20 +43,25 @@ export class AddProductModalComponent {
     reader.readAsDataURL(file);
   }
 
-  async submitForm() {
+  async createProduct() {
     if (this.createProductForm.valid) {
-      const formData: FormData = new FormData();
-      formData.append('name', this.createProductForm.get('name')?.value);
-      formData.append('brand', this.createProductForm.get('brand')?.value);
-      formData.append('short_description', this.createProductForm.get('shortDescription')?.value);
-      formData.append('description', this.createProductForm.get('description')?.value);
-      formData.append('price', this.createProductForm.get('price')?.value);
-      formData.append('avatar', this.createProductForm.get('image')?.value);
-      formData.append('stock_quantity', this.createProductForm.get('stockQuantity')?.value);
 
-      this.productService.addProduct(formData).subscribe({
+      const data = {
+        shopId: this.shopId,
+        name: this.createProductForm.get('name')?.value,
+        brand:this.createProductForm.get('brand')?.value,
+        short_description:this.createProductForm.get('shortDescription')?.value,
+        description:this.createProductForm.get('description')?.value,
+        price:this.createProductForm.get('price')?.value,
+        avatar:this.imagePreview,
+        stock_quantity:this.createProductForm.get('stockQuantity')?.value
+      }
+
+      console.log(data)
+
+      this.productService.addProduct(data).subscribe({
         next: (response) => {
-          this.modalController.dismiss();
+          this.closeModal(response)
         },
         error: (error: any) => {
           console.error('Error al crear el producto:', error);
