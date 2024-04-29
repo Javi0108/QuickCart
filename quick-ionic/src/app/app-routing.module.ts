@@ -39,7 +39,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/products-catalog/products-catalog.module').then( m => m.ProductsCatalogPageModule)
   },
   {
-    path: 'products-management',
+    path: 'products-management/:id',
     loadChildren: () => import('./pages/products-management/products-management.module').then( m => m.ProductsManagementPageModule)
   },
   {

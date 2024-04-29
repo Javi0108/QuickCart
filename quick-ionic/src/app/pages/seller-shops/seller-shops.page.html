@@ -38,6 +38,7 @@
                     <ng-template>
                       <ion-content>
                         <ion-list>
+                          <ion-item [button]="true" [detail]="false" [routerLink]="['/products-management', shop.id_shop]">Add Products</ion-item>
                           <ion-item [button]="true" [detail]="false" [routerLink]="['/web-page-edit', shop.id_shop]">Edit</ion-item>
                           <ion-item [button]="true" [detail]="false">Enable</ion-item>
                           <ion-item [button]="true" [detail]="false" (click)="removeShop(shop.id_shop)" color="danger">Delete</ion-item>
