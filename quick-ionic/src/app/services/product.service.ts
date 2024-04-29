@@ -37,7 +37,7 @@ export class ProductService {
   }
 
   editProduct(ProductId: number, updatedProductData: any): Observable<any> {
-    return this.http.put<any>(`${this.baseURL}product/${ProductId}/`, updatedProductData, { headers: this.getHeaders() });
+    return this.http.put<any>(`${this.baseURL}edit/product/${ProductId}/`, updatedProductData, { headers: this.getHeaders() });
   }
 
   private getHeaders(): HttpHeaders {

@@ -15,11 +15,10 @@ urlpatterns = [
     path('sections/delete/<int:id_shop_section>/', views.SellerShopSectionView.as_view(), name='delete-section'),
     
     path('catalog/',views.ProductsView.as_view(), name="products"),
-    path('product/<int:id_shop>/', views.ProductsView.as_view(), name='product-detail'),
-
     path('shop-catalog/<int:id_shop>',views.ProductsView.as_view(), name="shop-catalog"),
     path('product/<int:id_product>/', views.ProductsView.as_view(), name='product-detail'),
     path('create-product/', views.ProductsView.as_view(), name='create-product'),
+    path('edit/product/<int:id_product>/', views.ProductsView.as_view(), name='edit-product'),
     path('delete/product/<int:id_product>/', views.ProductsView.as_view(), name='delete-product'),
 
 ]

@@ -174,6 +174,7 @@ class ProductsView(APIView):
             try:
                 product = Product.objects.get(id_product=id_product)
                 serializer = ProductSerializer(product)
+                print(serializer.data)
                 return Response(serializer.data, status=status.HTTP_200_OK)
             except Product.DoesNotExist:
                 return Response({"message": "Producto no encontrado"}, status=status.HTTP_404_NOT_FOUND)
@@ -236,6 +237,42 @@ class ProductsView(APIView):
         else:
             print(serializer.errors)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def put(self, request, id_product):
+        # Obtener el producto existente por su ID
+        product = get_object_or_404(Product, id_product=id_product)
+
+        # Extraer los datos de la solicitud
+        name = request.data.get('name')
+        brand = request.data.get('brand')
+        short_description = request.data.get('short_description')
+        description = request.data.get('description')
+        price = request.data.get('price')
+        stock_quantity = request.data.get('stock_quantity')
+
+        # Actualizar los campos del producto
+        product.name = name
+        product.brand = brand
+        product.short_description = short_description
+        product.description = description
+        product.price = price
+        product.stock_quantity = stock_quantity
+
+        # Verificar si se envió una nueva imagen para actualizarla
+        if 'avatar' in request.data:
+            avatar_data = request.data.pop('avatar')
+            format, imgstr = avatar_data.split(';base64,')
+            ext = format.split('/')[-1]
+            image_name = f'avatar_{id_product}_{name}.{ext}'  # Nombre de archivo personalizado
+            image_data = ContentFile(base64.b64decode(imgstr), name=image_name)
+            product.avatar = image_data
+
+        # Guardar los cambios en el producto
+        product.save()
+
+        # Serializar y devolver la respuesta actualizada
+        serializer = ProductSerializer(product)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     def delete(self, request, id_product):
         try:
