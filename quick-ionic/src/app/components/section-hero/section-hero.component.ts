@@ -26,9 +26,9 @@ export class SectionHeroComponent implements OnInit {
   sectionFormBannerThree!: FormGroup;
 
   selectedSegment: 'banner_1' | 'banner_2' | 'banner_3' = 'banner_1';
-  selectedProductBannerOneText = 'Related Product';
-  selectedProductBannerTwoText = 'Related Product';
-  selectedProductBannerThreeText = 'Releated Product';
+  selectedProductBannerOneText = 'Select a Related Product';
+  selectedProductBannerTwoText = 'Select a Related Product';
+  selectedProductBannerThreeText = 'Select a Related Product';
   selectedProductBannerOne: string | null = null;
   selectedProductBannerTwo: string | null = null;
   selectedProductBannerThree: string | null = null;
@@ -143,6 +143,8 @@ export class SectionHeroComponent implements OnInit {
   }
 
   productSelectionChanged(selectedValue: string | null) {
+
+    console.log(this.section)
 
     this.sectionData![this.selectedSegment].related_product = selectedValue;
     

@@ -17,26 +17,21 @@ export class MenuPage implements OnInit {
   profile!: Profile;
   user: User | null = null;
 
-  userNameForm: FormGroup;
   constructor(
     private authService: AuthService,
     private profileService: ProfileService,
-    private formBuilder: FormBuilder,
     private router: Router
   ) {
-    this.userNameForm = this.formBuilder.group({
-      username: [''],
-    });
+
   }
 
   ngOnInit() {
     this.loadProfile();
     const userString = localStorage.getItem('user');
+    console.log(userString)
     if (userString) {
       this.user = JSON.parse(userString) as User;
-      if (this.userNameForm) {
-        this.userNameForm.patchValue({ username: this.user.username });
-      }
+      console.log(this.user)
     }
   }
 
