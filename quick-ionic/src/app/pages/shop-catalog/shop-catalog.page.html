@@ -2,7 +2,7 @@
   <div class="app-catalog">
     <div class="container">
       <ion-grid>
-        <h2 class="title">Productos {{shopId}}</h2>
+        <h2 class="title">Tienda {{shopId}} catalog</h2>
         <ion-row *ngIf='products'>
           <ng-container *ngFor="let product of products;">
             <div class="col-md-3 card_container">
@@ -28,24 +28,3 @@
     </div>
   </div>
 </ion-content>
-
-<!--
-
-<ion-col  size="6" size-md="4" size-lg="3" *ngFor="let product of products" class="card_container">
-  <ion-card class="card">
-    <div [routerLink]="['/product',product.id_product]">
-      <ion-img class="img" [src]="'http://localhost:8000' + product.avatar" alt="Product Image"></ion-img>
-      <ion-card-header>
-        <ion-card-title class="card-title">{{ product.name }}</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <p class="card-text">{{ product.short_description }}</p>
-        <p class="card-text">Precio: {{ product.price }}</p>
-      </ion-card-content>
-    </div>
-    <ion-button class="btn" expand="block" (click)="addToCart(product)">Agregar al carrito</ion-button>
-  </ion-card>
-</ion-col>
-
-
--->
