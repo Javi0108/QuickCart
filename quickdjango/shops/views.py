@@ -174,6 +174,7 @@ class ProductsView(APIView):
             try:
                 product = Product.objects.get(id_product=id_product)
                 serializer = ProductSerializer(product)
+                print(serializer.data)
                 return Response(serializer.data, status=status.HTTP_200_OK)
             except Product.DoesNotExist:
                 return Response({"message": "Producto no encontrado"}, status=status.HTTP_404_NOT_FOUND)

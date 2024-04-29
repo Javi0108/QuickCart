@@ -21,23 +21,24 @@ export class ProductDetailPage implements OnInit{
     const productId = this.route.snapshot.paramMap.get('id')
     if (productId) {
       this.productId =+ productId;
+      console.log(productId)
       this.getProduct();
     }else{
       console.error("Invalid Product ID")
     }
   }
 
-  getProduct(){
-    this.productService.getProductById(this.productId!).subscribe({
-      next: (productData) => {
+  getProduct() {
+    this.productService.getProductById(this.productId).subscribe({
+      next: (productData: Product) => {
         this.productData = productData;
         console.log(productData)
         if (!this.productData) {
-          console.error('No se encontró la tienda con el ID proporcionado.');
+          console.error('No se encontró el producto con el ID proporcionado.');
         }
       },
       error: (error) => {
-        console.error('Error al obtener los datos de la tienda:', error);
+        console.error('Error al obtener los datos del producto:', error);
       }
     });
   }
