@@ -1,4 +1,4 @@
-<section *ngIf="sectionData!" class="hero pt-3">
+<section *ngIf="sectionData!" class="hero pt-3" [ngClass]="{'container-xxl': !editMode}">
   <div class="row">
     <div [ngClass]="{'col-lg-12': !editMode, 'col-lg-9': editMode}">
       <div class="row">
@@ -17,7 +17,8 @@
                 {{sectionData.banner_1.price}}
               </h3>
               <div *ngIf="sectionData.banner_1.related_product" class="button">
-                <a [routerLink]="['/product', sectionData.banner_1.related_product]" type="button" class="btn btn-primary">{{sectionData.banner_1.button}}</a>
+                <a [routerLink]="['/product', sectionData.banner_1.related_product]" type="button"
+                  class="btn btn-primary">{{sectionData.banner_1.button}}</a>
               </div>
             </div>
           </div>
@@ -25,7 +26,8 @@
         <div class="col-xl-4 col-lg-12 col-12">
           <div class="row">
             <div class="col-xl-12 col-lg-6 col-md-12 col-12">
-              <div class="hero-banner-2" [style.background-image]="'url(' + sectionData.banner_2.image + ')'" [routerLink]="sectionData.banner_2.related_product ? ['/product', sectionData.banner_2.related_product] : null">
+              <div class="hero-banner-2" [style.background-image]="'url(' + sectionData.banner_2.image + ')'"
+                [routerLink]="sectionData.banner_2.related_product ? ['/product', sectionData.banner_2.related_product] : null">
                 <div class="row content">
                   <div class="col-8">
                     <h5>
@@ -45,7 +47,8 @@
                   <h2>{{sectionData.banner_3.title}}</h2>
                   <p>{{sectionData.banner_3.content}}</p>
                   <div *ngIf="sectionData.banner_3.related_product" class="button">
-                    <a [routerLink]="['/product', sectionData.banner_3.related_product]" type="button" class="btn btn-primary">{{sectionData.banner_3.button}}</a>
+                    <a [routerLink]="['/product', sectionData.banner_3.related_product]" type="button"
+                      class="btn btn-primary">{{sectionData.banner_3.button}}</a>
                   </div>
                 </div>
               </div>
@@ -95,9 +98,10 @@
         <div class="inline-inputs">
 
           <ion-input id="image-input" label="Image" label-placement="floating" placeholder="Image" fill="outline"
-            type="file" formControlName="image" (change)="onFileSelected($event)" class="file-input w-100" style="height: 75px;"></ion-input>
-          
-            <ion-list [inset]="true"
+            type="file" formControlName="image" (change)="onFileSelected($event)" class="file-input w-100"
+            style="height: 75px;"></ion-input>
+
+          <ion-list [inset]="true"
             style="outline: 1px solid #b3b3b3; border-radius: 2px; margin: 0px; margin-bottom: 15px; height: 73px; width: 75%;">
             <ion-item [button]="true" [detail]="false" (click)="openModal()">
               <div id="selected-products">{{ selectedProductBannerOneText }}</div>

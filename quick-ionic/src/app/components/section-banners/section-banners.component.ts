@@ -1,18 +1,16 @@
-import { SectionEventService } from 'src/app/services/section-event.service';
-import { HeroSectionData, Section } from './../../interfaces/section.interface';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { IonModal } from '@ionic/angular';
-import { ModalController } from '@ionic/angular';
+import { Component, Input, OnInit } from '@angular/core';
 import { Item, TypeaheadComponent } from '../typeahead/typeahead.component';
-import { Product } from 'src/app/interfaces/product.interface';
+import { BannersSectionData, Section } from 'src/app/interfaces/section.interface';
+import { FormControl, FormGroup } from '@angular/forms';
+import { ModalController } from '@ionic/angular';
+import { SectionEventService } from 'src/app/services/section-event.service';
 
 @Component({
-  selector: 'app-section-hero',
-  templateUrl: './section-hero.component.html',
-  styleUrls: ['./section-hero.component.scss'],
+  selector: 'app-section-banners',
+  templateUrl: './section-banners.component.html',
+  styleUrls: ['./section-banners.component.scss'],
 })
-export class SectionHeroComponent implements OnInit {
+export class SectionBannersComponent  implements OnInit {
 
   @Input() section: any;
 
@@ -20,22 +18,17 @@ export class SectionHeroComponent implements OnInit {
 
   sectionId?: number;
   sectionType?: string;
-  sectionData?: HeroSectionData;
+  sectionData?: BannersSectionData;
   products: Item[] = [];
-  
+
   sectionFormBannerOne!: FormGroup;
   sectionFormBannerTwo!: FormGroup;
-  sectionFormBannerThree!: FormGroup;
 
-  selectedSegment: 'banner_1' | 'banner_2' | 'banner_3' = 'banner_1';
+  selectedSegment: 'banner_1' | 'banner_2' = 'banner_1';
   selectedProductBannerOneText = 'Select a Related Product';
   selectedProductBannerTwoText = 'Select a Related Product';
-  selectedProductBannerThreeText = 'Select a Related Product';
   selectedProductBannerOne: string | null = null;
   selectedProductBannerTwo: string | null = null;
-  selectedProductBannerThree: string | null = null;
-
-  
 
   constructor(
     private sectionEventService: SectionEventService,
@@ -43,49 +36,39 @@ export class SectionHeroComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (this.section) {
+    if(this.section){
       this.sectionId = this.section.id
       this.sectionType = this.section.type
       this.editMode = this.section.editMode
       this.products = this.section.products
 
-      if (this.section.data.defaultSectionHeroData) {
-        this.sectionData = this.section.data.defaultSectionHeroData
-      } else {
+      if(this.section.data.defaultSectionBannersData){
+        this.sectionData = this.section.data.defaultSectionBannersData
+      }else{
         this.sectionData = this.section.data
       }
     }
 
-    if (this.editMode) {
+    console.log(this.sectionData)
+    if(this.editMode){
       this.initializeEditMode()
     }
-
   }
 
-  initializeEditMode() {
 
+  initializeEditMode(){
     this.sectionFormBannerOne = new FormGroup({
-      subtitle: new FormControl(this.sectionData?.banner_1.subtitle),
       title: new FormControl(this.sectionData?.banner_1.title),
       content: new FormControl(this.sectionData?.banner_1.content),
-      price_text: new FormControl(this.sectionData?.banner_1.price_text),
-      price: new FormControl(this.sectionData?.banner_1.price),
       button: new FormControl(this.sectionData?.banner_1.button),
       image: new FormControl(this.sectionData?.banner_1.image)
     });
 
     this.sectionFormBannerTwo = new FormGroup({
-      subtitle: new FormControl(this.sectionData?.banner_2.subtitle),
       title: new FormControl(this.sectionData?.banner_2.title),
-      price: new FormControl(this.sectionData?.banner_2.price),
+      content: new FormControl(this.sectionData?.banner_2.content),
+      button: new FormControl(this.sectionData?.banner_2.button),
       image: new FormControl(this.sectionData?.banner_2.image)
-    });
-
-    this.sectionFormBannerThree = new FormGroup({
-      title: new FormControl(this.sectionData?.banner_3.title),
-      content: new FormControl(this.sectionData?.banner_3.content),
-      button: new FormControl(this.sectionData?.banner_3.button),
-      image: new FormControl(this.sectionData?.banner_3.image)
     });
 
     this.sectionFormBannerOne.valueChanges.subscribe((values) => {
@@ -95,11 +78,6 @@ export class SectionHeroComponent implements OnInit {
     this.sectionFormBannerTwo.valueChanges.subscribe((values) => {
       this.sectionData!.banner_2 = { ...this.sectionData!.banner_2, ...values };
     });
-
-    this.sectionFormBannerThree.valueChanges.subscribe((values) => {
-      this.sectionData!.banner_3 = { ...this.sectionData!.banner_3, ...values };
-    });
-
   }
 
   segmentChanged(event: CustomEvent) {
@@ -137,16 +115,12 @@ export class SectionHeroComponent implements OnInit {
 
   productSelectionChanged(selectedValue: string | null) {
 
-    console.log(this.section)
-
     this.sectionData![this.selectedSegment].related_product = selectedValue;
     
     if(this.selectedSegment == 'banner_1'){
       this.selectedProductBannerOne = selectedValue;
     }else if(this.selectedSegment == 'banner_2'){
       this.selectedProductBannerTwo = selectedValue;
-    }else{
-      this.selectedProductBannerThree = selectedValue;
     } 
 
     const product = this.products.find((product) => product.value === selectedValue);
@@ -155,8 +129,6 @@ export class SectionHeroComponent implements OnInit {
       this.selectedProductBannerOneText = product ? product.text : 'No selection';
     }else if(this.selectedSegment == 'banner_2'){
       this.selectedProductBannerTwoText = product ? product.text : 'No selection';
-    }else{
-      this.selectedProductBannerThreeText = product ? product.text : 'No selection';
     }
   }
 

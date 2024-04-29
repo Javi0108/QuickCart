@@ -20,6 +20,8 @@ export class TypeaheadComponent implements OnInit {
 
 
   ngOnInit() {
+
+    console.log(this.items)
     this.filteredItems = [...this.items];
     if (this.selectedItem) {
       this.filteredItems.forEach(item => {
@@ -33,14 +35,6 @@ export class TypeaheadComponent implements OnInit {
   trackItems(index: number, item: Item) {
     return item.value;
   }
-
-  // cancelChanges() {
-  //   this.selectionCancel.emit();
-  // }
-
-  // confirmChanges() {
-  //   this.selectionChange.emit(this.selectedItem);
-  // }
 
   cancelChanges() {
     this.modalController.dismiss(null, 'cancel');
@@ -64,7 +58,6 @@ export class TypeaheadComponent implements OnInit {
 
   checkboxChange(ev: any) {
     const { value } = ev.detail;
-    // Si el valor ya está seleccionado, se deselecciona
     if (this.selectedItem === value) {
       this.selectedItem = null;
     } else {
