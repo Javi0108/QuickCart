@@ -1,6 +1,6 @@
 export interface Product {
     id_product: number;
-    shop: Shop;
+    shopId: number;
     name: string;
     brand: string | null;
     short_description: string | null;
@@ -8,9 +8,35 @@ export interface Product {
     price: number;
     avatar: string; 
     stock_quantity: number;
-    images: ProductImage[];
-    tags: Tag[]; 
+    images: ProductImage[] | null;
+    tags: Tag[] | null; 
 }
+
+export interface ProductCreate {
+  shopId: number;
+  name: string;
+  brand: string | null;
+  short_description: string | null;
+  description: string;
+  price: number;
+  avatar: string; 
+  stock_quantity: number;
+}
+
+// export interface Product {
+//   id_product: number;
+//   shop: Shop;
+//   name: string;
+//   brand: string | null;
+//   short_description: string | null;
+//   description: string;
+//   price: number;
+//   avatar: string; 
+//   stock_quantity: number;
+//   images: ProductImage[] | null;
+//   tags: Tag[] | null; 
+// }
+
 
 export interface Shop {
     id_shop: number;
@@ -34,6 +60,3 @@ export interface Shop {
   }
 
 
-export interface ProductCreate {
-
-}

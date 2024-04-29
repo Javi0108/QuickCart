@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
-import { ProductCreate } from '../interfaces/product.interface';
+import { Product, ProductCreate } from '../interfaces/product.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -31,9 +31,9 @@ export class ProductService {
   addProduct(newProductData: ProductCreate): Observable<any> {
     return this.http.post<any>(`${this.baseURL}create-product/`, newProductData, {headers: this.getHeaders()})
   }
-
-  removeProduct(ProductId: number): Observable<any> {
-    return this.http.delete<any>(`${this.baseURL}delete/${ProductId}/`, { headers: this.getHeaders() });
+  
+  deleteProduct(ProductId: number): Observable<any> {
+    return this.http.delete<any>(`${this.baseURL}delete/product/${ProductId}/`, { headers: this.getHeaders() });
   }
 
   editProduct(ProductId: number, updatedProductData: any): Observable<any> {

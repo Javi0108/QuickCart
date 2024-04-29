@@ -192,9 +192,55 @@ class ProductsView(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request):
-        serializer = ProductSerializer(data=request.data)
+        # Extraer los datos de la solicitud
+        shop_id = request.data.get('shopId')
+        name = request.data.get('name')
+        brand = request.data.get('brand')
+        short_description = request.data.get('short_description')
+        description = request.data.get('description')
+        price = request.data.get('price')
+        stock_quantity = request.data.get('stock_quantity')
+        
+        # Verificar que se proporciona el ID de la tienda
+        if not shop_id:
+            return Response({'error': 'El ID de la tienda es requerido.'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Obtener la tienda usando el ID proporcionado
+        shop = get_object_or_404(Shop, id_shop=shop_id)
+        
+        # Crear los datos para el producto, incluyendo la tienda asociada
+        product_data = {
+            'shop': shop.id_shop,
+            'name': name,
+            'brand': brand,
+            'short_description': short_description,
+            'description': description,
+            'price': price,
+            'stock_quantity': stock_quantity
+        }
+        
+        # Decodificar la imagen en base64 y guardarla como un archivo
+        if 'avatar' in request.data:
+            avatar_data = request.data.pop('avatar')
+            format, imgstr = avatar_data.split(';base64,')
+            ext = format.split('/')[-1]
+            image_name = f'avatar_{shop_id}_{name}.{ext}'  # Nombre de archivo personalizado
+            image_data = ContentFile(base64.b64decode(imgstr), name=image_name)
+            product_data['avatar'] = image_data
+        
+        # Crear el producto usando el serializador
+        serializer = ProductSerializer(data=product_data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
+            print(serializer.errors)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, id_product):
+        try:
+            product = get_object_or_404(Product, id_product=id_product)
+            product.delete()
+            return Response({"success": "Producto eliminado exitosamente"}, status=status.HTTP_204_NO_CONTENT)
+        except Product.DoesNotExist:
+            return Response({"error": "El producto no existe"}, status=status.HTTP_404_NOT_FOUND)
