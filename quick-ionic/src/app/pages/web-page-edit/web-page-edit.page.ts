@@ -1,8 +1,10 @@
-import { HeroSectionData, Section } from './../../interfaces/section.interface';
+import { Section } from './../../interfaces/section.interface';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { defaultSectionHeroData } from 'src/app/interfaces/sections-default';
+import { Product } from 'src/app/interfaces/product.interface';
+import { defaultSectionBannersData, defaultSectionHeroData } from 'src/app/interfaces/sections-default';
 import { ShopData } from 'src/app/interfaces/shop.interface';
+import { ProductService } from 'src/app/services/product.service';
 import { SectionEventService } from 'src/app/services/section-event.service';
 import { ShopService } from 'src/app/services/shop.service';
 
@@ -17,13 +19,20 @@ export class WebPageEditPage implements OnInit {
   shopId!: number;
 
   sections: Section[] = [];
+  products: Product[] = [];
 
-  constructor(private route: ActivatedRoute, private shopService: ShopService, private sectionEventService: SectionEventService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private shopService: ShopService,
+    private sectionEventService: SectionEventService,
+    private productService: ProductService
+  ) { }
 
   ngOnInit() {
     const shopIdString = this.route.snapshot.paramMap.get('id');
     if (shopIdString) {
       this.shopId = +shopIdString;
+      this.loadProducts(this.shopId);
       this.getShop();
     } else {
       console.error('No se proporcionó un ID de tienda válido.');
@@ -43,6 +52,7 @@ export class WebPageEditPage implements OnInit {
         } else {
           this.sections = shopData.sections;
           this.setEditModeForSections();
+          this.loadProductsForSections();
         }
       },
       error: (error) => {
@@ -57,17 +67,24 @@ export class WebPageEditPage implements OnInit {
     });
   }
 
+  loadProductsForSections() {
+    this.sections.forEach((section: Section) => {
+      section.products = this.products;
+    });
+  }
+
   addSection(sectionType: string) {
     let newSection: Section;
 
     if (sectionType === 'hero') {
-      newSection = { id: undefined, type: sectionType, editMode: true, data: { ...defaultSectionHeroData } };
+      newSection = { id: undefined, type: sectionType, editMode: true, data: { ...defaultSectionHeroData }, products: this.products };
+    } else if (sectionType === 'banners') {
+      newSection = { id: undefined, type: sectionType, editMode: true, data: { ...defaultSectionBannersData }, products: this.products };
     } else if (sectionType === 'products') {
-      newSection = { id: undefined, type: sectionType, editMode: true, data: {} };
+      newSection = { id: undefined, type: sectionType, editMode: true, data: {}, products: this.products };
     } else {
-      newSection = { id: undefined, type: "", editMode: true, data: {} };
+      newSection = { id: undefined, type: "", editMode: true, data: {}, products: this.products };
     }
-
     this.sections.push(newSection);
     console.log(this.sections);
   }
@@ -130,5 +147,22 @@ export class WebPageEditPage implements OnInit {
       }
     }
   }
+
+  loadProducts(shopId: number) {
+    this.productService.getShopProducts(shopId).subscribe(
+      (response) => {
+        this.products = response.map((product: Product) => ({
+          text: product.name,
+          value: product.id_product.toString(),
+          img: "http://localhost:8000" + product.avatar
+        }));
+        console.log(this.products);
+      },
+      (error) => {
+        console.error('Error loading products:', error);
+      }
+    );
+  }
+
 
 }

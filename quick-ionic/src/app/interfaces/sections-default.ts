@@ -26,3 +26,22 @@ export const defaultSectionHeroData = {
     }
 
 }
+
+
+export const defaultSectionBannersData = {
+    banner_1: {
+        title: "New line required",
+        content: "iPhone 12",
+        button: "Shop Now",
+        image: "https://demo.graygrids.com/themes/shopgrids/assets/images/banner/banner-1-bg.jpg",
+        related_product: null,
+    },
+    banner_2: {
+        title: "New line required",
+        content: "iPhone 12 Pro Max",
+        button: "Shop Now",
+        image: "https://demo.graygrids.com/themes/shopgrids/assets/images/banner/banner-2-bg.jpg",
+        related_product: null,
+    }
+
+}
