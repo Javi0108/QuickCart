@@ -56,9 +56,7 @@ export class ProductsManagementPage {
       }
     );
   }
-
-
-
+   
   // async openAddModal() {
   //   const modal = await this.modalController.create({
   //     component: AddProductModalComponent,
@@ -113,6 +111,15 @@ export class ProductsManagementPage {
   deleteProduct(id: number) {
     console.log('Delete product with ID:', id);
     this.products = this.products.filter(product => product.id_product !== id);
+    this.productService.deleteProduct(id).subscribe({
+      next: (response) => {
+        console.log(response)
+        this.loadProducts(this.shopId);
+      },
+      error: (error:any)=> {
+        console.error('Error deleting product:', error);
+      }
+    });
   }
 
   showDetail(id: number) {

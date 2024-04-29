@@ -236,3 +236,11 @@ class ProductsView(APIView):
         else:
             print(serializer.errors)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, id_product):
+        try:
+            product = get_object_or_404(Product, id_product=id_product)
+            product.delete()
+            return Response({"success": "Producto eliminado exitosamente"}, status=status.HTTP_204_NO_CONTENT)
+        except Product.DoesNotExist:
+            return Response({"error": "El producto no existe"}, status=status.HTTP_404_NOT_FOUND)
