@@ -44,9 +44,10 @@
         position: relative;
         overflow: hidden;
 
-        img {
-          width: 100%;
-          height: auto;
+        ion-img {
+          object-fit: inherit; /* La imagen se ajustará dentro de su contenedor */
+          width: auto;
+          height: 250px; /* Mantendrá la relación de aspecto original de la imagen */
           display: block;
         }
 
