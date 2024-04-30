@@ -15,6 +15,7 @@ import { ShopCatalogPage } from './shop-catalog.page';
     IonicModule,
     ShopCatalogPageRoutingModule
   ],
-  declarations: [ShopCatalogPage]
+  declarations: [ShopCatalogPage],
+  exports: [ShopCatalogPage] // Asegúrate de exportar ShopCatalogComponent
 })
 export class ShopCatalogPageModule {}

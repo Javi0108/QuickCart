@@ -1,8 +1,33 @@
 <ion-spinner *ngIf="!shopData"></ion-spinner>
-<ion-content>
-  <div class="p-5 pt-2">
+
+<ion-header *ngIf="shopData">
+  <ion-toolbar color="primary">
+    <div slot="start" style="display: flex; align-items: center;" class="ms-5">
+      <ion-img [src]="'http://localhost:8000'+shopData.logo" style="width: 50px;"></ion-img>
+      <ion-title style="margin-left: 10px;">{{shopData.name}}</ion-title>
+    </div>
+    <ion-buttons slot="end">
+      <ion-button (click)="changePageShow('home')" expand="block" fill="clear" shape="round">
+        Home
+      </ion-button>
+      <ion-button (click)="changePageShow('catalog')" expand="block" fill="clear" shape="round">
+        Catalog
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="shopData">
+  <div *ngIf="showSections" class="p-5 pt-2">
     <div *ngIf="sections">
       <app-section-container [sections]="sections"></app-section-container>
+    </div>
+  </div>
+
+  <div *ngIf="showCatalog" class="p-5 pt-2" style="background-color: green;">
+    <div *ngIf="products">
+      <app-shop-catalog [id]="shopId"></app-shop-catalog>
+      <!-- <app-shop-catalog [id]="shopId" [provitionalProducts]="products"></app-shop-catalog> -->
     </div>
   </div>
 </ion-content>
