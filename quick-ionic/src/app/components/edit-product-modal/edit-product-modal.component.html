@@ -1,0 +1,25 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-title>Edit Product</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="closeModal()">Close</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+    <form enctype="multipart/form-data" [formGroup]="editProductForm" (ngSubmit)="editProduct()">
+      <ion-input label="Name" label-placement="floating" fill="outline" formControlName="name"></ion-input>
+      <ion-input label="Brand" label-placement="floating" fill="outline" formControlName="brand"></ion-input>
+      <ion-input label="Short description" label-placement="floating" fill="outline" formControlName="shortDescription"></ion-input>
+      <ion-input label="Description" label-placement="floating" fill="outline" formControlName="description"></ion-input>
+      <ion-input label="Price" label-placement="floating" fill="outline" formControlName="price"></ion-input>
+      <div class="image-input-container">
+        <ion-img *ngIf="imagePreview" [src]="imagePreview" class="uploaded-image"></ion-img>
+        <ion-input id="image-input" label="Logo" fill="outline" type="file" formControlName="image" (change)="onFileSelected($event)" class="file-input"></ion-input>
+      </div>
+      <ion-input label="Stock" label-placement="floating" fill="outline" formControlName="stockQuantity"></ion-input>
+      <ion-button type="submit" [disabled]="editProductForm.invalid">Submit</ion-button>
+    </form>
+  </ion-content>
+  
