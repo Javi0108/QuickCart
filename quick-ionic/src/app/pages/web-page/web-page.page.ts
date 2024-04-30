@@ -17,14 +17,13 @@ export class WebPagePage implements OnInit {
   shopId: number | undefined;
   showSections: boolean = true;
   showCatalog: boolean = false;
+  showAbout: boolean = false;
 
   sections: Section[] = [];
-  products: Product[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private shopService: ShopService,
-    private productService: ProductService
   ) { }
 
   ngOnInit() {
@@ -32,7 +31,6 @@ export class WebPagePage implements OnInit {
     if (shopIdString) {
       this.shopId = +shopIdString;
       this.getShop();
-      //this.loadProducts();
     } else {
       console.error('No se proporcionó un ID de tienda válido.');
     }
@@ -42,11 +40,9 @@ export class WebPagePage implements OnInit {
     this.shopService.getShopById(this.shopId!).subscribe({
       next: (shopData) => {
         this.shopData = shopData.shop_data;
-        console.log('Datos de la tienda:', this.shopData); // Agregado
         if (this.shopData) {
           this.sections = shopData.sections;
           this.setEditModeForSections();
-          console.log('Secciones:', this.sections); // Agregado
         } else {
           console.error('No se encontró la tienda con el ID proporcionado.');
         }
@@ -63,28 +59,19 @@ export class WebPagePage implements OnInit {
     });
   }
 
-  // loadProducts() {
-  //   this.productService.getShopProducts(this.shopId!).subscribe({
-  //     next: (response) => {
-  //       this.products = response;
-  //       console.log('Productos cargados:', this.products); // Agregado
-  //     },
-  //     error: (error) => {
-  //       console.error('Error al cargar los productos:', error);
-  //     }
-  //   });
-  // }
-
   changePageShow(option: string) {
-    console.log('Cambiar página a:', option); // Agregado
     if (option == 'home') {
       this.showSections = true;
       this.showCatalog = false;
+      this.showAbout = false;
     } else if (option == 'catalog') {
-      this.showSections = false;
       this.showCatalog = true;
+      this.showSections = false;
+      this.showAbout = false;
+    }else if(option == 'about'){
+      this.showAbout = true;
+      this.showCatalog = false;
+      this.showSections = false;
     }
-    console.log('showSections:', this.showSections); // Agregado
-    console.log('showCatalog:', this.showCatalog); // Agregado
   }
 }

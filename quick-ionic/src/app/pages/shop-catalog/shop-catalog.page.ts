@@ -10,10 +10,9 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./shop-catalog.page.scss'],
 })
 export class ShopCatalogPage implements OnInit {
-  //@Input() provitionalProducts: Product[] = [];
+  @Input() shopName!: string;
   products: Product[] = [];
   shopId!: number;
-
 
   constructor(private productService: ProductService, private route: ActivatedRoute) { }
 

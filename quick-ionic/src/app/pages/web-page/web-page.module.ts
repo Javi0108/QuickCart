@@ -9,6 +9,7 @@ import { WebPagePageRoutingModule } from './web-page-routing.module';
 import { WebPagePage } from './web-page.page';
 import { SectionContainerModule } from 'src/app/components/section-container/section-container.module';
 import { ShopCatalogPageModule } from '../shop-catalog/shop-catalog.module';
+import { ProfilePageModule } from '../profile/profile.module';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { ShopCatalogPageModule } from '../shop-catalog/shop-catalog.module';
     IonicModule,
     WebPagePageRoutingModule,
     SectionContainerModule,
-    ShopCatalogPageModule
+    ShopCatalogPageModule,
+    ProfilePageModule,
   ],
   declarations: [WebPagePage]
 })

@@ -1,67 +1,30 @@
-<!-- <ion-spinner *ngIf="!products"></ion-spinner>
-
-
-<ion-content>
-  <div class="app-catalog">
-    <div class="container">
-      <ion-grid>
-        <h2 class="title">Tienda {{shopId}} catalog</h2>
-        <ion-row *ngIf='products'>
-          <ng-container *ngFor="let product of products;">
-            <div class="col-md-3 card_container">
-              <div class="card">
-                <div class="bg-image hover-overlay" mdbRipple rippleColor="light">
-                  <ion-img class="img" [src]="'http://localhost:8000' + product.avatar" alt="Product Image"></ion-img>
-                  <a [routerLink]="['/product',product.id_product]" class="btn btn-overlay"> <ion-icon
-                      name="cart-outline"></ion-icon> Shop</a>
-                </div>
-                <div class="card-body">
-                  <h5 class="card-title">{{ product.name }}</h5>
-                  <p class="card-text">{{ product.short_description }}</p>
-                  <p class="card-price">{{ product.price}} $</p>
-                </div>
-              </div>
-            </div>
-          </ng-container>
-        </ion-row>
-        <div *ngIf="!products || products.length === 0">
-          <p class="title">No hay productos disponibles</p>
-        </div>
-      </ion-grid>
-    </div>
-  </div>
-</ion-content> -->
-
-
 <ion-spinner *ngIf="!products"></ion-spinner>
 
-<ion-content>
-  <div class="app-catalog">
-    <div class="container">
-      <ion-grid>
-        <h2 class="title">Tienda {{shopId}} catalog</h2>
-        <ion-row *ngIf='products'>
-          <ng-container *ngFor="let product of products;">
-            <div class="col-md-3 card_container">
-              <div class="card">
-                <div class="bg-image hover-overlay" mdbRipple rippleColor="light">
-                  <ion-img class="img" [src]="'http://localhost:8000' + product.avatar" alt="Product Image"></ion-img>
-                  <a [routerLink]="['/product',product.id_product]" class="btn btn-overlay"> <ion-icon
-                      name="cart-outline"></ion-icon> Shop</a>
-                </div>
-                <div class="card-body">
-                  <h5 class="card-title">{{ product.name }}</h5>
-                  <p class="card-text">{{ product.short_description }}</p>
-                  <p class="card-price">{{ product.price}} $</p>
-                </div>
+<div class="app-catalog">
+  <div class="container">
+    <ion-grid>
+      <h2 class="title">Tienda {{shopName}} catalog</h2>
+      <ion-row *ngIf='products'>
+        <ng-container *ngFor="let product of products;">
+          <div class="col-md-3 card_container">
+            <div class="card">
+              <div class="bg-image hover-overlay" mdbRipple rippleColor="light">
+                <ion-img class="img" [src]="'http://localhost:8000' + product.avatar" alt="Product Image"></ion-img>
+                <a [routerLink]="['/product',product.id_product]" class="btn btn-overlay"> <ion-icon
+                    name="cart-outline"></ion-icon> Shop</a>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">{{ product.short_description }}</p>
+                <p class="card-price">{{ product.price}} $</p>
               </div>
             </div>
-          </ng-container>
-        </ion-row>
-        <div *ngIf="!products || products.length === 0">
-          <p class="title">No hay productos disponibles</p>
-        </div>
-      </ion-grid>
-    </div>
+          </div>
+        </ng-container>
+      </ion-row>
+      <div *ngIf="!products || products.length === 0">
+        <p class="title">No hay productos disponibles</p>
+      </div>
+    </ion-grid>
   </div>
-</ion-content>
+</div>
