@@ -32,14 +32,18 @@
           <ion-buttons slot="start" *ngIf="isLoggedIn()">
             <ion-menu-button></ion-menu-button>
           </ion-buttons>
-          <ion-title><a [routerLink]="['/home']" style="text-decoration: none"><img src="../../../assets/logo.webp"
-                width="40px" class="rounded-circle" /></a></ion-title>
+          <ion-title>
+            <a [routerLink]="['/home']" style="text-decoration: none">
+              <img src="../../../assets/logo.webp" width="40px" class="rounded-circle" />
+            </a>
+          </ion-title>
         </div>
         <div class="col-6 r-col">
           <ion-fab *ngIf="profile && isLoggedIn()">
             <ion-label style="font-weight: 500">{{ user!.username }}</ion-label>
             <ion-fab-button size="small">
-              <img src="http://127.0.0.1:8000/{{ profile.avatar }}" width="40px" class="rounded-circle" />
+              <img *ngIf="!profile.avatar" src="/assets/avatar.webp"  width="40px">
+              <img *ngIf="profile.avatar" src="http://127.0.0.1:8000/{{ profile.avatar }}" width="40px" height="40px" />
             </ion-fab-button>
             <ion-fab-list side="start">
               <ion-button *ngIf="isLoggedIn()" (click)="logout()">logout</ion-button>

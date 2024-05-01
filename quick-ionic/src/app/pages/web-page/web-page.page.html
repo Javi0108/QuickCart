@@ -1,8 +1,57 @@
 <ion-spinner *ngIf="!shopData"></ion-spinner>
-<ion-content>
-  <div class="p-5 pt-2">
-    <div *ngIf="sections">
-      <app-section-container [sections]="sections"></app-section-container>
+
+<ion-header *ngIf="shopData">
+  <ion-toolbar color="primary">
+    <div slot="start" style="display: flex; align-items: center;" class="ms-5">
+      <ion-img [src]="'http://localhost:8000'+shopData.logo" style="width: 50px;"></ion-img>
+      <ion-title style="margin-left: 10px;">{{shopData.name}}</ion-title>
+    </div>
+    <ion-buttons slot="end">
+      <ion-button (click)="changePageShow('home')" expand="block" fill="clear" shape="round">
+        Home
+      </ion-button>
+      <ion-button (click)="changePageShow('catalog')" expand="block" fill="clear" shape="round">
+        Catalog
+      </ion-button>
+      <ion-button (click)="changePageShow('about')" expand="block" fill="clear" shape="round">
+        About
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<div *ngIf="shouldShowIonContentValue">
+  <div *ngIf="shopData">
+    <div *ngIf="showSections" class="p-5 pt-2">
+      <div *ngIf="sections">
+        <app-section-container [sections]="sections"></app-section-container>
+      </div>
+    </div>
+
+    <div *ngIf="showCatalog" class="p-5 pt-2">
+      <app-shop-catalog [id]="shopId" [shopName]="shopData.name"></app-shop-catalog>
+    </div>
+
+    <div *ngIf="showAbout" class="p-5 pt-2">
+      <app-profile [id]="shopData.profile"></app-profile>
+    </div>
+  </div>
+</div>
+
+<ion-content *ngIf="!shouldShowIonContentValue">
+  <div *ngIf="shopData">
+    <div *ngIf="showSections" class="p-5 pt-2">
+      <div *ngIf="sections">
+        <app-section-container [sections]="sections"></app-section-container>
+      </div>
+    </div>
+
+    <div *ngIf="showCatalog" class="p-5 pt-2">
+      <app-shop-catalog [id]="shopId" [shopName]="shopData.name"></app-shop-catalog>
+    </div>
+
+    <div *ngIf="showAbout" class="p-5 pt-2">
+      <app-profile [idProfileShop]="shopData.profile"></app-profile>
     </div>
   </div>
 </ion-content>

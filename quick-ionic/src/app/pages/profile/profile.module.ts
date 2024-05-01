@@ -16,5 +16,6 @@ import { ProfilePage } from './profile.page';
     ProfilePageRoutingModule,
   ],
   declarations: [ProfilePage],
+  exports: [ProfilePage]
 })
 export class ProfilePageModule {}

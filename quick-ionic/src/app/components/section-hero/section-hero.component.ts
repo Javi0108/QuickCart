@@ -4,7 +4,8 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { IonModal } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
-import { TypeaheadComponent } from '../typeahead/typeahead.component';
+import { Item, TypeaheadComponent } from '../typeahead/typeahead.component';
+import { Product } from 'src/app/interfaces/product.interface';
 
 @Component({
   selector: 'app-section-hero',
@@ -13,6 +14,7 @@ import { TypeaheadComponent } from '../typeahead/typeahead.component';
 })
 export class SectionHeroComponent implements OnInit {
 
+  @Input() shopId!: number;
   @Input() section: any;
 
   editMode: boolean = false;
@@ -20,7 +22,8 @@ export class SectionHeroComponent implements OnInit {
   sectionId?: number;
   sectionType?: string;
   sectionData?: HeroSectionData;
-
+  products: Item[] = [];
+  
   sectionFormBannerOne!: FormGroup;
   sectionFormBannerTwo!: FormGroup;
   sectionFormBannerThree!: FormGroup;
@@ -33,19 +36,7 @@ export class SectionHeroComponent implements OnInit {
   selectedProductBannerTwo: string | null = null;
   selectedProductBannerThree: string | null = null;
 
-  products: any[] = [
-    { text: 'Apple', value: '1', img: "https://123cuidatuhogar.com/wp-content/uploads/2019/07/LAVALOZA-ENVASE-RECUPERADO-500-ML.png" },
-    { text: 'Apricot', value: '2' , img: "https://123cuidatuhogar.com/wp-content/uploads/2019/07/LAVALOZA-ENVASE-RECUPERADO-500-ML.png" },
-    { text: 'Banana', value: '3' , img: "https://123cuidatuhogar.com/wp-content/uploads/2019/07/LAVALOZA-ENVASE-RECUPERADO-500-ML.png" },
-    { text: 'Blackberry', value: '4' , img: "https://123cuidatuhogar.com/wp-content/uploads/2019/07/LAVALOZA-ENVASE-RECUPERADO-500-ML.png" },
-    { text: 'Blueberry', value: '5' , img: "https://123cuidatuhogar.com/wp-content/uploads/2019/07/LAVALOZA-ENVASE-RECUPERADO-500-ML.png" },
-    { text: 'Cherry', value: '6' , img: "https://123cuidatuhogar.com/wp-content/uploads/2019/07/LAVALOZA-ENVASE-RECUPERADO-500-ML.png" },
-    { text: 'Cranberry', value: '7' , img: "https://123cuidatuhogar.com/wp-content/uploads/2019/07/LAVALOZA-ENVASE-RECUPERADO-500-ML.png" },
-    { text: 'Grape', value: '7' , img: "https://123cuidatuhogar.com/wp-content/uploads/2019/07/LAVALOZA-ENVASE-RECUPERADO-500-ML.png" },
-    { text: 'Grapefruit', value: '8' , img: "https://123cuidatuhogar.com/wp-content/uploads/2019/07/LAVALOZA-ENVASE-RECUPERADO-500-ML.png" },
-    { text: 'Guava', value: '9' , img: "https://123cuidatuhogar.com/wp-content/uploads/2019/07/LAVALOZA-ENVASE-RECUPERADO-500-ML.png" },
-    { text: 'Jackfruit', value: '10' , img: "https://123cuidatuhogar.com/wp-content/uploads/2019/07/LAVALOZA-ENVASE-RECUPERADO-500-ML.png" },
-  ];
+  
 
   constructor(
     private sectionEventService: SectionEventService,
@@ -54,9 +45,10 @@ export class SectionHeroComponent implements OnInit {
 
   ngOnInit() {
     if (this.section) {
-      this.editMode = this.section.editMode
       this.sectionId = this.section.id
       this.sectionType = this.section.type
+      this.editMode = this.section.editMode
+      this.products = this.section.products
 
       if (this.section.data.defaultSectionHeroData) {
         this.sectionData = this.section.data.defaultSectionHeroData
@@ -68,6 +60,7 @@ export class SectionHeroComponent implements OnInit {
     if (this.editMode) {
       this.initializeEditMode()
     }
+
   }
 
   initializeEditMode() {
@@ -116,10 +109,12 @@ export class SectionHeroComponent implements OnInit {
 
   deleteSection() {
     let section: Section = {
+      provitionalId: "",
       id: this.sectionId,
       type: "hero",
       editMode: true,
-      data: this.sectionData
+      data: this.sectionData,
+      products: []
     }
     this.sectionEventService.deleteSection.emit(section);
   }
@@ -144,8 +139,6 @@ export class SectionHeroComponent implements OnInit {
 
   productSelectionChanged(selectedValue: string | null) {
 
-    console.log(this.section)
-
     this.sectionData![this.selectedSegment].related_product = selectedValue;
     
     if(this.selectedSegment == 'banner_1'){
@@ -168,10 +161,12 @@ export class SectionHeroComponent implements OnInit {
   }
 
   async openModal() {
+
     const modal = await this.modalController.create({
       component: TypeaheadComponent,
       cssClass: 'my-custom-class',
       componentProps: {
+        'shopId': this.shopId,
         'items': this.products,
         'selectedItem': this.selectedProductBannerOne,
         'title': 'Select a Related Product',
@@ -183,10 +178,7 @@ export class SectionHeroComponent implements OnInit {
     modal.onDidDismiss().then((data) => {
       if (data.role === 'confirm') {
         const selectedItem = data.data;
-        console.log(selectedItem)
         this.productSelectionChanged(selectedItem)
-      } else if (data.role === 'cancel') {
-        // El usuario canceló la selección, puedes manejarlo aquí si es necesario
       }
     });
 

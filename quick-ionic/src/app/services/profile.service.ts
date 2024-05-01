@@ -24,7 +24,7 @@ export class ProfileService {
   }
 
   getProfileById(profileId: number): Observable<any> {
-    return this.http.get<Profile>(`${this.baseURL}${profileId}`, { headers: this.getHeadersGet() });
+    return this.http.get<Profile>(`${this.baseURL}${profileId}/`, { headers: this.getHeadersGet() });
   }
 
   putEditProfile(formData: FormData): Observable<any> {

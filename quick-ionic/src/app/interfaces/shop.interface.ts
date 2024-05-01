@@ -4,6 +4,7 @@ export interface ShopData {
     title: string;
     description: string;
     address: string;
+    profile: number;
     logo: string;
     products: ProductData[];
 }

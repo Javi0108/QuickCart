@@ -1,14 +1,34 @@
 <ion-spinner *ngIf="!shopData"></ion-spinner>
+
+
 <ion-content>
-  <div class="p-5 pt-2">
+
+  <ion-segment [(ngModel)]="selectedSegment" (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="edit">
+      <ion-label>Edit</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="preview">
+      <ion-label>Preview</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div class="p-5 pt-2" *ngIf="selectedSegment === 'edit'">
     <div *ngIf="sections">
-      <app-section-container [sections]="sections"></app-section-container>
+      <app-section-container [sections]="sections" [shopId]="shopId"></app-section-container>
+    </div>
+  </div>
+
+  <div class="pt-2" *ngIf="selectedSegment === 'preview'">
+    <div *ngIf="sections">
+      <app-web-page></app-web-page>
     </div>
   </div>
 </ion-content>
-<ion-toolbar color="light" style="position: sticky; top: 0">
+
+<ion-toolbar *ngIf="selectedSegment === 'edit'" color="light" style="position: sticky; top: 0">
   <ion-buttons slot="start">
     <button (click)="addSection('hero')" class="btn btn-primary ms-5 me-2">Add Hero</button>
+    <button (click)="addSection('banners')" class="btn btn-primary">Add Banners</button>
     <button (click)="addSection('products')" class="btn btn-primary">Add Products</button>
   </ion-buttons>
   <ion-buttons slot="end">

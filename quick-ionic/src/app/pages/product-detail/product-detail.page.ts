@@ -21,7 +21,6 @@ export class ProductDetailPage implements OnInit{
     const productId = this.route.snapshot.paramMap.get('id')
     if (productId) {
       this.productId =+ productId;
-      console.log(productId)
       this.getProduct();
     }else{
       console.error("Invalid Product ID")
@@ -32,7 +31,6 @@ export class ProductDetailPage implements OnInit{
     this.productService.getProductById(this.productId).subscribe({
       next: (productData: Product) => {
         this.productData = productData;
-        console.log(productData)
         if (!this.productData) {
           console.error('No se encontró el producto con el ID proporcionado.');
         }

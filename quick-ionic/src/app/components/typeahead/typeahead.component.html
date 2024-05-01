@@ -3,20 +3,23 @@
     <ion-buttons slot="start">
       <ion-button (click)="cancelChanges()">Cancel</ion-button>
     </ion-buttons>
-    <ion-title>{{ title }}</ion-title>
+    <ion-title slot="">{{ title }}</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="confirmChanges()">Done</ion-button>
     </ion-buttons>
   </ion-toolbar>
   <ion-toolbar>
-    <ion-searchbar (ionInput)="searchbarInput($event)"></ion-searchbar>
+    <ion-searchbar slot="start" (ionInput)="searchbarInput($event)"></ion-searchbar>
+    <ion-button shape="round" slot="end" (click)="addProduct()">
+      <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
 
 <ion-content color="light" class="ion-padding">
   <ion-radio-group [(ngModel)]="selectedItem">
-    <ion-list id="modal-list" [inset]="true">
+    <ion-list id="modal-list" [inset]="true" *ngIf="filteredItems">
       <ion-item *ngFor="let item of filteredItems; trackBy: trackItems">
         <ion-radio [value]="item.value" (ionChange)="checkboxChange($event)">
           <ion-label style="display: flex; align-items: center;">

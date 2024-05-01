@@ -39,7 +39,6 @@ export class ChangePassword implements OnInit {
     if (userString) {
       this.user = JSON.parse(userString) as User;
     }
-    console.log(this.user.id);
 
     if (this.validatePassword()) {
       console.log('Password validated');

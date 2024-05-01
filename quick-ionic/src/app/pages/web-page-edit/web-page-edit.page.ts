@@ -1,10 +1,13 @@
-import { HeroSectionData, Section } from './../../interfaces/section.interface';
+import { Section } from './../../interfaces/section.interface';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { defaultSectionHeroData } from 'src/app/interfaces/sections-default';
+import { Product } from 'src/app/interfaces/product.interface';
+import { defaultSectionBannersData, defaultSectionHeroData } from 'src/app/interfaces/sections-default';
 import { ShopData } from 'src/app/interfaces/shop.interface';
+import { ProductService } from 'src/app/services/product.service';
 import { SectionEventService } from 'src/app/services/section-event.service';
 import { ShopService } from 'src/app/services/shop.service';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-web-page-edit',
@@ -17,13 +20,23 @@ export class WebPageEditPage implements OnInit {
   shopId!: number;
 
   sections: Section[] = [];
+  products: Product[] = [];
 
-  constructor(private route: ActivatedRoute, private shopService: ShopService, private sectionEventService: SectionEventService) { }
+  selectedSegment: 'edit' | 'preview' = 'edit';
+
+
+  constructor(
+    private route: ActivatedRoute,
+    private shopService: ShopService,
+    private sectionEventService: SectionEventService,
+    private productService: ProductService
+  ) { }
 
   ngOnInit() {
     const shopIdString = this.route.snapshot.paramMap.get('id');
     if (shopIdString) {
       this.shopId = +shopIdString;
+      this.loadProducts(this.shopId);
       this.getShop();
     } else {
       console.error('No se proporcionó un ID de tienda válido.');
@@ -32,6 +45,10 @@ export class WebPageEditPage implements OnInit {
     this.sectionEventService.deleteSection.subscribe((section: Section) => {
       this.deleteSection(section);
     })
+  }
+
+  segmentChanged(event: CustomEvent) {
+    this.selectedSegment = event.detail.value;
   }
 
   getShop() {
@@ -43,6 +60,7 @@ export class WebPageEditPage implements OnInit {
         } else {
           this.sections = shopData.sections;
           this.setEditModeForSections();
+          this.loadProductsForSections();
         }
       },
       error: (error) => {
@@ -57,41 +75,54 @@ export class WebPageEditPage implements OnInit {
     });
   }
 
+  loadProductsForSections() {
+    this.sections.forEach((section: Section) => {
+      section.products = this.products;
+    });
+  }
+
   addSection(sectionType: string) {
+    const id = uuidv4();
     let newSection: Section;
 
+    const order = this.sections.length;
+
     if (sectionType === 'hero') {
-      newSection = { id: undefined, type: sectionType, editMode: true, data: { ...defaultSectionHeroData } };
+      newSection = { provitionalId: id, id: undefined, type: sectionType, editMode: true, data: { ...defaultSectionHeroData }, products: this.products};
+    } else if (sectionType === 'banners') {
+      newSection = { provitionalId: id, id: undefined, type: sectionType, editMode: true, data: { ...defaultSectionBannersData }, products: this.products};
     } else if (sectionType === 'products') {
-      newSection = { id: undefined, type: sectionType, editMode: true, data: {} };
+      newSection = { provitionalId: id, id: undefined, type: sectionType, editMode: true, data: {}, products: this.products };
     } else {
-      newSection = { id: undefined, type: "", editMode: true, data: {} };
+      newSection = { provitionalId: id, id: undefined, type: "", editMode: true, data: {}, products: this.products };
     }
 
     this.sections.push(newSection);
-    console.log(this.sections);
   }
+
+
 
 
   saveAllSections() {
     if (this.sections.length === 0) {
-      console.log("No hay secciones para guardar.");
       return;
     }
 
+    let order = 0;
+
     this.sections.forEach((section: Section) => {
       if (section.id) {
-        this.updateSection(section);
+        this.updateSection(section, order);
       } else {
-        this.saveSection(section);
+        this.saveSection(section, order);
       }
+      order++
     });
   }
 
-  saveSection(section: Section) {
-    this.shopService.saveShopSection(this.shopId, section).subscribe({
+  saveSection(section: Section, order: number) {
+    this.shopService.saveShopSection(this.shopId, order, section).subscribe({
       next: (shopData) => {
-        console.log("Guardado correctamente", shopData)
         this.getShop()
       },
       error: (error) => {
@@ -100,11 +131,9 @@ export class WebPageEditPage implements OnInit {
     })
   }
 
-  updateSection(section: Section) {
-    this.shopService.updateShopSection(section.id!, section).subscribe({
-      next: (shopData) => {
-        console.log("Actualizado Correctamente", shopData)
-      },
+  updateSection(section: Section, order: number) {
+    this.shopService.updateShopSection(section.id!, order, section).subscribe({
+      next: (shopData) => { },
       error: (error) => {
         console.error("no se ha guardado correctamente", error)
       }
@@ -113,7 +142,7 @@ export class WebPageEditPage implements OnInit {
   }
 
   deleteSection(section: Section) {
-    if (section.id) {
+    if (section.id > 0) {
       this.shopService.deleteShopSection(section.id).subscribe({
         next: (data) => {
           const index = this.sections.findIndex(s => s.id === section.id);
@@ -123,12 +152,28 @@ export class WebPageEditPage implements OnInit {
         }
       });
     } else {
-      const index = this.sections.indexOf(section);
-      console.log(index, section)
+      const index = this.sections.findIndex(s => s.id === section.id);
       if (index !== -1) {
         this.sections.splice(index, 1);
       }
     }
   }
+
+
+  loadProducts(shopId: number) {
+    this.productService.getShopProducts(shopId).subscribe(
+      (response) => {
+        this.products = response.map((product: Product) => ({
+          text: product.name,
+          value: product.id_product.toString(),
+          img: "http://localhost:8000" + product.avatar
+        }));
+      },
+      (error) => {
+        console.error('Error loading products:', error);
+      }
+    );
+  }
+
 
 }

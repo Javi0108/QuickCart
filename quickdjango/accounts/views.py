@@ -11,6 +11,8 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken, BlacklistMixin
 from rest_framework.parsers import MultiPartParser, FormParser
 from django.contrib.auth.hashers import check_password
+from django.shortcuts import get_object_or_404
+
 
 class RegisterView(APIView):
     
@@ -97,7 +99,7 @@ class ProfileByIdView(APIView):
     permission_classes = [AllowAny]
 
     def get(self, request, id):
-        profile = Profile.objects.get(user=id)
+        profile = get_object_or_404(Profile, pk=id)
         serializer = ProfileSerializerByCode(profile)
         return Response(serializer.data, status=status.HTTP_200_OK)
     

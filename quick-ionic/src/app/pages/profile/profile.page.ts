@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observer } from 'rxjs';
 import { Profile } from 'src/app/interfaces/profile.interface';
@@ -13,6 +13,9 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
+
+  @Input() idProfileShop: number | undefined;
+
   profile!: Profile;
   user!: User;
   pageLoaded: boolean;
@@ -73,7 +76,6 @@ export class ProfilePage implements OnInit {
   }
 
   ngOnInit() {
-    // Load user profile
     this.loadProfile();
     this.editProfileForm.disable();
     this.socials.disable();
@@ -94,7 +96,15 @@ export class ProfilePage implements OnInit {
   }
 
   loadProfile() {
-    const userId = this.route.snapshot.paramMap.get('id');
+
+
+    let userId ;
+    if (this.idProfileShop) {
+      userId = this.idProfileShop + "";
+    } else {
+      userId = this.route.snapshot.paramMap.get('id');
+    }
+
     if (userId) {
       this.profileService.getProfileById(parseInt(userId)).subscribe({
         next: (profile: Profile) => {
@@ -107,6 +117,7 @@ export class ProfilePage implements OnInit {
         },
       } as Observer<Profile>);
     } else {
+
       this.profileService.getProfile().subscribe({
         next: (profile: Profile) => {
           this.loadUsername();
@@ -121,7 +132,7 @@ export class ProfilePage implements OnInit {
     }
   }
 
-  onFileChange(event: Event):void {
+  onFileChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       this.avatarFile = input.files ? input.files[0] : null; // Store the file reference
@@ -154,7 +165,6 @@ export class ProfilePage implements OnInit {
     }
 
     formData.append('socials', JSON.stringify(socialsJSON))
-    console.log();
 
     if (this.avatarFile) {
       formData.append('avatar', this.avatarFile); // Add the file if it exists
