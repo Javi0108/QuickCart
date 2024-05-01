@@ -7,11 +7,11 @@
       <h2 class="title">Products Management {{shopName}}</h2>
       <ion-grid>
         <ion-row class="ion-text-end">
-          <ion-col size="6">
+          <ion-col size="11">
             <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="onSearchChange($event)" show-cancel-button="always" cancel-button-text="Cancel" cancel-button-icon="trash" placeholder="Search"></ion-searchbar>
           </ion-col>
-          <ion-col size="6">
-            <ion-button title="Add Product Form" (click)="openAddModal()">Add  <ion-icon name="add-outline"></ion-icon></ion-button>
+          <ion-col size="1">
+            <ion-button class="btn-add" title="Add Product Form" (click)="openAddModal()"><ion-icon name="add-outline"></ion-icon></ion-button>
           </ion-col>
         </ion-row>
 
