@@ -99,7 +99,7 @@ export class TypeaheadComponent implements OnInit {
         this.items.push(newProduct);
         this.filteredItems.push(newProduct);
   
-        this.selectionChange.emit(this.selectedItem);
+        this.selectedItem = newProduct.value;
       }
     });
 

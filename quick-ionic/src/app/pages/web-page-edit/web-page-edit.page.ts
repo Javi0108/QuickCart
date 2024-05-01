@@ -85,17 +85,22 @@ export class WebPageEditPage implements OnInit {
     const id = uuidv4();
     let newSection: Section;
 
+    const order = this.sections.length;
+
     if (sectionType === 'hero') {
-      newSection = { provitionalId: id, id: undefined, type: sectionType, editMode: true, data: { ...defaultSectionHeroData }, products: this.products };
+      newSection = { provitionalId: id, id: undefined, type: sectionType, editMode: true, data: { ...defaultSectionHeroData }, products: this.products};
     } else if (sectionType === 'banners') {
-      newSection = { provitionalId: id, id: undefined, type: sectionType, editMode: true, data: { ...defaultSectionBannersData }, products: this.products };
+      newSection = { provitionalId: id, id: undefined, type: sectionType, editMode: true, data: { ...defaultSectionBannersData }, products: this.products};
     } else if (sectionType === 'products') {
       newSection = { provitionalId: id, id: undefined, type: sectionType, editMode: true, data: {}, products: this.products };
     } else {
       newSection = { provitionalId: id, id: undefined, type: "", editMode: true, data: {}, products: this.products };
     }
+
     this.sections.push(newSection);
   }
+
+
 
 
   saveAllSections() {
@@ -103,17 +108,20 @@ export class WebPageEditPage implements OnInit {
       return;
     }
 
+    let order = 0;
+
     this.sections.forEach((section: Section) => {
       if (section.id) {
-        this.updateSection(section);
+        this.updateSection(section, order);
       } else {
-        this.saveSection(section);
+        this.saveSection(section, order);
       }
+      order++
     });
   }
 
-  saveSection(section: Section) {
-    this.shopService.saveShopSection(this.shopId, section).subscribe({
+  saveSection(section: Section, order: number) {
+    this.shopService.saveShopSection(this.shopId, order, section).subscribe({
       next: (shopData) => {
         this.getShop()
       },
@@ -123,9 +131,9 @@ export class WebPageEditPage implements OnInit {
     })
   }
 
-  updateSection(section: Section) {
-    this.shopService.updateShopSection(section.id!, section).subscribe({
-      next: (shopData) => {},
+  updateSection(section: Section, order: number) {
+    this.shopService.updateShopSection(section.id!, order, section).subscribe({
+      next: (shopData) => { },
       error: (error) => {
         console.error("no se ha guardado correctamente", error)
       }

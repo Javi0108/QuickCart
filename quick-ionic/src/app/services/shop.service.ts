@@ -20,12 +20,13 @@ export class ShopService {
     return this.http.get<any>(`${this.baseURL}detail/${id_shop}/`, { headers: this.getHeaders() });
   }
 
-  saveShopSection(id_shop: number, shop_data: Section) {
-    return this.http.post<any>(`${this.baseURL}add-shop-section/`, { id_shop, shop_data }, { headers: this.getHeaders() });
+  saveShopSection(id_shop: number, order: number, shop_data: Section) {
+    return this.http.post<any>(`${this.baseURL}add-shop-section/`, { id_shop, shop_data, order }, { headers: this.getHeaders() });
   }
 
-  updateShopSection(idSection: number, shop_data: Section) {
-    return this.http.put<any>(`${this.baseURL}sections/edit/${idSection}/`, { shop_data }, { headers: this.getHeaders() })
+  updateShopSection(idSection: number, order: number, shop_data: Section) {
+    console.log(order)
+    return this.http.put<any>(`${this.baseURL}sections/edit/${idSection}/`, { shop_data, order }, { headers: this.getHeaders() })
   }
 
   deleteShopSection(idSection: number){

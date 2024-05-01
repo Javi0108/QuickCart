@@ -112,7 +112,8 @@ class SellerShopSectionView(APIView):
     def get(self, request, id_shop):
         if id_shop: 
             try:
-                sections = Section.objects.filter(shopsectionorder__shop_id=id_shop)
+                # Obtener las secciones ordenadas por el campo 'order'
+                sections = Section.objects.filter(shopsectionorder__shop_id=id_shop).order_by('shopsectionorder__order')
                 serialized_sections = ShopSectionSerializer(sections, many=True)
                 return Response(serialized_sections.data, status=status.HTTP_200_OK)
             except Section.DoesNotExist:
@@ -120,9 +121,11 @@ class SellerShopSectionView(APIView):
         else:
             return Response({"message": "Tienda no encontrada"}, status=status.HTTP_404_NOT_FOUND)
 
+
     def post(self, request):
         id_shop = request.data.get('id_shop')
         shop_data = request.data.get('shop_data')
+        order = request.data.get('order')
 
         try:
             shop = Shop.objects.get(id_shop=id_shop)
@@ -133,12 +136,28 @@ class SellerShopSectionView(APIView):
 
         if section_serializer.is_valid():
             section = section_serializer.save()
-            shop_section_order = ShopSectionOrder.objects.create(shop=shop, section=section)
+            shop_section_order = ShopSectionOrder.objects.create(shop=shop, section=section, order=order)
             return Response({"success": "Sección de tienda creada exitosamente"}, status=status.HTTP_201_CREATED)
         else:
             print(section_serializer.errors)
             return Response({"error": "Datos de sección no válidos"}, status=status.HTTP_400_BAD_REQUEST)
         
+    # def put(self, request, id_shop_section): 
+    #     try:
+    #         section = Section.objects.get(pk=id_shop_section)
+    #     except Section.DoesNotExist: 
+    #         return Response({"error": "La sección de tienda no existe"}, status=status.HTTP_400_BAD_REQUEST)
+        
+    #     shop_data = request.data.get('shop_data')
+    #     section_serializer = ShopSectionSerializer(instance=section, data=shop_data)
+        
+    #     if section_serializer.is_valid():
+    #         section_serializer.save()
+    #         return Response({"success": "Sección de tienda actualizada exitosamente"}, status=status.HTTP_200_OK)
+    #     else:
+    #         print(section_serializer.errors)
+    #         return Response({"error": "Datos de sección no válidos"}, status=status.HTTP_400_BAD_REQUEST)
+    
     def put(self, request, id_shop_section): 
         try:
             section = Section.objects.get(pk=id_shop_section)
@@ -146,10 +165,13 @@ class SellerShopSectionView(APIView):
             return Response({"error": "La sección de tienda no existe"}, status=status.HTTP_400_BAD_REQUEST)
         
         shop_data = request.data.get('shop_data')
+        order = request.data.get('order')  # Obtener el nuevo orden desde la solicitud
         section_serializer = ShopSectionSerializer(instance=section, data=shop_data)
         
         if section_serializer.is_valid():
             section_serializer.save()
+            # Actualizar el orden en ShopSectionOrder
+            ShopSectionOrder.objects.filter(section=section).update(order=order)
             return Response({"success": "Sección de tienda actualizada exitosamente"}, status=status.HTTP_200_OK)
         else:
             print(section_serializer.errors)
