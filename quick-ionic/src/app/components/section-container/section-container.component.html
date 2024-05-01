@@ -1,3 +1,18 @@
-<div *ngFor="let section of sections">
-  <ng-container *ngComponentOutlet="sectionComponents[section.type]; inputs: { section: section, shopId: shopId }"></ng-container>
+<div *ngFor="let section of sections; let i = index" >
+  <ion-row *ngIf="section.editMode" class="section-wrapper">
+    <ion-col size="1" class="move-buttons">
+      <ion-button *ngIf="i > 0" (click)="moveSectionUp(i)" fill="outline" class="button-up">
+        <ion-icon slot="icon-only" name="arrow-up"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="i < sections.length - 1" (click)="moveSectionDown(i)" fill="outline" class="button-down">
+        <ion-icon slot="icon-only" name="arrow-down"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col size="11">
+      <ng-container *ngComponentOutlet="sectionComponents[section.type]; inputs: { section: section, shopId: shopId }"></ng-container>
+    </ion-col>
+  </ion-row>
+  <div *ngIf="!section.editMode">
+    <ng-container *ngComponentOutlet="sectionComponents[section.type]; inputs: { section: section, shopId: shopId }"></ng-container>
+  </div>
 </div>

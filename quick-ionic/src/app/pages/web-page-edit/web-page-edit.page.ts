@@ -100,10 +100,27 @@ export class WebPageEditPage implements OnInit {
     this.sections.push(newSection);
   }
 
-
-
+  moveSectionUp(index: number) {
+    console.log(this.sections)
+    if (index > 0) {
+      const temp = this.sections[index - 1];
+      this.sections[index - 1] = this.sections[index];
+      this.sections[index] = temp;
+    }
+  }
+  
+  moveSectionDown(index: number) {
+    console.log(this.sections)
+    if (index < this.sections.length - 1) {
+      const temp = this.sections[index + 1];
+      this.sections[index + 1] = this.sections[index];
+      this.sections[index] = temp;
+    }
+  }
 
   saveAllSections() {
+
+    console.log(this.sections)
     if (this.sections.length === 0) {
       return;
     }

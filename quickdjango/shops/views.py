@@ -57,7 +57,6 @@ class SellerShopsView(APIView):
     permission_classes=[IsAuthenticated]
     
     def get(self, request, id_shop=None):
-        # Si no se proporciona un ID de tienda, devuelve todas las tiendas del vendedor
         print(id_shop)
         if id_shop is None:
             profile = request.user.profile
@@ -69,11 +68,15 @@ class SellerShopsView(APIView):
         try:
             shop = Shop.objects.get(id_shop=id_shop)
             serializer = ShopDetailSerializer(shop)
-            sections = Section.objects.filter(shopsectionorder__shop_id=id_shop)
+            
+            # Obtener las secciones ordenadas por el campo 'order'
+            sections = Section.objects.filter(shopsectionorder__shop_id=id_shop).order_by('shopsectionorder__order')
             serialized_sections = ShopSectionSerializer(sections, many=True)
+            
             return Response({"shop_data": serializer.data, "sections": serialized_sections.data}, status=status.HTTP_200_OK)
         except Shop.DoesNotExist:
             return Response({"message": "Tienda no encontrada"}, status=status.HTTP_404_NOT_FOUND)
+
         
 
     def post(self, request):
@@ -108,19 +111,6 @@ class SellerShopsView(APIView):
 
 class SellerShopSectionView(APIView):
     permission_classes=[IsAuthenticated]
-    
-    def get(self, request, id_shop):
-        if id_shop: 
-            try:
-                # Obtener las secciones ordenadas por el campo 'order'
-                sections = Section.objects.filter(shopsectionorder__shop_id=id_shop).order_by('shopsectionorder__order')
-                serialized_sections = ShopSectionSerializer(sections, many=True)
-                return Response(serialized_sections.data, status=status.HTTP_200_OK)
-            except Section.DoesNotExist:
-                return Response({"error": "No se encontraron secciones para esta tienda"}, status=status.HTTP_404_NOT_FOUND)
-        else:
-            return Response({"message": "Tienda no encontrada"}, status=status.HTTP_404_NOT_FOUND)
-
 
     def post(self, request):
         id_shop = request.data.get('id_shop')

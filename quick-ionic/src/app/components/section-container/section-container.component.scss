@@ -1,0 +1,20 @@
+.section-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    /* Espacio entre cada sección */
+}
+
+.move-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* Centrar verticalmente */
+}
+
+.button-up,
+.button-down {
+    margin-bottom: 5px;
+    /* Espacio entre los botones */
+}

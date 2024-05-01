@@ -1,6 +1,5 @@
 <ion-spinner *ngIf="!shopData"></ion-spinner>
 
-
 <ion-content>
 
   <ion-segment [(ngModel)]="selectedSegment" (ionChange)="segmentChanged($event)">
@@ -14,7 +13,8 @@
 
   <div class="p-5 pt-2" *ngIf="selectedSegment === 'edit'">
     <div *ngIf="sections">
-      <app-section-container [sections]="sections" [shopId]="shopId"></app-section-container>
+      <app-section-container [sections]="sections" [shopId]="shopId" (moveSectionUpEvent)="moveSectionUp($event)"
+        (moveSectionDownEvent)="moveSectionDown($event)">></app-section-container>
     </div>
   </div>
 
