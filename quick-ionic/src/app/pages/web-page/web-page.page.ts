@@ -39,7 +39,6 @@ export class WebPagePage implements OnInit {
   }
 
   shouldShowIonContent() {
-    console.log(window.location.pathname.includes('web-page-edit'))
     return window.location.pathname.includes('web-page-edit');
   }
 
@@ -67,8 +66,6 @@ export class WebPagePage implements OnInit {
   }
 
   changePageShow(option: string) {
-
-    console.log(this.shopData?.profile)
 
     if (option == 'home') {
       this.showSections = true;

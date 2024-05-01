@@ -21,12 +21,10 @@ export class ShopService {
   }
 
   saveShopSection(id_shop: number, shop_data: Section) {
-    console.log(shop_data)
     return this.http.post<any>(`${this.baseURL}add-shop-section/`, { id_shop, shop_data }, { headers: this.getHeaders() });
   }
 
   updateShopSection(idSection: number, shop_data: Section) {
-    console.log("shopa", shop_data)
     return this.http.put<any>(`${this.baseURL}sections/edit/${idSection}/`, { shop_data }, { headers: this.getHeaders() })
   }
 

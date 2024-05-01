@@ -50,7 +50,6 @@ export class SectionBannersComponent  implements OnInit {
       }
     }
 
-    console.log(this.sectionData)
     if(this.editMode){
       this.initializeEditMode()
     }
@@ -152,7 +151,6 @@ export class SectionBannersComponent  implements OnInit {
     modal.onDidDismiss().then((data) => {
       if (data.role === 'confirm') {
         const selectedItem = data.data;
-        console.log(selectedItem)
         this.productSelectionChanged(selectedItem)
       }
     });

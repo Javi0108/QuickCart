@@ -84,8 +84,6 @@ export class WebPageEditPage implements OnInit {
   addSection(sectionType: string) {
     const id = uuidv4();
     let newSection: Section;
-    console.log("uuidv4", id)
-
 
     if (sectionType === 'hero') {
       newSection = { provitionalId: id, id: undefined, type: sectionType, editMode: true, data: { ...defaultSectionHeroData }, products: this.products };
@@ -97,13 +95,11 @@ export class WebPageEditPage implements OnInit {
       newSection = { provitionalId: id, id: undefined, type: "", editMode: true, data: {}, products: this.products };
     }
     this.sections.push(newSection);
-    console.log(this.sections);
   }
 
 
   saveAllSections() {
     if (this.sections.length === 0) {
-      console.log("No hay secciones para guardar.");
       return;
     }
 
@@ -119,7 +115,6 @@ export class WebPageEditPage implements OnInit {
   saveSection(section: Section) {
     this.shopService.saveShopSection(this.shopId, section).subscribe({
       next: (shopData) => {
-        console.log("Guardado correctamente", shopData)
         this.getShop()
       },
       error: (error) => {
@@ -130,9 +125,7 @@ export class WebPageEditPage implements OnInit {
 
   updateSection(section: Section) {
     this.shopService.updateShopSection(section.id!, section).subscribe({
-      next: (shopData) => {
-        console.log("Actualizado Correctamente", shopData)
-      },
+      next: (shopData) => {},
       error: (error) => {
         console.error("no se ha guardado correctamente", error)
       }
@@ -167,7 +160,6 @@ export class WebPageEditPage implements OnInit {
           value: product.id_product.toString(),
           img: "http://localhost:8000" + product.avatar
         }));
-        console.log(this.products);
       },
       (error) => {
         console.error('Error loading products:', error);

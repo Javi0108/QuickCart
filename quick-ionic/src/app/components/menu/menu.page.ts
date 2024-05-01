@@ -28,10 +28,8 @@ export class MenuPage implements OnInit {
   ngOnInit() {
     this.loadProfile();
     const userString = localStorage.getItem('user');
-    console.log(userString)
     if (userString) {
       this.user = JSON.parse(userString) as User;
-      console.log(this.user)
     }
   }
 

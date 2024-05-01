@@ -67,7 +67,6 @@ export class ProductsManagementPage {
     modal.onDidDismiss().then((data) => {
       if (data && data.data) {
         this.products.push(data.data)
-        console.log('Data received from modal:', data.data);
       }
     });
   
@@ -100,11 +99,9 @@ export class ProductsManagementPage {
   }
 
   deleteProduct(id: number) {
-    console.log('Delete product with ID:', id);
     this.products = this.products.filter(product => product.id_product !== id);
     this.productService.deleteProduct(id).subscribe({
       next: (response) => {
-        console.log(response)
         this.loadProducts(this.shopId);
       },
       error: (error:any)=> {

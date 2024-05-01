@@ -24,7 +24,8 @@
     </div>
   </div>
 </ion-content>
-<ion-toolbar color="light" style="position: sticky; top: 0">
+
+<ion-toolbar *ngIf="selectedSegment === 'edit'" color="light" style="position: sticky; top: 0">
   <ion-buttons slot="start">
     <button (click)="addSection('hero')" class="btn btn-primary ms-5 me-2">Add Hero</button>
     <button (click)="addSection('banners')" class="btn btn-primary">Add Banners</button>

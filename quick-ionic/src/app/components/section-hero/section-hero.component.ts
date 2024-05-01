@@ -139,8 +139,6 @@ export class SectionHeroComponent implements OnInit {
 
   productSelectionChanged(selectedValue: string | null) {
 
-    console.log(this.section)
-
     this.sectionData![this.selectedSegment].related_product = selectedValue;
     
     if(this.selectedSegment == 'banner_1'){
@@ -180,7 +178,6 @@ export class SectionHeroComponent implements OnInit {
     modal.onDidDismiss().then((data) => {
       if (data.role === 'confirm') {
         const selectedItem = data.data;
-        console.log(selectedItem)
         this.productSelectionChanged(selectedItem)
       }
     });

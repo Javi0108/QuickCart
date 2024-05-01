@@ -27,7 +27,6 @@ export class TypeaheadComponent implements OnInit {
 
   ngOnInit() {
 
-    console.log(this.items)
     this.filteredItems = [...this.items];
     if (this.selectedItem) {
       this.filteredItems.forEach(item => {

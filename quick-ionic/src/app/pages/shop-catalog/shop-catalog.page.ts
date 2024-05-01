@@ -19,7 +19,6 @@ export class ShopCatalogPage implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.shopId = + params['id'];
-      console.log('ID de la tienda:', this.shopId); // Agregado
       this.loadProducts(this.shopId);
     });
   }
@@ -28,7 +27,6 @@ export class ShopCatalogPage implements OnInit {
     this.productService.getShopProducts(shopId).subscribe(
       (response) => {
         this.products = response;
-        console.log('Productos cargados:', this.products); // Agregado
       },
       (error) => {
         console.error('Error al cargar los productos:', error);

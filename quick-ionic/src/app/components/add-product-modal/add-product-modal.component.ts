@@ -57,8 +57,6 @@ export class AddProductModalComponent {
         stock_quantity:this.createProductForm.get('stockQuantity')?.value
       }
 
-      console.log(data)
-
       this.productService.addProduct(data).subscribe({
         next: (response) => {
           this.closeModal(response)

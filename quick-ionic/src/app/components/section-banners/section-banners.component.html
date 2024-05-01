@@ -62,15 +62,16 @@
         </div>
 
         <ion-input formControlName="button" type="text" placeholder="Button Text" label="Button Text"
-            label-placement="floating" fill="outline" [maxlength]="30" [counter]="true"></ion-input>
+          label-placement="floating" fill="outline" [maxlength]="30" [counter]="true"></ion-input>
 
         <div class="inline-inputs">
           <ion-input id="image-input" label="Image" label-placement="floating" placeholder="Image" fill="outline"
-            type="file" formControlName="image" (change)="onFileSelected($event)" class="file-input"></ion-input>
+            type="file" formControlName="image" (change)="onFileSelected($event)" class="file-input w-100"
+            style="height: 75px;"></ion-input>
 
           <ion-list [inset]="true"
-          style="outline: 1px solid #b3b3b3; border-radius: 2px; margin: 0px; margin-bottom: 15px; height: 73px; width: 75%;">
-          <ion-item [button]="true" [detail]="false" (click)="openModal()">
+            style="outline: 1px solid #b3b3b3; border-radius: 2px; margin: 0px; margin-bottom: 15px; height: 73px; width: 75%;">
+            <ion-item [button]="true" [detail]="false" (click)="openModal()">
               <div id="selected-products">{{ selectedProductBannerOneText }}</div>
             </ion-item>
           </ion-list>
@@ -88,15 +89,15 @@
         </div>
 
         <ion-input formControlName="button" type="text" placeholder="Button Text" label="Button Text"
-        label-placement="floating" fill="outline" [maxlength]="30" [counter]="true"></ion-input>
+          label-placement="floating" fill="outline" [maxlength]="30" [counter]="true"></ion-input>
 
         <div class="inline-inputs">
           <ion-input id="image-input" label="Image" label-placement="floating" placeholder="Image" fill="outline"
             type="file" formControlName="image" (change)="onFileSelected($event)" class="file-input"></ion-input>
 
           <ion-list [inset]="true"
-          style="outline: 1px solid #b3b3b3; border-radius: 2px; margin: 0px; margin-bottom: 15px; height: 73px; width: 75%;">
-          <ion-item [button]="true" [detail]="false" (click)="openModal()">
+            style="outline: 1px solid #b3b3b3; border-radius: 2px; margin: 0px; margin-bottom: 15px; height: 73px; width: 75%;">
+            <ion-item [button]="true" [detail]="false" (click)="openModal()">
               <div id="selected-products">{{ selectedProductBannerTwoText }}</div>
             </ion-item>
           </ion-list>
