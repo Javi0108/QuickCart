@@ -9,7 +9,11 @@ import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [TypeaheadComponent],
-  imports: [CommonModule, IonicModule, FormsModule],
+  imports: [
+    CommonModule, 
+    IonicModule, 
+    FormsModule
+  ],
   exports: [TypeaheadComponent]
 })
-export class TypeaheadModule {}
+export class TypeaheadModule { }

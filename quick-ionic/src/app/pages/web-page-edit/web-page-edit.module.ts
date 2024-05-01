@@ -8,6 +8,7 @@ import { WebPageEditPageRoutingModule } from './web-page-edit-routing.module';
 
 import { WebPageEditPage } from './web-page-edit.page';
 import { SectionContainerModule } from 'src/app/components/section-container/section-container.module';
+import { WebPagePageModule } from '../web-page/web-page.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { SectionContainerModule } from 'src/app/components/section-container/sec
     FormsModule,
     IonicModule,
     WebPageEditPageRoutingModule,
-    SectionContainerModule
+    SectionContainerModule,
+    WebPagePageModule
   ],
   declarations: [WebPageEditPage]
 })

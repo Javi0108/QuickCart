@@ -56,15 +56,6 @@ export class ProductsManagementPage {
       }
     );
   }
-   
-  // async openAddModal() {
-  //   const modal = await this.modalController.create({
-  //     component: AddProductModalComponent,
-  //     cssClass: 'add-product-modal',
-  //     componentProps: { createProductForm: this.createProductForm , shopId: this.shopId}
-  //   });
-  //   return await modal.present();
-  // }
 
   async openAddModal() {
     const modal = await this.modalController.create({

@@ -13,6 +13,8 @@ import { ShopService } from 'src/app/services/shop.service';
 })
 export class WebPagePage implements OnInit {
 
+  shouldShowIonContentValue: boolean = this.shouldShowIonContent();
+
   shopData: ShopData | undefined;
   shopId: number | undefined;
   showSections: boolean = true;
@@ -34,6 +36,11 @@ export class WebPagePage implements OnInit {
     } else {
       console.error('No se proporcionó un ID de tienda válido.');
     }
+  }
+
+  shouldShowIonContent() {
+    console.log(window.location.pathname.includes('web-page-edit'))
+    return window.location.pathname.includes('web-page-edit');
   }
 
   getShop() {
@@ -60,6 +67,9 @@ export class WebPagePage implements OnInit {
   }
 
   changePageShow(option: string) {
+
+    console.log(this.shopData?.profile)
+
     if (option == 'home') {
       this.showSections = true;
       this.showCatalog = false;

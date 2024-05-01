@@ -20,18 +20,38 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="shopData">
-  <div *ngIf="showSections" class="p-5 pt-2">
-    <div *ngIf="sections">
-      <app-section-container [sections]="sections"></app-section-container>
+<div *ngIf="shouldShowIonContentValue">
+  <div *ngIf="shopData">
+    <div *ngIf="showSections" class="p-5 pt-2">
+      <div *ngIf="sections">
+        <app-section-container [sections]="sections"></app-section-container>
+      </div>
+    </div>
+
+    <div *ngIf="showCatalog" class="p-5 pt-2">
+      <app-shop-catalog [id]="shopId" [shopName]="shopData.name"></app-shop-catalog>
+    </div>
+
+    <div *ngIf="showAbout" class="p-5 pt-2">
+      <app-profile [id]="shopData.profile"></app-profile>
     </div>
   </div>
+</div>
 
-  <div *ngIf="showCatalog" class="p-5 pt-2">
-    <app-shop-catalog [id]="shopId" [shopName]="shopData.name"></app-shop-catalog>
-  </div>
+<ion-content *ngIf="!shouldShowIonContentValue">
+  <div *ngIf="shopData">
+    <div *ngIf="showSections" class="p-5 pt-2">
+      <div *ngIf="sections">
+        <app-section-container [sections]="sections"></app-section-container>
+      </div>
+    </div>
 
-  <div *ngIf="showAbout" class="p-5 pt-2">
-    <app-profile [id]="shopData.profile" style="background-color: aqua;"></app-profile>
+    <div *ngIf="showCatalog" class="p-5 pt-2">
+      <app-shop-catalog [id]="shopId" [shopName]="shopData.name"></app-shop-catalog>
+    </div>
+
+    <div *ngIf="showAbout" class="p-5 pt-2">
+      <app-profile [id]="shopData.profile"></app-profile>
+    </div>
   </div>
 </ion-content>

@@ -1,7 +1,8 @@
 import { Product } from "./product.interface";
 
 export interface Section {
-  id: number | undefined;
+  provitionalId: string;
+  id: any;
   type: string;
   data: any;
   editMode: boolean;

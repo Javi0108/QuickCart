@@ -14,6 +14,7 @@ import { Product } from 'src/app/interfaces/product.interface';
 })
 export class SectionHeroComponent implements OnInit {
 
+  @Input() shopId!: number;
   @Input() section: any;
 
   editMode: boolean = false;
@@ -108,6 +109,7 @@ export class SectionHeroComponent implements OnInit {
 
   deleteSection() {
     let section: Section = {
+      provitionalId: "",
       id: this.sectionId,
       type: "hero",
       editMode: true,
@@ -166,6 +168,7 @@ export class SectionHeroComponent implements OnInit {
       component: TypeaheadComponent,
       cssClass: 'my-custom-class',
       componentProps: {
+        'shopId': this.shopId,
         'items': this.products,
         'selectedItem': this.selectedProductBannerOne,
         'title': 'Select a Related Product',

@@ -13,6 +13,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
+  
   profile!: Profile;
   user!: User;
   pageLoaded: boolean;

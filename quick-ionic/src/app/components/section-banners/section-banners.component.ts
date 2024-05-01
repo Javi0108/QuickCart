@@ -11,7 +11,8 @@ import { SectionEventService } from 'src/app/services/section-event.service';
   styleUrls: ['./section-banners.component.scss'],
 })
 export class SectionBannersComponent  implements OnInit {
-
+  
+  @Input() shopId!: number;
   @Input() section: any;
 
   editMode: boolean = false;
@@ -86,6 +87,7 @@ export class SectionBannersComponent  implements OnInit {
 
   deleteSection() {
     let section: Section = {
+      provitionalId: "",
       id: this.sectionId,
       type: "hero",
       editMode: true,
@@ -138,6 +140,7 @@ export class SectionBannersComponent  implements OnInit {
       component: TypeaheadComponent,
       cssClass: 'my-custom-class',
       componentProps: {
+        'shopId': this.shopId,
         'items': this.products,
         'selectedItem': this.selectedProductBannerOne,
         'title': 'Select a Related Product',

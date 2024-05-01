@@ -10,6 +10,7 @@ import { SectionBannersComponent } from '../section-banners/section-banners.comp
   styleUrls: ['./section-container.component.scss'],
 })
 export class SectionContainerComponent implements OnInit {
+  @Input() shopId!: number;
   @Input() sections: Section[] = [];
 
   sectionComponents: { [key: string]: any } = {

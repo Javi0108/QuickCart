@@ -21,6 +21,7 @@ import { ProfilePageModule } from '../profile/profile.module';
     ShopCatalogPageModule,
     ProfilePageModule,
   ],
-  declarations: [WebPagePage]
+  declarations: [WebPagePage],
+  exports:[WebPagePage]
 })
 export class WebPagePageModule {}

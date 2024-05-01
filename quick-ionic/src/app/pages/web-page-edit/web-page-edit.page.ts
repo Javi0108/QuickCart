@@ -7,6 +7,7 @@ import { ShopData } from 'src/app/interfaces/shop.interface';
 import { ProductService } from 'src/app/services/product.service';
 import { SectionEventService } from 'src/app/services/section-event.service';
 import { ShopService } from 'src/app/services/shop.service';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-web-page-edit',
@@ -20,6 +21,9 @@ export class WebPageEditPage implements OnInit {
 
   sections: Section[] = [];
   products: Product[] = [];
+
+  selectedSegment: 'edit' | 'preview' = 'edit';
+
 
   constructor(
     private route: ActivatedRoute,
@@ -41,6 +45,10 @@ export class WebPageEditPage implements OnInit {
     this.sectionEventService.deleteSection.subscribe((section: Section) => {
       this.deleteSection(section);
     })
+  }
+
+  segmentChanged(event: CustomEvent) {
+    this.selectedSegment = event.detail.value;
   }
 
   getShop() {
@@ -74,16 +82,19 @@ export class WebPageEditPage implements OnInit {
   }
 
   addSection(sectionType: string) {
+    const id = uuidv4();
     let newSection: Section;
+    console.log("uuidv4", id)
+
 
     if (sectionType === 'hero') {
-      newSection = { id: undefined, type: sectionType, editMode: true, data: { ...defaultSectionHeroData }, products: this.products };
+      newSection = { provitionalId: id, id: undefined, type: sectionType, editMode: true, data: { ...defaultSectionHeroData }, products: this.products };
     } else if (sectionType === 'banners') {
-      newSection = { id: undefined, type: sectionType, editMode: true, data: { ...defaultSectionBannersData }, products: this.products };
+      newSection = { provitionalId: id, id: undefined, type: sectionType, editMode: true, data: { ...defaultSectionBannersData }, products: this.products };
     } else if (sectionType === 'products') {
-      newSection = { id: undefined, type: sectionType, editMode: true, data: {}, products: this.products };
+      newSection = { provitionalId: id, id: undefined, type: sectionType, editMode: true, data: {}, products: this.products };
     } else {
-      newSection = { id: undefined, type: "", editMode: true, data: {}, products: this.products };
+      newSection = { provitionalId: id, id: undefined, type: "", editMode: true, data: {}, products: this.products };
     }
     this.sections.push(newSection);
     console.log(this.sections);
@@ -130,7 +141,7 @@ export class WebPageEditPage implements OnInit {
   }
 
   deleteSection(section: Section) {
-    if (section.id) {
+    if (section.id > 0) {
       this.shopService.deleteShopSection(section.id).subscribe({
         next: (data) => {
           const index = this.sections.findIndex(s => s.id === section.id);
@@ -140,13 +151,13 @@ export class WebPageEditPage implements OnInit {
         }
       });
     } else {
-      const index = this.sections.indexOf(section);
-      console.log(index, section)
+      const index = this.sections.findIndex(s => s.id === section.id);
       if (index !== -1) {
         this.sections.splice(index, 1);
       }
     }
   }
+
 
   loadProducts(shopId: number) {
     this.productService.getShopProducts(shopId).subscribe(
