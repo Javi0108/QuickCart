@@ -11,7 +11,7 @@
     </ion-segment-button>
   </ion-segment>
 
-  <div class="p-5 pt-2" *ngIf="selectedSegment === 'edit'">
+  <div class="pt-2" *ngIf="selectedSegment === 'edit'">
     <div *ngIf="sections">
       <app-section-container [sections]="sections" [shopId]="shopId" (moveSectionUpEvent)="moveSectionUp($event)"
         (moveSectionDownEvent)="moveSectionDown($event)">></app-section-container>

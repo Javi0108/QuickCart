@@ -1,4 +1,10 @@
 export const defaultSectionHeroData = {
+    background: {
+        imageUrl: null,
+        overlayOpacity: null,
+        fixedBackground: null,
+        hexColor: "#FFFFFF",
+    },
     banner_1:
     {
         subtitle: "Big Sale Offer",
@@ -29,6 +35,12 @@ export const defaultSectionHeroData = {
 
 
 export const defaultSectionBannersData = {
+    background: {
+        imageUrl: null,
+        overlayOpacity: null,
+        fixedBackground: null,
+        hexColor: "#FFFFFF",
+    },
     banner_1: {
         title: "New line required",
         content: "iPhone 12",

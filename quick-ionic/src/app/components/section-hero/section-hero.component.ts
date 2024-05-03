@@ -6,6 +6,7 @@ import { IonModal } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { Item, TypeaheadComponent } from '../typeahead/typeahead.component';
 import { Product } from 'src/app/interfaces/product.interface';
+import { EditSectionModalComponent } from '../edit-section-modal/edit-section-modal.component';
 
 @Component({
   selector: 'app-section-hero',
@@ -16,14 +17,16 @@ export class SectionHeroComponent implements OnInit {
 
   @Input() shopId!: number;
   @Input() section: any;
+  @Input() order!: number;
 
   editMode: boolean = false;
+  showOptions: boolean = false;
 
   sectionId?: number;
   sectionType?: string;
   sectionData?: HeroSectionData;
   products: Item[] = [];
-  
+
   sectionFormBannerOne!: FormGroup;
   sectionFormBannerTwo!: FormGroup;
   sectionFormBannerThree!: FormGroup;
@@ -36,7 +39,7 @@ export class SectionHeroComponent implements OnInit {
   selectedProductBannerTwo: string | null = null;
   selectedProductBannerThree: string | null = null;
 
-  
+
 
   constructor(
     private sectionEventService: SectionEventService,
@@ -103,22 +106,6 @@ export class SectionHeroComponent implements OnInit {
 
   }
 
-  segmentChanged(event: CustomEvent) {
-    this.selectedSegment = event.detail.value;
-  }
-
-  deleteSection() {
-    let section: Section = {
-      provitionalId: "",
-      id: this.sectionId,
-      type: "hero",
-      editMode: true,
-      data: this.sectionData,
-      products: []
-    }
-    this.sectionEventService.deleteSection.emit(section);
-  }
-
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
     if (file) {
@@ -140,22 +127,22 @@ export class SectionHeroComponent implements OnInit {
   productSelectionChanged(selectedValue: string | null) {
 
     this.sectionData![this.selectedSegment].related_product = selectedValue;
-    
-    if(this.selectedSegment == 'banner_1'){
+
+    if (this.selectedSegment == 'banner_1') {
       this.selectedProductBannerOne = selectedValue;
-    }else if(this.selectedSegment == 'banner_2'){
+    } else if (this.selectedSegment == 'banner_2') {
       this.selectedProductBannerTwo = selectedValue;
-    }else{
+    } else {
       this.selectedProductBannerThree = selectedValue;
-    } 
+    }
 
     const product = this.products.find((product) => product.value === selectedValue);
 
-    if(this.selectedSegment == 'banner_1'){
+    if (this.selectedSegment == 'banner_1') {
       this.selectedProductBannerOneText = product ? product.text : 'No selection';
-    }else if(this.selectedSegment == 'banner_2'){
+    } else if (this.selectedSegment == 'banner_2') {
       this.selectedProductBannerTwoText = product ? product.text : 'No selection';
-    }else{
+    } else {
       this.selectedProductBannerThreeText = product ? product.text : 'No selection';
     }
   }
@@ -174,7 +161,7 @@ export class SectionHeroComponent implements OnInit {
         'selectionCancel': () => modal.dismiss()
       }
     });
-  
+
     modal.onDidDismiss().then((data) => {
       if (data.role === 'confirm') {
         const selectedItem = data.data;
@@ -183,6 +170,41 @@ export class SectionHeroComponent implements OnInit {
     });
 
     await modal.present();
+  }
+
+  moveSectionUp() {
+    this.sectionEventService.moveSectionUp.emit(this.order);
+  }
+
+  moveSectionDown() {
+    this.sectionEventService.moveSectionDown.emit(this.order);
+  }
+
+  deleteSection() {
+    this.sectionEventService.deleteSection.emit(this.sectionId);
+  }
+
+  segmentChanged(event: CustomEvent) {
+    this.selectedSegment = event.detail.value;
+  }
+
+  toggleOptions() {
+    this.showOptions = !this.showOptions;
+  }
+
+  async optionsSection() {
+    const modal = await this.modalController.create({
+      component: EditSectionModalComponent,
+      componentProps: {},
+    });
+
+    modal.onDidDismiss().then((data) => {
+      if (data.role === 'confirm') {
+        const modalData = data.data;
+      }
+    });
+
+    return await modal.present();
   }
 
 }

@@ -28,19 +28,24 @@
 .alert-wrapper.sc-ion-alert-md {
     color: #fff;
     background-color: black !important;
-    .alert-title  {
+
+    .alert-title {
         color: white !important;
     }
+
     .alert-radio-group {
         border-top: 2px solid grey !important;
         border-bottom: 2px solid grey !important;
+
         .alert-radio-label {
             color: #fff;
         }
     }
+
     .alert-button {
         background-color: red !important;
     }
+
     .alert-button-inner.sc-ion-alert-md {
         color: white !important;
     }
@@ -61,35 +66,37 @@
     }
 }
 
-.form-edit{   
+.form-edit {
 
-    border-LEFT:1px solid black;
+    border-LEFT: 1px solid black;
 
-    ion-segment{
+    ion-segment {
         margin-top: -5px;
     }
 
-    .form-wrapper{
+    .form-wrapper {
         margin-top: 16px;
+
         ::ng-deep ion-input {
             margin-bottom: 15px;
+
             .input-bottom {
                 padding-right: 6px;
                 margin-top: -25px !important;
             }
-        
+
         }
 
-        ::ng-deep ion-textarea{
+        ::ng-deep ion-textarea {
             margin-bottom: 15px;
             height: auto;
 
-            .native-wrapper{
+            .native-wrapper {
                 padding-bottom: 20px;
             }
 
             .textarea-bottom {
-                
+
                 padding-right: 6px;
                 margin-top: -25px !important;
             }
@@ -98,3 +105,74 @@
 }
 
 
+.section-edit {
+
+    padding: 10px 50px 10px 50px;
+    border: 2px solid transparent;
+
+    .section-options {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        background-color: #fff;
+        box-shadow: 0 0 12px #1d1e2029;
+        padding: 2px;
+        border-radius: 8px;
+        -webkit-user-select: none;
+        user-select: none;
+        top: 5px;
+        right: 5px;
+
+        .vertical-separator {
+            margin: 0 4px;
+            width: 1px;
+            height: 20px;
+            background-color: #969696;
+            border: 0;
+        }
+
+        .option-button {
+            padding: 6px 8px;
+            color: #36344d;
+            background-color: transparent;
+            border: 1px solid transparent;
+            border-radius: 8px;
+
+            .text-button {
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 24px;
+            }
+
+            &:hover {
+                color: #673de6;
+                background-color: #ebe4ff;
+            }
+        }
+
+    }
+
+    &:hover {
+        border: 2px solid blue;
+    }
+}
+
+
+.disabled-icon {
+    color: gray;
+}
+
+
+
+
+ion-modal {
+    --border-radius: 6px;
+    --box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
+}
+
+ion-modal h1 {}
+
+ion-modal ion-icon {}
+
+ion-modal .wrapper {}

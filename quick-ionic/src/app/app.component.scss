@@ -64,3 +64,32 @@ h1 {
   box-shadow: 3px 3px 8px #b1b1b1, -3px -3px 8px #ffffff;
   cursor: pointer;
 }
+
+
+.section-edit{
+  .section-options {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      padding: 5px 10px;
+  }
+
+  .delete-button {
+      background-color: #f00;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      display: none;
+      /* Oculta el botón por defecto */
+  }
+
+  &:hover .delete-button {
+      display: block;
+      /* Muestra el botón cuando se hace hover sobre la sección */
+  }
+
+  &:hover {
+      border: 2px solid blue;
+      /* Agrega el borde azul al hacer hover sobre la sección */
+  }
+}
