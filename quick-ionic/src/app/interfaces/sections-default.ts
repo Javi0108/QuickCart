@@ -1,9 +1,9 @@
 export const defaultSectionHeroData = {
     background: {
-        imageUrl: null,
-        overlayOpacity: null,
-        fixedBackground: null,
-        hexColor: "#FFFFFF",
+        image: null,
+        overlay_opacity: null,
+        fixed_background: null,
+        hex_color: "#FFFFFF",
     },
     banner_1:
     {
@@ -36,10 +36,10 @@ export const defaultSectionHeroData = {
 
 export const defaultSectionBannersData = {
     background: {
-        imageUrl: null,
-        overlayOpacity: null,
-        fixedBackground: null,
-        hexColor: "#FFFFFF",
+        image: null,
+        overlay_opacity: null,
+        fixed_background: null,
+        hex_color: "#FFFFFF",
     },
     banner_1: {
         title: "New line required",

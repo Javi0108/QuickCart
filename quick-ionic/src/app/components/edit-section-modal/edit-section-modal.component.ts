@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
 @Component({
@@ -7,20 +7,20 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./edit-section-modal.component.scss'],
 })
 export class EditSectionModalComponent {
-  imageUrl: string = "https://images.unsplash.com/photo-1682686578615-39549501dd08?auto=format&fit=clip&w=400&h=200&q=100";
-  overlayOpacity: number = 50;
-  fixedBackground: boolean = false; 
-  hexColor: string = "#eeeeee";
+  @Input() image!: string | null;
+  @Input() overlayOpacity!: number;
+  @Input() fixedBackground!: boolean; 
+  @Input() hexColor!: string ;
   file: File | null = null;
 
   constructor(private modalController: ModalController) {}
 
   closeModal() {
     const modalData = {
-      imageUrl: this.imageUrl,
-      overlayOpacity: this.overlayOpacity,
-      fixedBackground: this.fixedBackground,
-      hexColor: this.hexColor,
+      image: this.image,
+      overlay_opacity: this.overlayOpacity,
+      fixed_background: this.fixedBackground,
+      hex_color: this.hexColor,
     };
 
     this.modalController.dismiss(modalData, 'confirm');
@@ -33,10 +33,15 @@ export class EditSectionModalComponent {
     }
   }
 
+  clearImage() {
+    this.image = null;
+    this.file = null;
+  }
+
   convertFileToDataURL(file: File) {
     const reader = new FileReader();
     reader.onload = () => {
-      this.imageUrl = reader.result as string;
+      this.image = reader.result as string;
     };
     reader.readAsDataURL(file);
   }

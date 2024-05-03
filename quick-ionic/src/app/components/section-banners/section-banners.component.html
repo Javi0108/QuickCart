@@ -1,6 +1,12 @@
 <section *ngIf="editMode" class="section-edit section-banners" (click)="toggleOptions()">
   <div class="row" *ngIf="sectionData!">
-    <div class="col-lg-9">
+    <div class="col-lg-9 p-2" [ngStyle]="{
+      'background-image': sectionData.background.image ? 'url(' + sectionData.background.image + ')' : 'none',
+      'background-color': sectionData.background.image || !sectionData.background.hex_color ? '#ffffff' : sectionData.background.hex_color,
+      'opacity': sectionData.background.overlay_opacity,
+      'background-attachment': sectionData.background.fixed_background ? 'fixed' : 'scroll',
+      'background-size': sectionData.background.image ? 'cover' : 'auto'
+    }">
       <div class="row">
         <div class="col-12 col-md-6">
           <div class="banner" [style.background-image]="'url(' + sectionData.banner_1.image + ')'">
@@ -124,20 +130,25 @@
 
     <button [disabled]="order === 0" class="option-button" (click)="moveSectionUp()" fill="outline">
       <ion-icon slot="icon-only" name="arrow-up" [ngClass]="{'disabled-icon': order === 0}"></ion-icon>
-    </button>    
-    
+    </button>
+
     <button class="option-button" (click)="moveSectionDown()" fill="outline">
       <ion-icon slot="icon-only" name="arrow-down"></ion-icon>
     </button>
-    
+
   </div>
 
 </section>
 
 <!--Modo vista-->
 
-<section *ngIf="!editMode && sectionData!" class="section-banners  pt-5"
-  [style.background-image]="'url(' + sectionData.banner_1.image + ')'">
+<section *ngIf="!editMode && sectionData" class="section-banners pt-5" [ngStyle]="{
+  'background-image': sectionData.background.image ? 'url(' + sectionData.background.image + ')' : 'none',
+  'background-color': sectionData.background.image || !sectionData.background.hex_color ? '#ffffff' : sectionData.background.hex_color,
+  'opacity': sectionData.background.overlay_opacity,
+  'background-attachment': sectionData.background.fixed_background ? 'fixed' : 'scroll',
+  'background-size': sectionData.background.image ? 'cover' : 'auto'
+}">
   <div class="container-xxl">
     <div class="row">
       <div class="col-12 col-md-6">

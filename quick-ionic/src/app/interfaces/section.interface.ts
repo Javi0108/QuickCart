@@ -48,10 +48,10 @@ export interface Banner4 {
 }
 
 export interface Background {
-  imageUrl: string | null;
-  overlayOpacity: number | null;
-  fixedBackground: boolean | null;
-  hexColor: string;
+  image: string | null;
+  overlay_opacity: number | null;
+  fixed_background: boolean | null;
+  hex_color: string;
 }
 
 // Interfaz para el objeto "hero" completo

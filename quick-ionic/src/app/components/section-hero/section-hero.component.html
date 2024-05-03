@@ -1,6 +1,12 @@
 <section *ngIf="editMode" class="section-edit section-hero" (click)="toggleOptions()">
   <div *ngIf="sectionData!" class="row">
-    <div class="col-lg-9" [style.background-image]="'url(' + sectionData.banner_1.image + ')'">
+    <div class="col-lg-9" [ngStyle]="{
+      'background-image': sectionData.background.image ? 'url(' + sectionData.background.image + ')' : 'none',
+      'background-color': sectionData.background.image || !sectionData.background.hex_color ? '#ffffff' : sectionData.background.hex_color,
+      'opacity': sectionData.background.overlay_opacity,
+      'background-attachment': sectionData.background.fixed_background ? 'fixed' : 'scroll',
+      'background-size': sectionData.background.image ? 'cover' : 'auto'
+    }">
       <div class="row">
         <div class="col-xl-8 col-lg-12 col-12">
           <div class="hero-banner-1" [style.background-image]="'url(' + sectionData.banner_1.image + ')'">
@@ -155,7 +161,7 @@
       </div>
     </div>
   </div>
-  
+
   <div class="section-options" *ngIf="showOptions">
 
     <button class="option-button" (click)="optionsSection()">
@@ -172,8 +178,8 @@
 
     <button [disabled]="order === 0" class="option-button" (click)="moveSectionUp()" fill="outline">
       <ion-icon slot="icon-only" name="arrow-up" [ngClass]="{'disabled-icon': order === 0}"></ion-icon>
-    </button>    
-    
+    </button>
+
     <button class="option-button" (click)="moveSectionDown()" fill="outline">
       <ion-icon slot="icon-only" name="arrow-down"></ion-icon>
     </button>
@@ -183,8 +189,13 @@
 
 <!--Modo vista-->
 
-<section *ngIf="!editMode && sectionData!" class="section-hero pt-3"
-  [style.background-image]="'url(' + sectionData.banner_1.image + ')'">
+<section *ngIf="!editMode && sectionData!" class="section-hero pt-4" [ngStyle]="{
+  'background-image': sectionData.background.image ? 'url(' + sectionData.background.image + ')' : 'none',
+  'background-color': sectionData.background.image || !sectionData.background.hex_color ? '#ffffff' : sectionData.background.hex_color,
+  'opacity': sectionData.background.overlay_opacity,
+  'background-attachment': sectionData.background.fixed_background ? 'fixed' : 'scroll',
+  'background-size': sectionData.background.image ? 'cover' : 'auto'
+}">
   <div class="container-xxl">
     <div class="row">
       <div class="col-xl-8 col-lg-12 col-12">

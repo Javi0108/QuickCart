@@ -6,16 +6,19 @@
 
   <ion-card-content class="mt-5">
 
-    <div class="zyro-image-selector">
+    <div class="zyro-image-selector" (click)="selectImage()">
       <input type="file" (change)="changeImage($event)" class="zyro-image-selector__input visually-hidden">
       <button class="zyro-image-selector__button" title="Replace image">
-        <ion-img class="zyro-image-selector__image" [src]="imageUrl" (click)="selectImage()"></ion-img>
+        <ion-img class="zyro-image-selector__image" [src]="image"></ion-img>
         <div class="zyro-image-selector__description">
           <ion-icon name="photo_library" class="icon material-symbols-rounded zyro-image-selector__icon"></ion-icon>
           <p class="text-body-2">Replace image</p>
         </div>
       </button>
     </div>
+
+    <ion-button (click)="clearImage()" color="danger" expand="block">Clear Image</ion-button>
+
     <ion-item>
       <div class="color-preview me-2" [style.background-color]="hexColor" style="padding: 15px; border-radius: 160px;" ></div>
       <ion-label class="text-bold-2">Section Color</ion-label>

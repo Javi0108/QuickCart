@@ -25,6 +25,7 @@ export class SectionBannersComponent implements OnInit {
   sectionData?: BannersSectionData;
   products: Item[] = [];
 
+  sectionFormBackground!: FormGroup;
   sectionFormBannerOne!: FormGroup;
   sectionFormBannerTwo!: FormGroup;
 
@@ -60,6 +61,14 @@ export class SectionBannersComponent implements OnInit {
 
 
   initializeEditMode() {
+
+    this.sectionFormBackground = new FormGroup({
+      image: new FormControl(this.sectionData?.background.image),
+      overlay_opacity: new FormControl(this.sectionData?.background.overlay_opacity),
+      fixed_background: new FormControl(this.sectionData?.background.fixed_background),
+      hex_color: new FormControl(this.sectionData?.background.hex_color),
+    });
+
     this.sectionFormBannerOne = new FormGroup({
       title: new FormControl(this.sectionData?.banner_1.title),
       content: new FormControl(this.sectionData?.banner_1.content),
@@ -72,6 +81,10 @@ export class SectionBannersComponent implements OnInit {
       content: new FormControl(this.sectionData?.banner_2.content),
       button: new FormControl(this.sectionData?.banner_2.button),
       image: new FormControl(this.sectionData?.banner_2.image)
+    });
+
+    this.sectionFormBackground.valueChanges.subscribe((values) =>{
+      this.sectionData!.background = { ...this.sectionData!.background, ...values};
     });
 
     this.sectionFormBannerOne.valueChanges.subscribe((values) => {
@@ -145,6 +158,27 @@ export class SectionBannersComponent implements OnInit {
     await modal.present();
   }
 
+  async optionsSection() {
+    const modal = await this.modalController.create({
+      component: EditSectionModalComponent,
+      componentProps: {
+        'image': this.sectionData!.background.image,
+        'overlay_opacity': this.sectionData!.background.overlay_opacity,
+        'fixed_background': this.sectionData!.background.fixed_background,
+        'hex_color': this.sectionData!.background.hex_color
+      },
+    });
+
+    modal.onDidDismiss().then((data) => {
+      if (data.role === 'confirm') {
+        const modalData = data.data;
+        this.sectionData!.background = { ...this.sectionData!.background, ...modalData};
+      }
+    });
+
+    return await modal.present();
+  }
+
   moveSectionUp() {
     this.sectionEventService.moveSectionUp.emit(this.order);
   }
@@ -163,21 +197,6 @@ export class SectionBannersComponent implements OnInit {
 
   toggleOptions() {
     this.showOptions = !this.showOptions;
-  }
-
-  async optionsSection() {
-    const modal = await this.modalController.create({
-      component: EditSectionModalComponent,
-      componentProps: {},
-    });
-
-    modal.onDidDismiss().then((data) => {
-      if (data.role === 'confirm') {
-        const modalData = data.data;
-      }
-    });
-
-    return await modal.present();
   }
 
 }
