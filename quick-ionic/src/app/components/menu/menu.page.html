@@ -48,6 +48,7 @@
             <ion-fab-list side="start">
               <ion-button *ngIf="isLoggedIn()" (click)="logout()">logout</ion-button>
               <ion-button [routerLink]="['/profile']">Profile</ion-button>
+              <ion-button [routerLink]="['/catalog']">Catalog</ion-button>
               <ion-button *ngIf="profile.user_type == 'Seller'" [routerLink]="['/seller-shops']">My Shops</ion-button>
             </ion-fab-list>
           </ion-fab>

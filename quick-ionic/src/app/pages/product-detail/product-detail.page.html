@@ -9,12 +9,10 @@
               <div class="image-selected">
                 <img [src]="selectedImage || 'http://localhost:8000' + productData.avatar" id="current" alt="Avatar del producto">
               </div>
-              <!--
               <div class="images">
-                <img *ngFor="let image of productData.images" [src]="'http://localhost:8000' + image.img" id="current" alt="Imagenes del producto"
+                <img *ngFor="let image of productData.images" [src]="'http://localhost:8000' + image" id="current" alt="Imagenes del producto"
                   (click)="selectImage(image)">
               </div>
-              -->
             </div>
           </ion-col>
           <ion-col size-lg="6" size-md="12" size="12">

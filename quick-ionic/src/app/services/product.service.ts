@@ -29,6 +29,7 @@ export class ProductService {
   }
 
   addProduct(newProductData: ProductCreate): Observable<any> {
+    console.log(newProductData)
     return this.http.post<any>(`${this.baseURL}create-product/`, newProductData, {headers: this.getHeaders()})
   }
   

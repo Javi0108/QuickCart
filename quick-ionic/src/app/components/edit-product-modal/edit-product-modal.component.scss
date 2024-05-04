@@ -15,3 +15,20 @@
     flex: 1;
 }
   
+
+.gallery_container{
+    position: relative;
+    background-color: aqua;
+    .gallery_img{
+        background-color: red;
+        position: absolute;
+    }
+    .gallery_icon{
+        background-color: yellow;
+        position: absolute;
+        right: 1px;
+        bottom: 1px;
+        left: 195px;
+        top: 20px;
+    }
+}

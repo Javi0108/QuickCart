@@ -41,6 +41,7 @@ export class ProductsManagementPage {
       price: ['', [Validators.required, Validators.min(0)]],
       image: [''],
       stockQuantity: ['', [Validators.required, Validators.min(0)]],
+      gallery: ['']
     });
   }
 
@@ -61,6 +62,7 @@ export class ProductsManagementPage {
       (response) => {
         this.products = response;
         this.filteredProducts = response;
+        console.log(this.products)
       },
       (error) => {
         console.error('Error loading products:', error);
@@ -94,8 +96,10 @@ export class ProductsManagementPage {
       price: [product.price, [Validators.required, Validators.min(0)]],
       image: [product.avatar],
       stockQuantity: [product.stock_quantity, [Validators.required, Validators.min(0)]],
+      gallery: [product.images]
     });
 
+    console.log("openModal", product)
 
     const modal = await this.modalController.create({
       component: EditProductModalComponent,
@@ -165,7 +169,7 @@ export class ProductsManagementPage {
       } else {
         this.filteredProducts = this.products.filter((product) => {
           return product.name.toLowerCase().includes(searchTerm) ||
-          product.description.toLowerCase().includes(searchTerm);
+          product.brand.toLowerCase().includes(searchTerm);
         });
       }
     }

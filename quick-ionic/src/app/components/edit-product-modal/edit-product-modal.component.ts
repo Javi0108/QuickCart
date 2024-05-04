@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { FormGroup } from '@angular/forms';
 import { ProductService } from 'src/app/services/product.service';
@@ -9,10 +9,11 @@ import { Product } from 'src/app/interfaces/product.interface';
   templateUrl: './edit-product-modal.component.html',
   styleUrls: ['./edit-product-modal.component.scss'],
 })
-export class EditProductModalComponent {
+export class EditProductModalComponent implements OnInit{
   @Input() editProductForm!: FormGroup;
   @Input() shopId!: number;
   @Input() product!: Product;
+  galleryPreviews: any[] = [];
 
   imagePreview: any;
 
@@ -21,6 +22,9 @@ export class EditProductModalComponent {
     private productService: ProductService
   ) {
 
+  }
+  ngOnInit(): void {
+    console.log("modal", this.product)
   }
 
   closeModal(dataToSend?: any) {
@@ -32,7 +36,6 @@ export class EditProductModalComponent {
     if (file) {
       this.convertFileToDataURL(file);
     }
-
   }
 
   convertFileToDataURL(file: File) {
@@ -46,6 +49,39 @@ export class EditProductModalComponent {
     reader.readAsDataURL(file);
   }
 
+  onGallerySelected(event: any) {
+    const files: FileList = event.target.files;
+    if (files && files.length > 0) {
+      this.convertFilesToDataURL(files, (imagePreviews: string[]) => {
+        this.galleryPreviews = imagePreviews;
+      });
+    }
+  }
+
+
+  discardImage(index:number){
+    console.log("Imagen numero:" + index)
+    this.galleryPreviews.splice(index,1);
+    console.log(this.galleryPreviews  )
+  }
+
+  convertFilesToDataURL(files: FileList, callback: (imagePreviews: string[]) => void) {
+    const imagePreviews: string[] = [];
+    for (let i = 0; i < files.length; i++) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const imageUrl: string = reader.result as string;
+        if (imageUrl) {
+          imagePreviews.push(imageUrl);
+          if (imagePreviews.length === files.length) {
+            callback(imagePreviews);
+          }
+        }
+      };
+      reader.readAsDataURL(files[i]);
+    }
+  }
+
   async editProduct() {
     if (this.editProductForm.valid) {
 
@@ -57,7 +93,8 @@ export class EditProductModalComponent {
         description:this.editProductForm.get('description')?.value,
         price:this.editProductForm.get('price')?.value,
         avatar:this.imagePreview,
-        stock_quantity:this.editProductForm.get('stockQuantity')?.value
+        stock_quantity:this.editProductForm.get('stockQuantity')?.value,
+        galleryPreviews: this.galleryPreviews
       }
 
       console.log(data)
