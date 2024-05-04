@@ -22,7 +22,7 @@ export class WebPageEditPage implements OnInit {
   sections: Section[] = [];
   products: Product[] = [];
 
-  selectedSegment: 'edit' | 'preview' = 'edit';
+  selectedMode: string = "edit";
 
 
   constructor(
@@ -55,8 +55,8 @@ export class WebPageEditPage implements OnInit {
     })
   }
 
-  segmentChanged(event: CustomEvent) {
-    this.selectedSegment = event.detail.value;
+  segmentChanged(segment: string) {
+    this.selectedMode = segment;
   }
 
   getShop() {
