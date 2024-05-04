@@ -47,14 +47,23 @@ export interface Banner4 {
   related_product?: string | null;
 }
 
+export interface Background {
+  image: string | null;
+  overlay_opacity: number | null;
+  fixed_background: boolean | null;
+  hex_color: string;
+}
+
 // Interfaz para el objeto "hero" completo
 export interface HeroSectionData {
+  background: Background;
   banner_1: Banner1;
   banner_2: Banner2;
   banner_3: Banner3;
 }
 
 export interface BannersSectionData {
+  background: Background;
   banner_1: Banner4;
   banner_2: Banner4;
 }

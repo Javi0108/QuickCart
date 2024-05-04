@@ -22,7 +22,7 @@ export class WebPageEditPage implements OnInit {
   sections: Section[] = [];
   products: Product[] = [];
 
-  selectedSegment: 'edit' | 'preview' = 'edit';
+  selectedMode: string = "edit";
 
 
   constructor(
@@ -42,13 +42,21 @@ export class WebPageEditPage implements OnInit {
       console.error('No se proporcionó un ID de tienda válido.');
     }
 
-    this.sectionEventService.deleteSection.subscribe((section: Section) => {
-      this.deleteSection(section);
+    this.sectionEventService.deleteSection.subscribe((id: number) => {
+      this.deleteSection(id);
+    })
+
+    this.sectionEventService.moveSectionUp.subscribe((index: number) => {
+      this.moveSectionUp(index);
+    })
+
+    this.sectionEventService.moveSectionDown.subscribe((index: number) => {
+      this.moveSectionDown(index);
     })
   }
 
-  segmentChanged(event: CustomEvent) {
-    this.selectedSegment = event.detail.value;
+  segmentChanged(segment: string) {
+    this.selectedMode = segment;
   }
 
   getShop() {
@@ -100,10 +108,25 @@ export class WebPageEditPage implements OnInit {
     this.sections.push(newSection);
   }
 
-
-
+  moveSectionUp(index: number) {
+    if (index > 0) {
+      const temp = this.sections[index - 1];
+      this.sections[index - 1] = this.sections[index];
+      this.sections[index] = temp;
+    }
+  }
+  
+  moveSectionDown(index: number) {
+    if (index < this.sections.length - 1) {
+      const temp = this.sections[index + 1];
+      this.sections[index + 1] = this.sections[index];
+      this.sections[index] = temp;
+    }
+  }
 
   saveAllSections() {
+
+    console.log(this.sections)
     if (this.sections.length === 0) {
       return;
     }
@@ -141,18 +164,18 @@ export class WebPageEditPage implements OnInit {
     })
   }
 
-  deleteSection(section: Section) {
-    if (section.id > 0) {
-      this.shopService.deleteShopSection(section.id).subscribe({
+  deleteSection(id: number) {
+    if (id > 0) {
+      this.shopService.deleteShopSection(id).subscribe({
         next: (data) => {
-          const index = this.sections.findIndex(s => s.id === section.id);
+          const index = this.sections.findIndex(s => s.id === id);
           if (index !== -1) {
             this.sections.splice(index, 1);
           }
         }
       });
     } else {
-      const index = this.sections.findIndex(s => s.id === section.id);
+      const index = this.sections.findIndex(s => s.id === id);
       if (index !== -1) {
         this.sections.splice(index, 1);
       }

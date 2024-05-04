@@ -1,6 +1,6 @@
 .section-banners {
-    margin-top: 56px;
-    align-items: center;
+    position: relative;
+
     .banner {
         background-size: cover;
         background-position: center;
@@ -29,34 +29,34 @@
         }
     }
 
-    .form-edit{   
+    .form-edit {
+        border-left: 1px solid black;
 
-        border-left:1px solid black;
-        ion-segment{
+        ion-segment {
             margin-top: -5px;
         }
 
-        .form-wrapper{
+        .form-wrapper {
             margin-top: 16px;
+
             ::ng-deep ion-input {
                 margin-bottom: 15px;
+
                 .input-bottom {
                     padding-right: 6px;
                     margin-top: -25px !important;
                 }
-            
             }
-    
-            ::ng-deep ion-textarea{
+
+            ::ng-deep ion-textarea {
                 margin-bottom: 15px;
                 height: auto;
 
-                .native-wrapper{
+                .native-wrapper {
                     padding-bottom: 20px;
                 }
 
                 .textarea-bottom {
-                    
                     padding-right: 6px;
                     margin-top: -25px !important;
                 }
@@ -64,3 +64,5 @@
         }
     }
 }
+
+

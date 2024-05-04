@@ -22,25 +22,25 @@
 
 <div *ngIf="shouldShowIonContentValue">
   <div *ngIf="shopData">
-    <div *ngIf="showSections" class="p-5 pt-2">
+    <div *ngIf="showSections">
       <div *ngIf="sections">
         <app-section-container [sections]="sections"></app-section-container>
       </div>
     </div>
 
-    <div *ngIf="showCatalog" class="p-5 pt-2">
+    <div *ngIf="showCatalog">
       <app-shop-catalog [id]="shopId" [shopName]="shopData.name"></app-shop-catalog>
     </div>
 
     <div *ngIf="showAbout" class="p-5 pt-2">
-      <app-profile [id]="shopData.profile"></app-profile>
+      <app-profile [idProfileShop]="shopData.profile"></app-profile>
     </div>
   </div>
 </div>
 
 <ion-content *ngIf="!shouldShowIonContentValue">
   <div *ngIf="shopData">
-    <div *ngIf="showSections" class="p-5 pt-2">
+    <div *ngIf="showSections">
       <div *ngIf="sections">
         <app-section-container [sections]="sections"></app-section-container>
       </div>

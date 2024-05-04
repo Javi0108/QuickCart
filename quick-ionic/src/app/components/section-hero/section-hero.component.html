@@ -1,6 +1,12 @@
-<section *ngIf="sectionData!" class="hero pt-3" [ngClass]="{'container-xxl': !editMode}">
-  <div class="row">
-    <div [ngClass]="{'col-lg-12': !editMode, 'col-lg-9': editMode}">
+<section *ngIf="editMode" class="section-edit section-hero" (click)="toggleOptions()">
+  <div *ngIf="sectionData!" class="row">
+    <div class="col-lg-9" [ngStyle]="{
+      'background-image': sectionData.background.image ? 'url(' + sectionData.background.image + ')' : 'none',
+      'background-color': sectionData.background.image || !sectionData.background.hex_color ? '#ffffff' : sectionData.background.hex_color,
+      'opacity': sectionData.background.overlay_opacity,
+      'background-attachment': sectionData.background.fixed_background ? 'fixed' : 'scroll',
+      'background-size': sectionData.background.image ? 'cover' : 'auto'
+    }">
       <div class="row">
         <div class="col-xl-8 col-lg-12 col-12">
           <div class="hero-banner-1" [style.background-image]="'url(' + sectionData.banner_1.image + ')'">
@@ -58,7 +64,7 @@
       </div>
     </div>
 
-    <div *ngIf="editMode" class="col-lg-3 p-1 form-edit p-3 pt-0">
+    <div class="col-lg-3 form-edit">
 
       <ion-segment [(ngModel)]="selectedSegment" (ionChange)="segmentChanged($event)">
         <ion-segment-button value="banner_1">
@@ -153,13 +159,98 @@
           </ion-item>
         </ion-list>
       </div>
+    </div>
+  </div>
 
-      <div class="row">
-        <div class="col-12">
-          <button (click)="deleteSection()" class="btn btn-danger btn-block w-100">Delete</button>
+  <div class="section-options" *ngIf="showOptions">
+
+    <button class="option-button" (click)="optionsSection()">
+      <span class="text-button">Edit section</span>
+    </button>
+
+    <hr class="vertical-separator">
+
+    <button class="option-button" (click)="deleteSection()">
+      <ion-icon name="trash-outline"></ion-icon>
+    </button>
+
+    <hr class="vertical-separator">
+
+    <button [disabled]="order === 0" class="option-button" (click)="moveSectionUp()" fill="outline">
+      <ion-icon slot="icon-only" name="arrow-up" [ngClass]="{'disabled-icon': order === 0}"></ion-icon>
+    </button>
+
+    <button class="option-button" (click)="moveSectionDown()" fill="outline">
+      <ion-icon slot="icon-only" name="arrow-down"></ion-icon>
+    </button>
+
+  </div>
+</section>
+
+<!--Modo vista-->
+
+<section *ngIf="!editMode && sectionData!" class="section-hero pt-4" [ngStyle]="{
+  'background-image': sectionData.background.image ? 'url(' + sectionData.background.image + ')' : 'none',
+  'background-color': sectionData.background.image || !sectionData.background.hex_color ? '#ffffff' : sectionData.background.hex_color,
+  'opacity': sectionData.background.overlay_opacity,
+  'background-attachment': sectionData.background.fixed_background ? 'fixed' : 'scroll',
+  'background-size': sectionData.background.image ? 'cover' : 'auto'
+}">
+  <div class="container-xxl">
+    <div class="row">
+      <div class="col-xl-8 col-lg-12 col-12">
+        <div class="hero-banner-1" [style.background-image]="'url(' + sectionData.banner_1.image + ')'">
+          <div class="content">
+            <h2>
+              <span>{{sectionData.banner_1.subtitle}}</span>
+              {{sectionData.banner_1.title}}
+            </h2>
+            <p>
+              {{sectionData.banner_1.content}}
+            </p>
+            <h3>
+              <span>{{sectionData.banner_1.price_text}}</span>
+              {{sectionData.banner_1.price}}
+            </h3>
+            <div *ngIf="sectionData.banner_1.related_product" class="button">
+              <a [routerLink]="['/product', sectionData.banner_1.related_product]" type="button"
+                class="btn btn-primary">{{sectionData.banner_1.button}}</a>
+            </div>
+          </div>
         </div>
       </div>
-
+      <div class="col-xl-4 col-lg-12 col-12">
+        <div class="row">
+          <div class="col-xl-12 col-lg-6 col-md-12 col-12">
+            <div class="hero-banner-2" [style.background-image]="'url(' + sectionData.banner_2.image + ')'"
+              [routerLink]="sectionData.banner_2.related_product ? ['/product', sectionData.banner_2.related_product] : null">
+              <div class="row content">
+                <div class="col-8">
+                  <h5>
+                    {{sectionData.banner_2.subtitle}}
+                  </h5>
+                  <h2>
+                    {{sectionData.banner_2.title}}
+                  </h2>
+                  <h3>{{sectionData.banner_2.price}}</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-12 col-lg-6 col-md-12 col-12">
+            <div class="hero-banner-3" [style.background-image]="'url(' + sectionData.banner_3.image + ')'">
+              <div class="content">
+                <h2>{{sectionData.banner_3.title}}</h2>
+                <p>{{sectionData.banner_3.content}}</p>
+                <div *ngIf="sectionData.banner_3.related_product" class="button">
+                  <a [routerLink]="['/product', sectionData.banner_3.related_product]" type="button"
+                    class="btn btn-primary">{{sectionData.banner_3.button}}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>

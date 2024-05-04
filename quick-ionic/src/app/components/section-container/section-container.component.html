@@ -1,3 +1,4 @@
-<div *ngFor="let section of sections">
-  <ng-container *ngComponentOutlet="sectionComponents[section.type]; inputs: { section: section, shopId: shopId }"></ng-container>
+<div *ngFor="let section of sections; let i = index">
+  <ng-container
+    *ngComponentOutlet="sectionComponents[section.type]; inputs: { section: section, shopId: shopId, order: i }"></ng-container>
 </div>

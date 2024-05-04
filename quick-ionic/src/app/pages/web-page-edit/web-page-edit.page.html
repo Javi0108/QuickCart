@@ -1,31 +1,44 @@
 <ion-spinner *ngIf="!shopData"></ion-spinner>
 
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
 
-<ion-content>
+      <ion-button id="popover-button">Website builder</ion-button>
+    </ion-buttons>
 
-  <ion-segment [(ngModel)]="selectedSegment" (ionChange)="segmentChanged($event)">
-    <ion-segment-button value="edit">
-      <ion-label>Edit</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="preview">
-      <ion-label>Preview</ion-label>
-    </ion-segment-button>
-  </ion-segment>
+    <ion-buttons slot="end">
+      <ion-button *ngIf="selectedMode === 'preview'" (click)="segmentChanged('edit')" expand="block" fill="clear" shape="round">
+        Edit
+      </ion-button>
 
-  <div class="p-5 pt-2" *ngIf="selectedSegment === 'edit'">
+      <ion-button *ngIf="selectedMode === 'edit'" (click)="segmentChanged('preview')" expand="block" fill="clear" shape="round">
+        Preview
+      </ion-button>
+
+      <ion-button (click)="saveAllSections()">Save</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="shopData" id="main-content">
+
+  <div class="pt-2" *ngIf="selectedMode === 'edit'">
     <div *ngIf="sections">
-      <app-section-container [sections]="sections" [shopId]="shopId"></app-section-container>
+      <app-section-container [sections]="sections" [shopId]="shopId" (moveSectionUpEvent)="moveSectionUp($event)"
+        (moveSectionDownEvent)="moveSectionDown($event)">></app-section-container>
     </div>
   </div>
 
-  <div class="pt-2" *ngIf="selectedSegment === 'preview'">
+  <div class="pt-2" *ngIf="selectedMode === 'preview'">
     <div *ngIf="sections">
       <app-web-page></app-web-page>
     </div>
   </div>
 </ion-content>
 
-<ion-toolbar *ngIf="selectedSegment === 'edit'" color="light" style="position: sticky; top: 0">
+<ion-toolbar *ngIf="selectedMode === 'edit'" color="light" style="position: sticky; top: 0">
   <ion-buttons slot="start">
     <button (click)="addSection('hero')" class="btn btn-primary ms-5 me-2">Add Hero</button>
     <button (click)="addSection('banners')" class="btn btn-primary">Add Banners</button>
@@ -35,3 +48,32 @@
     <ion-button (click)="saveAllSections()" class="btn btn-primary">Save</ion-button>
   </ion-buttons>
 </ion-toolbar>
+
+
+<ion-popover trigger="popover-button" [dismissOnSelect]="true">
+  <ng-template>
+    <ion-content>
+      <ion-list>
+        <ion-item [button]="true" [detail]="false">Option 1</ion-item>
+        <ion-item [button]="true" [detail]="false">Option 2</ion-item>
+        <ion-item [button]="true" id="nested-trigger">More options...</ion-item>
+
+        <ion-popover trigger="nested-trigger" [dismissOnSelect]="true" side="end">
+          <ng-template>
+            <ion-content>
+              <ion-list>
+                <ion-item [button]="true" [detail]="false">Nested option</ion-item>
+              </ion-list>
+            </ion-content>
+          </ng-template>
+        </ion-popover>
+      </ion-list>
+    </ion-content>
+  </ng-template>
+</ion-popover>
+
+
+<!-- Barra lateral -->
+<ion-menu contentId="main-content">
+  
+</ion-menu>

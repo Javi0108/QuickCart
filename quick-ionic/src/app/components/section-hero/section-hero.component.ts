@@ -6,6 +6,7 @@ import { IonModal } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { Item, TypeaheadComponent } from '../typeahead/typeahead.component';
 import { Product } from 'src/app/interfaces/product.interface';
+import { EditSectionModalComponent } from '../edit-section-modal/edit-section-modal.component';
 
 @Component({
   selector: 'app-section-hero',
@@ -16,14 +17,17 @@ export class SectionHeroComponent implements OnInit {
 
   @Input() shopId!: number;
   @Input() section: any;
+  @Input() order!: number;
 
   editMode: boolean = false;
+  showOptions: boolean = false;
 
   sectionId?: number;
   sectionType?: string;
   sectionData?: HeroSectionData;
   products: Item[] = [];
-  
+
+  sectionFormBackground!: FormGroup;
   sectionFormBannerOne!: FormGroup;
   sectionFormBannerTwo!: FormGroup;
   sectionFormBannerThree!: FormGroup;
@@ -36,7 +40,7 @@ export class SectionHeroComponent implements OnInit {
   selectedProductBannerTwo: string | null = null;
   selectedProductBannerThree: string | null = null;
 
-  
+
 
   constructor(
     private sectionEventService: SectionEventService,
@@ -65,6 +69,13 @@ export class SectionHeroComponent implements OnInit {
 
   initializeEditMode() {
 
+    this.sectionFormBackground = new FormGroup({
+      image: new FormControl(this.sectionData?.background.image),
+      overlay_opacity: new FormControl(this.sectionData?.background.overlay_opacity),
+      fixed_background: new FormControl(this.sectionData?.background.fixed_background),
+      hex_color: new FormControl(this.sectionData?.background.hex_color),
+    });
+
     this.sectionFormBannerOne = new FormGroup({
       subtitle: new FormControl(this.sectionData?.banner_1.subtitle),
       title: new FormControl(this.sectionData?.banner_1.title),
@@ -89,6 +100,10 @@ export class SectionHeroComponent implements OnInit {
       image: new FormControl(this.sectionData?.banner_3.image)
     });
 
+    this.sectionFormBackground.valueChanges.subscribe((values) => {
+      this.sectionData!.background = { ...this.sectionData!.background, ...values };
+    });
+
     this.sectionFormBannerOne.valueChanges.subscribe((values) => {
       this.sectionData!.banner_1 = { ...this.sectionData!.banner_1, ...values };
     });
@@ -101,22 +116,6 @@ export class SectionHeroComponent implements OnInit {
       this.sectionData!.banner_3 = { ...this.sectionData!.banner_3, ...values };
     });
 
-  }
-
-  segmentChanged(event: CustomEvent) {
-    this.selectedSegment = event.detail.value;
-  }
-
-  deleteSection() {
-    let section: Section = {
-      provitionalId: "",
-      id: this.sectionId,
-      type: "hero",
-      editMode: true,
-      data: this.sectionData,
-      products: []
-    }
-    this.sectionEventService.deleteSection.emit(section);
   }
 
   onFileSelected(event: any) {
@@ -140,22 +139,22 @@ export class SectionHeroComponent implements OnInit {
   productSelectionChanged(selectedValue: string | null) {
 
     this.sectionData![this.selectedSegment].related_product = selectedValue;
-    
-    if(this.selectedSegment == 'banner_1'){
+
+    if (this.selectedSegment == 'banner_1') {
       this.selectedProductBannerOne = selectedValue;
-    }else if(this.selectedSegment == 'banner_2'){
+    } else if (this.selectedSegment == 'banner_2') {
       this.selectedProductBannerTwo = selectedValue;
-    }else{
+    } else {
       this.selectedProductBannerThree = selectedValue;
-    } 
+    }
 
     const product = this.products.find((product) => product.value === selectedValue);
 
-    if(this.selectedSegment == 'banner_1'){
+    if (this.selectedSegment == 'banner_1') {
       this.selectedProductBannerOneText = product ? product.text : 'No selection';
-    }else if(this.selectedSegment == 'banner_2'){
+    } else if (this.selectedSegment == 'banner_2') {
       this.selectedProductBannerTwoText = product ? product.text : 'No selection';
-    }else{
+    } else {
       this.selectedProductBannerThreeText = product ? product.text : 'No selection';
     }
   }
@@ -174,7 +173,7 @@ export class SectionHeroComponent implements OnInit {
         'selectionCancel': () => modal.dismiss()
       }
     });
-  
+
     modal.onDidDismiss().then((data) => {
       if (data.role === 'confirm') {
         const selectedItem = data.data;
@@ -185,4 +184,44 @@ export class SectionHeroComponent implements OnInit {
     await modal.present();
   }
 
+  async optionsSection() {
+    const modal = await this.modalController.create({
+      component: EditSectionModalComponent,
+      componentProps: {
+        'image': this.sectionData!.background.image,
+        'overlay_opacity': this.sectionData!.background.overlay_opacity,
+        'fixed_background': this.sectionData!.background.fixed_background,
+        'hex_color': this.sectionData!.background.hex_color
+      },
+    });
+
+    modal.onDidDismiss().then((data) => {
+      if (data.role === 'confirm') {
+        const modalData = data.data;
+        this.sectionData!.background = { ...this.sectionData!.background, ...modalData };
+      }
+    });
+
+    return await modal.present();
+  }
+
+  moveSectionUp() {
+    this.sectionEventService.moveSectionUp.emit(this.order);
+  }
+
+  moveSectionDown() {
+    this.sectionEventService.moveSectionDown.emit(this.order);
+  }
+
+  deleteSection() {
+    this.sectionEventService.deleteSection.emit(this.sectionId);
+  }
+
+  segmentChanged(event: CustomEvent) {
+    this.selectedSegment = event.detail.value;
+  }
+
+  toggleOptions() {
+    this.showOptions = !this.showOptions;
+  }
 }
