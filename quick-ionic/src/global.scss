@@ -124,14 +124,6 @@
         top: 5px;
         right: 5px;
 
-        .vertical-separator {
-            margin: 0 4px;
-            width: 1px;
-            height: 20px;
-            background-color: #969696;
-            border: 0;
-        }
-
         .option-button {
             padding: 6px 8px;
             color: #36344d;
@@ -159,13 +151,126 @@
     }
 }
 
-
 .disabled-icon {
     color: gray;
 }
 
 
+.quickart-item {
+    margin-top: 8px;
+    color: #36344d;
+    background-color: transparent;
+    border: 1px solid transparent;
 
+    ion-icon {}
+
+    span {
+        display: flex;
+        align-items: center;
+        margin: 0 8px;
+    }
+
+
+}
+
+.quickart-button {
+    color: #201f2e;
+    margin: 0px 5px 0px 0px;
+    background-color: transparent;
+    padding: 10px 23px;
+    font-weight: 600;
+    font-family: DM Sans, sans-serif;
+    cursor: pointer;
+    border-radius: 8px;
+    display: inline-flex; /* Para permitir el alineamiento vertical */
+    align-items: center; /* Alinea el contenido verticalmente */
+
+    ion-icon {
+        font-size: 20px !important;
+        margin-right: 5px; /* Espacio entre el icono y el texto */
+        vertical-align: middle; /* Alinea el icono verticalmente */
+    }
+
+    &:hover {
+        background-color: #e2e5e79c;
+    }
+}
+
+.quickart-button-violet {
+    background-color: #673de6;
+    font-weight: 700;
+    color: #fff;
+
+    &:hover {
+        background-color: #582ae4;
+    }
+}
+
+
+.quickart-button-white {
+    background-color: #fff;
+    font-weight: 700;
+    color: #673de6;
+    border: 1px solid #dad9da;
+
+    &:hover {
+        background-color: #e6e6e6;
+    }
+}
+
+.quickart-button-icon {
+    border: none;
+
+    /* Asegúrate de que el tamaño del icono se ajuste adecuadamente */
+    ion-icon {
+        padding: 5px;
+        border-radius: 100px; /* Se establece en 50% para que sea un círculo */
+        font-size: 30px;
+        font-weight: 800;
+
+        &:hover {
+            background-color: #e6e6e6;
+        }
+    }
+
+    &:hover {
+        background-color: #fff;
+    }
+}
+
+
+.h-list-button {
+    padding: 15px 24px;
+    width: 100%;
+    display: block;
+    font-weight: 400;
+    font-size: 14px;
+    text-align: left;
+    border: 0;
+    background: transparent;
+
+    &:hover {
+        background-color: #e6e6e6;
+    }
+}
+
+.trans {
+    word-break: break-word;
+}
+
+
+
+.vertical-separator {
+    margin: 0 4px;
+    width: 1px;
+    height: 20px;
+    background-color: #969696;
+    border: 0;
+}
+
+ion-content {
+    --background: #f4f5ff;;
+}
 
 ion-modal {
     --border-radius: 6px;

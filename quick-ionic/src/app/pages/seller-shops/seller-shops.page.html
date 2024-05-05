@@ -1,62 +1,90 @@
 <ion-content>
 
-    <ion-spinner *ngIf="!pageloaded"></ion-spinner>
-  
-    <div *ngIf="pageloaded" class="container mt-3">
-      <div class="head-container ion-text-end">
-        <h3>Web sites</h3>
-        <ion-button (click)="openAddWebsiteModal()">
-          <ion-icon slot="start" name="add-circle-outline"></ion-icon>
-          Add web site
-        </ion-button>
-      </div>
-      <div class="search-container mt-3">
-        <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="onSearchChange($event)"></ion-searchbar>
-      </div>
-      <div class="shops-container mt-3">
-        <ng-container *ngIf="filteredShops && filteredShops.length">
-          <div class="row">
-            <div *ngFor="let shop of filteredShops; let i = index" class="mb-3">
-              <ion-card class="d-flex flex-row h-100">
-                <ion-img [src]="'http://localhost:8000' + shop.logo"></ion-img>
-  
-                <ion-card-header class="flex-grow-1">
-                  <ion-card-title>{{ shop.name }}</ion-card-title>
-                  <ion-card-subtitle>{{ shop.title }}</ion-card-subtitle>
-                </ion-card-header>
-  
-                <ion-card-content class="flex-grow-1">
-                  {{ shop.description }}
-                </ion-card-content>
-  
-                <ion-card-content class="flex">
-                  <ion-button [routerLink]="['/web-page', shop.name, shop.id_shop]">Visit web site</ion-button>
-                  <ion-button [id]="'options-shop-' + i">
-                    <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
-                  </ion-button>
-                  <ion-popover [trigger]="'options-shop-' + i" [dismissOnSelect]="true">
-                    <ng-template>
-                      <ion-content>
-                        <ion-list>
-                          <ion-item [button]="true" [detail]="false" [routerLink]="['/products-management', shop.id_shop]">Add Products</ion-item>
-                          <ion-item [button]="true" [detail]="false" [routerLink]="['/web-page-edit', shop.id_shop]">Edit</ion-item>
-                          <ion-item [button]="true" [detail]="false">Enable</ion-item>
-                          <ion-item [button]="true" [detail]="false" (click)="removeShop(shop.id_shop)" color="danger">Delete</ion-item>
-                        </ion-list>
-                      </ion-content>
-                    </ng-template>
-                  </ion-popover>
-                </ion-card-content>
-              </ion-card>
-            </div>
-          </div>
-        </ng-container>
-  
-  
-        <ion-text *ngIf="!filteredShops || filteredShops.length === 0" class="ion-text-center">
-          No shops available.
-        </ion-text>
-      </div>
+  <ion-spinner *ngIf="!pageloaded"></ion-spinner>
+
+  <div *ngIf="pageloaded" class="container mt-3">
+    <div class="head-container ion-text-end">
+      <h3>Websites</h3>
+      <button class="quickart-button quickart-button-violet" (click)="openAddWebsiteModal()">
+        <ion-icon slot="start" name="add-outline"></ion-icon>
+        Add website
+      </button>
     </div>
-  </ion-content>
-  
+    <div class="search-container mt-3">
+      <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="onSearchChange($event)"></ion-searchbar>
+    </div>
+    <div class="shops-container mt-3">
+      <ng-container *ngIf="filteredShops && filteredShops.length">
+        <div class="row">
+          <div *ngFor="let shop of filteredShops; let i = index" class="mb-3">
+            <ion-card class="d-flex flex-row h-100">
+              <ion-img [src]="'http://localhost:8000' + shop.logo"></ion-img>
+
+              <ion-card-header class="flex-grow-1" style="min-width: 20%;">
+                <ion-card-title>{{ shop.name }}</ion-card-title>
+                <ion-card-subtitle>{{ shop.title }}</ion-card-subtitle>
+              </ion-card-header>
+
+              <ion-card-content class="flex-grow-1 d-none d-lg-block" style="width: 50%;">
+                {{ shop.description }}
+              </ion-card-content>
+
+              <ion-card-content class="flex align-items-end justify-content-end">
+
+                <ion-buttons slot="start">
+                  <button class="quickart-button quickart-button-white"
+                    [routerLink]="['/web-page-edit', shop.id_shop]">Edit website</button>
+                  <button class="quickart-button quickart-button-white quickart-button-icon" [id]="'options-shop-' + i"
+                    style="border: none;">
+                    <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+                  </button>
+                </ion-buttons>
+
+
+                <ion-popover [trigger]="'options-shop-' + i" [dismissOnSelect]="true">
+                  <ng-template>
+                    <ion-content>
+                      <ion-list>
+                        <button class="h-list-button" [routerLink]="['/web-page', shop.name, shop.id_shop]">
+                          <div class="d-flex">
+                            <span class="trans">Visit website</span>
+                          </div>
+                        </button>
+
+                        <button class="h-list-button" (click)="openAddWebsiteModal()">
+                          <div class="d-flex">
+                            <span class="trans">Edit website info</span>
+                          </div>
+                        </button>
+
+                        <button class="h-list-button" [routerLink]="['/products-management', shop.id_shop]">
+                          <div class="d-flex">
+                            <span class="trans">Store manager</span>
+                          </div>
+                        </button>
+
+                        <button class="h-list-button" (click)="removeShop(shop.id_shop)" style="color: #fc5185;">
+                          <div class="d-flex">
+                            <span class="trans">Delete</span>
+                          </div>
+                        </button>
+                      </ion-list>
+                    </ion-content>
+                  </ng-template>
+                </ion-popover>
+              </ion-card-content>
+            </ion-card>
+          </div>
+        </div>
+      </ng-container>
+
+
+      <ion-text *ngIf="!filteredShops || filteredShops.length === 0" class="ion-text-center d-flex flex-column align-items-center justify-content-center">
+        <ion-icon name="rocket-outline" style="font-size: 100px; color: gray;"></ion-icon>
+        <h1 class="mt-3">Nothing found</h1>
+        <p class="mt-2">Try looking for something else.</p>
+      </ion-text>
+      
+    </div>
+  </div>
+</ion-content>
