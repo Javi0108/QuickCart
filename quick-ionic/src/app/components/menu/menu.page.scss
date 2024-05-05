@@ -1,64 +1,70 @@
 ion-header {
-    border-bottom: 1px solid rgb(190, 190, 190);
-    .row {
-        .l-col {
-            display: flex;
-            align-items: center;
+  border-bottom: 1px solid rgb(190, 190, 190);
+  .row {
+    .l-col {
+      display: flex;
+      align-items: center;
 
-            ion-icon {
-                cursor: pointer;
-                margin-left: 21px;
-            }
-        }
-
-        .r-col {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            padding-right: 33px;
-
-            ul {
-                margin: 0;
-                display: flex;
-                align-items: center;
-                justify-content: flex-end;
-
-                li {
-                    list-style: none;
-
-                    a {
-                        cursor: pointer;
-                        margin-left: 16px;
-                        text-decoration: none;
-
-                    }
-                }
-            }
-        }
+      ion-icon {
+        cursor: pointer;
+        margin-left: 21px;
+      }
     }
+
+    .r-col {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 33px;
+
+      ul {
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        li {
+          list-style: none;
+
+          a {
+            cursor: pointer;
+            margin-left: 16px;
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
 }
 
-// ion-toolbar {
-//     background-color: --primary-color;
-// }
-
-#menuLogo {
-    display: flex;
-    flex-direction: column;
-    & img {
-        margin-left: 5px;
-        margin-bottom: 10px;
-    }
-}
-
-ion-fab {
+#buttonFav {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-}
-
-#homeTitle {
+  
+    & button {
+      min-height: 56px;
+      padding: 1rem;
+      background-color: rgb(0, 0, 0, 0);
+      transition: all .3s ease;
+    }
+  }
+  
+  #buttonFav {
+      & button:hover {
+          background-color: #e9e1ff;
+      }
+  }
+  
+  ion-fab {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  #homeTitle {
     font-size: 25px;
     font-weight: 500;
     display: flex;
@@ -66,36 +72,32 @@ ion-fab {
     flex-wrap: wrap;
     align-items: center;
     gap: 5px;
-}
-
-#menuTitle {
+  }
+  
+  #menuTitle {
     padding: 1rem;
-    font-size: 30px;
-    font-weight: 600;
+    font-size: 20px;
     display: flex;
     flex-direction: column;
-
+  
     & label {
-        margin-left: 1rem;
+      margin-left: 1rem;
     }
-}
-
-#listElement {
-    transition: all .3s ease;
-}
-
-#listElement:hover {
-    background-color: #d7d7d7;
-}
-
-
+  }
+  
+  #listElement {
+    transition: all 0.3s ease;
+  }
+  
+  #listElement:hover {
+    background-color: #e9e1ff;
+  }
 
 // // Extra small devices (portrait phones, less than 576px)
 // @media (max-width: 575.98px) {
 //     ion-header {
 //         .row {
 //             .l-col {
-
 
 //                 ion-icon {}
 //             }
@@ -106,7 +108,6 @@ ion-fab {
 
 //                 ul {
 //                     li {
-
 
 //                         a {}
 //                     }
@@ -121,9 +122,7 @@ ion-fab {
 
 //         ul {
 
-
 //             li {
-
 
 //                 a {}
 //             }
@@ -137,7 +136,6 @@ ion-fab {
 //         .row {
 //             .l-col {
 
-
 //                 ion-icon {}
 //             }
 
@@ -147,7 +145,6 @@ ion-fab {
 
 //                 ul {
 //                     li {
-
 
 //                         a {}
 //                     }
@@ -162,9 +159,7 @@ ion-fab {
 
 //         ul {
 
-
 //             li {
-
 
 //                 a {}
 //             }
@@ -178,7 +173,6 @@ ion-fab {
 //         .row {
 //             .l-col {
 
-
 //                 ion-icon {}
 //             }
 
@@ -188,7 +182,6 @@ ion-fab {
 
 //                 ul {
 //                     li {
-
 
 //                         a {}
 //                     }
@@ -203,9 +196,7 @@ ion-fab {
 
 //         ul {
 
-
 //             li {
-
 
 //                 a {}
 //             }

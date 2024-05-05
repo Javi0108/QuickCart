@@ -216,7 +216,7 @@
               <p>{{ profile.user_type }}</p>
               <button
                 *ngIf='profile.user_type == "Seller"'
-                [routerLink]="['/seller-shops']"
+                [routerLink]="['/web-page-catalog', profile.id_profile]"
                 class="btn btn-primary m-2"
               >
                 My Shops
