@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { FormGroup } from '@angular/forms';
 import { SellerService } from 'src/app/services/seller.service';
 import { ShopCreate, ShopData } from 'src/app/interfaces/shop.interface';
+import { NotificationToastService } from 'src/app/services/notification-toast.service';
 
 @Component({
   selector: 'app-add-website-modal',
@@ -14,11 +15,12 @@ export class AddWebsiteModalComponent {
   @Input() createWebSiteForm!: FormGroup;
   imagePreview: any;
   file: File | null = null;
-
+  waitingAnswer?: boolean;
 
   constructor(
     private modalController: ModalController,
     private sellerService: SellerService,
+    private notificationToastService: NotificationToastService
   ) { }
 
   handleModalClose() {
@@ -34,18 +36,28 @@ export class AddWebsiteModalComponent {
         address: this.createWebSiteForm.get('address')?.value,
         logo: this.imagePreview,
       };
-      this.handleModalClose();
       this.addShop(shopData);
     }
   }
 
   addShop(shopData: ShopCreate) {
+    this.waitingAnswer = true;
     this.sellerService.addShop(shopData).subscribe({
       next: (response) => {
+        this.waitingAnswer = false;
+        this.notificationToastService.presentToast(
+          'Store successfully created',
+          'success',
+          '../../assets/check.svg'
+        );
         this.handleModalClose();
       },
       error: (error) => {
-        console.error('Error al agregar la tienda:', error);
+        this.notificationToastService.presentToast(
+          'An error occurred while creating the store',
+          'danger',
+          '../../assets/exclamation.svg'
+        );
       }
     });
   }
