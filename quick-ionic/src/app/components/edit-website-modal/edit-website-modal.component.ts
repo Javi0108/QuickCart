@@ -12,7 +12,7 @@ import { SellerService } from 'src/app/services/seller.service';
 export class EditWebsiteModalComponent implements OnInit {
 
   @Input() editWebSiteForm!: FormGroup;
-  imagePreview: any;
+  @Input() imagePreview: any;
   file: File | null = null;
 
   constructor(
@@ -36,6 +36,7 @@ export class EditWebsiteModalComponent implements OnInit {
         address: this.editWebSiteForm.get('address')?.value,
         logo: this.imagePreview,
       };
+      console.log(this.imagePreview)
       this.editShop(shopData);
     }
   }

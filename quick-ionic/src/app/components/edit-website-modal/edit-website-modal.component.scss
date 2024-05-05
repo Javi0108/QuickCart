@@ -1,0 +1,143 @@
+.image-input-container {
+    display: flex;
+    align-items: center;
+}
+
+.uploaded-image {
+    margin: 10px;
+    border: 1px solid rgba(70, 70, 70, 0.39);
+    width: 200px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.file-input {
+    flex: 1;
+}
+
+.content-wrapper {
+    height: calc(100vh - 128px);
+    padding: 20px;
+    border-radius: 10px;
+    overflow: auto;
+}
+
+ion-content {
+    --background: white;
+
+    form {
+        padding: 40px;
+        border: 1px solid rgb(219, 219, 219);
+        border-radius: 10px;
+
+        ion-input {
+            height: 50px;
+            width: 100%;
+            border-radius: 3px;
+            padding: 0 10px;
+            margin-top: 12px;
+            font-size: 14px;
+            font-weight: 300;
+    
+            &::placeholder {
+                color: #e5e5e5;
+            }
+        }
+
+        ion-textarea {
+            border-radius: 3px;
+            margin-top: 12px;
+            font-size: 14px;
+            font-weight: 300;
+    
+            &::placeholder {
+                color: #e5e5e5;
+            }
+        }
+
+        margin-top: 16px;
+        ::ng-deep ion-input {
+            margin-bottom: 15px;
+            .input-bottom {
+                padding-right: 6px;
+                margin-top: -25px !important;
+            }
+        
+        }
+
+        ::ng-deep ion-textarea{
+            margin-bottom: 15px;
+            height: auto;
+
+            .native-wrapper{
+                padding-bottom: 20px;
+            }
+
+            .textarea-bottom {
+                padding-right: 6px;
+                margin-top: -25px !important;
+            }
+        }
+    }
+
+    .zyro-image-selector {
+        margin-bottom: 16px;
+    
+        .zyro-image-selector__button {
+            position: relative;
+            display: block;
+            width: 100%;
+            height: 250px;
+            cursor: pointer;
+            border-radius: 4px;
+            background-color: #dadce0;
+        }
+    
+        .zyro-image-selector__image {
+            object-fit: var(--z-object-fit, contain);
+            width: 100%;
+            height: 100%;
+            object-position: center center;
+            border-radius: 4px;
+        }
+    
+        .zyro-image-selector__description {
+            position: absolute;
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            padding: 16px;
+            color: #fff;
+            background: #0009;
+            -webkit-backdrop-filter: blur(2px);
+            backdrop-filter: blur(2px);
+        }
+    
+        .zyro-image-selector__icon {
+            margin-bottom: 4px;
+    
+            ion-icon {
+                transition: .3s ease transform;
+                fill: currentColor;
+                font-size: var(--7a38e87c);
+                transform: rotate(var(--37637554));
+                font-variation-settings: "FILL" var(--7a44bd78), "opsz" var(--64bfb938);
+                width: var(--7a38e87c);
+                height: var(--7a38e87c);
+                overflow: hidden;
+            }
+        }
+    
+        .text-body-2 {
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 24px;
+        }
+    }
+}
