@@ -135,6 +135,7 @@
     border: 2px solid transparent;
 
     background-color: var(--white-color);
+
     .section-options {
         position: absolute;
         display: flex;
@@ -312,16 +313,37 @@ ion-modal ion-icon {}
 
 ion-modal .wrapper {}
 
-.icon-gray{
+.icon-gray {
     color: var(--text-gray);
 }
 
-.text-gray{
+.text-gray {
     color: var(--text-gray);
 }
 
-.link{
-    &:hover{
+.link {
+    &:hover {
         color: var(--primary-color-hover);
+    }
+}
+
+
+.moving-icon {
+    padding-top: 20px;
+    font-size: 100px;
+    color: gray;
+    animation: moveIcon 2s infinite alternate;
+    /* Definir la animación */
+}
+
+@keyframes moveIcon {
+    0% {
+        transform: translateY(0);
+        /* Estado inicial */
+    }
+
+    100% {
+        transform: translateY(-20px);
+        /* Estado final */
     }
 }

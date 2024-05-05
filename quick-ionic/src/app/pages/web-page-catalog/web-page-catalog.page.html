@@ -8,35 +8,42 @@
         <h2 class="title">Shops</h2>
         <ng-container *ngIf="filteredShops && filteredShops.length">
           <ion-row>
-            <ion-col size="6" size-md="4" size-lg="3" *ngFor="let shop of filteredShops; let i = index">
-              <ion-card>
-                <div [routerLink]="['/web-page', shop.name, shop.id_shop]">
-                  <ion-img [src]="'http://localhost:8000' + shop.logo" alt="Product Image"></ion-img>
-                  <ion-card-header>
-                    <ion-card-title>{{ shop.name }}</ion-card-title>
-                  </ion-card-header>
-                  <ion-card-content>
-                    <p>{{ shop.title }}</p>
-                    <p>{{shop.description}}</p>
-                  </ion-card-content>
+            <ion-col size="12" size-md="6" *ngFor="let shop of filteredShops; let i = index">
+              <div class="card_container">
+                <div class="card">
+                  <div class="bg-image">
+                    <a [routerLink]="['/web-page', shop.name, shop.id_shop]">
+                      <img [src]="'http://localhost:8000' + shop.logo" alt="Product Image">
+                      <div class="btn-overlay">
+                        <ion-button>View</ion-button>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="card-body">
+                    <ion-card-header>
+                      <ion-card-title>{{ shop.name }}</ion-card-title>
+                      <p>{{ shop.title }}</p>
+                    </ion-card-header>
+                    <ion-card-content>
+                      <p>{{ shop.description }}</p>
+                    </ion-card-content>
+                  </div>
                 </div>
-              </ion-card>
+              </div>
             </ion-col>
           </ion-row>
         </ng-container>
       </ion-grid>
     </div>
   </div>
+
+  <div>
+    <ion-text *ngIf="!filteredShops || filteredShops.length === 0" class="ion-text-center d-flex flex-column align-items-center justify-content-center">
+      <ion-icon name="rocket-outline" class="moving-icon"></ion-icon>
+      <h1 class="mt-3">Nothing found</h1>
+      <p class="mt-2">Try looking for something else.</p>
+    </ion-text>
+  </div>
 </ion-content>
 
 
-<ion-content *ngIf="!shops">
-
-  <ion-text *ngIf="!filteredShops || filteredShops.length === 0"
-    class="ion-text-center d-flex flex-column align-items-center justify-content-center">
-    <ion-icon name="rocket-outline" style="font-size: 100px; color: gray;"></ion-icon>
-    <h1 class="mt-3">Nothing found</h1>
-    <p class="mt-2">Try looking for something else.</p>
-  </ion-text>
-
-</ion-content>
