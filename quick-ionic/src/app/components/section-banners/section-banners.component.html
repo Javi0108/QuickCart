@@ -7,7 +7,7 @@
       'background-attachment': sectionData.background.fixed_background ? 'fixed' : 'scroll',
       'background-size': sectionData.background.image ? 'cover' : 'auto'
     }">
-      <div class="row">
+      <div class="row pb-3 pt-3">
         <div class="col-12 col-md-6">
           <div class="banner" [style.background-image]="'url(' + sectionData.banner_1.image + ')'">
             <div class="row content">
@@ -142,7 +142,7 @@
 
 <!--Modo vista-->
 
-<section *ngIf="!editMode && sectionData" class="section-banners pt-5" [ngStyle]="{
+<section *ngIf="!editMode && sectionData" class="section-banners pt-5 pb-5" [ngStyle]="{
   'background-image': sectionData.background.image ? 'url(' + sectionData.background.image + ')' : 'none',
   'background-color': sectionData.background.image || !sectionData.background.hex_color ? '#ffffff' : sectionData.background.hex_color,
   'opacity': sectionData.background.overlay_opacity,
@@ -150,7 +150,7 @@
   'background-size': sectionData.background.image ? 'cover' : 'auto'
 }">
   <div class="container-xxl">
-    <div class="row">
+    <div class="row pb-3 pt-3">
       <div class="col-12 col-md-6">
         <div class="banner" [style.background-image]="'url(' + sectionData.banner_1.image + ')'">
           <div class="row content">

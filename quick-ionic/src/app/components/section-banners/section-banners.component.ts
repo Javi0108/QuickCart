@@ -172,13 +172,13 @@ export class SectionBannersComponent implements OnInit {
     modal.onDidDismiss().then((data) => {
       if (data.role === 'confirm') {
         const modalData = data.data;
-        this.sectionData!.background = { ...this.sectionData!.background, ...modalData};
+        this.sectionData!.background = { ...this.sectionData!.background, ...modalData };
       }
     });
 
     return await modal.present();
   }
-
+  
   moveSectionUp() {
     this.sectionEventService.moveSectionUp.emit(this.order);
   }
