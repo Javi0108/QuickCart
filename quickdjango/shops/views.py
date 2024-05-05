@@ -77,8 +77,6 @@ class SellerShopsView(APIView):
         except Shop.DoesNotExist:
             return Response({"message": "Tienda no encontrada"}, status=status.HTTP_404_NOT_FOUND)
 
-        
-
     def post(self, request):
         profile = request.user.profile
         request_data = request.data.copy() 
@@ -99,6 +97,33 @@ class SellerShopsView(APIView):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
+    def put(self, request, id_shop):
+        try:
+            shop = Shop.objects.get(id_shop=id_shop)
+            if request.user != shop.profile.user:
+                return Response({'error': 'You are not allowed to update this shop.'}, status=status.HTTP_403_FORBIDDEN)
+
+            if 'logo' in request.data and not request.data['logo'].startswith('http'):
+                image_data = request.data.pop('logo')
+                format, imgstr = image_data.split(';base64,')
+                ext = format.split('/')[-1]
+                request.data['logo'] = ContentFile(base64.b64decode(imgstr), name=f'logo.{ext}')
+            elif 'logo' in request.data and request.data['logo'].startswith('http'):
+                del request.data['logo']
+
+            serializer = ShopSerializer(shop, data=request.data, partial=True)
+            if serializer.is_valid():
+                serializer.save()
+                print('Shop updated successfully:', serializer.data)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            else:
+                print('Error updating shop:', serializer.errors)
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except Shop.DoesNotExist:
+            print('Error: Shop not found')
+            return Response({"error": "La tienda no existe"}, status=status.HTTP_400_BAD_REQUEST)
+
+
     def delete(self, request, id_shop):
         shop = get_object_or_404(Shop, id_shop=id_shop)
         

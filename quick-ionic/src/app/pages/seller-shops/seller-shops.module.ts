@@ -8,6 +8,7 @@ import { SellerShopsPageRoutingModule } from './seller-shops-routing.module';
 
 import { SellerShopsPage } from './seller-shops.page';
 import { AddWebsiteModalModule } from 'src/app/components/add-website-modal/add-website-modal.module';
+import { EditWebsiteModalModule } from 'src/app/components/edit-website-modal/edit-website-modal.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { AddWebsiteModalModule } from 'src/app/components/add-website-modal/add-
     FormsModule,
     IonicModule,
     SellerShopsPageRoutingModule,
-    AddWebsiteModalModule
+    AddWebsiteModalModule,
+    EditWebsiteModalModule
   ],
   declarations: [SellerShopsPage]
 })

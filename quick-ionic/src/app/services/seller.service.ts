@@ -32,8 +32,7 @@ export class SellerService {
   }
 
   editShop(shopId: number, updatedShopData: any): Observable<any> {
-    // Editar una tienda por su ID
-    return this.http.put<any>(`${this.baseURL}shop/${shopId}/`, updatedShopData, { headers: this.getHeaders() });
+    return this.http.put<any>(`${this.baseURL}edit/${shopId}/`, updatedShopData, { headers: this.getHeaders() });
   }
 
   // Método para obtener los encabezados de la solicitud
