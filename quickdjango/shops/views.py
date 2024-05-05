@@ -13,43 +13,15 @@ from rest_framework import status
 from django.core.files.base import ContentFile
 import base64
 
-class CreateShopsView(APIView):
-    permission_classes = [IsAuthenticated]
-    
-    def post(self, request):
-        profile = request.user.profile
-        request_data = request.data.copy() 
-        request_data['profile'] = profile.id_profile 
-        serializer = ShopSerializer(data=request_data)
-        
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-class DetailShopView(APIView):
-    permission_classes = [IsAuthenticated]
-
-    def get(self, request, id_shop):
-        try:
-            shop = Shop.objects.get(id_shop=id_shop)
-            serializer = ShopDetailSerializer(shop)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        except Shop.DoesNotExist:
-            return Response({"message": "Tienda no encontrada"}, status=status.HTTP_404_NOT_FOUND)
-        
-    def delete(self, request, id_shop):
-        shop = get_object_or_404(Shop, id=id_shop)
-        shop.delete()
-        return Response({'message': 'Shop deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
-
 class ShopView(APIView):
     permission_classes = [IsAuthenticated]    
 
-    def get(self, request):
-        shops = Shop.objects.all()
+    def get(self, request, id_seller=None):
+        if id_seller is not None:
+            shops = Shop.objects.filter(profile_id=id_seller)
+        else:
+            shops = Shop.objects.all()
+        
         serializer = ShopSerializer(shops, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -57,7 +29,6 @@ class SellerShopsView(APIView):
     permission_classes=[IsAuthenticated]
     
     def get(self, request, id_shop=None):
-        print(id_shop)
         if id_shop is None:
             profile = request.user.profile
             shops = Shop.objects.filter(profile=profile)

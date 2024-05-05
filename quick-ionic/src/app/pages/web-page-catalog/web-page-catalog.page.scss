@@ -1,0 +1,66 @@
+.app-catalog {
+    display: flex;
+
+    .card_container {
+        padding: 10px;
+        position: relative;
+
+        .card {
+            width: 100%;
+            height: 100%;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+            padding: 10px;
+            position: relative;
+
+            .bg-image {
+                position: relative;
+                overflow: hidden;
+
+                img {
+                    width: 100%;
+                    height: auto;
+                    display: block;
+                }
+
+                .btn-overlay {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                    background-color: rgba(0, 0, 0, 0.5);
+                    /* Color de fondo del botón */
+                    color: white;
+                    /* Color del texto del botón */
+                    padding: 10px;
+                    /* Espaciado interno del botón */
+                    transform: translateY(100%);
+                    transition: transform 0.3s ease;
+                }
+
+                &:hover .btn-overlay {
+                    transform: translateY(0);
+                }
+            }
+
+            .card-body {
+                padding: 15px;
+            }
+
+            .card-title {
+                font-size: 1.2em;
+                margin-bottom: 5px;
+            }
+
+            .card-text {
+                font-size: 1em;
+                margin-bottom: 10px;
+            }
+
+            .btn {
+                margin-bottom: auto;
+            }
+        }
+    }
+}

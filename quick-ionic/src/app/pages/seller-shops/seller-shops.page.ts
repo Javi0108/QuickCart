@@ -90,11 +90,8 @@ export class SellerShopsPage implements OnInit {
     return await modal.present();
   }
 
-
-
-
   getShops() {
-    this.sellerService.getShops().subscribe({
+    this.sellerService.getMyShops().subscribe({
       next: (response) => {
         this.shops = response;
         this.filteredShops = response;
