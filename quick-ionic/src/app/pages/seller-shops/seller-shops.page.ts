@@ -29,7 +29,6 @@ export class SellerShopsPage implements OnInit {
       title: ['', Validators.required],
       description: ['', Validators.required],
       address: ['', Validators.required],
-      image: [null, Validators.required]
     });
   }
 
@@ -41,7 +40,7 @@ export class SellerShopsPage implements OnInit {
     this.pageloaded = true;
   }
 
-  async openAddWebsiteModal() {
+  async openWebsiteModal() {
     const modal = await this.modalController.create({
       component: AddWebsiteModalComponent,
       cssClass: 'add-website-modal',

@@ -13,6 +13,7 @@ export class AddWebsiteModalComponent {
 
   @Input() createWebSiteForm!: FormGroup;
   imagePreview: any;
+  file: File | null = null;
 
 
   constructor(
@@ -69,5 +70,20 @@ export class AddWebsiteModalComponent {
 
   showImagePreview(imageData: string) {
     this.imagePreview = imageData;
+  }
+
+
+  changeImage(event: any) {
+    this.file = event.target.files[0];
+    if (this.file) {
+      this.convertFileToDataURL(this.file);
+    }
+  }
+
+  selectImage() {
+    const inputElement: HTMLInputElement | null = document.querySelector('.zyro-image-selector__input');
+    if (inputElement) {
+      inputElement.click();
+    }
   }
 }

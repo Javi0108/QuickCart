@@ -3,15 +3,29 @@
   <ion-spinner *ngIf="!pageloaded"></ion-spinner>
 
   <div *ngIf="pageloaded" class="container mt-3">
+
     <div class="head-container ion-text-end">
-      <h3>Websites</h3>
-      <button class="quickart-button quickart-button-violet" (click)="openAddWebsiteModal()">
-        <ion-icon slot="start" name="add-outline"></ion-icon>
+      <div class="d-flex align-items-center">
+        <div class="flex-grow-1 me-2">
+          <h3>Websites</h3>
+        </div>
+        <div>
+          <hr class="vertical-separator me-2">
+        </div>
+        <div class="d-flex align-items-center">
+          <ion-icon name="home-sharp" [routerLink]="['/home']" class="icon-gray link me-2"></ion-icon>
+          <ion-icon name="arrow-forward-sharp" class="icon-gray me-2"></ion-icon>
+          <p class="text-gray link mb-0 ml-2">Websites</p>
+        </div>
+      </div>
+      
+      <button class="quickart-button quickart-button-violet" (click)="openWebsiteModal()">
+        <ion-icon slot="start" name="add-sharp"></ion-icon>
         Add website
       </button>
     </div>
     <div class="search-container mt-3">
-      <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="onSearchChange($event)"></ion-searchbar>
+      <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="onSearchChange($event)"></ion-searchbar>
     </div>
     <div class="shops-container mt-3">
       <ng-container *ngIf="filteredShops && filteredShops.length">
@@ -51,7 +65,7 @@
                           </div>
                         </button>
 
-                        <button class="h-list-button" (click)="openAddWebsiteModal()">
+                        <button class="h-list-button" (click)="openWebsiteModal()">
                           <div class="d-flex">
                             <span class="trans">Edit website info</span>
                           </div>

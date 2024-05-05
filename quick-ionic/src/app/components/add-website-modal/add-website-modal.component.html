@@ -1,25 +1,47 @@
-<!-- add-shop-modal.component.html -->
-
 <ion-header>
   <ion-toolbar>
-    <ion-title>Add Shop</ion-title>
+    <ion-title>Create Website</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="handleModalClose()">Close</ion-button>
+      <ion-button (click)="handleModalClose()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <form enctype="multipart/form-data" [formGroup]="createWebSiteForm" (ngSubmit)="saveWebsite()">
-    <ion-input label="Shop name" label-placement="floating" fill="outline" formControlName="name"></ion-input>
-    <ion-input label="Title" label-placement="floating" fill="outline" formControlName="title"></ion-input>
-    <ion-input label="Description" label-placement="floating" fill="outline" formControlName="description"></ion-input>
-    <ion-input label="Address" label-placement="floating" fill="outline" formControlName="address"></ion-input>
-    <div class="image-input-container">
-      <ion-img *ngIf="imagePreview" [src]="imagePreview" class="uploaded-image"></ion-img>
-      <ion-input id="image-input" label="Logo" fill="outline" type="file" formControlName="image" (change)="onFileSelected($event)" class="file-input"></ion-input>
-    </div>
-    <ion-button type="submit" [disabled]="createWebSiteForm.invalid">Submit</ion-button>
-  </form>
-</ion-content>
+<div class="content-wrapper">
+    <ion-content>
+      <form class="form-wrapper" enctype="multipart/form-data" [formGroup]="createWebSiteForm">
+        <div class="zyro-image-selector" (click)="selectImage()">
+          <input type="file" (change)="changeImage($event)" class="zyro-image-selector__input visually-hidden">
+          <button class="zyro-image-selector__button" title="Replace image">
+            <ion-icon *ngIf="!imagePreview" class="zyro-image-selector__image" name="image-sharp"></ion-icon>
+            <ion-img *ngIf="imagePreview" class="zyro-image-selector__image" [src]="imagePreview"></ion-img>
+            <div class="zyro-image-selector__description">
+              <ion-icon name="photo_library" class="icon material-symbols-rounded zyro-image-selector__icon"></ion-icon>
+              <p *ngIf="imagePreview" class="text-body-2">Replace image</p>
+              <p *ngIf="!imagePreview" class="text-body-2">Select image</p>
+            </div>
+          </button>
+        </div>
+        <ion-input label="Shop name" label-placement="floating" fill="outline" formControlName="name" [maxlength]="30" [counter]="true"></ion-input>
+        <ion-input label="Title" label-placement="floating" fill="outline" formControlName="title" [maxlength]="50" [counter]="true"></ion-input>
+        <ion-textarea label="Description" label-placement="floating" fill="outline"
+        formControlName="description" [maxlength]="500" [counter]="true" rows="5"></ion-textarea>
+        <ion-input label="Address" label-placement="floating" fill="outline" formControlName="address" [maxlength]="255" [counter]="true"></ion-input>
+      </form>
+    </ion-content>
+</div>
 
+<div class="container-fluid mb-3">
+  <div class="row justify-content-end">
+    <div class="col-auto" style="margin: 0px;">
+      <button class="quickart-button quickart-button-white" (click)="handleModalClose()"
+        style="margin: 0px; border: none; font-size: 13px; padding: 11px;">Cancelar</button>
+    </div>
+    <div class="col-auto" style="margin: 0px;">
+      <button class="quickart-button quickart-button-violet" (click)="saveWebsite()"
+        [attr.disabled]="createWebSiteForm.invalid ? true : null" style="margin-left: 0px;">Create</button>
+    </div>
+  </div>
+</div>

@@ -25,12 +25,35 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
+:root {
+    /* Colores */
+    --primary-color: #673de6;
+    --primary-color-hover: #582ae4;
+    --secondary-color: #201f2e;
+    --text-color: #36344d;
+    --background-color: #f4f5ff;
+    --white-color: #fff;
+    --text-gray: #727586;
+
+
+    /* Tamaños */
+    --button-padding: 10px 23px;
+    --icon-size: 20px;
+    --icon-margin: 5px;
+    --separator-width: 1px;
+    --separator-height: 20px;
+    --modal-border-radius: 6px;
+    --modal-box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
+}
+
+
+
 .alert-wrapper.sc-ion-alert-md {
-    color: #fff;
+    color: var(--white-color);
     background-color: black !important;
 
     .alert-title {
-        color: white !important;
+        color: var(--white-color) !important;
     }
 
     .alert-radio-group {
@@ -38,7 +61,7 @@
         border-bottom: 2px solid grey !important;
 
         .alert-radio-label {
-            color: #fff;
+            color: var(--white-color);
         }
     }
 
@@ -47,7 +70,7 @@
     }
 
     .alert-button-inner.sc-ion-alert-md {
-        color: white !important;
+        color: var(--white-color) !important;
     }
 }
 
@@ -115,7 +138,7 @@
         position: absolute;
         display: flex;
         align-items: center;
-        background-color: #fff;
+        background-color: var(--white-color);
         box-shadow: 0 0 12px #1d1e2029;
         padding: 2px;
         border-radius: 8px;
@@ -126,7 +149,7 @@
 
         .option-button {
             padding: 6px 8px;
-            color: #36344d;
+            color: var(--text-color);
             background-color: transparent;
             border: 1px solid transparent;
             border-radius: 8px;
@@ -139,7 +162,7 @@
             }
 
             &:hover {
-                color: #673de6;
+                color: var(--primary-color);
                 background-color: #ebe4ff;
             }
         }
@@ -158,7 +181,7 @@
 
 .quickart-item {
     margin-top: 8px;
-    color: #36344d;
+    color: var(--text-color);
     background-color: transparent;
     border: 1px solid transparent;
 
@@ -182,13 +205,17 @@
     font-family: DM Sans, sans-serif;
     cursor: pointer;
     border-radius: 8px;
-    display: inline-flex; /* Para permitir el alineamiento vertical */
-    align-items: center; /* Alinea el contenido verticalmente */
+    display: inline-flex;
+    /* Para permitir el alineamiento vertical */
+    align-items: center;
+    /* Alinea el contenido verticalmente */
 
     ion-icon {
         font-size: 20px !important;
-        margin-right: 5px; /* Espacio entre el icono y el texto */
-        vertical-align: middle; /* Alinea el icono verticalmente */
+        margin-right: 5px;
+        /* Espacio entre el icono y el texto */
+        vertical-align: middle;
+        /* Alinea el icono verticalmente */
     }
 
     &:hover {
@@ -197,20 +224,20 @@
 }
 
 .quickart-button-violet {
-    background-color: #673de6;
+    background-color: var(--primary-color);
     font-weight: 700;
-    color: #fff;
+    color: var(--white-color);
 
     &:hover {
-        background-color: #582ae4;
+        background-color: var(--primary-color-hover);
     }
 }
 
 
 .quickart-button-white {
-    background-color: #fff;
+    background-color: var(--white-color);
     font-weight: 700;
-    color: #673de6;
+    color: var(--primary-color);
     border: 1px solid #dad9da;
 
     &:hover {
@@ -224,7 +251,8 @@
     /* Asegúrate de que el tamaño del icono se ajuste adecuadamente */
     ion-icon {
         padding: 5px;
-        border-radius: 100px; /* Se establece en 50% para que sea un círculo */
+        border-radius: 100px;
+        /* Se establece en 50% para que sea un círculo */
         font-size: 30px;
         font-weight: 800;
 
@@ -234,7 +262,7 @@
     }
 
     &:hover {
-        background-color: #fff;
+        background-color: var(--white-color);
     }
 }
 
@@ -269,7 +297,7 @@
 }
 
 ion-content {
-    --background: #f4f5ff;;
+    --background: #f4f5ff;
 }
 
 ion-modal {
@@ -282,3 +310,17 @@ ion-modal h1 {}
 ion-modal ion-icon {}
 
 ion-modal .wrapper {}
+
+.icon-gray{
+    color: var(--text-gray);
+}
+
+.text-gray{
+    color: var(--text-gray);
+}
+
+.link{
+    &:hover{
+        color: var(--primary-color-hover);
+    }
+}

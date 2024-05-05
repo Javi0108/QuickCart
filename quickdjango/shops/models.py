@@ -27,8 +27,6 @@ class ShopSectionOrder(models.Model):
     class Meta:
         ordering = ['order'] 
 
-    
-
 class Product(models.Model):
     id_product = models.AutoField(primary_key=True)
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
