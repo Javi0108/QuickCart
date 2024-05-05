@@ -25,12 +25,35 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
+:root {
+    /* Colores */
+    --primary-color: #673de6;
+    --primary-color-hover: #582ae4;
+    --secondary-color: #201f2e;
+    --text-color: #36344d;
+    --background-color: #f4f5ff;
+    --white-color: #fff;
+    --text-gray: #727586;
+
+
+    /* Tamaños */
+    --button-padding: 10px 23px;
+    --icon-size: 20px;
+    --icon-margin: 5px;
+    --separator-width: 1px;
+    --separator-height: 20px;
+    --modal-border-radius: 6px;
+    --modal-box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
+}
+
+
+
 .alert-wrapper.sc-ion-alert-md {
-    color: #fff;
+    color: var(--white-color);
     background-color: black !important;
 
     .alert-title {
-        color: white !important;
+        color: var(--white-color) !important;
     }
 
     .alert-radio-group {
@@ -38,7 +61,7 @@
         border-bottom: 2px solid grey !important;
 
         .alert-radio-label {
-            color: #fff;
+            color: var(--white-color);
         }
     }
 
@@ -47,7 +70,7 @@
     }
 
     .alert-button-inner.sc-ion-alert-md {
-        color: white !important;
+        color: var(--white-color) !important;
     }
 }
 
@@ -115,7 +138,7 @@
         position: absolute;
         display: flex;
         align-items: center;
-        background-color: #fff;
+        background-color: var(--white-color);
         box-shadow: 0 0 12px #1d1e2029;
         padding: 2px;
         border-radius: 8px;
@@ -124,17 +147,9 @@
         top: 5px;
         right: 5px;
 
-        .vertical-separator {
-            margin: 0 4px;
-            width: 1px;
-            height: 20px;
-            background-color: #969696;
-            border: 0;
-        }
-
         .option-button {
             padding: 6px 8px;
-            color: #36344d;
+            color: var(--text-color);
             background-color: transparent;
             border: 1px solid transparent;
             border-radius: 8px;
@@ -147,7 +162,7 @@
             }
 
             &:hover {
-                color: #673de6;
+                color: var(--primary-color);
                 background-color: #ebe4ff;
             }
         }
@@ -159,13 +174,131 @@
     }
 }
 
-
 .disabled-icon {
     color: gray;
 }
 
 
+.quickart-item {
+    margin-top: 8px;
+    color: var(--text-color);
+    background-color: transparent;
+    border: 1px solid transparent;
 
+    ion-icon {}
+
+    span {
+        display: flex;
+        align-items: center;
+        margin: 0 8px;
+    }
+
+
+}
+
+.quickart-button {
+    color: #201f2e;
+    margin: 0px 5px 0px 0px;
+    background-color: transparent;
+    padding: 10px 23px;
+    font-weight: 600;
+    font-family: DM Sans, sans-serif;
+    cursor: pointer;
+    border-radius: 8px;
+    display: inline-flex;
+    /* Para permitir el alineamiento vertical */
+    align-items: center;
+    /* Alinea el contenido verticalmente */
+
+    ion-icon {
+        font-size: 20px !important;
+        margin-right: 5px;
+        /* Espacio entre el icono y el texto */
+        vertical-align: middle;
+        /* Alinea el icono verticalmente */
+    }
+
+    &:hover {
+        background-color: #e2e5e79c;
+    }
+}
+
+.quickart-button-violet {
+    background-color: var(--primary-color);
+    font-weight: 700;
+    color: var(--white-color);
+
+    &:hover {
+        background-color: var(--primary-color-hover);
+    }
+}
+
+
+.quickart-button-white {
+    background-color: var(--white-color);
+    font-weight: 700;
+    color: var(--primary-color);
+    border: 1px solid #dad9da;
+
+    &:hover {
+        background-color: #e6e6e6;
+    }
+}
+
+.quickart-button-icon {
+    border: none;
+
+    /* Asegúrate de que el tamaño del icono se ajuste adecuadamente */
+    ion-icon {
+        padding: 5px;
+        border-radius: 100px;
+        /* Se establece en 50% para que sea un círculo */
+        font-size: 30px;
+        font-weight: 800;
+
+        &:hover {
+            background-color: #e6e6e6;
+        }
+    }
+
+    &:hover {
+        background-color: var(--white-color);
+    }
+}
+
+
+.h-list-button {
+    padding: 15px 24px;
+    width: 100%;
+    display: block;
+    font-weight: 400;
+    font-size: 14px;
+    text-align: left;
+    border: 0;
+    background: transparent;
+
+    &:hover {
+        background-color: #e6e6e6;
+    }
+}
+
+.trans {
+    word-break: break-word;
+}
+
+
+
+.vertical-separator {
+    margin: 0 4px;
+    width: 1px;
+    height: 20px;
+    background-color: #969696;
+    border: 0;
+}
+
+ion-content {
+    --background: #f4f5ff;
+}
 
 ion-modal {
     --border-radius: 6px;
@@ -177,3 +310,17 @@ ion-modal h1 {}
 ion-modal ion-icon {}
 
 ion-modal .wrapper {}
+
+.icon-gray{
+    color: var(--text-gray);
+}
+
+.text-gray{
+    color: var(--text-gray);
+}
+
+.link{
+    &:hover{
+        color: var(--primary-color-hover);
+    }
+}

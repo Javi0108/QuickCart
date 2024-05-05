@@ -1,9 +1,8 @@
 import { Section } from './../../interfaces/section.interface';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/interfaces/product.interface';
 import { defaultSectionBannersData, defaultSectionHeroData } from 'src/app/interfaces/sections-default';
-import { ShopData } from 'src/app/interfaces/shop.interface';
 import { ProductService } from 'src/app/services/product.service';
 import { SectionEventService } from 'src/app/services/section-event.service';
 import { ShopService } from 'src/app/services/shop.service';
@@ -16,9 +15,10 @@ import { v4 as uuidv4 } from 'uuid';
 })
 export class WebPageEditPage implements OnInit {
 
-  shopData!: ShopData;
+  shopData!: any;
   shopId!: number;
 
+  sectionsCopy: Section[] = [];
   sections: Section[] = [];
   products: Product[] = [];
 
@@ -33,6 +33,7 @@ export class WebPageEditPage implements OnInit {
   ) { }
 
   ngOnInit() {
+
     const shopIdString = this.route.snapshot.paramMap.get('id');
     if (shopIdString) {
       this.shopId = +shopIdString;
@@ -63,12 +64,14 @@ export class WebPageEditPage implements OnInit {
     this.shopService.getShopById(this.shopId!).subscribe({
       next: (shopData) => {
         this.shopData = shopData;
-        if (!this.shopData) {
-          console.error('No se encontró la tienda con el ID proporcionado.');
-        } else {
+        if (this.shopData) {
           this.sections = shopData.sections;
           this.setEditModeForSections();
           this.loadProductsForSections();
+          this.sectionsCopy = JSON.parse(JSON.stringify(this.sections)); 
+        } else {
+          console.error('No se encontró la tienda con el ID proporcionado.');
+
         }
       },
       error: (error) => {
@@ -96,9 +99,9 @@ export class WebPageEditPage implements OnInit {
     const order = this.sections.length;
 
     if (sectionType === 'hero') {
-      newSection = { provitionalId: id, id: undefined, type: sectionType, editMode: true, data: { ...defaultSectionHeroData }, products: this.products};
+      newSection = { provitionalId: id, id: undefined, type: sectionType, editMode: true, data: { ...defaultSectionHeroData }, products: this.products };
     } else if (sectionType === 'banners') {
-      newSection = { provitionalId: id, id: undefined, type: sectionType, editMode: true, data: { ...defaultSectionBannersData }, products: this.products};
+      newSection = { provitionalId: id, id: undefined, type: sectionType, editMode: true, data: { ...defaultSectionBannersData }, products: this.products };
     } else if (sectionType === 'products') {
       newSection = { provitionalId: id, id: undefined, type: sectionType, editMode: true, data: {}, products: this.products };
     } else {
@@ -115,7 +118,7 @@ export class WebPageEditPage implements OnInit {
       this.sections[index] = temp;
     }
   }
-  
+
   moveSectionDown(index: number) {
     if (index < this.sections.length - 1) {
       const temp = this.sections[index + 1];
@@ -141,6 +144,8 @@ export class WebPageEditPage implements OnInit {
       }
       order++
     });
+
+    this.sectionsCopy = JSON.parse(JSON.stringify(this.sections));
   }
 
   saveSection(section: Section, order: number) {
@@ -160,7 +165,6 @@ export class WebPageEditPage implements OnInit {
       error: (error) => {
         console.error("no se ha guardado correctamente", error)
       }
-
     })
   }
 
@@ -198,5 +202,10 @@ export class WebPageEditPage implements OnInit {
     );
   }
 
+  areSectionsModified(): boolean {
+    const modified = JSON.stringify(this.sections) !== JSON.stringify(this.sectionsCopy);
+    return modified;
+  }
+  
 
 }

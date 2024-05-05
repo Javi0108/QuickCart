@@ -1,28 +1,80 @@
 <ion-spinner *ngIf="!shopData"></ion-spinner>
 
-<ion-header>
+
+<!-- Barra lateral -->
+<ion-menu contentId="main-content">
+  <ion-header>
+    <ion-toolbar color="tertiary">
+      <ion-title>Menu Content</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+
+  </ion-content>
+</ion-menu>
+
+<ion-popover trigger="popover-button" [dismissOnSelect]="true" style="padding-top: 10px; border-radius: 20px;">
+  <ng-template>
+    <ion-content>
+      <ion-list>
+        <ion-item class="quickart-item" [button]="true" [detail]="false" [routerLink]="['/seller-shops']">
+          <ion-icon name="home-outline"></ion-icon>
+          <span>My shops</span>
+        </ion-item>
+        <ion-item class="quickart-item" [button]="true" [detail]="false"
+          [routerLink]="['/products-management', shopId]">
+          <ion-icon name="bag-handle-outline"></ion-icon>
+          <span>Store manager</span>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ng-template>
+</ion-popover>
+
+
+
+<ion-header id="main-content">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
 
-      <ion-button id="popover-button">Website builder</ion-button>
+      <hr class="vertical-separator">
+
+      <button class="quickart-button" id="popover-button">
+        Website builder
+      </button>
+      <ion-icon name="chevron-down-outline" style="margin-left: -25px; margin-right: 5px; z-index: -1;"></ion-icon>
+
+      <hr class="vertical-separator">
     </ion-buttons>
 
+    <div slot="end" style="padding: 15px 15px 0px 15px;">
+      <p *ngIf="shopData">{{ shopData.shop_data.name }}</p>
+      <ion-spinner *ngIf="!shopData"></ion-spinner>
+    </div>
+
     <ion-buttons slot="end">
-      <ion-button *ngIf="selectedMode === 'preview'" (click)="segmentChanged('edit')" expand="block" fill="clear" shape="round">
+
+      <hr class="vertical-separator">
+
+      <button class="quickart-button" *ngIf="selectedMode === 'preview'" (click)="segmentChanged('edit')">
         Edit
-      </ion-button>
-
-      <ion-button *ngIf="selectedMode === 'edit'" (click)="segmentChanged('preview')" expand="block" fill="clear" shape="round">
+      </button>
+      <button class="quickart-button" *ngIf="selectedMode === 'edit'" (click)="segmentChanged('preview')">
         Preview
-      </ion-button>
+      </button>
 
-      <ion-button (click)="saveAllSections()">Save</ion-button>
+      <hr class="vertical-separator">
+
+      <button class="quickart-button quickart-button-violet" (click)="saveAllSections()">
+        {{ areSectionsModified() ? 'Update' : 'Updated' }}
+      </button>
+      
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="shopData" id="main-content">
+<ion-content *ngIf="shopData">
 
   <div class="pt-2" *ngIf="selectedMode === 'edit'">
     <div *ngIf="sections">
@@ -44,36 +96,4 @@
     <button (click)="addSection('banners')" class="btn btn-primary">Add Banners</button>
     <button (click)="addSection('products')" class="btn btn-primary">Add Products</button>
   </ion-buttons>
-  <ion-buttons slot="end">
-    <ion-button (click)="saveAllSections()" class="btn btn-primary">Save</ion-button>
-  </ion-buttons>
 </ion-toolbar>
-
-
-<ion-popover trigger="popover-button" [dismissOnSelect]="true">
-  <ng-template>
-    <ion-content>
-      <ion-list>
-        <ion-item [button]="true" [detail]="false">Option 1</ion-item>
-        <ion-item [button]="true" [detail]="false">Option 2</ion-item>
-        <ion-item [button]="true" id="nested-trigger">More options...</ion-item>
-
-        <ion-popover trigger="nested-trigger" [dismissOnSelect]="true" side="end">
-          <ng-template>
-            <ion-content>
-              <ion-list>
-                <ion-item [button]="true" [detail]="false">Nested option</ion-item>
-              </ion-list>
-            </ion-content>
-          </ng-template>
-        </ion-popover>
-      </ion-list>
-    </ion-content>
-  </ng-template>
-</ion-popover>
-
-
-<!-- Barra lateral -->
-<ion-menu contentId="main-content">
-  
-</ion-menu>
