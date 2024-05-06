@@ -1,3 +1,5 @@
+import { Product } from "./product.interface";
+
 export const defaultSectionHeroData = {
     background: {
         image: null,
@@ -30,9 +32,7 @@ export const defaultSectionHeroData = {
         image: "http://localhost:8000/media/sections/default/hero_section/slider-bg2.jpg",
         related_product: null,
     }
-
 }
-
 
 export const defaultSectionBannersData = {
     background: {
@@ -57,3 +57,13 @@ export const defaultSectionBannersData = {
     }
 
 }
+
+export const defaultSectionProductsData = {
+    background: {
+        image: null,
+        overlay_opacity: null,
+        fixed_background: null,
+        hex_color: "#FFFFFF",
+    },
+    products: [] as Product[],
+};

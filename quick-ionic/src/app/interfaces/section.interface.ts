@@ -68,6 +68,11 @@ export interface BannersSectionData {
   banner_2: Banner4;
 }
 
+export interface ProductsSectionData {
+  background: Background;
+  products: Product[];
+}
+
 
 
 
