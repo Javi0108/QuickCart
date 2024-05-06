@@ -1,5 +1,5 @@
 ion-header {
-  border-bottom: 1px solid rgb(190, 190, 190);
+  // border-bottom: 1px solid rgb(190, 190, 190);
   .row {
     .l-col {
       display: flex;
@@ -8,30 +8,6 @@ ion-header {
       ion-icon {
         cursor: pointer;
         margin-left: 21px;
-      }
-    }
-
-    .r-col {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      padding-right: 33px;
-
-      ul {
-        margin: 0;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-
-        li {
-          list-style: none;
-
-          a {
-            cursor: pointer;
-            margin-left: 16px;
-            text-decoration: none;
-          }
-        }
       }
     }
   }

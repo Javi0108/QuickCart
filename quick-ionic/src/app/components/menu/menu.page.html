@@ -45,7 +45,7 @@
   <ion-header>
     <ion-toolbar>
       <div class="row">
-        <div *ngIf="isLoggedIn()" class="col-4 l-col">
+        <div *ngIf="isLoggedIn()" class="col-12 col-sm-4 l-col">
           <ion-buttons slot="start" *ngIf="isLoggedIn()">
             <ion-menu-button></ion-menu-button>
           </ion-buttons>
@@ -84,7 +84,7 @@
 
         <div
           *ngIf="isLoggedIn()"
-          class="col-lg-4 justify-content-center"
+          class="d-none d-sm-flex col-sm-4 justify-content-center"
           id="menuButtons"
         >
           <button [routerLink]="['/home']">Home</button>
@@ -94,12 +94,12 @@
           <button>Products</button>
         </div>
 
-        <div *ngIf="isLoggedIn()" class="col-4 r-col">
+        <div *ngIf="isLoggedIn()" class="d-none d-sm-flex justify-content-end align-items-center col-sm-4">
           <ion-fab *ngIf="profile && isLoggedIn()" [routerLink]="['/profile']">
-            <ion-label class="d-none d-lg-block mx-2" style="font-weight: 500"
+            <ion-label class=" mx-2" style="font-weight: 500"
               >{{ user!.username }}</ion-label
             >
-            <hr class="vertical-separator" />
+            <hr class="d-none d-sm-block vertical-separator" />
             <ion-fab-button size="small">
               <img
                 *ngIf="!profile.avatar"
