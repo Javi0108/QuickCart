@@ -8,36 +8,62 @@
     </div>
 
     <form [formGroup]="registerForm" (ngSubmit)="register()">
-      <h3>Register Here</h3>
+      <h3>Sign up</h3>
 
       <!-- Select user type -->
       <ion-select
-        label="Account Type" 
-        labelPlacement="floating" 
-        fill="outline" 
+        labelPlacement="floating"
+        fill="outline"
+        class="always-flip"
+        toggleIcon="caret-down-sharp"
+        interface="popover"
+        label="Account type"
         formControlName="user_type"
-        placeholder="Select user type" 
+        placeholder="Select user type"
         (ionChange)="onUserTypeChange()"
       >
         <ion-select-option value="Client">Client</ion-select-option>
         <ion-select-option value="Seller">Seller</ion-select-option>
       </ion-select>
-
       <!-- Email input -->
-      <ion-input type="email" formControlName="email" placeholder="Email" labelPlacement="floating" label="Email"
-        fill="outline"></ion-input>
+      <ion-input
+        type="email"
+        formControlName="email"
+        placeholder="Email"
+        labelPlacement="floating"
+        label="Email"
+        fill="outline"
+      ></ion-input>
 
       <!-- Username input - disabled until user_type is selected -->
-      <ion-input type="text" formControlName="username" placeholder="Username" labelPlacement="floating"
-        label="Username" fill="outline"></ion-input>
+      <ion-input
+        type="text"
+        formControlName="username"
+        placeholder="Username"
+        labelPlacement="floating"
+        label="Username"
+        fill="outline"
+      ></ion-input>
 
       <!-- Password input - disabled until user_type is selected -->
-      <ion-input type="password" formControlName="password" placeholder="Password" labelPlacement="floating"
-        label="Password" fill="outline"></ion-input>
+      <ion-input
+        type="password"
+        formControlName="password"
+        placeholder="Password"
+        labelPlacement="floating"
+        label="Password"
+        fill="outline"
+      ></ion-input>
 
       <!-- Confirm Password input - disabled until user_type is selected -->
-      <ion-input type="password" formControlName="confirmPassword" placeholder="Repeat the password"
-        labelPlacement="floating" label="Repeat the password" fill="outline"></ion-input>
+      <ion-input
+        type="password"
+        formControlName="confirmPassword"
+        placeholder="Repeat the password"
+        labelPlacement="floating"
+        label="Repeat the password"
+        fill="outline"
+      ></ion-input>
 
       <!-- Submit button - disabled until form is valid -->
       <button type="submit" [disabled]="!registerForm.valid">Register</button>
