@@ -29,7 +29,7 @@
               >
                 Shops
               </button>
-              <button class="btn btn-outline-primary">Contactar</button>
+              <button class="quickart-button-violet">Contactar</button>
             </div>
           </ion-card-content>
         </ion-card>
@@ -219,11 +219,11 @@
                   <button
                     *ngIf='profile.user_type == "Seller"'
                     [routerLink]="['/web-page-catalog', profile.id_profile]"
-                    class="btn btn-primary m-2"
+                    class="profileBtn quickart-button-violet m-2"
                   >
                     My Shops
                   </button>
-                  <button class="btn btn-outline-primary">Message</button>
+                  <button class="quickart-button quickart-button-white">Message</button>
                 </div>
               </div>
             </ion-card-content>
@@ -358,7 +358,7 @@
                 <div class="row mt-4">
                   <div class="col-sm-12" id="buttonGroup">
                     <button
-                      class="btn btn-primary"
+                      class="profileBtn quickart-button-violet"
                       *ngIf="this.enableEdit == true"
                       type="submit"
                       [disabled]="!editProfileForm.valid"
@@ -366,14 +366,14 @@
                       Save
                     </button>
                     <button
-                      class="btn btn-light"
+                      class="quickart-button quickart-button-white"
                       *ngIf="this.enableEdit == true"
                       (click)="cancelChanges()"
                     >
                       Cancel
                     </button>
                     <button
-                      class="btn btn-primary"
+                      class="profileBtn quickart-button-violet"
                       *ngIf="this.enableEdit == false"
                       (click)="editProfile()"
                     >
@@ -381,7 +381,7 @@
                     </button>
                     <button
                       *ngIf="profile"
-                      class="btn btn-primary"
+                      class="profileBtn quickart-button-violet"
                       [routerLink]="['/change-password']"
                     >
                       Change Password
