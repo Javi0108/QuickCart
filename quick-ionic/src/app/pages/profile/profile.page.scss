@@ -5,16 +5,15 @@
 }
 
 .pageContent {
-  display: flex;
-  flex-direction: row;
   margin: 1rem;
 }
 
 #content {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(2, 1fr);
+  display: flex;
+  flex-direction: column;
   justify-items: center;
+  align-items: center;
+  margin-top: 2rem;
 }
 
 #fileBtn {
