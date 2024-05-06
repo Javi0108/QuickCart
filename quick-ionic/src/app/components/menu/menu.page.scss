@@ -37,10 +37,9 @@ ion-header {
   }
 }
 
-#buttonFav {
+  #menuButtons {
     display: flex;
     flex-direction: row;
-    justify-content: center;
     align-items: center;
   
     & button {
@@ -50,12 +49,12 @@ ion-header {
       transition: all .3s ease;
     }
   }
-  
-  #buttonFav {
-      & button:hover {
-          background-color: #e9e1ff;
-      }
-  }
+
+  #menuButtons {
+    & button:hover {
+        background-color: #e9e1ff;
+    }
+}
   
   ion-fab {
     display: flex;
@@ -86,126 +85,14 @@ ion-header {
   }
   
   #listElement {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    padding: 1rem;
     transition: all 0.3s ease;
   }
   
   #listElement:hover {
     background-color: #e9e1ff;
   }
-
-// // Extra small devices (portrait phones, less than 576px)
-// @media (max-width: 575.98px) {
-//     ion-header {
-//         .row {
-//             .l-col {
-
-//                 ion-icon {}
-//             }
-
-//             .r-col {
-
-//                 display: none;
-
-//                 ul {
-//                     li {
-
-//                         a {}
-//                     }
-//                 }
-//             }
-//         }
-//     }
-
-//     .hide-sidebar {}
-
-//     .sidebar {
-
-//         ul {
-
-//             li {
-
-//                 a {}
-//             }
-//         }
-//     }
-// }
-
-// // Small devices (landscape phones, 576px and up)
-// @media (min-width: 576px) and (max-width: 767.98px) {
-//     ion-header {
-//         .row {
-//             .l-col {
-
-//                 ion-icon {}
-//             }
-
-//             .r-col {
-
-//                 display: none;
-
-//                 ul {
-//                     li {
-
-//                         a {}
-//                     }
-//                 }
-//             }
-//         }
-//     }
-
-//     .hide-sidebar {}
-
-//     .sidebar {
-
-//         ul {
-
-//             li {
-
-//                 a {}
-//             }
-//         }
-//     }
-// }
-
-// // Medium devices (tablets, 768px and up)
-// @media (min-width: 768px) and (max-width: 991.98px) {
-//     ion-header {
-//         .row {
-//             .l-col {
-
-//                 ion-icon {}
-//             }
-
-//             .r-col {
-
-//                 display: none;
-
-//                 ul {
-//                     li {
-
-//                         a {}
-//                     }
-//                 }
-//             }
-//         }
-//     }
-
-//     .hide-sidebar {}
-
-//     .sidebar {
-
-//         ul {
-
-//             li {
-
-//                 a {}
-//             }
-//         }
-//     }
-// }
-
-// // Large devices (desktops, 992px and up)
-// @media (min-width: 992px) and (max-width: 1199.98px) {}
-
-// // Extra large devices (large desktops, 1200px and up)
-// @media (min-width: 1200px) {}
