@@ -5,9 +5,19 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">cart</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div *ngIf="cart">
+    <h2>Order Details</h2>
+    <p><strong>Order ID:</strong> {{ cart.id_order }}</p>
+    <p><strong>Order Date:</strong> {{ cart.order_date | date:'medium' }}</p>
+    <p><strong>Status:</strong> {{ cart.status }}</p>
+  
+    <h3>Products</h3>
+    <ul>
+      <li *ngFor="let productId of cart.products">{{ productId }}</li>
+    </ul>
+  </div>
+  <div *ngIf="!cart">
+    <p>No cart data available.</p>
+  </div>
+  
 </ion-content>

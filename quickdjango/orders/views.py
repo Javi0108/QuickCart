@@ -7,14 +7,14 @@ from .serializers import OrderSerializer
 from shops.models import Product
 
 class OrderView(APIView):
-    def get(self, request):
-        order = Order.objects.filter(profile=request.user.profile, status='Pending').first()
-        if order:
+    
+    def get(self, request, order_id=None):  # Acepta un argumento opcional order_id
+        if order_id is not None:
+            order = get_object_or_404(Order, id_order=order_id)  # Usar id_order en lugar de id
             serializer = OrderSerializer(order)
             return Response(serializer.data)
         else:
-            return Response({'message': 'No items in cart'}, status=status.HTTP_404_NOT_FOUND)
-
+            return Response({'message': 'Order ID is required'}, status=status.HTTP_400_BAD_REQUEST)
     def post(self, request):
         product_id = request.data.get('product_id')
         quantity = request.data.get('quantity', 1)

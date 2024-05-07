@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../../services/order.service';
 import { Order } from '../../interfaces/cart.interface';
-
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -9,20 +9,29 @@ import { Order } from '../../interfaces/cart.interface';
   styleUrls: ['./cart.page.scss'],
 })
 export class CartPage implements OnInit {
-  orders: Order[] = [];
+  cart: Order | null = null;
+  orderId!: number;
 
-  constructor(private orderService: OrderService) { }
+  constructor(private route: ActivatedRoute, private orderService: OrderService) { }
 
+  
   ngOnInit() {
-    this.loadOrders();
+    const orderId = this.route.snapshot.paramMap.get('id');
+    if (orderId) {
+      this.orderId = +orderId;
+      this.loadOrders(+orderId);
+    } else {
+      console.error('Order ID not found in URL');
+    } 
   }
 
-  loadOrders() {
-    this.orderService.getOrder().subscribe(
+  loadOrders(orderId:number) {
+    this.orderService.getOrder(orderId).subscribe(
       (response: Order) => {
         this.cart = response;
+        console.log('Loaded cart:', this.cart);
       },
-      (error) => {
+      (error: any) => {
         console.error('Error loading cart:', error);
       }
     );
@@ -32,8 +41,7 @@ export class CartPage implements OnInit {
     this.orderService.addProductToOrder(productId, quantity).subscribe(
       (response) => {
         console.log('Product added to order:', response);
-        // Optionally, reload the orders after adding a product
-        this.loadOrders();
+        this.loadOrders(this.orderId); // Recargar el pedido después de agregar un producto
       },
       (error) => {
         console.error('Error adding product to order:', error);
@@ -45,8 +53,7 @@ export class CartPage implements OnInit {
     this.orderService.removeProductFromOrder(orderId, productId).subscribe(
       (response) => {
         console.log('Product removed from order:', response);
-        // Optionally, reload the orders after removing a product
-        this.loadOrders();
+        this.loadOrders(this.orderId); // Recargar el pedido después de eliminar un producto
       },
       (error) => {
         console.error('Error removing product from order:', error);
