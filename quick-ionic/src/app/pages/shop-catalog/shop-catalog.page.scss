@@ -45,9 +45,11 @@
         overflow: hidden;
 
         ion-img {
-          object-fit: inherit; /* La imagen se ajustará dentro de su contenedor */
+          object-fit: inherit;
+          /* La imagen se ajustará dentro de su contenedor */
           width: auto;
-          height: 250px; /* Mantendrá la relación de aspecto original de la imagen */
+          height: 250px;
+          /* Mantendrá la relación de aspecto original de la imagen */
           display: block;
         }
 
@@ -66,9 +68,6 @@
           transition: transform 0.3s ease;
         }
 
-        &:hover .btn-overlay {
-          transform: translateY(0);
-        }
       }
 
       .card-body {
@@ -97,6 +96,10 @@
 
       .btn {
         margin-bottom: auto;
+      }
+
+      &:hover .bg-image .btn-overlay {
+        transform: translateY(0);
       }
     }
   }
