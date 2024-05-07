@@ -46,14 +46,40 @@
       ></ion-input>
 
       <!-- Password input - disabled until user_type is selected -->
-      <ion-input
-        type="password"
-        formControlName="password"
-        placeholder="Password"
-        labelPlacement="floating"
-        label="Password"
-        fill="outline"
-      ></ion-input>
+      <div class="d-flex flex-row align-items-center gap-2">
+        <ion-input
+          type="password"
+          formControlName="password"
+          placeholder="Password"
+          labelPlacement="floating"
+          label="Password"
+          fill="outline"
+          id="password"
+        >
+        <ion-button id="hover-trigger" class="helpButton" fill="clear" slot="end"><i class="bi bi-question-circle"></i></ion-button>
+
+        <ion-button id="buttonToggle1" (click)="showHide($event, 'password')" fill="clear" slot="end" aria-label="Show/hide">
+          <ion-icon slot="icon-only" name="eye" aria-hidden="true"></ion-icon>
+        </ion-button>
+      </ion-input>
+      
+        
+        <ion-popover trigger="hover-trigger" side="right" triggerAction="hover">
+          <ng-template>
+            <ion-content class="ion-padding">
+              <ul id="requirementesList">
+                <li id="step1">Use 6 characters o more</li>
+                <li id="step2">
+                  Combine upper and lower case
+                </li>
+                <li id="step3">Include numbers</li>
+                <li id="step4">Include special characters</li>
+                <li id="step5">There should be no blank spaces</li>
+              </ul>
+            </ion-content>
+          </ng-template>
+        </ion-popover>
+      </div>
 
       <!-- Confirm Password input - disabled until user_type is selected -->
       <ion-input
@@ -63,10 +89,21 @@
         labelPlacement="floating"
         label="Repeat the password"
         fill="outline"
-      ></ion-input>
+        id="confirmPassword"
+      >
+      <ion-button id="buttonToggle2" (click)="showHide($event, 'confirmPassword')" fill="clear" slot="end" aria-label="Show/hide">
+        <ion-icon slot="icon-only" name="eye" aria-hidden="true"></ion-icon>
+      </ion-button>
+    </ion-input>
 
       <!-- Submit button - disabled until form is valid -->
-      <button type="submit" [disabled]="!registerForm.valid">Register</button>
+      <button
+        class="submitButton"
+        type="submit"
+        [disabled]="!registerForm.valid"
+      >
+        Sign up
+      </button>
     </form>
   </div>
 </body>
