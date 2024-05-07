@@ -2,7 +2,7 @@ import { Section } from './../../interfaces/section.interface';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/interfaces/product.interface';
-import { defaultSectionBannersData, defaultSectionHeroData } from 'src/app/interfaces/sections-default';
+import { defaultSectionBannersData, defaultSectionHeroData, defaultSectionProductsData } from 'src/app/interfaces/sections-default';
 import { ProductService } from 'src/app/services/product.service';
 import { SectionEventService } from 'src/app/services/section-event.service';
 import { ShopService } from 'src/app/services/shop.service';
@@ -103,7 +103,7 @@ export class WebPageEditPage implements OnInit {
     } else if (sectionType === 'banners') {
       newSection = { provitionalId: id, id: undefined, type: sectionType, editMode: true, data: { ...defaultSectionBannersData }, products: this.products };
     } else if (sectionType === 'products') {
-      newSection = { provitionalId: id, id: undefined, type: sectionType, editMode: true, data: {}, products: this.products };
+      newSection = { provitionalId: id, id: undefined, type: sectionType, editMode: true, data: { ...defaultSectionProductsData}, products: this.products };
     } else {
       newSection = { provitionalId: id, id: undefined, type: "", editMode: true, data: {}, products: this.products };
     }

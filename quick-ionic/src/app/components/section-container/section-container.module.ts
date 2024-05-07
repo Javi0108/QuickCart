@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { SectionHeroModule } from '../section-hero/section-hero.module';
 import { SectionBannersModule } from '../section-banners/section-banners.module';
+import { SectionProductsModule } from '../section-products/section-products.module';
 
 @NgModule({
   declarations: [SectionContainerComponent],
@@ -16,6 +17,7 @@ import { SectionBannersModule } from '../section-banners/section-banners.module'
     IonicModule,
     SectionHeroModule,
     SectionBannersModule,
+    SectionProductsModule
   ],
   exports: [SectionContainerComponent],
 })

@@ -193,6 +193,7 @@ export class SectionBannersComponent implements OnInit {
 
   segmentChanged(event: CustomEvent) {
     this.selectedSegment = event.detail.value;
+    this.toggleOptions();
   }
 
   toggleOptions() {

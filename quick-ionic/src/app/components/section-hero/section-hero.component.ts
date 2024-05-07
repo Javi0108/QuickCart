@@ -7,6 +7,7 @@ import { ModalController } from '@ionic/angular';
 import { Item, TypeaheadComponent } from '../typeahead/typeahead.component';
 import { Product } from 'src/app/interfaces/product.interface';
 import { EditSectionModalComponent } from '../edit-section-modal/edit-section-modal.component';
+import { timeout } from 'rxjs';
 
 @Component({
   selector: 'app-section-hero',
@@ -39,8 +40,6 @@ export class SectionHeroComponent implements OnInit {
   selectedProductBannerOne: string | null = null;
   selectedProductBannerTwo: string | null = null;
   selectedProductBannerThree: string | null = null;
-
-
 
   constructor(
     private sectionEventService: SectionEventService,
@@ -219,6 +218,7 @@ export class SectionHeroComponent implements OnInit {
 
   segmentChanged(event: CustomEvent) {
     this.selectedSegment = event.detail.value;
+    this.toggleOptions();
   }
 
   toggleOptions() {

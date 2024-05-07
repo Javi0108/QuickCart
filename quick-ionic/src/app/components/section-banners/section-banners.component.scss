@@ -28,35 +28,34 @@
             }
         }
     }
-
-    .form-edit {
-        border-left: 1px solid black;
-
+    .form-edit {    
         ion-segment {
             margin-top: -5px;
         }
-
+    
         .form-wrapper {
             margin-top: 16px;
-
+    
             ::ng-deep ion-input {
                 margin-bottom: 15px;
-
+    
                 .input-bottom {
                     padding-right: 6px;
                     margin-top: -25px !important;
                 }
+    
             }
-
+    
             ::ng-deep ion-textarea {
                 margin-bottom: 15px;
                 height: auto;
-
+    
                 .native-wrapper {
                     padding-bottom: 20px;
                 }
-
+    
                 .textarea-bottom {
+    
                     padding-right: 6px;
                     margin-top: -25px !important;
                 }
