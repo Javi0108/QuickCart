@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
-
+import stripe
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
@@ -160,3 +160,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+# STRIPE
+
+STRIPE_PUB_KEY="pk_test_51PDlqMK6SUOsEgbaBglMJakeKD97oH60HHNB7fHK1zI4tPbwSB2f5Kom1BIw6WxxQczB13JZZXAzVIDrpOT9vFz700gmyOVMJy"
+STRIPE_SECRET_KEY="sk_test_51PDlqMK6SUOsEgbajKAs7nWPduq94GxfD5ENCujppMm3wjccO5IR7BUDRnzjXb0yAqg3HKgubMqVbiSBZ8bimbVz00D8mWqhYn"
+stripe.api_key=STRIPE_SECRET_KEY

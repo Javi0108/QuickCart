@@ -58,6 +58,10 @@ const routes: Routes = [
     data: { menu: 'default' }
   },
   {
+    path: 'cart',
+    loadChildren: () => import('./pages/cart/cart.module').then( m => m.CartPageModule)
+  },
+  {
     path: 'change-password',
     loadChildren: () => import('./pages/change-password/change-password.module').then( m => m.ChangePasswordModule)
   },

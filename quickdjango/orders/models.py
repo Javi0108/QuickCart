@@ -4,6 +4,7 @@ from shops.models import Product
 
 class Order(models.Model):
     id_order = models.AutoField(primary_key=True)
+    id_stripe= models.CharField(max_length=250, default=None)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     order_date = models.DateTimeField()
     status = models.CharField(max_length=20)
