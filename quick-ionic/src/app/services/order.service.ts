@@ -13,29 +13,22 @@ export class OrderService {
   private baseURL = "http://localhost:8000/api/orders/cart";
   private token: string | null;
 
-  constructor(private http: HttpClient, private cookies: CookieService) {
+  constructor(private http: HttpClient) {
     this.token = localStorage.getItem('token');
   }
 
-  getOrders(): Observable<Order[]> {
-    return this.http.get<Order[]>(`${this.baseURL}`, { headers: this.getHeaders() });
+  getOrder(): Observable<any> {
+    return this.http.get<any>('http://localhost:8000/api/order/', { headers: this.getHeaders() });
   }
 
-  getOrderById(orderId: number): Observable<Order> {
-    return this.http.get<Order>(`${this.baseURL}${orderId}/`, { headers: this.getHeaders() });
+  addProductToOrder(productId: number, quantity: number = 1): Observable<any> {
+    const data = { product_id: productId, quantity };
+    return this.http.post<any>('http://localhost:8000/api/order/', data, { headers: this.getHeaders() });
   }
-
-  createOrder(orderData: any): Observable<Order> {
-    return this.http.post<Order>(`${this.baseURL}/`, orderData, { headers: this.getHeaders() });
-  }
-
-  updateOrder(orderId: number, updatedOrderData: any): Observable<Order> {
-    return this.http.put<Order>(`${this.baseURL}${orderId}/`, updatedOrderData, { headers: this.getHeaders() });
-  }
-
-  deleteOrder(orderId: number): Observable<any> {
-    return this.http.delete<any>(`${this.baseURL}${orderId}/`, { headers: this.getHeaders() });
-  }
+  
+  removeProductFromOrder(orderId: number, productId: number): Observable<any> {
+    return this.http.delete<any>(`http://localhost:8000/api/order/${orderId}/?product_id=${productId}`, { headers: this.getHeaders() });
+  }  
 
   private getHeaders(): HttpHeaders {
     let headers = new HttpHeaders({

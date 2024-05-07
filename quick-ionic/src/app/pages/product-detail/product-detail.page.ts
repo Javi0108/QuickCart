@@ -14,7 +14,7 @@ export class ProductDetailPage implements OnInit, AfterViewInit {
   selectedImage: string | null = null;
   productId!: number;
   productData!: Product;
-  @ViewChild('quantity') quantityInput!: IonInput;
+  @ViewChild('quantity') quantity!: IonInput;
 
   constructor(private route: ActivatedRoute, private productService: ProductService, private cartService: CartService) {
 
@@ -53,11 +53,13 @@ export class ProductDetailPage implements OnInit, AfterViewInit {
   }
 
   addToCart() {
-    const quantity = Number(this.quantityInput.value);
+    const quantity = Number(this.quantity.value);
     console.log('Cantidad:', quantity);
     if (this.productData) {
       this.cartService.addToCart(this.productData, quantity);
-      console.log('Producto agregado al carrito:', this.productData);
+      console.log('Producto agregado al carrito:', this.productData.name);
+      const carrito =this.cartService.getCartItems()
+      console.log(carrito)
     }
   }
 
