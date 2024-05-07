@@ -71,9 +71,11 @@
 
       <hr class="vertical-separator">
 
-      <button class="quickart-button quickart-button-violet" (click)="saveAllSections()">
-        {{ areSectionsModified() ? 'Update' : 'Updated' }}
+      <button class="quickart-button quickart-button-violet" (click)="saveAllSections()" [disabled]="saving">
+        <span *ngIf="!saving">{{ areSectionsModified() ? 'Update' : 'Updated' }}</span>
+        <ion-spinner *ngIf="saving" style="height: 15px; color: aliceblue;"></ion-spinner>
       </button>
+      
       
     </ion-buttons>
   </ion-toolbar>
@@ -95,10 +97,16 @@
   </div>
 </ion-content>
 
+<ion-content *ngIf="!shopData" class="loading-content">
+  <div class="loading-container" style="margin-top: 250px;">
+    <ion-icon name="rocket-outline" class="moving-icon loading-icon" style="font-size: 300px;"></ion-icon>
+  </div>
+</ion-content>
+
 <ion-toolbar *ngIf="selectedMode === 'edit'" color="light" style="position: sticky; top: 0">
-  <ion-buttons slot="start">
-    <button (click)="addSection('hero')" class="btn btn-primary ms-5 me-2">Add Hero</button>
-    <button (click)="addSection('banners')" class="btn btn-primary">Add Banners</button>
-    <button (click)="addSection('products')" class="btn btn-primary">Add Products</button>
+  <ion-buttons slot="start" class="ms-5">
+    <button (click)="addSection('hero')" class="quickart-button quickart-button-violet">Add Hero</button>
+    <button (click)="addSection('banners')" class="quickart-button quickart-button-white">Add Banners</button>
+    <button (click)="addSection('products')" class="quickart-button quickart-button-violet">Add Products</button>
   </ion-buttons>
 </ion-toolbar>

@@ -1,7 +1,7 @@
 ion-col[size="9"] {
-    width: 100%; 
-    flex: 1; 
-    height: 93vh; 
+    width: 100%;
+    flex: 1;
+    height: 93vh;
     overflow-y: auto;
     padding: 10px;
     border-radius: 5px;
@@ -17,12 +17,31 @@ ion-col[size="3"] {
     z-index: 1000;
 }
 
-img{
+img {
     padding: 10px;
-    transition: transform 0.3s; /* Transición suave para la transformación */
+    transition: transform 0.3s;
+    /* Transición suave para la transformación */
 
-    &:hover{
-        transform: scale(1.1); /* Escala aumentada */
+    &:hover {
+        transform: scale(1.1);
+        /* Escala aumentada */
     }
 }
 
+.loading-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.loading-container {
+    text-align: center;
+    position: relative;
+}
+
+.loading-icon {
+    position: absolute;
+    padding-top: 0px;
+    margin-left: -150px;
+}

@@ -52,12 +52,6 @@ export class SectionProductsComponent implements OnInit {
   }
 
   async addProduct() {
-
-    console.log(this.productsSelected)
-
-    console.log("productsitem: ", this.productsItem)
-
-
     const modal = await this.modalController.create({
       component: TypeaheadComponent,
       cssClass: 'my-custom-class',

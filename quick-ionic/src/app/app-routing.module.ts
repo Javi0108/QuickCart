@@ -43,7 +43,7 @@ const routes: Routes = [
     data: { menu: 'default' }
   },
   {
-    path: 'catalog',
+    path: 'catalog/',
     loadChildren: () => import('./pages/products-catalog/products-catalog.module').then( m => m.ProductsCatalogPageModule),
     data: { menu: 'default' }
   },
