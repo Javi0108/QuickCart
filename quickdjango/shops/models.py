@@ -40,20 +40,20 @@ class Product(models.Model):
     stock_quantity = models.IntegerField()
     images = models.ManyToManyField('ProductImage', related_name='product_images',blank=True)
     tags = models.ManyToManyField('Tag',blank=True)
-    
+        
     #invoices = models.ManyToManyField(Invoice, through='InvoiceProduct')
     #orders = models.ManyToManyField(Order, through='OrderProduct')
     
+class ProductImage(models.Model):
+    image = models.ImageField(upload_to='product_images/')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='product_images')
+
+    def __str__(self):
+        return f"{self.product.name} - {self.id}"
+
 class Tag(models.Model):
     name = models.CharField(max_length=50)
 
     def __str__(self):
         return self.name
 
-
-class ProductImage(models.Model):
-    image = models.ImageField(upload_to='product_images/')
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='product_images')
-
-    def __str__(self):
-        return self.product.name + ' - ' + str(self.id)

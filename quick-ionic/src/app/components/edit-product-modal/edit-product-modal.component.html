@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Add Product</ion-title>
+    <ion-title>Edit Product</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="closeModal()">Close</ion-button>
     </ion-buttons>
@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <form enctype="multipart/form-data" [formGroup]="createProductForm" (ngSubmit)="createProduct()">
+  <form enctype="multipart/form-data" [formGroup]="editProductForm" (ngSubmit)="editProduct()">
     <ion-input label="Name" label-placement="floating" fill="outline" formControlName="name"></ion-input>
     <ion-input label="Brand" label-placement="floating" fill="outline" formControlName="brand"></ion-input>
     <ion-input label="Short description" label-placement="floating" fill="outline"
@@ -23,11 +23,12 @@
     <ion-input id="image-input" label="Gallery" fill="outline" type="file" formControlName="gallery"
       (change)="onGallerySelected($event)" class="file-input" multiple></ion-input>
     <ion-row *ngIf="galleryPreviews">
-      <ion-col size="6" *ngFor="let image of galleryPreviews">
-        <ion-img [src]="image" class="uploaded-image"></ion-img>
+      <ion-col class="gallery_container" size="6" *ngFor="let image of galleryPreviews;let i =  index;">
+        <ion-img class="gallery_img" [src]="image" class="uploaded-image"></ion-img>
+        <ion-icon class="gallery_icon" name="trash-outline" (click)="discardImage(i)"></ion-icon>
       </ion-col>
     </ion-row>
     <ion-input label="Stock" label-placement="floating" fill="outline" formControlName="stockQuantity"></ion-input>
-    <ion-button type="submit" [disabled]="createProductForm.invalid">Submit</ion-button>
+    <ion-button type="submit" [disabled]="editProductForm.invalid">Submit</ion-button>
   </form>
 </ion-content>

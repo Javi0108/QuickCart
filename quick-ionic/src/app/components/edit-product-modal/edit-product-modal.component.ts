@@ -1,24 +1,30 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { FormGroup } from '@angular/forms';
 import { ProductService } from 'src/app/services/product.service';
+import { Product } from 'src/app/interfaces/product.interface';
 
 @Component({
-  selector: 'app-add-product',
-  templateUrl: './add-product-modal.component.html',
-  styleUrls: ['./add-product-modal.component.scss'],
+  selector: 'app-edit-product',
+  templateUrl: './edit-product-modal.component.html',
+  styleUrls: ['./edit-product-modal.component.scss'],
 })
-export class AddProductModalComponent {
-  @Input() createProductForm!: FormGroup;
+export class EditProductModalComponent implements OnInit{
+  @Input() editProductForm!: FormGroup;
   @Input() shopId!: number;
-  imagePreview: any;
+  @Input() product!: Product;
   galleryPreviews: any[] = [];
+
+  imagePreview: any;
 
   constructor(
     private modalController: ModalController,
     private productService: ProductService
   ) {
 
+  }
+  ngOnInit(): void {
+    console.log("modal", this.product)
   }
 
   closeModal(dataToSend?: any) {
@@ -30,7 +36,6 @@ export class AddProductModalComponent {
     if (file) {
       this.convertFileToDataURL(file);
     }
-
   }
 
   convertFileToDataURL(file: File) {
@@ -53,6 +58,13 @@ export class AddProductModalComponent {
     }
   }
 
+
+  discardImage(index:number){
+    console.log("Imagen numero:" + index)
+    this.galleryPreviews.splice(index,1);
+    console.log(this.galleryPreviews  )
+  }
+
   convertFilesToDataURL(files: FileList, callback: (imagePreviews: string[]) => void) {
     const imagePreviews: string[] = [];
     for (let i = 0; i < files.length; i++) {
@@ -70,27 +82,29 @@ export class AddProductModalComponent {
     }
   }
 
-  async createProduct() {
-    if (this.createProductForm.valid) {
+  async editProduct() {
+    if (this.editProductForm.valid) {
 
       const data = {
         shopId: this.shopId,
-        name: this.createProductForm.get('name')?.value,
-        brand:this.createProductForm.get('brand')?.value,
-        short_description:this.createProductForm.get('shortDescription')?.value,
-        description:this.createProductForm.get('description')?.value,
-        price:this.createProductForm.get('price')?.value,
+        name: this.editProductForm.get('name')?.value,
+        brand:this.editProductForm.get('brand')?.value,
+        short_description:this.editProductForm.get('shortDescription')?.value,
+        description:this.editProductForm.get('description')?.value,
+        price:this.editProductForm.get('price')?.value,
         avatar:this.imagePreview,
-        stock_quantity:this.createProductForm.get('stockQuantity')?.value,
+        stock_quantity:this.editProductForm.get('stockQuantity')?.value,
         galleryPreviews: this.galleryPreviews
       }
 
-      this.productService.addProduct(data).subscribe({
+      console.log(data)
+
+      this.productService.editProduct(this.product.id_product, data).subscribe({
         next: (response) => {
           this.closeModal(response)
         },
         error: (error: any) => {
-          console.error('Error al crear el producto:', error);
+          console.error('Error al editar el producto:', error);
         },
       });
     }

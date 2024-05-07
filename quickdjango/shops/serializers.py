@@ -1,10 +1,16 @@
 from rest_framework import serializers
-from .models import Shop, Product, Section
+from .models import Shop, Product, Section, ProductImage
        
  # PRODUCTS
 
-class ProductSerializer(serializers.ModelSerializer):   
-    
+class ProductImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductImage
+        fields = ('id', 'image')  # Ajusta los campos según tu modelo de imágenes
+
+class ProductSerializer(serializers.ModelSerializer):
+    images = ProductImageSerializer(many=True, read_only=True)  # Incluye la serialización de las imágenes
+
     class Meta:
         model = Product
         fields = '__all__'

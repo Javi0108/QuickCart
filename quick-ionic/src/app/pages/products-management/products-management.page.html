@@ -1,25 +1,52 @@
 <ion-content>
-  <ion-grid>
-    <h2 class="title">Products Management</h2>
-    <ion-button (click)="openAddModal()">Add Product</ion-button>
-    <ion-row>
-      <ion-col size="6" size-md="4" size-lg="3" *ngFor="let product of products">
-        <ion-card>
-            <ion-img [src]="'http://localhost:8000' + product.avatar" alt="Product Image"></ion-img>
-            <ion-card-header>
-              <ion-card-title>{{ product.name }}</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-              <p>{{ product.short_description }}</p>
-              <p>Precio: {{ product.price }}</p>
-              <ion-button color="primary" slot="end" (click)="openEditModal(product)">Edit</ion-button>
-              <ion-button color="danger" slot="end" (click)="confirmDelete(product.id_product)">Delete</ion-button>
-            </ion-card-content>
-        </ion-card>
-      </ion-col>
-      <div *ngIf="!products || products.length === 0">
-        <p class="title">No hay productos disponibles</p>
-      </div>
-    </ion-row>
-  </ion-grid>
+
+  <ion-spinner *ngIf="!pageloaded"></ion-spinner>
+
+  <div class="products-management">
+    <div class="container">
+      <h2 class="title">Products Management {{shopName}}</h2>
+      <ion-grid>
+        <ion-row class="ion-text-end">
+          <ion-col size="11">
+            <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="onSearchChange($event)" show-cancel-button="always" cancel-button-text="Cancel" cancel-button-icon="trash" placeholder="Search"></ion-searchbar>
+          </ion-col>
+          <ion-col size="1">
+            <ion-button class="btn-add" title="Add Product Form" (click)="openAddModal()"><ion-icon name="add-outline"></ion-icon></ion-button>
+          </ion-col>
+        </ion-row>
+
+        <ion-row *ngIf='products'>
+          <ng-container *ngFor="let product of filteredProducts;">
+            <div class="col-lg-3 col-md-6 col-sm-12 card_container">
+              <div class="card">
+                <div class="bg-image hover-overlay" mdbRipple rippleColor="light">
+                  <ion-img [src]="'http://localhost:8000' + product.avatar" alt="Product Image"></ion-img>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">{{ product.name }}</h5>
+                  <p class="card-text">{{ product.short_description }}</p>
+                  <p class="card-price">{{ product.price}} $</p>
+                </div>
+                <ion-buttons>
+                  <ion-button title="Edit" fill="solid" color="primary" (click)="openEditModal(product)">
+                    <ion-icon name="create"></ion-icon>
+                  </ion-button>
+                  <ion-button title="View Product" fill="solid" color="secondary"
+                    [routerLink]="['/product',product.id_product]">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </ion-button>
+                  <ion-button title="Delete" fill="solid" color="danger" (click)="confirmDelete(product.id_product)">
+                    <ion-icon name="trash-outline"></ion-icon>
+                  </ion-button>
+                </ion-buttons>
+              </div>
+            </div>
+          </ng-container>
+        </ion-row>
+        <div *ngIf="!products || products.length === 0">
+          <p class="title">No hay productos disponibles</p>
+        </div>
+      </ion-grid>
+    </div>
+  </div>
 </ion-content>

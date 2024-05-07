@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
-from .models import Shop, Product, ShopSectionOrder, Section
+from .models import Shop, Product, ShopSectionOrder, Section, ProductImage
 from .serializers import ShopSerializer, ShopDetailSerializer, ShopSectionSerializer
 from .serializers import ShopSerializer,ProductSerializer
 
@@ -186,7 +186,6 @@ class ProductsView(APIView):
             try:
                 product = Product.objects.get(id_product=id_product)
                 serializer = ProductSerializer(product)
-                print(serializer.data)
                 return Response(serializer.data, status=status.HTTP_200_OK)
             except Product.DoesNotExist:
                 return Response({"message": "Producto no encontrado"}, status=status.HTTP_404_NOT_FOUND)
@@ -241,10 +240,22 @@ class ProductsView(APIView):
             image_data = ContentFile(base64.b64decode(imgstr), name=image_name)
             product_data['avatar'] = image_data
         
+        if 'galleryPreviews' in request.data:
+            gallery_images = request.data['galleryPreviews']
+            gallery_data = []
+            for img_data in gallery_images:
+                format, imgstr = img_data.split(';base64,')
+                ext = format.split('/')[-1]
+                image_name = f'gallery_{shop_id}_{name}_{len(gallery_data)}.{ext}'  # Nombre de archivo personalizado
+                image_data = ContentFile(base64.b64decode(imgstr), name=image_name)
+                gallery_data.append(image_data)
+
         # Crear el producto usando el serializador
         serializer = ProductSerializer(data=product_data)
         if serializer.is_valid():
-            serializer.save()
+            product = serializer.save()
+            for img in gallery_data:
+                ProductImage.objects.create(product=product, image=img)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             print(serializer.errors)
@@ -278,6 +289,15 @@ class ProductsView(APIView):
             image_name = f'avatar_{id_product}_{name}.{ext}'  # Nombre de archivo personalizado
             image_data = ContentFile(base64.b64decode(imgstr), name=image_name)
             product.avatar = image_data
+
+        if "galleryPreviews" in request.data:
+            gallery_images = request.data.getlist('galleryPreviews')
+            for img_data in gallery_images:
+                format, imgstr = img_data.split(';base64,')
+                ext = format.split('/')[-1]
+                image_name = f'gallery_{id_product}_{name}_{len(product.productimage_set.all())}.{ext}'  # Nombre de archivo personalizado
+                image_data = ContentFile(base64.b64decode(imgstr), name=image_name)
+                ProductImage.objects.create(product=product, image=image_data)
 
         # Guardar los cambios en el producto
         product.save()
