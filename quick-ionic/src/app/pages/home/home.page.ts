@@ -12,4 +12,9 @@ export class HomePage implements OnInit {
   ngOnInit() {
   }
 
+  isLoggedIn(): boolean {
+    const token = localStorage.getItem('token');
+    return token !== null;
+  }
+
 }
