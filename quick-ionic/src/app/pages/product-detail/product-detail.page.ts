@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/interfaces/product.interface';
 import { ProductService } from 'src/app/services/product.service';
 import { IonInput } from '@ionic/angular';
-import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -16,7 +15,7 @@ export class ProductDetailPage implements OnInit, AfterViewInit {
   productData!: Product;
   @ViewChild('quantity') quantity!: IonInput;
 
-  constructor(private route: ActivatedRoute, private productService: ProductService, private cartService: CartService) {
+  constructor(private route: ActivatedRoute, private productService: ProductService) {
 
   }
 
@@ -53,14 +52,6 @@ export class ProductDetailPage implements OnInit, AfterViewInit {
   }
 
   addToCart() {
-    const quantity = Number(this.quantity.value);
-    console.log('Cantidad:', quantity);
-    if (this.productData) {
-      this.cartService.addToCart(this.productData, quantity);
-      console.log('Producto agregado al carrito:', this.productData.name);
-      const carrito =this.cartService.getCartItems()
-      console.log(carrito)
-    }
   }
 
 

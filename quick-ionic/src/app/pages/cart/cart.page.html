@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>cart</ion-title>
+    <ion-title>Cart</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -10,14 +10,23 @@
     <p><strong>Order ID:</strong> {{ cart.id_order }}</p>
     <p><strong>Order Date:</strong> {{ cart.order_date | date:'medium' }}</p>
     <p><strong>Status:</strong> {{ cart.status }}</p>
-  
+    <ion-button size="large">
+      <ion-icon title="Buy now" name="cart-outline"></ion-icon>
+    </ion-button>
+
     <h3>Products</h3>
-    <ul>
-      <li *ngFor="let productId of cart.products">{{ productId }}</li>
-    </ul>
+    <ion-list>
+      <ion-item *ngFor="let orderProduct of cart.order_products">
+        <ion-label [routerLink]="['/product',orderProduct.product.id_product]">{{ orderProduct.product.name }}</ion-label>
+        <ion-label>{{ orderProduct.product.price }}</ion-label>
+        <ion-note slot="end">{{ orderProduct.quantity }}</ion-note>
+        <ion-button color="danger" slot="end">
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-list>
   </div>
   <div *ngIf="!cart">
     <p>No cart data available.</p>
   </div>
-  
 </ion-content>
