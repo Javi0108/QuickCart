@@ -17,19 +17,11 @@
         <ion-label>Profile</ion-label>
         <i class="bi bi-person-fill"></i>
       </div>
-      <div
-        *ngIf="isLoggedIn() && profile.user_type == 'Seller'"
-        [routerLink]="['/seller-shops']"
-        id="listElement"
-      >
+      <div *ngIf="isLoggedIn() && profile.user_type == 'Seller'" [routerLink]="['/seller-shops']" id="listElement">
         <ion-label>My Shops</ion-label>
         <i class="bi bi-bag-fill"></i>
       </div>
-      <div
-        *ngIf="isLoggedIn() && profile.user_type == 'Client'"
-        [routerLink]="['/web-page-catalog']"
-        id="listElement"
-      >
+      <div *ngIf="isLoggedIn() && profile.user_type == 'Client'" [routerLink]="['/web-page-catalog']" id="listElement">
         <ion-label>Shops</ion-label>
         <i class="bi bi-bag-fill"></i>
       </div>
@@ -81,45 +73,26 @@
           </ion-title>
         </div>
 
-        <div
-          *ngIf="isLoggedIn()"
-          class="d-none d-sm-flex col-sm-4 justify-content-center"
-          id="menuButtons"
-        >
-          <button [routerLink]="['/home']">Home</button>
+        <div *ngIf="isLoggedIn()" class="d-none d-sm-flex col-sm-4 justify-content-center" id="menuButtons">
+          <button [routerLink]="['/home']" [class.active-route]="activeRoute === '/home'">Home</button>
           <hr class="vertical-separator" />
-          <button [routerLink]="['/web-page-catalog']">Shops</button>
+          <button [routerLink]="['/web-page-catalog']" [class.active-route]="activeRoute === '/web-page-catalog'">Shops</button>
           <hr class="vertical-separator" />
-          <button [routerLink]="['/catalog']">Products</button>
+          <button [class.active-route]="activeRoute === '/catalog'" [routerLink]="['/catalog']">Products</button>
         </div>
 
         <div *ngIf="isLoggedIn()" class="d-none d-sm-flex justify-content-end align-items-center col-sm-4">
           <ion-fab *ngIf="profile && isLoggedIn()" [routerLink]="['/profile']">
-            <ion-label class=" mx-2" style="font-weight: 500"
-              >{{ user!.username }}</ion-label
-            >
+            <ion-label class=" mx-2" style="font-weight: 500">{{ user!.username }}</ion-label>
             <hr class="d-none d-sm-block vertical-separator" />
             <ion-fab-button size="small">
-              <img
-                *ngIf="!profile.avatar"
-                src="/assets/avatar.webp"
-                width="40px"
-              />
-              <img
-                *ngIf="profile.avatar"
-                src="http://127.0.0.1:8000/{{ profile.avatar }}"
-                width="40px"
-                height="40px"
-              />
+              <img *ngIf="!profile.avatar" src="/assets/avatar.webp" width="40px" />
+              <img *ngIf="profile.avatar" src="http://127.0.0.1:8000/{{ profile.avatar }}" width="40px" height="40px" />
             </ion-fab-button>
           </ion-fab>
         </div>
 
-        <div
-          *ngIf="!isLoggedIn()"
-          class="col-6 r-col justify-content-end"
-          id="menuButtons"
-        >
+        <div *ngIf="!isLoggedIn()" class="col-6 r-col justify-content-end" id="menuButtons">
           <button [routerLink]="['/login']">Log In</button>
           <hr class="vertical-separator" />
           <button [routerLink]="['/register']">Sing Up</button>
