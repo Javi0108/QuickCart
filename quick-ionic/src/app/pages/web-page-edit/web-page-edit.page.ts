@@ -1,8 +1,11 @@
 import { Section } from './../../interfaces/section.interface';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
+import { PopoverController } from '@ionic/angular';
+import { catchError, finalize, forkJoin, of } from 'rxjs';
 import { Product } from 'src/app/interfaces/product.interface';
-import { defaultSectionBannersData, defaultSectionHeroData } from 'src/app/interfaces/sections-default';
+import { defaultSectionAboutOfData, defaultSectionBannersData, defaultSectionHeroData, defaultSectionProductsData } from 'src/app/interfaces/sections-default';
+import { NotificationToastService } from 'src/app/services/notification-toast.service';
 import { ProductService } from 'src/app/services/product.service';
 import { SectionEventService } from 'src/app/services/section-event.service';
 import { ShopService } from 'src/app/services/shop.service';
@@ -15,6 +18,8 @@ import { v4 as uuidv4 } from 'uuid';
 })
 export class WebPageEditPage implements OnInit {
 
+  @ViewChild('popoverContent', { static: false }) popoverContent: any;
+
   shopData!: any;
   shopId!: number;
 
@@ -24,21 +29,39 @@ export class WebPageEditPage implements OnInit {
 
   selectedMode: string = "edit";
 
+  saving: Boolean = false;
+
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private shopService: ShopService,
     private sectionEventService: SectionEventService,
-    private productService: ProductService
+    private productService: ProductService,
+    private notificationToastService: NotificationToastService,
+    private popoverController: PopoverController
   ) { }
 
   ngOnInit() {
+
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationStart) {
+        if (this.router.url.includes('/web-page-edit')) {
+          // Verificar si las secciones han sido modificadas
+          if (this.areSectionsModified()) {
+            if (!confirm('Are you sure you want to leave? Your changes may not be saved.')) {
+              // Cancelar la navegación si el usuario elige quedarse
+              this.router.navigate([], { skipLocationChange: true });
+            }
+          }
+        }
+      }
+    });
 
     const shopIdString = this.route.snapshot.paramMap.get('id');
     if (shopIdString) {
       this.shopId = +shopIdString;
       this.loadProducts(this.shopId);
-      this.getShop();
     } else {
       console.error('No se proporcionó un ID de tienda válido.');
     }
@@ -68,7 +91,7 @@ export class WebPageEditPage implements OnInit {
           this.sections = shopData.sections;
           this.setEditModeForSections();
           this.loadProductsForSections();
-          this.sectionsCopy = JSON.parse(JSON.stringify(this.sections)); 
+          this.sectionsCopy = JSON.parse(JSON.stringify(this.sections));
         } else {
           console.error('No se encontró la tienda con el ID proporcionado.');
 
@@ -103,7 +126,15 @@ export class WebPageEditPage implements OnInit {
     } else if (sectionType === 'banners') {
       newSection = { provitionalId: id, id: undefined, type: sectionType, editMode: true, data: { ...defaultSectionBannersData }, products: this.products };
     } else if (sectionType === 'products') {
-      newSection = { provitionalId: id, id: undefined, type: sectionType, editMode: true, data: {}, products: this.products };
+      newSection = { provitionalId: id, id: undefined, type: sectionType, editMode: true, data: { ...defaultSectionProductsData }, products: this.products };
+    } else if (sectionType === 'about-of-1') {
+      const copiedData = { ...defaultSectionAboutOfData };
+      const copiedContent = { ...copiedData.content, type: 1 };
+      newSection = { provitionalId: id, id: undefined, type: "about-of", editMode: true, data: { ...copiedData, content: copiedContent }, products: this.products };
+    } else if (sectionType === 'about-of-2') {
+      const copiedData = { ...defaultSectionAboutOfData };
+      const copiedContent = { ...copiedData.content, type: 2 };
+      newSection = { provitionalId: id, id: undefined, type: "about-of", editMode: true, data: { ...copiedData, content: copiedContent }, products: this.products };
     } else {
       newSection = { provitionalId: id, id: undefined, type: "", editMode: true, data: {}, products: this.products };
     }
@@ -128,44 +159,50 @@ export class WebPageEditPage implements OnInit {
   }
 
   saveAllSections() {
+    this.saving = true;
 
-    console.log(this.sections)
     if (this.sections.length === 0) {
       return;
     }
 
-    let order = 0;
-
-    this.sections.forEach((section: Section) => {
+    const requests = this.sections.map((section: Section, index: number) => {
       if (section.id) {
-        this.updateSection(section, order);
+        return this.updateSection(section, index);
       } else {
-        this.saveSection(section, order);
+        return this.saveSection(section, index);
       }
-      order++
     });
 
-    this.sectionsCopy = JSON.parse(JSON.stringify(this.sections));
+    forkJoin(requests)
+      .pipe(
+        catchError(error => {
+          this.notificationToastService.presentToast(
+            'It seems there was an issue while trying to save the changes. Some sections could not be saved correctly. Please try again later. If the issue persists, please contact technical support.',
+            'success',
+            '../../assets/check.svg'
+          );
+          return of(null);
+        }),
+        finalize(() => {
+          this.notificationToastService.presentToast(
+            'Shop successfully updated',
+            'success',
+            '../../assets/check.svg'
+          );
+          this.saving = false;
+        })
+      )
+      .subscribe(() => {
+        this.sectionsCopy = JSON.parse(JSON.stringify(this.sections));
+      });
   }
 
   saveSection(section: Section, order: number) {
-    this.shopService.saveShopSection(this.shopId, order, section).subscribe({
-      next: (shopData) => {
-        this.getShop()
-      },
-      error: (error) => {
-        console.error("Error al guarda la seccion", error)
-      }
-    })
+    return this.shopService.saveShopSection(this.shopId, order, section);
   }
 
   updateSection(section: Section, order: number) {
-    this.shopService.updateShopSection(section.id!, order, section).subscribe({
-      next: (shopData) => { },
-      error: (error) => {
-        console.error("no se ha guardado correctamente", error)
-      }
-    })
+    return this.shopService.updateShopSection(section.id!, order, section);
   }
 
   deleteSection(id: number) {
@@ -176,13 +213,30 @@ export class WebPageEditPage implements OnInit {
           if (index !== -1) {
             this.sections.splice(index, 1);
           }
-        }
+          this.notificationToastService.presentToast(
+            'Section successfully deleted',
+            'success',
+            '../../assets/check.svg'
+          );
+        },
+        error: (err) => {
+          this.notificationToastService.presentToast(
+            'An error occurred while delete the section',
+            'danger',
+            '../../assets/exclamation.svg'
+          );
+        },
       });
     } else {
       const index = this.sections.findIndex(s => s.id === id);
       if (index !== -1) {
         this.sections.splice(index, 1);
       }
+      this.notificationToastService.presentToast(
+        'Section successfully deleted',
+        'success',
+        '../../assets/check.svg'
+      );
     }
   }
 
@@ -195,6 +249,7 @@ export class WebPageEditPage implements OnInit {
           value: product.id_product.toString(),
           img: "http://localhost:8000" + product.avatar
         }));
+        this.getShop();
       },
       (error) => {
         console.error('Error loading products:', error);
@@ -206,6 +261,23 @@ export class WebPageEditPage implements OnInit {
     const modified = JSON.stringify(this.sections) !== JSON.stringify(this.sectionsCopy);
     return modified;
   }
-  
+
+
+  async presentPopover(ev: any) {
+    const popover = await this.popoverController.create({
+      component: this.popoverContent,
+      event: ev,
+      translucent: true
+    });
+    return await popover.present();
+  }
+
+  @HostListener('window:beforeunload', ['$event'])
+  unloadNotification($event: any) {
+    if (this.areSectionsModified()) {
+      $event.returnValue = true;
+    }
+  }
+
 
 }

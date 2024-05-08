@@ -3,15 +3,34 @@
 
 <!-- Barra lateral -->
 <ion-menu contentId="main-content">
-  <ion-header>
+  <ion-header class="mb-2">
     <ion-toolbar color="tertiary">
-      <ion-title>Menu Content</ion-title>
+      <ion-title>Section selector</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-content>
-
+  <ion-content class="menu-content">
+    <hr class="hr-separator">
+    <p class="p-menu">Banners</p>
+    <img class="img-menu" src="/assets/sections/section-banners.png" alt="banners" (click)="addSection('banners')">
+  
+    <hr class="hr-separator">
+    <p class="p-menu">Hero</p>
+    <img class="img-menu" src="/assets/sections/section-hero.png" alt="hero" (click)="addSection('hero')">
+  
+    <hr class="hr-separator">
+    <p class="p-menu">Products</p>
+    <img class="img-menu" src="/assets/sections/section-products.png" alt="products" (click)="addSection('products')">
+  
+    <hr class="hr-separator">
+    <p class="p-menu">About of 1</p>
+    <img class="img-menu" src="/assets/sections/section-about-of-1.png" alt="about-of-1" (click)="addSection('about-of-1')">
+  
+    <hr class="hr-separator">
+    <p class="p-menu">About of 2</p>
+    <img class="img-menu" src="/assets/sections/section-about-of-2.png" alt="about-of-2" (click)="addSection('about-of-2')">
   </ion-content>
 </ion-menu>
+
 
 <ion-popover trigger="popover-button" [dismissOnSelect]="true" style="padding-top: 10px; border-radius: 20px;">
   <ng-template>
@@ -66,9 +85,14 @@
 
       <hr class="vertical-separator">
 
-      <button class="quickart-button quickart-button-violet" (click)="saveAllSections()">
-        {{ areSectionsModified() ? 'Update' : 'Updated' }}
+      <button class="quickart-button quickart-button-violet" (click)="saveAllSections()" [disabled]="saving" style="min-width: 120px;">
+        <ion-icon *ngIf="!saving && areSectionsModified()" name="cloud-upload-outline" style="height: 20px;"></ion-icon>
+        <ion-icon *ngIf="!saving && !areSectionsModified()" name="cloud-done-outline" style="height: 20px;"></ion-icon>
+        <span *ngIf="!saving" style="margin-left: 5px;">{{ areSectionsModified() ? 'Update' : 'Updated' }}</span>
+        <ion-spinner *ngIf="saving" style="height: 15px; color: aliceblue;"></ion-spinner>
       </button>
+      
+      
       
     </ion-buttons>
   </ion-toolbar>
@@ -79,7 +103,7 @@
   <div class="pt-2" *ngIf="selectedMode === 'edit'">
     <div *ngIf="sections">
       <app-section-container [sections]="sections" [shopId]="shopId" (moveSectionUpEvent)="moveSectionUp($event)"
-        (moveSectionDownEvent)="moveSectionDown($event)">></app-section-container>
+        (moveSectionDownEvent)="moveSectionDown($event)"></app-section-container>
     </div>
   </div>
 
@@ -90,10 +114,29 @@
   </div>
 </ion-content>
 
+<ion-content *ngIf="!shopData" class="loading-content">
+  <div class="loading-container" style="margin-top: 250px; height: 100vh;">
+    <ion-icon name="rocket-outline" class="moving-icon loading-icon" style="font-size: 300px;"></ion-icon>
+  </div>
+</ion-content>
+
 <ion-toolbar *ngIf="selectedMode === 'edit'" color="light" style="position: sticky; top: 0">
-  <ion-buttons slot="start">
-    <button (click)="addSection('hero')" class="btn btn-primary ms-5 me-2">Add Hero</button>
-    <button (click)="addSection('banners')" class="btn btn-primary">Add Banners</button>
-    <button (click)="addSection('products')" class="btn btn-primary">Add Products</button>
+  <ion-buttons slot="start" class="ms-5">
+    <button (click)="addSection('hero')" class="quickart-button quickart-button-violet">Add Hero</button>
+    <button (click)="addSection('banners')" class="quickart-button quickart-button-white">Add Banners</button>
+    <button (click)="addSection('products')" class="quickart-button quickart-button-violet">Add Products</button>
+    <button id="popoverContent" class="quickart-button quickart-button-white">About of</button>
   </ion-buttons>
 </ion-toolbar>
+
+<ion-popover trigger="popoverContent" [dismissOnSelect]="true" style="padding-top: 10px; border-radius: 20px;">
+  <ng-template style="padding: 0;">
+        <button (click)="addSection('about-of-1')" class="quickart-button quickart-button-white" style="border: none; width: 100%;">Option image right</button>
+        <button (click)="addSection('about-of-2')" class="quickart-button quickart-button-white" style="border: none; width: 100%;">Option image left</button>
+  </ng-template>
+</ion-popover>
+
+
+
+
+

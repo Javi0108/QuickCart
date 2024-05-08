@@ -17,8 +17,18 @@ export class SellerService {
   }
 
   getShops(): Observable<any> {
+    // Obtener todas las tiendas
+    return this.http.get<any>(`${this.baseURL}`, { headers: this.getHeaders() });
+  }
+
+  getMyShops(): Observable<any> {
     // Obtener las tiendas del vendedor actual
     return this.http.get<any>(`${this.baseURL}my-shops/`, { headers: this.getHeaders() });
+  }
+
+  getShopsBySeller(sellerId: number): Observable<any> {
+    // Obtener las tiendas de un vendedor por su ID
+    return this.http.get<any>(`${this.baseURL}seller/${sellerId}`, { headers: this.getHeaders() });
   }
 
   addShop(newShopData: ShopCreate): Observable<any> {
@@ -26,15 +36,15 @@ export class SellerService {
     return this.http.post<any>(`${this.baseURL}create-shop/`, newShopData, {headers: this.getHeaders()})
   }
 
+  editShop(shopId: number, updatedShopData: any): Observable<any> {
+    return this.http.put<any>(`${this.baseURL}edit/${shopId}/`, updatedShopData, { headers: this.getHeaders() });
+  }
+
   removeShop(shopId: number): Observable<any> {
     // Eliminar una tienda por su ID
     return this.http.delete<any>(`${this.baseURL}delete/${shopId}/`, { headers: this.getHeaders() });
   }
 
-  editShop(shopId: number, updatedShopData: any): Observable<any> {
-    // Editar una tienda por su ID
-    return this.http.put<any>(`${this.baseURL}shop/${shopId}/`, updatedShopData, { headers: this.getHeaders() });
-  }
 
   // Método para obtener los encabezados de la solicitud
   private getHeaders(): HttpHeaders {

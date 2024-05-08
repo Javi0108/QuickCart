@@ -42,20 +42,20 @@ export class SectionBannersComponent implements OnInit {
 
   ngOnInit() {
     if (this.section) {
-      this.sectionId = this.section.id
-      this.sectionType = this.section.type
-      this.editMode = this.section.editMode
-      this.products = this.section.products
+      this.sectionId = this.section.id;
+      this.sectionType = this.section.type;
+      this.editMode = this.section.editMode;
+      this.products = this.section.products;
 
       if (this.section.data.defaultSectionBannersData) {
-        this.sectionData = this.section.data.defaultSectionBannersData
+        this.sectionData = this.section.data.defaultSectionBannersData;
       } else {
-        this.sectionData = this.section.data
+        this.sectionData = this.section.data;
       }
     }
 
     if (this.editMode) {
-      this.initializeEditMode()
+      this.initializeEditMode();
     }
   }
 
@@ -172,13 +172,13 @@ export class SectionBannersComponent implements OnInit {
     modal.onDidDismiss().then((data) => {
       if (data.role === 'confirm') {
         const modalData = data.data;
-        this.sectionData!.background = { ...this.sectionData!.background, ...modalData};
+        this.sectionData!.background = { ...this.sectionData!.background, ...modalData };
       }
     });
 
     return await modal.present();
   }
-
+  
   moveSectionUp() {
     this.sectionEventService.moveSectionUp.emit(this.order);
   }
@@ -193,6 +193,7 @@ export class SectionBannersComponent implements OnInit {
 
   segmentChanged(event: CustomEvent) {
     this.selectedSegment = event.detail.value;
+    this.toggleOptions();
   }
 
   toggleOptions() {

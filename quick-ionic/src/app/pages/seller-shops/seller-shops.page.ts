@@ -4,6 +4,7 @@ import { ModalController } from '@ionic/angular';
 import { ShopData } from 'src/app/interfaces/shop.interface';
 import { SellerService } from 'src/app/services/seller.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { EditWebsiteModalComponent } from 'src/app/components/edit-website-modal/edit-website-modal.component';
 
 @Component({
   selector: 'app-seller-shops',
@@ -57,8 +58,40 @@ export class SellerShopsPage implements OnInit {
   }
 
 
+  async openEditWebsiteModal(idShop: number) {
+
+    const shopToEdit = this.shops.find(shop => shop.id_shop === idShop);
+    if (!shopToEdit) {
+      console.error('No se encontró la tienda para el ID dado:', idShop);
+      return;
+    }
+
+    const editWebSiteForm = this.formBuilder.group({
+      id_shop: [shopToEdit.id_shop, Validators.required],
+      name: [shopToEdit.name, Validators.required],
+      title: [shopToEdit.title, Validators.required],
+      description: [shopToEdit.description, Validators.required],
+      address: [shopToEdit.address, Validators.required],
+    });
+    
+    const modal = await this.modalController.create({
+      component: EditWebsiteModalComponent,
+      cssClass: 'add-website-modal',
+      componentProps: {
+        editWebSiteForm: editWebSiteForm,
+        imagePreview: "http://localhost:8000/" + shopToEdit.logo
+      }
+    });
+
+    modal.onDidDismiss().then(() => {
+      this.getShops();
+    });
+
+    return await modal.present();
+  }
+
   getShops() {
-    this.sellerService.getShops().subscribe({
+    this.sellerService.getMyShops().subscribe({
       next: (response) => {
         this.shops = response;
         this.filteredShops = response;

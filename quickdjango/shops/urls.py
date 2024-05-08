@@ -4,9 +4,11 @@ from . import views
 app_name = 'shops'
 
 urlpatterns = [
-    path('shops/', views.ShopView.as_view(), name='all-shops'),
+    path('', views.ShopView.as_view(), name='all-shops'),
+    path('seller/<int:id_seller>', views.ShopView.as_view(), name='all-shops-by-seller'),
     path('my-shops/', views.SellerShopsView.as_view(), name='my-shops'),
     path('create-shop/', views.SellerShopsView.as_view(), name='create-shop'),
+    path('edit/<int:id_shop>/', views.SellerShopsView.as_view(), name='edit-shop'),
     path('detail/<int:id_shop>/', views.SellerShopsView.as_view(), name='shop-detail'),
     path('delete/<int:id_shop>/', views.SellerShopsView.as_view(), name='delete-dhop'),
 

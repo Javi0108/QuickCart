@@ -62,6 +62,14 @@ const routes: Routes = [
     loadChildren: () => import('./pages/change-password/change-password.module').then( m => m.ChangePasswordModule)
   },
   {
+    path: 'web-page-catalog/:sellerId',
+    loadChildren: () => import('./pages/web-page-catalog/web-page-catalog.module').then( m => m.WebPageCatalogPageModule)
+  },
+  {
+    path: 'web-page-catalog',
+    loadChildren: () => import('./pages/web-page-catalog/web-page-catalog.module').then( m => m.WebPageCatalogPageModule)
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
@@ -71,7 +79,6 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
- 
 ];
 
 @NgModule({

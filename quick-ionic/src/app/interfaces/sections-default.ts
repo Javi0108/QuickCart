@@ -1,3 +1,5 @@
+import { Product } from "./product.interface";
+
 export const defaultSectionHeroData = {
     background: {
         image: null,
@@ -30,9 +32,7 @@ export const defaultSectionHeroData = {
         image: "http://localhost:8000/media/sections/default/hero_section/slider-bg2.jpg",
         related_product: null,
     }
-
 }
-
 
 export const defaultSectionBannersData = {
     background: {
@@ -56,4 +56,32 @@ export const defaultSectionBannersData = {
         related_product: null,
     }
 
+}
+
+export const defaultSectionProductsData = {
+    background: {
+        image: null,
+        overlay_opacity: null,
+        fixed_background: null,
+        hex_color: "#FFFFFF",
+    },
+    products: [] as Product[],
+};
+
+
+export const defaultSectionAboutOfData = {
+    background: {
+        image: null,
+        overlay_opacity: null,
+        fixed_background: null,
+        hex_color: "#FFFFFF",
+    },
+    content: {
+        type: "",
+        subtitle: "OUR STORY",
+        title: "Quality, not quantity",
+        paragraph: "We have made quality our habit...",
+        image: "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=606,fit=scale-down,q=100/mPoyZVg96EI62K0E/joel-filipe-unsplash-YlZPLyOrnxigROG5.jpg",
+        related_product: null,    
+    }
 }
