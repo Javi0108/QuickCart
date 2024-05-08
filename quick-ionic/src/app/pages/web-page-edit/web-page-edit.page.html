@@ -14,6 +14,18 @@
     <hr style="margin: 10px; border-top: 1px solid #303030;">
 
     <img src="/assets/sections/section-hero.png" alt="banners" (click)="addSection('hero')">
+
+    <hr style="margin: 10px; border-top: 1px solid #303030;">
+
+    <img src="/assets/sections/section-products.png" alt="banners" (click)="addSection('products')">
+
+    <hr style="margin: 10px; border-top: 1px solid #303030;">
+
+    <img src="/assets/sections/section-about-of-1.png" alt="banners" (click)="addSection('about-of-1')">
+    
+    <hr style="margin: 10px; border-top: 1px solid #303030;">
+
+    <img src="/assets/sections/section-about-of-2.png" alt="banners" (click)="addSection('about-of-2')">
   </ion-content>
 </ion-menu>
 
@@ -86,7 +98,7 @@
   <div class="pt-2" *ngIf="selectedMode === 'edit'">
     <div *ngIf="sections">
       <app-section-container [sections]="sections" [shopId]="shopId" (moveSectionUpEvent)="moveSectionUp($event)"
-        (moveSectionDownEvent)="moveSectionDown($event)">></app-section-container>
+        (moveSectionDownEvent)="moveSectionDown($event)"></app-section-container>
     </div>
   </div>
 
@@ -108,5 +120,6 @@
     <button (click)="addSection('hero')" class="quickart-button quickart-button-violet">Add Hero</button>
     <button (click)="addSection('banners')" class="quickart-button quickart-button-white">Add Banners</button>
     <button (click)="addSection('products')" class="quickart-button quickart-button-violet">Add Products</button>
+    <button (click)="addSection('about-of-1')" class="quickart-button quickart-button-white">About of</button>
   </ion-buttons>
 </ion-toolbar>

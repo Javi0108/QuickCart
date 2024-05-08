@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { catchError, finalize, forkJoin, of } from 'rxjs';
 import { Product } from 'src/app/interfaces/product.interface';
-import { defaultSectionBannersData, defaultSectionHeroData, defaultSectionProductsData } from 'src/app/interfaces/sections-default';
+import { defaultSectionAboutOfData, defaultSectionBannersData, defaultSectionHeroData, defaultSectionProductsData } from 'src/app/interfaces/sections-default';
 import { NotificationToastService } from 'src/app/services/notification-toast.service';
 import { ProductService } from 'src/app/services/product.service';
 import { SectionEventService } from 'src/app/services/section-event.service';
@@ -108,6 +108,14 @@ export class WebPageEditPage implements OnInit {
       newSection = { provitionalId: id, id: undefined, type: sectionType, editMode: true, data: { ...defaultSectionBannersData }, products: this.products };
     } else if (sectionType === 'products') {
       newSection = { provitionalId: id, id: undefined, type: sectionType, editMode: true, data: { ...defaultSectionProductsData }, products: this.products };
+    } else if (sectionType === 'about-of-1') {
+      const copiedData = { ...defaultSectionAboutOfData };
+      const copiedContent = { ...copiedData.content, type: 1 };
+      newSection = { provitionalId: id, id: undefined, type: "about-of", editMode: true, data: { ...copiedData, content: copiedContent }, products: this.products };
+    } else if (sectionType === 'about-of-2') {
+      const copiedData = { ...defaultSectionAboutOfData };
+      const copiedContent = { ...copiedData.content, type: 2 };
+      newSection = { provitionalId: id, id: undefined, type: "about-of", editMode: true, data: { ...copiedData, content: copiedContent }, products: this.products };
     } else {
       newSection = { provitionalId: id, id: undefined, type: "", editMode: true, data: {}, products: this.products };
     }
@@ -177,48 +185,6 @@ export class WebPageEditPage implements OnInit {
   updateSection(section: Section, order: number) {
     return this.shopService.updateShopSection(section.id!, order, section);
   }
-
-  // saveAllSections() {
-
-  //   this.saving = true
-
-  //   if (this.sections.length === 0) {
-  //     return;
-  //   }
-
-  //   let order = 0;
-
-  //   this.sections.forEach((section: Section) => {
-  //     if (section.id) {
-  //       this.updateSection(section, order);
-  //     } else {
-  //       this.saveSection(section, order);
-  //     }
-  //     order++
-  //   });
-
-  //   this.sectionsCopy = JSON.parse(JSON.stringify(this.sections));
-  // }
-
-  // saveSection(section: Section, order: number) {
-  //   this.shopService.saveShopSection(this.shopId, order, section).subscribe({
-  //     next: (shopData) => {
-  //       this.getShop()
-  //     },
-  //     error: (error) => {
-  //       console.error("Error al guarda la seccion", error)
-  //     }
-  //   })
-  // }
-
-  // updateSection(section: Section, order: number) {
-  //   this.shopService.updateShopSection(section.id!, order, section).subscribe({
-  //     next: (shopData) => { },
-  //     error: (error) => {
-  //       console.error("no se ha guardado correctamente", error)
-  //     }
-  //   })
-  // }
 
   deleteSection(id: number) {
     if (id > 0) {

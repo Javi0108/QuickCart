@@ -67,3 +67,21 @@ export const defaultSectionProductsData = {
     },
     products: [] as Product[],
 };
+
+
+export const defaultSectionAboutOfData = {
+    background: {
+        image: null,
+        overlay_opacity: null,
+        fixed_background: null,
+        hex_color: "#FFFFFF",
+    },
+    content: {
+        type: "",
+        subtitle: "OUR STORY",
+        title: "Quality, not quantity",
+        paragraph: "We have made quality our habit...",
+        image: "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=606,fit=scale-down,q=100/mPoyZVg96EI62K0E/joel-filipe-unsplash-YlZPLyOrnxigROG5.jpg",
+        related_product: null,    
+    }
+}

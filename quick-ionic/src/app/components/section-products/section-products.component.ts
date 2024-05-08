@@ -48,7 +48,6 @@ export class SectionProductsComponent implements OnInit {
     } else {
       this.sectionData = this.section.data;
     }
-
   }
 
   async addProduct() {
@@ -137,6 +136,5 @@ export class SectionProductsComponent implements OnInit {
   toggleOptions() {
     this.showOptions = !this.showOptions;
   }
-
 
 }

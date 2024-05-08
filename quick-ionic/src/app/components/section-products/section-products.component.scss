@@ -74,13 +74,13 @@
 
   .product-container {
     cursor: pointer;
-    position: relative; // Hacemos que la posición sea relativa para que podamos posicionar el icono absolutamente dentro de este contenedor
+    position: relative;
     border: 1px solid rgb(202, 202, 202);
     border-radius: 5px;
     padding: 0.5rem;
     display: flex;
     align-items: center;
-    transition: box-shadow 0.5s ease; // Agregamos una transición suave al cambio de sombra
+    transition: box-shadow 0.5s ease;
 
     img {
       height: 60px;
@@ -101,18 +101,16 @@
       transform: translateY(-50%);
       font-size: 35px;
       color: rgb(212, 212, 212);
-      transition: transform 0.7s ease, color 0.3s ease, box-shadow 0.3s ease; // Ajustamos la transición para aplicarla a todas las propiedades modificadas
-
-     
+      transition: transform 0.7s ease, color 0.3s ease, box-shadow 0.3s ease;
     }
 
     &:hover {
-      background-color: rgba(255, 0, 0, 0.1); // Cambiamos el color de fondo en el estado de hover
-      box-shadow: 0px 0px 10px 0px rgba(255, 0, 0, 0.815); // Agregamos una sombra roja en el estado de hover
+      background-color: rgba(255, 0, 0, 0.1);
+      box-shadow: 0px 0px 5px 0px rgba(255, 0, 0, 0.815);
 
       .delete-icon {
-        transform: translateY(-50%) scale(1.2); // Escalamos el icono y mantenemos la posición vertical centrada
-        color: rgba(255, 0, 0, 0.5); // Cambiamos el color a rojo con transparencia
+        transform: translateY(-50%) scale(1.2);
+        color: rgba(255, 0, 0, 0.5);
       }
     }
   }

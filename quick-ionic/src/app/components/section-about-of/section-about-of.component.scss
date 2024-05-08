@@ -1,0 +1,77 @@
+.section-about {
+    position: relative;
+
+    .block-layout-container {
+        margin: 15px 0px;
+        .content-left{
+            margin: 50px 0 0 0;
+            .text-box{
+                margin: 20px 0 20px 0;
+                width: 75%;
+                h2{
+                    font-size: 4em;
+                    font-weight: bold;
+                }
+                
+                h3{
+                    color: var(--text-gray);
+                    font-size: 1em;
+                    font-weight: 600;
+                }
+
+                p{
+                    color: var(--text-gray);
+                    font-size: 1.2em;
+                }
+            }
+
+        }
+        .image-right{
+            .image{
+                img{
+                    border-radius: 5px;
+                    height: 500px;
+                    width: 600px;
+                    object-fit: cover;
+                }
+            }
+        }
+    }
+
+    .form-edit {
+        margin-top: 55px;
+
+        ion-segment {
+            margin-top: -5px;
+        }
+
+        .form-wrapper {
+            margin-top: 16px;
+
+            ::ng-deep ion-input {
+                margin-bottom: 15px;
+
+                .input-bottom {
+                    padding-right: 6px;
+                    margin-top: -25px !important;
+                }
+
+            }
+
+            ::ng-deep ion-textarea {
+                margin-bottom: 15px;
+                height: auto;
+
+                .native-wrapper {
+                    padding-bottom: 20px;
+                }
+
+                .textarea-bottom {
+
+                    padding-right: 6px;
+                    margin-top: -25px !important;
+                }
+            }
+        }
+    }
+}

@@ -1,17 +1,17 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { AboutOfSectionData } from 'src/app/interfaces/section.interface';
 import { Item, TypeaheadComponent } from '../typeahead/typeahead.component';
-import { BannersSectionData, Section } from 'src/app/interfaces/section.interface';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { SectionEventService } from 'src/app/services/section-event.service';
 import { EditSectionModalComponent } from '../edit-section-modal/edit-section-modal.component';
 
 @Component({
-  selector: 'app-section-banners',
-  templateUrl: './section-banners.component.html',
-  styleUrls: ['./section-banners.component.scss'],
+  selector: 'app-section-about-of',
+  templateUrl: './section-about-of.component.html',
+  styleUrls: ['./section-about-of.component.scss'],
 })
-export class SectionBannersComponent implements OnInit {
+export class SectionAboutOfComponent implements OnInit {
 
   @Input() shopId!: number;
   @Input() section: any;
@@ -22,18 +22,14 @@ export class SectionBannersComponent implements OnInit {
 
   sectionId?: number;
   sectionType?: string;
-  sectionData?: BannersSectionData;
+  sectionData?: AboutOfSectionData;
   products: Item[] = [];
 
   sectionFormBackground!: FormGroup;
-  sectionFormBannerOne!: FormGroup;
-  sectionFormBannerTwo!: FormGroup;
+  sectionFormContent!: FormGroup;
 
-  selectedSegment: 'banner_1' | 'banner_2' = 'banner_1';
-  selectedProductBannerOneText = 'Select a Related Product';
-  selectedProductBannerTwoText = 'Select a Related Product';
-  selectedProductBannerOne: string | null = null;
-  selectedProductBannerTwo: string | null = null;
+  selectedProductText = 'Select a Related Product';
+  selectedProduct: string | null = null;
 
   constructor(
     private sectionEventService: SectionEventService,
@@ -59,7 +55,6 @@ export class SectionBannersComponent implements OnInit {
     }
   }
 
-
   initializeEditMode() {
 
     this.sectionFormBackground = new FormGroup({
@@ -69,30 +64,19 @@ export class SectionBannersComponent implements OnInit {
       hex_color: new FormControl(this.sectionData?.background.hex_color),
     });
 
-    this.sectionFormBannerOne = new FormGroup({
-      title: new FormControl(this.sectionData?.banner_1.title),
-      content: new FormControl(this.sectionData?.banner_1.content),
-      button: new FormControl(this.sectionData?.banner_1.button),
-      image: new FormControl(this.sectionData?.banner_1.image)
+    this.sectionFormContent = new FormGroup({
+      subtitle: new FormControl(this.sectionData?.content.subtitle),
+      title: new FormControl(this.sectionData?.content.title),
+      paragraph: new FormControl(this.sectionData?.content.paragraph),
+      image: new FormControl(this.sectionData?.content.image)
     });
 
-    this.sectionFormBannerTwo = new FormGroup({
-      title: new FormControl(this.sectionData?.banner_2.title),
-      content: new FormControl(this.sectionData?.banner_2.content),
-      button: new FormControl(this.sectionData?.banner_2.button),
-      image: new FormControl(this.sectionData?.banner_2.image)
+    this.sectionFormBackground.valueChanges.subscribe((values) => {
+      this.sectionData!.background = { ...this.sectionData!.background, ...values };
     });
 
-    this.sectionFormBackground.valueChanges.subscribe((values) =>{
-      this.sectionData!.background = { ...this.sectionData!.background, ...values};
-    });
-
-    this.sectionFormBannerOne.valueChanges.subscribe((values) => {
-      this.sectionData!.banner_1 = { ...this.sectionData!.banner_1, ...values };
-    });
-
-    this.sectionFormBannerTwo.valueChanges.subscribe((values) => {
-      this.sectionData!.banner_2 = { ...this.sectionData!.banner_2, ...values };
+    this.sectionFormContent.valueChanges.subscribe((values) => {
+      this.sectionData!.content = { ...this.sectionData!.content, ...values };
     });
   }
 
@@ -107,30 +91,11 @@ export class SectionBannersComponent implements OnInit {
     const reader = new FileReader();
     reader.onload = () => {
       const imageUrl: string = reader.result as string;
-      if (this.sectionData && this.sectionData[this.selectedSegment]) {
-        this.sectionData[this.selectedSegment].image = imageUrl;
+      if (this.sectionData) {
+        this.sectionData.content.image = imageUrl;
       }
     };
     reader.readAsDataURL(file);
-  }
-
-  productSelectionChanged(selectedValue: string | null) {
-
-    this.sectionData![this.selectedSegment].related_product = selectedValue;
-
-    if (this.selectedSegment == 'banner_1') {
-      this.selectedProductBannerOne = selectedValue;
-    } else if (this.selectedSegment == 'banner_2') {
-      this.selectedProductBannerTwo = selectedValue;
-    }
-
-    const product = this.products.find((product) => product.value === selectedValue);
-
-    if (this.selectedSegment == 'banner_1') {
-      this.selectedProductBannerOneText = product ? product.text : 'No selection';
-    } else if (this.selectedSegment == 'banner_2') {
-      this.selectedProductBannerTwoText = product ? product.text : 'No selection';
-    }
   }
 
   async openModal() {
@@ -141,7 +106,7 @@ export class SectionBannersComponent implements OnInit {
       componentProps: {
         'shopId': this.shopId,
         'items': this.products,
-        'selectedItem': this.selectedProductBannerOne,
+        'selectedItem': this.selectedProduct,
         'title': 'Select a Related Product',
         'selectionChange': this.productSelectionChanged.bind(this),
         'selectionCancel': () => modal.dismiss()
@@ -156,6 +121,15 @@ export class SectionBannersComponent implements OnInit {
     });
 
     await modal.present();
+  }
+
+  productSelectionChanged(selectedValue: string | null) {
+
+    this.sectionData!.content.related_product = selectedValue;
+    const product = this.products.find((product) => product.value === selectedValue);
+    this.selectedProduct = selectedValue;
+    this.selectedProductText = product ? product.text : 'No selection';
+
   }
 
   async optionsSection() {
@@ -178,7 +152,8 @@ export class SectionBannersComponent implements OnInit {
 
     return await modal.present();
   }
-  
+
+
   moveSectionUp() {
     this.sectionEventService.moveSectionUp.emit(this.order);
   }
@@ -189,11 +164,6 @@ export class SectionBannersComponent implements OnInit {
 
   deleteSection() {
     this.sectionEventService.deleteSection.emit(this.sectionId);
-  }
-
-  segmentChanged(event: CustomEvent) {
-    this.selectedSegment = event.detail.value;
-    this.toggleOptions();
   }
 
   toggleOptions() {
