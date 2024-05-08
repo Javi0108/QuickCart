@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/interfaces/product.interface';
 import { ProductService } from 'src/app/services/product.service';
 import { IonInput } from '@ionic/angular';
+import { OrderService } from 'src/app/services/order.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -14,8 +15,9 @@ export class ProductDetailPage implements OnInit, AfterViewInit {
   productId!: number;
   productData!: Product;
   @ViewChild('quantity') quantity!: IonInput;
+  quantity_value: number = 1;
 
-  constructor(private route: ActivatedRoute, private productService: ProductService) {
+  constructor(private route: ActivatedRoute, private productService: ProductService, private orderService: OrderService) {
 
   }
 
@@ -52,6 +54,15 @@ export class ProductDetailPage implements OnInit, AfterViewInit {
   }
 
   addToCart() {
+    this.quantity_value = Number(this.quantity.value);
+    this.orderService.addProductToOrder(this.productId, this.quantity_value).subscribe({
+      next(response) {
+        console.log("Producto añadido correctamente al carrito")
+      },
+      error(error) {
+        console.error('Error al obtener los datos del pedido/producto:', error);
+      },
+    });
   }
 
 

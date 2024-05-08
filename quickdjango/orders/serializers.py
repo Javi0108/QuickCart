@@ -11,7 +11,7 @@ class OrderProductSerializer(serializers.ModelSerializer):
 
 
 class OrderSerializer(serializers.ModelSerializer):
-    order_products = OrderProductSerializer(many=True, source='order_products.all')
+    order_products = OrderProductSerializer(many=True)
 
     class Meta:
         model = Order

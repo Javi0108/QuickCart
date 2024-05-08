@@ -24,7 +24,7 @@ class OrderView(APIView):
             return Response({'error': 'Product ID is required'}, status=status.HTTP_400_BAD_REQUEST)
 
         profile = request.user.profile
-        product = get_object_or_404(Product, id=product_id)
+        product = get_object_or_404(Product, id_product=product_id)
 
         order, created = Order.objects.get_or_create(profile=profile, status='Pending')
         order.add_product(product, quantity=quantity)
@@ -35,11 +35,11 @@ class OrderView(APIView):
     def delete(self, request, pk):
         order = get_object_or_404(Order, id=pk, profile=request.user.profile, status='Pending')
         product_id = request.data.get('product_id')
-        
+
         if not product_id:
             return Response({'error': 'Product ID is required'}, status=status.HTTP_400_BAD_REQUEST)
 
-        product = get_object_or_404(Product, id=product_id)
+        product = get_object_or_404(Product, id_product=product_id)
         order.remove_product(product)
-        
+
         return Response({'message': 'Product removed from cart'}, status=status.HTTP_204_NO_CONTENT)

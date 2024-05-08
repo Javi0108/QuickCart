@@ -20,7 +20,7 @@ export class OrderService {
 
   addProductToOrder(productId: number, quantity: number = 1): Observable<any> {
     const data = { product_id: productId, quantity };
-    return this.http.post<any>(`${this.baseURL}`, data, { headers: this.getHeaders() });
+    return this.http.post<any>(`${this.baseURL}add/`, data, { headers: this.getHeaders() });
   }
   
   removeProductFromOrder(orderId: number, productId: number): Observable<any> {
