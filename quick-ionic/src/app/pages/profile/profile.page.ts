@@ -131,9 +131,11 @@ export class ProfilePage implements OnInit {
   onFileChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
-      this.avatarFile = input.files ? input.files[0] : null; // Store the file reference
+      this.avatarFile = input.files[0]; // Almacena la referencia del archivo
+      this.profile.avatar = URL.createObjectURL(this.avatarFile); // Convierte el archivo en URL y lo asigna
+      this.saveChanges();
     }
-  }
+}
 
   saveChanges() {
     const formData = new FormData();

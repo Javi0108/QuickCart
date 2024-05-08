@@ -180,7 +180,7 @@
                   <div class="rounded-circle hide-show-div" id="front">
                     <img
                       *ngIf="profile.avatar != null"
-                      src="http://127.0.0.1:8000/{{ profile.avatar }}"
+                      [src]="profile.avatar.includes('http') ? profile.avatar : 'http://127.0.0.1:8000/' + profile.avatar"
                       class="rounded-circle"
                       width="150"
                       height="150"
@@ -370,7 +370,7 @@
             <div class="row mt-4">
               <div class="col-sm-12" id="buttonGroup">
                 <button
-                  class="btn btn-primary"
+                  class="quickart-button quickart-button-violet"
                   *ngIf="this.enableEdit == true"
                   type="submit"
                   [disabled]="!editProfileForm.valid"
@@ -378,20 +378,20 @@
                   Save
                 </button>
                 <button
-                  class="btn btn-light"
+                  class="quickart-button quickart-button-white"
                   *ngIf="this.enableEdit == true"
                   (click)="cancelChanges()"
                 >
                   Cancel
                 </button>
                 <button
-                  class="btn btn-primary"
+                  class="quickart-button quickart-button-violet"
                   *ngIf="this.enableEdit == false"
                   (click)="editProfile()"
                 >
                   Edit
                 </button>
-                <button *ngIf="profile" class="btn btn-primary" [routerLink]="['/change-password']">Change Password</button>
+                <button *ngIf="profile && !enableEdit" class="quickart-button quickart-button-white" [routerLink]="['/change-password']">Change Password</button>
               </div>
             </div>
           </form>
