@@ -59,7 +59,7 @@
           <hr class="vertical-separator" />
           <button [routerLink]="['/web-page-catalog']" [class.active-route]="activeRoute === '/web-page-catalog'">Shops</button>
           <hr class="vertical-separator" />
-          <button [class.active-route]="activeRoute === '/products'">Products</button>
+          <button [class.active-route]="activeRoute === '/catalog'" [routerLink]="['/catalog']">Products</button>
         </div>
 
         <div *ngIf="isLoggedIn()" class="d-none d-sm-flex justify-content-end align-items-center col-sm-4">
