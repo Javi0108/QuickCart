@@ -97,7 +97,7 @@ Durante el desarrollo del proyecto, surgieron varios problemas, entre ellos:
 El proyecto logró cubrir la mayoría de las funcionalidades proyectadasSin embargo, algunas funciones secundarias tuvieron que ser postergados para futuras actualizaciones debido a restricciones de tiempo. Las funcionalidades implementadas incluyen:
 
 + Gestión de cuentas: Registro, inicio de sesión y edición de perfiles.
-+ Gestión de tiendas: Empresas pueden añadir productos, categorías.
++ Gestión de tiendas: Empresas pueden gestionar los productos, las webs de las tiendas para la visualizacion de productos.
 + Gestión del carrito: Clientes pueden agregar productos, ajustar cantidades y eliminar elementos.
 + Barra de búsqueda: Búsqueda por empresas.
 + Sistema de pago: Los clientes pueden pagar los productos mediante Stripe, un intermediario entre el cliente y la empresa, la cual gestiona los pago y las cuentas.
@@ -124,6 +124,16 @@ En el contrato del proyecto, se especificaron las siguientes cláusulas clave:
 ### 11.  PRODUCTO FINAL. <a name="id11"></a>
 
 Describir el producto final obtenido, qué funcionalidades se han implementado, que hay que tener en cuenta para usarla, etc. Describirlo como si fuera un pequeño MANUAL DE USO de la aplicación, ya que se usará este punto para corregir el proyecto.
+
+QuickCart es una plataforma de comercio electrónico que permite a las empresas crear y gestionar sus propias tiendas en línea. El sistema ofrece una gama de funcionalidades clave para facilitar la venta de productos:
+
++ Gestión de cuentas: Registro, inicio de sesión y edición de perfiles.
++ Gestión de tiendas: Empresas pueden gestionar los productos, las webs de las tiendas para la visualizacion de productos.
++ Gestión del carrito: Clientes pueden agregar productos, ajustar cantidades y eliminar elementos.
++ Barra de búsqueda: Búsqueda por empresas.
++ Sistema de pago: Los clientes pueden pagar los productos mediante Stripe, un intermediario entre el cliente y la empresa, la cual gestiona los pago y las cuentas.
+
+La implementación con Django y Angular garantiza un sistema estable y escalable. El despliegue en Azure facilita el mantenimiento y la escalabilidad.
     
 ### 12.  EXPERIENCIAS APRENDIDAS A TENER EN CUENTA EN PRÓXIMOS PROYECTOS. <a name="id12"></a>
 ### 13.  CONCLUSIONES, COMENTARIOS Y VALORACIÓN FINAL. <a name="id13"></a>
