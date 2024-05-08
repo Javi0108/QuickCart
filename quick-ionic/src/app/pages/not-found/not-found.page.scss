@@ -1,0 +1,77 @@
+.background {
+    --background: url("https://wallpapercave.com/wp/6SLzBEY.jpg") no-repeat left top;
+    --background-size: cover;
+    --background-position: center center;
+    --background-attachment: fixed;
+    --background-color: transparent;
+    background: var(--background);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    position: relative;
+}
+
+.text {
+    text-align: center;
+    margin-top: 50px;
+    /* Ajustamos el margen superior para centrar los textos verticalmente */
+}
+
+.text h1 {
+    color: #011718;
+    font-size: 15em;
+    text-shadow: -5px 5px 0px rgba(0, 0, 0, 0.7), -10px 10px 0px rgba(0, 0, 0, 0.4),
+        -15px 15px 0px rgba(0, 0, 0, 0.2);
+    font-family: monospace;
+    font-weight: bold;
+    margin: 0;
+    /* Eliminamos el margen superior para que el texto esté alineado con el borde superior */
+}
+
+.text h2 {
+    color: black;
+    font-size: 5em;
+    text-shadow: -5px 5px 0px rgba(0, 0, 0, 0.7);
+    font-family: monospace;
+    font-weight: bold;
+    margin: 0;
+    /* Eliminamos el margen superior para que el texto esté alineado con el borde superior */
+}
+
+.text h3 {
+    color: white;
+    font-size: 2em;
+    text-shadow: -5px 5px 0px rgba(0, 0, 0, 0.7);
+    font-family: monospace;
+    font-weight: bold;
+    margin: 0;
+    /* Eliminamos el margen superior para que el texto esté alineado con el borde superior */
+}
+
+.torch {
+    margin: -200px 0 0 -150px;
+    width: 200px;
+    height: 200px;
+    box-shadow: 0 0 0 9999em #000000f1;
+    opacity: 1;
+    border-radius: 50%;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.3);
+    position: absolute;
+
+    //z-index: -1;
+    /* Movemos la linterna al fondo para que esté detrás del texto */
+
+    &:after {
+        content: '';
+        display: block;
+        border-radius: 50%;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        box-shadow: inset 0 0 40px 2px #0000009d, 0 0 20px 4px rgba(13, 13, 10, 0.2);
+    }
+}

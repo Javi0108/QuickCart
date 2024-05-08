@@ -3,6 +3,7 @@ import { SectionHeroComponent } from '../section-hero/section-hero.component';
 import { SectionProductsComponent } from '../section-products/section-products.component';
 import { Section } from 'src/app/interfaces/section.interface';
 import { SectionBannersComponent } from '../section-banners/section-banners.component';
+import { SectionAboutOfComponent } from '../section-about-of/section-about-of.component';
 
 @Component({
   selector: 'app-section-container',
@@ -19,6 +20,7 @@ export class SectionContainerComponent implements OnInit {
     'hero': SectionHeroComponent,
     'banners': SectionBannersComponent,
     'products': SectionProductsComponent,
+    'about-of': SectionAboutOfComponent,
   };
 
   constructor() { }

@@ -24,7 +24,7 @@
   <div *ngIf="shopData">
     <div *ngIf="showSections">
       <div *ngIf="sections">
-        <app-section-container [sections]="sections"></app-section-container>
+        <app-section-container [sections]="sections" [shopId]="shopId!"></app-section-container>
       </div>
     </div>
 

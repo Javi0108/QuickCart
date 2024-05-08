@@ -1,0 +1,160 @@
+<section *ngIf="editMode" class="section-edit section-about" (click)="toggleOptions()">
+  <div class="row" *ngIf="sectionData!">
+    <div class="col-lg-9 p-2" [ngStyle]="{
+      'background-image': sectionData.background.image ? 'url(' + sectionData.background.image + ')' : 'none',
+      'background-color': sectionData.background.image || !sectionData.background.hex_color ? '#ffffff' : sectionData.background.hex_color,
+      'opacity': sectionData.background.overlay_opacity,
+      'background-attachment': sectionData.background.fixed_background ? 'fixed' : 'scroll',
+      'background-size': sectionData.background.image ? 'cover' : 'auto'
+    }">
+      <div *ngIf="sectionData.content.type == '1'" class="row pb-3 pt-3 block-layout-container">
+        <div class="content-left col-12 col-md-6">
+          <div class="text-box">
+            <h3>{{sectionData.content.subtitle}}</h3>
+          </div>
+          <div class="text-box">
+            <h2>{{sectionData.content.title}}</h2>
+          </div>
+          <div class="text-box">
+            <p>{{sectionData.content.paragraph}}</p>
+          </div>
+        </div>
+
+        <div class="image-right col-6">
+          <div [routerLink]="sectionData.content.related_product ? ['/product', sectionData.content.related_product] : null" class="image">
+            <img [src]="sectionData.content.image">
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="sectionData.content.type == '2'" class="row pb-3 pt-3 block-layout-container">
+        <div class="image-right col-6">
+          <div [routerLink]="sectionData.content.related_product ? ['/product', sectionData.content.related_product] : null" class="image" style="margin: 0px 20px 0px 0px;">
+            <img [src]="sectionData.content.image">
+          </div>
+        </div>
+        
+        <div class="content-left col-12 col-md-6">
+          <div class="text-box">
+            <h3>{{sectionData.content.subtitle}}</h3>
+          </div>
+          <div class="text-box">
+            <h2>{{sectionData.content.title}}</h2>
+          </div>
+          <div class="text-box">
+            <p>{{sectionData.content.paragraph}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 form-edit">
+
+      <button class="quickart-button quickart-button-white d-flex justify-content-center" (click)="changeType()" style="width: 100%;">
+        <ion-icon name="sync-outline"></ion-icon>
+        <span class="text-button">Change the distribution</span>
+      </button>
+
+      <div class="form-wrapper" [formGroup]="sectionFormContent">
+
+        <ion-input formControlName="subtitle" type="text" placeholder="Subtitle" label="Subtitle"
+          label-placement="floating" fill="outline" [maxlength]="15" [counter]="true"></ion-input>
+
+        <ion-input formControlName="title" type="text" placeholder="Title" label="Title" label-placement="floating"
+          fill="outline" [maxlength]="25" [counter]="true"></ion-input>
+
+        <ion-input formControlName="paragraph" type="text" placeholder="Content" label="Content"
+          label-placement="floating" fill="outline" [maxlength]="200" [counter]="true"></ion-input>
+
+        <ion-input id="image-input" label="Image" label-placement="floating" placeholder="Image" fill="outline"
+          type="file" formControlName="image" (change)="onFileSelected($event)" class="file-input w-100"
+          style="height: 75px;"></ion-input>
+
+        <ion-list [inset]="true"
+          style="outline: 1px solid #b3b3b3; border-radius: 2px; margin: 0px; margin-bottom: 15px; height: 73px;">
+          <ion-item [button]="true" [detail]="false" (click)="openModal()">
+            <div id="selected-products">{{ selectedProductText }}</div>
+          </ion-item>
+        </ion-list>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-options" *ngIf="showOptions">
+
+    <button class="option-button" (click)="optionsSection()">
+      <span class="text-button">Edit section</span>
+    </button>
+
+    <hr class="vertical-separator">
+
+    <button class="option-button" (click)="deleteSection()">
+      <ion-icon name="trash-outline"></ion-icon>
+    </button>
+
+    <hr class="vertical-separator">
+
+    <button [disabled]="order === 0" class="option-button" (click)="moveSectionUp()" fill="outline">
+      <ion-icon slot="icon-only" name="arrow-up" [ngClass]="{'disabled-icon': order === 0}"></ion-icon>
+    </button>
+
+    <button class="option-button" (click)="moveSectionDown()" fill="outline">
+      <ion-icon slot="icon-only" name="arrow-down"></ion-icon>
+    </button>
+
+  </div>
+
+</section>
+
+<!--Modo vista-->
+
+<section *ngIf="!editMode && sectionData" class="section-about pt-5 pb-5" [ngStyle]="{
+  'background-image': sectionData.background.image ? 'url(' + sectionData.background.image + ')' : 'none',
+  'background-color': sectionData.background.image || !sectionData.background.hex_color ? '#ffffff' : sectionData.background.hex_color,
+  'opacity': sectionData.background.overlay_opacity,
+  'background-attachment': sectionData.background.fixed_background ? 'fixed' : 'scroll',
+  'background-size': sectionData.background.image ? 'cover' : 'auto'
+}">
+  <div class="container-xxl">
+    <div *ngIf="sectionData.content.type == '1'" class="row pb-3 pt-3 block-layout-container">
+      <div class="content-left col-12 col-md-6">
+        <div class="text-box">
+          <h3>{{sectionData.content.subtitle}}</h3>
+        </div>
+        <div class="text-box">
+          <h2>{{sectionData.content.title}}</h2>
+        </div>
+        <div class="text-box">
+          <p>{{sectionData.content.paragraph}}</p>
+        </div>
+      </div>
+
+      <div class="image-right col-6">
+        <div [routerLink]="sectionData.content.related_product ? ['/product', sectionData.content.related_product] : null" class="image">
+          <img [src]="sectionData.content.image">
+        </div>
+      </div>
+    </div>
+
+
+    <div *ngIf="sectionData.content.type == '2'" class="row pb-3 pt-3 block-layout-container">
+      <div class="image-right col-6">
+        <div [routerLink]="sectionData.content.related_product ? ['/product', sectionData.content.related_product] : null" class="image" style="margin: 0px 20px 0px 0px;">
+          <img [src]="sectionData.content.image">
+        </div>
+      </div>
+      
+      <div class="content-left col-12 col-md-6">
+        <div class="text-box">
+          <h3>{{sectionData.content.subtitle}}</h3>
+        </div>
+        <div class="text-box">
+          <h2>{{sectionData.content.title}}</h2>
+        </div>
+        <div class="text-box">
+          <p>{{sectionData.content.paragraph}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

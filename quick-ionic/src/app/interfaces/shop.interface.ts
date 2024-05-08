@@ -18,12 +18,26 @@ export interface ProductData {
 }
 
 export interface Shop{
+    id_shop: number;
     name: string;
-    logoUrl: string;
+    title: string;
+    description: string;
+    address: string;
+    logo: string;
 }
 
 
 export interface ShopCreate {
+    name: string;
+    title: string;
+    description: string;
+    address: string;
+    logo: string;
+}
+
+
+export interface ShopEdit {
+    id_shop: number;
     name: string;
     title: string;
     description: string;

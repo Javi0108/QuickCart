@@ -54,6 +54,15 @@ export interface Background {
   hex_color: string;
 }
 
+export interface Content {
+  type: string;
+  subtitle: string;
+  title: string;
+  paragraph: string;
+  image: string;
+  related_product?: string | null;
+}
+
 // Interfaz para el objeto "hero" completo
 export interface HeroSectionData {
   background: Background;
@@ -66,6 +75,16 @@ export interface BannersSectionData {
   background: Background;
   banner_1: Banner4;
   banner_2: Banner4;
+}
+
+export interface ProductsSectionData {
+  background: Background;
+  products: Product[];
+}
+
+export interface AboutOfSectionData {
+  background: Background;
+  content: Content;
 }
 
 

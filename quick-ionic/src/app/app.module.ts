@@ -12,6 +12,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CookieService } from "ngx-cookie-service";
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { ReactiveFormsModule } from '@angular/forms';
+// import { AngularFireModule } from 'angularfire2';
+// import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +25,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MenuPageModule,
     HttpClientModule,
     ReactiveFormsModule,
+    // AngularFireModule,
+    // AngularFireModule.initializeApp(environment.firebaseConfig),
   ],
   providers: [
     CookieService,
