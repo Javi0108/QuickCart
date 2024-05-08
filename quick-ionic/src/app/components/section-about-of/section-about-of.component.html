@@ -50,12 +50,12 @@
 
     <div class="col-lg-3 form-edit">
 
-      <button class="quickart-button quickart-button-white d-flex justify-content-center" (click)="changeType()" style="width: 100%;">
-        <ion-icon name="sync-outline"></ion-icon>
-        <span class="text-button">Change the distribution</span>
-      </button>
-
       <div class="form-wrapper" [formGroup]="sectionFormContent">
+
+        <button class="quickart-button quickart-button-white d-flex justify-content-center mb-3" (click)="changeType()" style="width: 100%;">
+          <ion-icon name="sync-outline"></ion-icon>
+          <span class="text-button">Change the distribution</span>
+        </button>
 
         <ion-input formControlName="subtitle" type="text" placeholder="Subtitle" label="Subtitle"
           label-placement="floating" fill="outline" [maxlength]="15" [counter]="true"></ion-input>

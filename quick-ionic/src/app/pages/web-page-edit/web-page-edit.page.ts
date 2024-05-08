@@ -43,7 +43,7 @@ export class WebPageEditPage implements OnInit {
   ) { }
 
   ngOnInit() {
-
+ 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationStart) {
         if (this.router.url.includes('/web-page-edit')) {
