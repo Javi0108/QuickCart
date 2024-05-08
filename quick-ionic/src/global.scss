@@ -46,7 +46,9 @@
     --modal-box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
 }
 
-
+* {
+    font-family: "Onest", sans-serif;
+}
 
 .alert-wrapper.sc-ion-alert-md {
     color: var(--white-color);
