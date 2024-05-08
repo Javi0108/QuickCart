@@ -17,16 +17,7 @@ ion-col[size="3"] {
     z-index: 1000;
 }
 
-img {
-    padding: 10px;
-    transition: transform 0.3s;
-    /* Transición suave para la transformación */
 
-    &:hover {
-        transform: scale(1.1);
-        /* Escala aumentada */
-    }
-}
 
 .loading-content {
     display: flex;
@@ -44,4 +35,37 @@ img {
     position: absolute;
     padding-top: 0px;
     margin-left: -150px;
+}
+
+.menu-content {
+    text-align: center;
+
+    .img-menu {
+        display: block;
+        margin: -5px auto 25px auto;
+        width: 90%;
+        transition: transform 0.3s;
+
+        &:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 5px #673de6c0;
+        }
+    }
+
+    .p-menu {
+        display: inline-block;
+        /* Ajusta el ancho al tamaño del texto */
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        background-color: var(--background-color);
+        position: relative;
+        z-index: 1;
+        padding: 0px 5px;
+    }
+
+    .hr-separator {
+        margin: 10px 10px -15px 10px;
+        border-top: 1px solid #303030;
+    }
 }

@@ -50,6 +50,11 @@
 
     <div class="col-lg-3 form-edit">
 
+      <button class="quickart-button quickart-button-white d-flex justify-content-center" (click)="changeType()" style="width: 100%;">
+        <ion-icon name="sync-outline"></ion-icon>
+        <span class="text-button">Change the distribution</span>
+      </button>
+
       <div class="form-wrapper" [formGroup]="sectionFormContent">
 
         <ion-input formControlName="subtitle" type="text" placeholder="Subtitle" label="Subtitle"

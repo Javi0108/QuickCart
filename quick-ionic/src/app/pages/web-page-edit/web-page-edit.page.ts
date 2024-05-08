@@ -1,6 +1,7 @@
 import { Section } from './../../interfaces/section.interface';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
+import { PopoverController } from '@ionic/angular';
 import { catchError, finalize, forkJoin, of } from 'rxjs';
 import { Product } from 'src/app/interfaces/product.interface';
 import { defaultSectionAboutOfData, defaultSectionBannersData, defaultSectionHeroData, defaultSectionProductsData } from 'src/app/interfaces/sections-default';
@@ -17,6 +18,8 @@ import { v4 as uuidv4 } from 'uuid';
 })
 export class WebPageEditPage implements OnInit {
 
+  @ViewChild('popoverContent', { static: false }) popoverContent: any;
+
   shopData!: any;
   shopId!: number;
 
@@ -30,14 +33,30 @@ export class WebPageEditPage implements OnInit {
 
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private shopService: ShopService,
     private sectionEventService: SectionEventService,
     private productService: ProductService,
-    private notificationToastService: NotificationToastService
+    private notificationToastService: NotificationToastService,
+    private popoverController: PopoverController
   ) { }
 
   ngOnInit() {
+
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationStart) {
+        if (this.router.url.includes('/web-page-edit')) {
+          // Verificar si las secciones han sido modificadas
+          if (this.areSectionsModified()) {
+            if (!confirm('Are you sure you want to leave? Your changes may not be saved.')) {
+              // Cancelar la navegación si el usuario elige quedarse
+              this.router.navigate([], { skipLocationChange: true });
+            }
+          }
+        }
+      }
+    });
 
     const shopIdString = this.route.snapshot.paramMap.get('id');
     if (shopIdString) {
@@ -241,6 +260,23 @@ export class WebPageEditPage implements OnInit {
   areSectionsModified(): boolean {
     const modified = JSON.stringify(this.sections) !== JSON.stringify(this.sectionsCopy);
     return modified;
+  }
+
+
+  async presentPopover(ev: any) {
+    const popover = await this.popoverController.create({
+      component: this.popoverContent,
+      event: ev,
+      translucent: true
+    });
+    return await popover.present();
+  }
+
+  @HostListener('window:beforeunload', ['$event'])
+  unloadNotification($event: any) {
+    if (this.areSectionsModified()) {
+      $event.returnValue = true;
+    }
   }
 
 

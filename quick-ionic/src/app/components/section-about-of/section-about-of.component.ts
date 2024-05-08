@@ -170,4 +170,11 @@ export class SectionAboutOfComponent implements OnInit {
     this.showOptions = !this.showOptions;
   }
 
+  changeType() {
+    if(this.sectionData!.content.type == "1"){
+      this.sectionData!.content.type = "2";
+    }else{
+      this.sectionData!.content.type = "1";
+    }
+  }
 }
