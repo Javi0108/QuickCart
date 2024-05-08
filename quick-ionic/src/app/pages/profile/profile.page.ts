@@ -13,7 +13,6 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-
   @Input() idProfileShop: number | undefined;
 
   profile!: Profile;
@@ -96,11 +95,9 @@ export class ProfilePage implements OnInit {
   }
 
   loadProfile() {
-
-
-    let userId ;
+    let userId;
     if (this.idProfileShop) {
-      userId = this.idProfileShop + "";
+      userId = this.idProfileShop + '';
     } else {
       userId = this.route.snapshot.paramMap.get('id');
     }
@@ -117,7 +114,6 @@ export class ProfilePage implements OnInit {
         },
       } as Observer<Profile>);
     } else {
-
       this.profileService.getProfile().subscribe({
         next: (profile: Profile) => {
           this.loadUsername();
@@ -158,13 +154,13 @@ export class ProfilePage implements OnInit {
     formData.append('address', this.editProfileForm.get('address')?.value);
     formData.append('user_type', this.editProfileForm.get('user_type')?.value);
     const socialsJSON = {
-      "instagram": this.socials.get('instagram')?.value,
-      "facebook": this.socials.get('facebook')?.value,
-      "x": this.socials.get('x')?.value,
-      "linkedin": this.socials.get('linkedin')?.value
-    }
+      instagram: this.socials.get('instagram')?.value,
+      facebook: this.socials.get('facebook')?.value,
+      x: this.socials.get('x')?.value,
+      linkedin: this.socials.get('linkedin')?.value,
+    };
 
-    formData.append('socials', JSON.stringify(socialsJSON))
+    formData.append('socials', JSON.stringify(socialsJSON));
 
     if (this.avatarFile) {
       formData.append('avatar', this.avatarFile); // Add the file if it exists

@@ -131,8 +131,11 @@
                 {{ profile.user.first_name }} {{ profile.user.last_name }}
               </h1>
               <p>{{ profile.user_type }}</p>
-              <button *ngIf='profile.user_type == "Seller"' [routerLink]="['/seller-shops']"
-                class="btn btn-primary m-2">
+              <button
+                *ngIf='profile.user_type == "Seller"'
+                [routerLink]="['/web-page-catalog', profile.id_profile]"
+                class="btn btn-primary m-2"
+              >
                 My Shops
               </button>
               <button [routerLink]="['/not-found']" class="btn btn-outline-primary">Message</button>
