@@ -23,7 +23,7 @@ export class HomePage implements OnInit {
     const element = document.getElementById(elementId);
     if (element) {
       const yOffset = element.offsetTop;
-      this.content.scrollToPoint(0, yOffset, 1000);
+      this.content.scrollToPoint(0, yOffset, 900);
     }
   }
 

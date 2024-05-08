@@ -1,10 +1,10 @@
 <ion-content [fullscreen]="true">
   <div class="home-page">
-    <div class="banner-image">
-      <div class="banner-text">
+    <div class="banner-image" id="title">
+      <div class="banner-text d-flex flex-column justify-content-center">
         <h1 class="display-5 fw-bold text-white"><b>QuickCart</b></h1>
         <p class="fs-5 mb-4">Quick, easy, all in QuickCart!</p>
-        <div class="icon_container d-flex flex-row justify-content-evenly mt-3">
+        <div class="icon_container d-none d-md-flex flex-row justify-content-center mt-3">
           <div
             class="d-flex flex-column align-items-center justify-content-center gap-2"
           >
@@ -36,29 +36,34 @@
     <div class="container mt-5">
       <div class="row">
         <div class="col-12 col-lg-4">
-          <div (click)="scrollToElement('shops')" class="interestingSites card d-flex flex-column align-items-center p-4">
-            <label>
+          <div
+            (click)="scrollToElement('shops')"
+            class="interestingSites card d-flex flex-column align-items-center p-4"
+          >
+            <label style="width: 85px;">
               <i class="bi bi-shop"></i>
             </label>
 
             <h6>Shops</h6>
             <p>
-              All the shops available in our web, were you can
-              buy their products
+              All the shops available in our web, were you can buy their
+              products
             </p>
-            <p  class="accessText">
+            <p class="accessText">
               Learn more <i class="bi bi-box-arrow-up-right ms-2"></i>
             </p>
           </div>
         </div>
         <div class="col-12 col-lg-4">
-          <div (click)="scrollToElement('products')" class="interestingSites card d-flex flex-column align-items-center p-4">
-            <label><i class="bi bi-bag"></i>
-            </label>
+          <div
+            (click)="scrollToElement('products')"
+            class="interestingSites card d-flex flex-column align-items-center p-4"
+          >
+            <label style="width: 85px;"><i class="bi bi-bag"></i> </label>
             <h6>Products</h6>
             <p>
-              All the shops available in our web, were you can buy
-              their products
+              All the shops available in our web, were you can buy their
+              products
             </p>
             <nav>
               <p class="accessText">
@@ -68,15 +73,15 @@
           </div>
         </div>
         <div class="col-12 col-lg-4">
-          <div (click)="scrollToElement('profile')" class="interestingSites card d-flex flex-column align-items-center p-4">
-            <label >
+          <div
+            (click)="scrollToElement('profile')"
+            class="interestingSites card d-flex flex-column align-items-center p-4"
+          >
+            <label style="width: 85px;">
               <i class="bi bi-person"></i>
             </label>
             <h6>Profile</h6>
-            <p>
-              Modify all the information about you and your
-              account
-            </p>
+            <p>Modify all the information about you and your account</p>
             <p class="accessText">
               Learn more <i class="bi bi-box-arrow-up-right ms-2"></i>
             </p>
@@ -91,8 +96,8 @@
         class="d-flex flex-row align-items-center gap-5"
         style="margin-top: 5rem"
       >
-        <div style="width: 500px">
-          <h3>Shops</h3>
+        <div style="width: 500px;">
+          <h3 style="color: var(--primary-color);">Shops</h3>
           <p>
             You will have a variety of shopping options, including local shops
             that are a vey important part in our economy. Here you can buy
@@ -106,6 +111,7 @@
           </p>
         </div>
         <img
+          class="d-none d-md-block"
           src="assets/shop_img.jpg"
           alt="Online shopping image"
           width="500px"
@@ -114,17 +120,18 @@
       <section
         id="products"
         class="d-flex flex-row align-items-center gap-5"
-        style="margin-top: 5rem"
+        style="margin-top: 5rem;"
       >
         <div>
           <img
+            class="d-none d-md-block"
             src="assets/products_img.webp"
             alt="Online selling image"
             width="500px"
           />
         </div>
         <div style="width: 500px">
-          <h3>Products</h3>
+          <h3 style="color: var(--primary-color);">Products</h3>
           <p>
             You will be able to create your own shop in a very simple and
             intuitive way with our website creation model, that's why we invite
@@ -148,7 +155,7 @@
         style="margin-top: 5rem"
       >
         <div style="width: 500px">
-          <h3>Profile</h3>
+          <h3 style="color: var(--primary-color);">Profile</h3>
           <p>
             We understand the importance of privacy and the right to control the
             personal data of all users. For this reason, we would like to inform
@@ -161,15 +168,26 @@
             your personal information, address, contact information and more.
           </p>
           <p
-            class="accessText quickart-button quickart-button-white "
+            class="accessText quickart-button quickart-button-white"
             [routerLink]="isLoggedIn() ? '/profile' : '/login'"
           >
             Access to profile <i class="bi bi-box-arrow-up-right ms-2"></i>
           </p>
         </div>
-        <div><img src="assets/profile_img.jpeg" alt="" width="500px" /></div>
+        <div>
+          <img
+            class="d-none d-md-block"
+            src="assets/profile_img.jpeg"
+            alt=""
+            width="500px"
+          />
+        </div>
       </section>
     </div>
+    <button (click)="scrollToElement('title')" class="toStartButton fixed-bottom"><i class="bi bi-arrow-up-circle"></i></button>
+
   </div>
+  
   <app-footer></app-footer>
+
 </ion-content>
