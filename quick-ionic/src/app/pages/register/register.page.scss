@@ -89,12 +89,13 @@ form {
     
     ion-select{
         padding: 0px;
-        
     }
 
 
 
-    button {
+
+
+    .submitButton {
         margin-top: 50px;
         width: 100%;
         background-color: #ffffff;
@@ -106,6 +107,13 @@ form {
         cursor: pointer;
     }
 
+    .helpButton {
+        width: 25px;
+        margin-right: 10px;
+        font-size: 25px;
+
+    }
+  
     .social {
         margin-top: 30px;
         display: flex;
@@ -132,3 +140,4 @@ form {
         }
     }
 }
+
