@@ -70,6 +70,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/web-page-catalog/web-page-catalog.module').then( m => m.WebPageCatalogPageModule)
   },
   {
+    path: 'not-found',
+    loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
