@@ -4,8 +4,8 @@
       url("/assets/banner1.webp");
 
     height: 100%;
-    min-height: 325px;
-    max-height: 325px;
+    min-height: 50vh;
+    max-height: 50vh;
 
     background-position: center;
     background-repeat: no-repeat;
@@ -39,12 +39,12 @@
 
   .interestingSites {
     text-align: center;
-    transition: all .3s ease;
+    transition: all .3s ease;  
 
     & label {
       padding: 1rem;
       border-radius: 100%;
-      background-color: #582ae4;
+      background-color: var(--primary-color);
       font-size: 45px;
       color: white;
       transition: all .3s ease;
@@ -54,13 +54,22 @@
 
   .interestingSites {
     & label:hover {
-      background-color: #673de6;
+      background-color: var(--primary-color-hover);
     }
   }
 
   .accessText {
     font-size: 14px;
     font-weight: 600;
+  }
+
+  .card {
+    transition: all .3s ease;
+  }
+
+  .card:hover {
+    box-shadow: 3px 3px 3px var(--primary-color);
+    border: 1px solid var(--primary-color);
   }
 
   .banner-button {
@@ -75,42 +84,8 @@
     cursor: pointer;
   }
 
-  .banner-button:hover {
-    background-color: grey;
-    border-color: black;
-    color: black;
+  img {
+    border-radius: 2px;
   }
 
-  .banner2-image {
-    background-image: url("/assets/logo.webp");
-  }
-}
-
-// Extra small devices (portrait phones, less than 576px)
-@media (max-width: 575.98px) {
-  .home-page {
-    .banner-image {
-      min-height: 200px;
-      height: 200px;
-    }
-
-    .banner-text {
-    }
-  }
-}
-
-// Small devices (landscape phones, 576px and up)
-@media (min-width: 576px) and (max-width: 767.98px) {
-}
-
-// Medium devices (tablets, 768px and up)
-@media (min-width: 768px) and (max-width: 991.98px) {
-}
-
-// Large devices (desktops, 992px and up)
-@media (min-width: 992px) and (max-width: 1199.98px) {
-}
-
-// Extra large devices (large desktops, 1200px and up)
-@media (min-width: 1200px) {
 }
