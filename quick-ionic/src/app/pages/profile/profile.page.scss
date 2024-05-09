@@ -5,16 +5,15 @@
 }
 
 .pageContent {
-  display: flex;
-  flex-direction: row;
   margin: 1rem;
 }
 
 #content {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(2, 1fr);
+  display: flex;
+  flex-direction: column;
   justify-items: center;
+  align-items: center;
+  margin-top: 2rem;
 }
 
 #fileBtn {
@@ -38,7 +37,7 @@
   flex-direction: column;
   justify-content: center;
   position: absolute;
-  background-color: #0D6EFD;
+  background-color: var(--primary-color);
   border-radius: 50%;
   width: 150px;
   height: 150px;
@@ -80,6 +79,7 @@
 #socialsLogo {
   font-size: x-large;
   margin-right: 1rem;
+  color: var(--primary-color);
 }
 
 #buttonGroup {
@@ -87,5 +87,24 @@
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: center;
-  gap: 1rem;
+}
+
+/* Modificaciones de clases globales */
+.profileBtn {
+  color: #ffffff;
+  margin: 0px 5px 0px 0px;
+  background-color: var(--primary-color);
+  padding: 10px 23px;
+  font-weight: 600;
+  font-family: DM Sans, sans-serif;
+  cursor: pointer;
+  border-radius: 8px;
+  display: inline-flex;
+  /* Para permitir el alineamiento vertical */
+  align-items: center;
+  /* Alinea el contenido verticalmente */
+
+  &:hover {
+      background-color: var(--primary-color-hover);
+  }
 }

@@ -14,6 +14,7 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./menu.page.scss'],
 })
 export class MenuPage implements OnInit {
+  activeRoute: string = '';
   profile!: Profile;
   user: User | null = null;
 
@@ -31,6 +32,11 @@ export class MenuPage implements OnInit {
     if (userString) {
       this.user = JSON.parse(userString) as User;
     }
+
+    this.router.events.subscribe((val) => {
+      this.activeRoute = this.router.url;
+    });
+
   }
 
   isLoggedIn(): boolean {
