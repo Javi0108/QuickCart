@@ -44,17 +44,17 @@
 
 ### 1. INTRODUCCIÓN. <a name="id1"></a>
 
-Muchas empresas de hoy en día aún no tienen página web debido a su bajo conocimiento de la programación o a que no se pueden permitir los costes de un programador que les realice dicha página web. Es aquí donde nace QuickCart, esta es una aplicación web en la que las empresas se podrán registrar y crear sus propias páginas web desde cero utilizando plantillas altamente personalizables, por lo que ninguna página web será igual.
+Muchas empresas de hoy en día aún no tienen página web debido a su bajo conocimiento de la programación o a que no se pueden permitir los costes de un programador que les realice dicha página web. Es aquí donde nace QuickCart, esta es una aplicación web en la que las empresas se podrán registrar y crear sus propias páginas web desde cero utilizando plantillas altamente personalizables, por lo que ninguna página web será igual, esto permite a muchas pymes tener una página web sencilla y con bajos costes, por lo que la digitalización de la empresa será mucho más fácil y menos costosa de realizar.
 
 ### 2. TECNOLOGÍAS UTILIZADAS. <a name="id2"></a>
 
-+ Front End:
++ **Front End**:
     - Angular con TypeScript
     - Ionic 7
     - Bootstrap 5.1
-+ Back End:
++ **Back End**:
     - Django 5 con Python
-+ Base de datos:
++ **Base de datos**:
     - SQLite
 
 Estas tecnologías fueron necesarias tanto para la fase de desarrollo como para la producción.
@@ -65,16 +65,16 @@ En cuanto al hardware necesario, QuickCart no requiere de equipamiento adicional
 
 La guía de estilo de la web establece los estándares visuales y de experiencia de usuario que deben seguirse para mantener una apariencia coherente y profesional. En este proyecto, buscamos crear una aplicación web con un diseño lo más limpio posible y moderno. Los elementos clave de nuestra guía de estilo incluyen:
 
-+ Colores: Se utilizaron tonos neutros como el blanco, y un color primario como el violeta para resaltar los elementos importantes y hacer una página única.
-+ Fuentes: Se eligieron fuentes onest para mantener una legibilidad óptima.
-+ Estructura: Las páginas están estructuradas con una navegación intuitiva y jerárquica.
++ **Colores**: Se utilizaron tonos neutros como el blanco, y un color primario como el violeta para resaltar los elementos importantes y hacer una página única.
++ **Fuentes**: Se eligieron fuentes onest para mantener una legibilidad óptima.
++ **Estructura**: Las páginas están estructuradas con una navegación intuitiva y jerárquica.
 
 ### 4. INVESTIGACIÓN. <a name="id4"></a>
 
 Durante el desarrollo de QuickCart, se llevaron a cabo investigaciones para abordar diversas cuestiones técnicas y de diseño. Algunas áreas clave de investigación incluyeron:
 
-+ Integración de tecnologías: Se investigó el como combinar Django y Angular en un solo proyecto.
-+ Experiencia de usuario: Se realizaron estudios para mejorar la usabilidad de la aplicación.
++ **Integración de tecnologías**: Se investigó el como combinar Django y Angular en un solo proyecto.
++ **Experiencia de usuario**: Se realizaron estudios para mejorar la usabilidad de la aplicación.
 
 No todo funcionó a la primera, algunos desarrollos tuvieron que ser modificados o descartados debido a problemas de dificultad y tiempo. Sin embargo, el proceso de investigación permitió encontrar soluciones adecuadas para los problemas encontrados.
 
@@ -82,26 +82,26 @@ No todo funcionó a la primera, algunos desarrollos tuvieron que ser modificados
 
 En QuickCart, se utilizaron diversos tipos de contenido y recursos multimedia. Para garantizar el respeto a los derechos de autor, se implementaron las siguientes acciones:
 
-+ Desarrollo propio: El logotipo de la aplicación fue creado internamente utilizando Photoshop. Este recurso está publicado bajo una licencia Creative Commons.
-+ Material de terceros: Se utilizaron librerías como Google Fonts para la fuente y Ionic o Bootstrap para estilos e iconos. Ambos con licencias que permiten su uso para fines comerciales, sin restricciones de redistribución. También se han utilizado imagenes las cuales ninguna está bajo licencias por lo que son aptas para nuestros objetivos de uso.
++ **Desarrollo propio**: El logotipo de la aplicación fue creado internamente utilizando Photoshop. Este recurso está publicado bajo una licencia Creative Commons.
++ **Material de terceros**: Se utilizaron librerías como Google Fonts para la fuente y Ionic o Bootstrap para estilos e iconos. Ambos con licencias que permiten su uso para fines comerciales, sin restricciones de redistribución. También se han utilizado imagenes las cuales ninguna está bajo licencias por lo que son aptas para nuestros objetivos de uso.
 
 ### 6. RIESGOS Y MEDIDAS. <a name="id6"></a>
 
 Durante el desarrollo del proyecto, surgieron varios problemas, entre ellos:
 
-+ Integración de funcionalidades: Hubo dificultades al integrar algunas funcionalidades a algunos componentes. Para mitigarlo, el equipo se ayudó al completo y se buscó información para arrelgar dicho error lo antes posible.
-+ Cambios de estilo en componententes de Ionic: para arreglar este error tuvimos que investigar más a fondo como estilar dichos componentes.
-+ Desviación de tiempos: Algunos módulos tardaron más de lo esperado. Para evitar mayores retrasos, se ajustaron las tareas prioritarias y nos ayudamos entre los integrantes del equipo para sacar adelante esos problemas.
++ **Integración de funcionalidades**: Hubo dificultades al integrar algunas funcionalidades a algunos componentes. Para mitigarlo, el equipo se ayudó al completo y se buscó información para arrelgar dicho error lo antes posible.
++ **Cambios de estilo en componententes de Ionic**: para arreglar este error tuvimos que investigar más a fondo como estilar dichos componentes.
++ **Desviación de tiempos**: Algunos módulos tardaron más de lo esperado. Para evitar mayores retrasos, se ajustaron las tareas prioritarias y nos ayudamos entre los integrantes del equipo para sacar adelante esos problemas.
 
 ### 7. GRADO DE CUMPLIMIENTO EN ALCANCE. <a name="id7"></a>
 
 El proyecto logró cubrir la mayoría de las funcionalidades proyectadasSin embargo, algunas funciones secundarias tuvieron que ser postergados para futuras actualizaciones debido a restricciones de tiempo. Las funcionalidades implementadas incluyen:
 
-+ Gestión de cuentas: Registro, inicio de sesión y edición de perfiles.
-+ Gestión de tiendas: Empresas pueden gestionar los productos, las webs de las tiendas para la visualizacion de productos.
-+ Gestión del carrito: Clientes pueden agregar productos, ajustar cantidades y eliminar elementos.
-+ Barra de búsqueda: Búsqueda por empresas.
-+ Sistema de pago: Los clientes pueden pagar los productos mediante Stripe, un intermediario entre el cliente y la empresa, la cual gestiona los pago y las cuentas.
++ **Gestión de cuentas**: Registro, inicio de sesión y edición de perfiles.
++ **Gestión de tiendas**: Empresas pueden gestionar los productos, las webs de las tiendas para la visualizacion de productos.
++ **Gestión del carrito**: Clientes pueden agregar productos, ajustar cantidades y eliminar elementos.
++ **Barra de búsqueda**: Búsqueda por empresas.
++ **Sistema de pago**: Los clientes pueden pagar los productos mediante Stripe, un intermediario entre el cliente y la empresa, la cual gestiona los pago y las cuentas.
 
 Algunas funciones secundarias, como las valoraciones de los productos, quedaron fuera del alcance inicial pero se planean para futuras actualizaciones.
 
@@ -117,52 +117,58 @@ El proyecto se mantuvo dentro del presupuesto previsto de **6.427€**. Para evi
 
 En el contrato del proyecto, se especificaron las siguientes cláusulas clave:
 
-+ Retrasos: Se acordó un período de 2 meses para retrasos no previstos, con multas en caso de superación significativa.
-+ Pagos: Los pagos serán realizados por Stripe, un intermediario que nos ayuda a gestionar los pagos y todas las cuentas.
++ **Retrasos**: Se acordó un período de 2 meses para retrasos no previstos, con multas en caso de superación significativa.
++ **Pagos**: Los pagos serán realizados por Stripe, un intermediario que nos ayuda a gestionar los pagos y todas las cuentas.
 
 ### 11.  PRODUCTO FINAL. <a name="id11"></a>
 
 QuickCart es una plataforma de comercio electrónico que permite a las empresas crear y gestionar sus propias tiendas en línea. El sistema ofrece una gama de funcionalidades clave para facilitar la venta de productos:
-
-+ Gestión de cuentas: Registro, inicio de sesión y edición de perfiles.
++ **Home**: Página principal de la web en la que se aprecian los apartados más destacados.
 <div align="center">
 
-![](./img/profile_img.png)
+<img src="/img/home_img.png" width="600px">
 
 </div>
 
-+ Gestión de tiendas: Empresas pueden gestionar los productos, las webs de las tiendas para la visualizacion de productos.
++ **Gestión de cuentas**: Registro, inicio de sesión y edición de perfiles.
 <div align="center">
 
-![](./img/shops_img.png)
+<img src="/img/profile_img.png" width="600px">
+
+</div>
+
++ **Gestión de tiendas**: Empresas pueden gestionar los productos, las webs de las tiendas para la visualizacion de productos.
+<div align="center">
+
+<img src="/img/shops_img.png" width="600px">
 
 </div>
 <div align="center">
 
-![](./img/shops_img(2).png)
+<img src="/img/shops_img(2).png" width="600px">
 
 </div>
 
-+ Gestión del carrito: Clientes pueden agregar productos, ajustar cantidades y eliminar elementos.
++ **Gestión del carrito**: Clientes pueden agregar productos, ajustar cantidades y eliminar elementos.
 ***IMAGEN***
 <!-- <div align="center">
 
-![](./img/cart_img.png)
+<img src="/img/cart_img.png" width="600px">
 
 </div> -->
 
-+ Barra de búsqueda: Búsqueda por empresas.
++ **Barra de búsqueda**: Búsqueda por empresas.
 <div align="center">
 
-![](./img/barra_de_busqueda.png)
+<img src="/img/barra_de_busqueda.png" width="600px">
 
 </div>
 
-+ Sistema de pago: Los clientes pueden pagar los productos mediante Stripe, un intermediario entre el cliente y la empresa, la cual gestiona los pago y las cuentas.
++ **Sistema de pago**: Los clientes pueden pagar los productos mediante Stripe, un intermediario entre el cliente y la empresa, la cual gestiona los pago y las cuentas.
 ***IMAGEN***
 <!-- <div align="center">
 
-![](./img/payment_img.png)
+<img src="/img/payment_img.png" width="600px">
 
 </div> -->
 La implementación con Django y Angular garantiza un sistema estable y escalable. El despliegue en Azure facilita el mantenimiento y la escalabilidad.
@@ -171,9 +177,9 @@ La implementación con Django y Angular garantiza un sistema estable y escalable
 
 Durante el desarrollo de QuickCart, se aprendieron varias lecciones importantes:
 
-+ Comunicación y colaboración: La comunicación constante en el equipo y el uso de GitHub para el control de versiones fue esencial para el éxito del proyecto.
-+ Planificación flexible: Mantener una planificación flexible permitió ajustar el cronograma para compensar retrasos inesperados.
-+ Organización: Mantener el proyecto organizado de una manera fácilmente entendible para que en el desarrollo de la aplicación no se hagan difíciles tareas que deberían ser fáciles.
++ **Comunicación y colaboración**: La comunicación constante en el equipo y el uso de GitHub para el control de versiones fue esencial para el éxito del proyecto.
++ **Planificación flexible**: Mantener una planificación flexible permitió ajustar el cronograma para compensar retrasos inesperados.
++ **Organización**: Mantener el proyecto organizado de una manera fácilmente entendible para que en el desarrollo de la aplicación no se hagan difíciles tareas que deberían ser fáciles.
 
 Estas experiencias nos servirán para futuros proyectos, permitiendonos mejorar la planificación y la ejecución del desarrollo.
 
