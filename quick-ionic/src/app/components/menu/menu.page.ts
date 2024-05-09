@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observer } from 'rxjs';
@@ -17,6 +17,9 @@ export class MenuPage implements OnInit {
   activeRoute: string = '';
   profile!: Profile;
   user: User | null = null;
+
+  loginSuccessEvent: EventEmitter<void> = new EventEmitter<void>();
+
 
   constructor(
     private authService: AuthService,
@@ -37,6 +40,10 @@ export class MenuPage implements OnInit {
       this.activeRoute = this.router.url;
     });
 
+    this.loginSuccessEvent.subscribe(() => {
+      this.loadProfile();
+    });
+
   }
 
   isLoggedIn(): boolean {
@@ -50,6 +57,9 @@ export class MenuPage implements OnInit {
         localStorage.removeItem('user');
         localStorage.removeItem('token');
         this.router.navigate(['/home']);
+        setTimeout(() => {
+          window.location.reload();
+        }, 1);
       }
     )
   }

@@ -97,6 +97,9 @@
               <img *ngIf="!profile.avatar" src="/assets/avatar.webp" width="40px" />
               <img *ngIf="profile.avatar" src="http://127.0.0.1:8000/{{ profile.avatar }}" width="40px" height="40px" />
             </ion-fab-button>
+            <div *ngIf="isLoggedIn()" (click)="logout()" id="listElement" style="margin-top: auto;">
+              <i class="bi bi-box-arrow-right" style="font-size: 1.2em;"></i>
+            </div>
           </ion-fab>
         </div>
 

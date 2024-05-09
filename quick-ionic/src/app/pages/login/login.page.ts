@@ -2,6 +2,7 @@ import { AuthService } from '../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
+import { timeout } from 'rxjs';
 import { NotificationToastService } from 'src/app/services/notification-toast.service';
 
 @Component({
@@ -18,7 +19,7 @@ export class LoginPage implements OnInit {
     private formBuilder: FormBuilder,
     public authService: AuthService,
     public router: Router,
-    private notificationToastService: NotificationToastService
+    private notificationToastService: NotificationToastService,
   ) {
     this.pageloaded = false;
     this.passwordSeen = false;
@@ -32,16 +33,22 @@ export class LoginPage implements OnInit {
   login() {
     if (this.loginForm.valid) {
       const user = this.loginForm.value;
-      this.authService.login(user).subscribe((data) => {
-        this.router.navigateByUrl("/");
-      },
-        error => {
+      this.authService.login(user).subscribe({
+        next: (data) => {
+          this.router.navigate(['/home']);
+          setTimeout(() => {
+            window.location.reload();
+          }, 1);
+
+        },
+        error: (error) => {
           this.notificationToastService.presentToast(
             'Incorrect username or password. Please try again.',
             'danger',
             '../../assets/exclamation.svg'
           );
-        });
+        }
+      });
     }
   }
 
