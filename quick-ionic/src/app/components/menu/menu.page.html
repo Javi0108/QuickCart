@@ -13,23 +13,23 @@
   </ion-header>
   <ion-content>
     <ion-list lines="full" id="menuList">
-      <div *ngIf="isLoggedIn()" [routerLink]="['/home']" id="listElement">
+      <div *ngIf="isLoggedIn()" [routerLink]="['/home']" id="listElement" [class.active-route]="activeRoute === '/home'">
         <ion-label>Home</ion-label>
         <i class="bi bi-house-door-fill"></i>
       </div>
-      <div *ngIf="isLoggedIn()" [routerLink]="['/profile']" id="listElement">
+      <div *ngIf="isLoggedIn()" [routerLink]="['/profile']" id="listElement" [class.active-route]="activeRoute === '/profile'">
         <ion-label>Profile</ion-label>
         <i class="bi bi-person-fill"></i>
       </div>
-      <div *ngIf="isLoggedIn() && profile.user_type == 'Seller'" [routerLink]="['/seller-shops']" id="listElement">
+      <div *ngIf="isLoggedIn() && profile.user_type == 'Seller'" [routerLink]="['/seller-shops']" id="listElement" [class.active-route]="activeRoute === '/seller-shops'">
         <ion-label>My Shops</ion-label>
         <ion-icon name="construct"></ion-icon>
       </div>
-      <div *ngIf="isLoggedIn()" [routerLink]="['/web-page-catalog']" id="listElement">
+      <div *ngIf="isLoggedIn()" [routerLink]="['/web-page-catalog']" id="listElement" [class.active-route]="activeRoute === '/web-page-catalog'">
         <ion-label>Shops</ion-label>
         <i class="bi bi-bag-fill"></i>
       </div>
-      <div *ngIf="isLoggedIn()" [routerLink]="['/catalog']" id="listElement">
+      <div *ngIf="isLoggedIn()" [routerLink]="['/catalog']" id="listElement" [class.active-route]="activeRoute === '/catalog'">
         <ion-label>Products</ion-label>
         <ion-icon name="pricetags"></ion-icon>
       </div>
