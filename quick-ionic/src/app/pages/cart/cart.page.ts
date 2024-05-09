@@ -44,11 +44,7 @@ import { Product } from 'src/app/interfaces/product.interface';
     updateQuantity(productId: number, quantity: number){
       this.orderService.updateProductQuantity(this.cart.id_order, productId, quantity).subscribe({
         next(response) {
-          // console.log("Product quantity updated successfully");
-          // const updatedProduct = this.cart.order_products.find((product: Product) => product.id_product === productId);
-          // if (updatedProduct) {
-          //   updatedProduct.quantity = quantity;
-          // }
+          console.log("Product quantity updated successfully");
         },
         error(error) {
           console.error('Error updating product quantity:', error);
