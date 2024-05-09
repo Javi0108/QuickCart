@@ -2,6 +2,7 @@ import { AuthService } from '../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
+import { NotificationToastService } from 'src/app/services/notification-toast.service';
 
 @Component({
   selector: 'app-login',
@@ -13,10 +14,15 @@ export class LoginPage implements OnInit {
   loginForm: FormGroup;
   passwordSeen: boolean;
 
-  constructor(private formBuilder: FormBuilder, public authService: AuthService, public router: Router) {
+  constructor(
+    private formBuilder: FormBuilder,
+    public authService: AuthService,
+    public router: Router,
+    private notificationToastService: NotificationToastService
+  ) {
     this.pageloaded = false;
     this.passwordSeen = false;
-    
+
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', [Validators.required]],
@@ -26,20 +32,23 @@ export class LoginPage implements OnInit {
   login() {
     if (this.loginForm.valid) {
       const user = this.loginForm.value;
-
       this.authService.login(user).subscribe((data) => {
         this.router.navigateByUrl("/");
       },
-      error => {
-        console.log(error)
-      });
+        error => {
+          this.notificationToastService.presentToast(
+            'Incorrect username or password. Please try again.',
+            'danger',
+            '../../assets/exclamation.svg'
+          );
+        });
     }
   }
 
   showHide(event: any, inputId: string) {
     const parentElement = document.getElementById(event.target.id);
     const input = document.getElementById(inputId) as HTMLInputElement;
-    
+
     if (input != undefined) {
       if (parentElement != undefined) {
         if (this.passwordSeen == false) {

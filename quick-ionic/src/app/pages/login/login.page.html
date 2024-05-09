@@ -14,7 +14,7 @@
         label="Username" fill="outline"> </ion-input>
       <ion-input type="password" formControlName="password" placeholder="Password" labelPlacement="floating"
         label="Password" fill="outline" id="password">
-        <ion-button id="buttonToggle1" (click)="showHide($event, 'password')" fill="clear" slot="end" aria-label="Show/hide">
+        <ion-button *ngIf="loginForm.value.password != ''" id="buttonToggle1" (click)="showHide($event, 'password')" fill="clear" slot="end" aria-label="Show/hide">
           <ion-icon slot="icon-only" name="eye" aria-hidden="true"></ion-icon>
         </ion-button>
       </ion-input>

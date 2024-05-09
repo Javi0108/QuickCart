@@ -55,13 +55,14 @@ export class MenuPage implements OnInit {
   }
 
   loadProfile() {
-    this.profileService.getProfile().subscribe({
-      next: (profile: Profile) => {
-        this.profile = profile;
-      },
-      error: (error) => {
-        console.error(error);
-      },
-    } as Observer<Profile>);
+    if (localStorage.getItem('token')) {
+      this.profileService.getProfile().subscribe({
+        next: (profile: Profile) => {
+          this.profile = profile;
+        },
+        error: (error) => {
+        },
+      } as Observer<Profile>);
+    }
   }
 }
