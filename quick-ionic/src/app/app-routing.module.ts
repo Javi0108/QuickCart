@@ -81,7 +81,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'home',
+    redirectTo: 'not-found',
     pathMatch: 'full'
   },
 ];
