@@ -14,6 +14,12 @@ ion-header {
   }
 }
 
+#menuList {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 #menuButtons {
   display: flex;
   flex-direction: row;
