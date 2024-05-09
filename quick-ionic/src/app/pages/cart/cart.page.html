@@ -10,8 +10,9 @@
     <p><strong>Order ID:</strong> {{ cart.id_order }}</p>
     <p><strong>Order Date:</strong> {{ cart.order_date | date:'medium' }}</p>
     <p><strong>Status:</strong> {{ cart.status }}</p>
+    <p><strong>Total Price:</strong> {{ cart.total_price }}</p>
 
-    <ion-button color="primary" expand="block">
+    <ion-button color="primary" expand="block" (click)="makePayment()">
       <ion-icon name="cart-outline" slot="start"></ion-icon>
       Buy now
     </ion-button>

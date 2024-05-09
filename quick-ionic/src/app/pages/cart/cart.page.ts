@@ -63,4 +63,8 @@ import { Product } from 'src/app/interfaces/product.interface';
       });
     }
 
+    makePayment(){
+      console.log("Pagos en proceso")
+    }
+
   }
