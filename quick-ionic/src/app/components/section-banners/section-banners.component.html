@@ -1,0 +1,192 @@
+<section *ngIf="editMode" class="section-edit section-banners" (click)="toggleOptions()">
+  <div class="row" *ngIf="sectionData!">
+    <div class="col-lg-9 p-2" [ngStyle]="{
+      'background-image': sectionData.background.image ? 'url(' + sectionData.background.image + ')' : 'none',
+      'background-color': sectionData.background.image || !sectionData.background.hex_color ? '#ffffff' : sectionData.background.hex_color,
+      'opacity': sectionData.background.overlay_opacity,
+      'background-attachment': sectionData.background.fixed_background ? 'fixed' : 'scroll',
+      'background-size': sectionData.background.image ? 'cover' : 'auto'
+    }">
+      <div class="row pb-3 pt-3">
+        <div class="col-12 col-md-6">
+          <div class="banner" [style.background-image]="'url(' + sectionData.banner_1.image + ')'">
+            <div class="row content">
+              <div class="col-8">
+                <h2>
+                  {{sectionData.banner_1.title}}
+                </h2>
+                <h5>
+                  {{sectionData.banner_1.content}}
+                </h5>
+                <div *ngIf="sectionData.banner_1.related_product" class="button">
+                  <a [routerLink]="['/product', sectionData.banner_1.related_product]" type="button"
+                    class="btn btn-primary">{{sectionData.banner_1.button}}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="banner" [style.background-image]="'url(' + sectionData.banner_2.image + ')'">
+            <div class="row content">
+              <div class="col-8">
+                <h2>
+                  {{sectionData.banner_2.title}}
+                </h2>
+                <h5>
+                  {{sectionData.banner_2.content}}
+                </h5>
+                <div *ngIf="sectionData.banner_2.related_product" class="button">
+                  <a [routerLink]="['/product', sectionData.banner_2.related_product]" type="button"
+                    class="btn btn-primary">{{sectionData.banner_2.button}}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-lg-3 form-edit">
+      <ion-segment [(ngModel)]="selectedSegment" (ionChange)="segmentChanged($event)">
+        <ion-segment-button value="banner_1">
+          <ion-label>Banner 1</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="banner_2">
+          <ion-label>Banner 2</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+
+      <div class="form-wrapper" [formGroup]="sectionFormBannerOne" *ngIf="selectedSegment === 'banner_1'">
+
+        <div class="inline-inputs">
+          <ion-input formControlName="title" type="text" placeholder="Title" label="Title" label-placement="floating"
+            fill="outline" [maxlength]="30" [counter]="true"></ion-input>
+
+          <ion-input formControlName="content" type="text" placeholder="Content" label="Content"
+            label-placement="floating" fill="outline" [maxlength]="65" [counter]="true"></ion-input>
+        </div>
+
+        <ion-input formControlName="button" type="text" placeholder="Button Text" label="Button Text"
+          label-placement="floating" fill="outline" [maxlength]="30" [counter]="true"></ion-input>
+
+        <div class="inline-inputs">
+          <ion-input id="image-input" label="Image" label-placement="floating" placeholder="Image" fill="outline"
+            type="file" formControlName="image" (change)="onFileSelected($event)" class="file-input w-100"
+            style="height: 75px;"></ion-input>
+
+          <ion-list [inset]="true"
+            style="outline: 1px solid #b3b3b3; border-radius: 2px; margin: 0px; margin-bottom: 15px; height: 73px; width: 75%;">
+            <ion-item [button]="true" [detail]="false" (click)="openModal()">
+              <div id="selected-products">{{ selectedProductBannerOneText }}</div>
+            </ion-item>
+          </ion-list>
+        </div>
+      </div>
+
+
+      <div class="form-wrapper" [formGroup]="sectionFormBannerTwo" *ngIf="selectedSegment === 'banner_2'">
+        <div class="inline-inputs">
+          <ion-input formControlName="title" type="text" placeholder="Title" label="Title" label-placement="floating"
+            fill="outline" [maxlength]="30" [counter]="true"></ion-input>
+
+          <ion-input formControlName="content" type="text" placeholder="Content" label="Content"
+            label-placement="floating" fill="outline" [maxlength]="70" [counter]="true"></ion-input>
+        </div>
+
+        <ion-input formControlName="button" type="text" placeholder="Button Text" label="Button Text"
+          label-placement="floating" fill="outline" [maxlength]="30" [counter]="true"></ion-input>
+
+        <div class="inline-inputs">
+          <ion-input id="image-input" label="Image" label-placement="floating" placeholder="Image" fill="outline"
+            type="file" formControlName="image" (change)="onFileSelected($event)" class="file-input"
+            style="height: 75px;"></ion-input>
+
+          <ion-list [inset]="true"
+            style="outline: 1px solid #b3b3b3; border-radius: 2px; margin: 0px; margin-bottom: 15px; height: 73px; width: 75%;">
+            <ion-item [button]="true" [detail]="false" (click)="openModal()">
+              <div id="selected-products">{{ selectedProductBannerTwoText }}</div>
+            </ion-item>
+          </ion-list>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-options" *ngIf="showOptions">
+
+    <button class="option-button" (click)="optionsSection()">
+      <span class="text-button">Edit section</span>
+    </button>
+
+    <hr class="vertical-separator">
+
+    <button class="option-button" (click)="deleteSection()">
+      <ion-icon name="trash-outline"></ion-icon>
+    </button>
+
+    <hr class="vertical-separator">
+
+    <button [disabled]="order === 0" class="option-button" (click)="moveSectionUp()" fill="outline">
+      <ion-icon slot="icon-only" name="arrow-up" [ngClass]="{'disabled-icon': order === 0}"></ion-icon>
+    </button>
+
+    <button class="option-button" (click)="moveSectionDown()" fill="outline">
+      <ion-icon slot="icon-only" name="arrow-down"></ion-icon>
+    </button>
+
+  </div>
+
+</section>
+
+<!--Modo vista-->
+
+<section *ngIf="!editMode && sectionData" class="section-banners pt-5 pb-5" [ngStyle]="{
+  'background-image': sectionData.background.image ? 'url(' + sectionData.background.image + ')' : 'none',
+  'background-color': sectionData.background.image || !sectionData.background.hex_color ? '#ffffff' : sectionData.background.hex_color,
+  'opacity': sectionData.background.overlay_opacity,
+  'background-attachment': sectionData.background.fixed_background ? 'fixed' : 'scroll',
+  'background-size': sectionData.background.image ? 'cover' : 'auto'
+}">
+  <div class="container-xxl">
+    <div class="row pb-3 pt-3">
+      <div class="col-12 col-md-6">
+        <div class="banner" [style.background-image]="'url(' + sectionData.banner_1.image + ')'">
+          <div class="row content">
+            <div class="col-8">
+              <h2>
+                {{sectionData.banner_1.title}}
+              </h2>
+              <h5>
+                {{sectionData.banner_1.content}}
+              </h5>
+              <div *ngIf="sectionData.banner_1.related_product" class="button">
+                <a [routerLink]="['/product', sectionData.banner_1.related_product]" type="button"
+                  class="btn btn-primary">{{sectionData.banner_1.button}}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="banner" [style.background-image]="'url(' + sectionData.banner_2.image + ')'">
+          <div class="row content">
+            <div class="col-8">
+              <h2>
+                {{sectionData.banner_2.title}}
+              </h2>
+              <h5>
+                {{sectionData.banner_2.content}}
+              </h5>
+              <div *ngIf="sectionData.banner_2.related_product" class="button">
+                <a [routerLink]="['/product', sectionData.banner_2.related_product]" type="button"
+                  class="btn btn-primary">{{sectionData.banner_2.button}}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

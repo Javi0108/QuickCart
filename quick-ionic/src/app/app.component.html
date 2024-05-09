@@ -1,0 +1,9 @@
+<div *ngIf="currentMenu === 'default'">
+  <app-menu></app-menu>
+</div>
+
+<div class="content-wrapper">
+  <ion-router-outlet [style.max-height]="currentMenu === 'default' ? 'calc(100vh - 57px)' : ''"
+    [style.margin-top]="currentMenu === 'default' ? '57px' : ''">
+  </ion-router-outlet>
+</div>

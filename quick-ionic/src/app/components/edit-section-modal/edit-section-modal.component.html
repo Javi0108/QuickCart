@@ -1,0 +1,39 @@
+<ion-card class="popup-card popup-card--editor" style="--35705904: 50vh; --7cb232a9: 400px; --1d7736ae: 360px;">
+  <ion-card-header class="popup-card__head">
+    <ion-card-title class="popup-card__title">Configuraciones de sección</ion-card-title>
+    <ion-icon name="close" class="popup-card__close" (click)="closeModal()"></ion-icon>
+  </ion-card-header>
+
+  <ion-card-content class="mt-5">
+
+    <div class="zyro-image-selector" (click)="selectImage()">
+      <input type="file" (change)="changeImage($event)" class="zyro-image-selector__input visually-hidden">
+      <button class="zyro-image-selector__button" title="Replace image">
+        <ion-img class="zyro-image-selector__image" [src]="image"></ion-img>
+        <div class="zyro-image-selector__description">
+          <ion-icon name="photo_library" class="icon material-symbols-rounded zyro-image-selector__icon"></ion-icon>
+          <p class="text-body-2">Replace image</p>
+        </div>
+      </button>
+    </div>
+
+    <button class="quickart-button quickart-button-white d-flex justify-content-center mb-3" (click)="clearImage()" style="width: 100%;">
+      <ion-icon name="trash-outline"></ion-icon>
+      <span class="text-button">Clear Image</span>
+    </button>
+    
+    <ion-item>
+      <div class="color-preview me-2" [style.background-color]="hexColor" style="padding: 15px; border-radius: 50%; border: 1px solid #673de6;" ></div>
+      <ion-label class="text-bold-2">Section Color</ion-label>
+      <input type="text" [(ngModel)]="hexColor" placeholder="Enter Hexadecimal Color" class="color-input">
+    </ion-item>
+    <ion-item>
+      <ion-range min="0" max="100" step="1" [(ngModel)]="overlayOpacity" label="Overlay Opacity"></ion-range>
+      <ion-label>{{ overlayOpacity }} %</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-toggle [(ngModel)]="fixedBackground" labelPlacement="start">Fixed Background</ion-toggle>
+    </ion-item>
+
+  </ion-card-content>
+</ion-card>

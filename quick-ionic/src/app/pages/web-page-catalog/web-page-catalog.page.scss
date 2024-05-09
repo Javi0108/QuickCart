@@ -1,0 +1,101 @@
+.app-catalog {
+    display: flex;
+
+    h2 {
+        text-align: center;
+        font-size: 30px;
+        line-height: 35px;
+        text-transform: capitalize;
+        position: relative;
+        font-weight: 800;
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+        position: relative;
+    }
+
+    h2::before {
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        content: "";
+        background-color: var(--primary-color);
+        height: 2px;
+        width: 50px;
+        margin-left: -25px;
+        border-radius: 2px;
+    }
+
+
+    .card_container {
+        padding: 10px;
+        position: relative;
+
+        .card {
+            width: 100%;
+            height: 100%;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+            padding: 10px;
+            position: relative;
+            box-shadow: 0px 0px 20px #00000012;
+
+            .bg-image {
+                position: relative;
+                overflow: hidden;
+
+                img {
+                    object-fit: cover;
+                    width: 100%;
+                    height: 250px;
+                    display: block;
+                }
+
+                .btn-overlay {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                    background-color: #673de6d3;
+                    color: white;
+                    padding: 10px;
+                    transform: translateY(100%);
+                    transition: transform 0.3s ease;
+                }
+
+            }
+
+            .card-body {
+                padding: 15px;
+            }
+
+            .card-name {
+                font-size: 1.4em;
+                font-weight: 800;
+                margin-bottom: 5px;
+                color: #081828
+            }
+
+            .card-text {
+                color: #888;
+                font-size: 13px;
+                display: block;
+                margin-bottom: 2px;
+            }
+
+            .card-title {
+                font-size: 17px;
+                font-weight: 700;
+                color: var(--primary-color);
+            }
+
+            .btn {
+                margin-bottom: auto;
+            }
+
+            &:hover .bg-image .btn-overlay {
+                transform: translateY(0);
+            }
+        }
+    }
+}

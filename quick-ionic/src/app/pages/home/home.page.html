@@ -1,0 +1,193 @@
+<ion-content [fullscreen]="true">
+  <div class="home-page">
+    <div class="banner-image" id="title">
+      <div class="banner-text d-flex flex-column justify-content-center">
+        <h1 class="display-5 fw-bold text-white"><b>QuickCart</b></h1>
+        <p class="fs-5 mb-4">Quick, easy, all in QuickCart!</p>
+        <div class="icon_container d-none d-md-flex flex-row justify-content-center mt-3">
+          <div
+            class="d-flex flex-column align-items-center justify-content-center gap-2"
+          >
+            <div class="icon p-2">
+              <img src="assets/buy_icon.svg" alt="Buy Icon" width="70px" />
+            </div>
+            <span class="icon_text">Buy</span>
+          </div>
+          <div
+            class="d-flex flex-column align-items-center justify-content-center gap-2 p-2"
+          >
+            <div class="icon p-2">
+              <img src="assets/sell_icon.svg" alt="Sell Icon" width="70px" />
+            </div>
+            <span class="icon_text">Sell</span>
+          </div>
+          <div
+            class="d-flex flex-column align-items-center justify-content-center gap-2 p-2"
+          >
+            <div class="icon p-2">
+              <img src="assets/quick_icon.svg" alt="Quick Icon" width="70px" />
+            </div>
+            <span class="icon_text">Quick</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-12 col-lg-4">
+          <div
+            (click)="scrollToElement('shops')"
+            class="interestingSites card d-flex flex-column align-items-center p-4"
+          >
+            <label style="width: 85px;">
+              <i class="bi bi-shop"></i>
+            </label>
+
+            <h6>Shops</h6>
+            <p>
+              All the shops available in our web, were you can buy their
+              products
+            </p>
+            <p class="accessText">
+              Learn more <i class="bi bi-box-arrow-up-right ms-2"></i>
+            </p>
+          </div>
+        </div>
+        <div class="col-12 col-lg-4">
+          <div
+            (click)="scrollToElement('products')"
+            class="interestingSites card d-flex flex-column align-items-center p-4"
+          >
+            <label style="width: 85px;"><i class="bi bi-bag"></i> </label>
+            <h6>Products</h6>
+            <p>
+              All the shops available in our web, were you can buy their
+              products
+            </p>
+            <nav>
+              <p class="accessText">
+                Learn more <i class="bi bi-box-arrow-up-right ms-2"></i>
+              </p>
+            </nav>
+          </div>
+        </div>
+        <div class="col-12 col-lg-4">
+          <div
+            (click)="scrollToElement('profile')"
+            class="interestingSites card d-flex flex-column align-items-center p-4"
+          >
+            <label style="width: 85px;">
+              <i class="bi bi-person"></i>
+            </label>
+            <h6>Profile</h6>
+            <p>Modify all the information about you and your professional account</p>
+            <p class="accessText">
+              Learn more <i class="bi bi-box-arrow-up-right ms-2"></i>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex flex-column align-items-center">
+      <section
+        id="shops"
+        class="d-flex flex-row align-items-center gap-5"
+        style="margin-top: 5rem"
+      >
+        <div style="width: 500px;">
+          <h3 style="color: var(--primary-color);">Shops</h3>
+          <p>
+            You will have a variety of shopping options, including local shops
+            that are a vey important part in our economy. Here you can buy
+            anything, no matter how big or small, as long as it is not alive.
+          </p>
+          <p
+            class="accessText quickart-button quickart-button-white"
+            [routerLink]="isLoggedIn() ? '/web-page-catalog' : '/login'"
+          >
+            Access to shops <i class="bi bi-box-arrow-up-right ms-2"></i>
+          </p>
+        </div>
+        <img
+          class="d-none d-md-block"
+          src="assets/shop_img.jpg"
+          alt="Online shopping image"
+          width="500px"
+        />
+      </section>
+      <section
+        id="products"
+        class="d-flex flex-row align-items-center gap-5"
+        style="margin-top: 5rem;"
+      >
+        <div>
+          <img
+            class="d-none d-md-block"
+            src="assets/products_img.webp"
+            alt="Online selling image"
+            width="500px"
+          />
+        </div>
+        <div style="width: 500px">
+          <h3 style="color: var(--primary-color);">Products</h3>
+          <p>
+            You will be able to create your own shop in a very simple and
+            intuitive way with our website creation model, that's why we invite
+            you to get into the world of entrepreneurship and see the
+            fascinating things you can do. why we invite you to get into the
+            world of entrepreneurship and see the fascinating things that can be
+            done, as well as create your own as well as create your own website
+            to your liking with nothing to hold you back.
+          </p>
+          <p
+            class="accessText quickart-button quickart-button-white"
+            [routerLink]="isLoggedIn() ? '/catalog' : '/login'"
+          >
+            Access to products <i class="bi bi-box-arrow-up-right ms-2"></i>
+          </p>
+        </div>
+      </section>
+      <section
+        id="profile"
+        class="d-flex flex-row align-items-center gap-5"
+        style="margin-top: 5rem"
+      >
+        <div style="width: 500px">
+          <h3 style="color: var(--primary-color);">Profile</h3>
+          <p>
+            We understand the importance of privacy and the right to control the
+            personal data of all users. For this reason, we would like to inform
+            you that you will be free to modify your personal data at any time.
+            personal data at any time.
+          </p>
+          <p>
+            To change your details, simply log in to your account and go to your
+            profile then click the ‘Edit Profile’ button. There you can update
+            your personal information, address, contact information and more.
+          </p>
+          <p
+            class="accessText quickart-button quickart-button-white"
+            [routerLink]="isLoggedIn() ? '/profile' : '/login'"
+          >
+            Access to profile <i class="bi bi-box-arrow-up-right ms-2"></i>
+          </p>
+        </div>
+        <div>
+          <img
+            class="d-none d-md-block"
+            src="assets/profile_img.jpeg"
+            alt=""
+            width="500px"
+          />
+        </div>
+      </section>
+    </div>
+    <button (click)="scrollToElement('title')" class="toStartButton fixed-bottom"><i class="bi bi-arrow-up-circle"></i></button>
+
+  </div>
+  
+  <app-footer></app-footer>
+
+</ion-content>

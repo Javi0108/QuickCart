@@ -1,0 +1,112 @@
+<section *ngIf="editMode" class="section-edit section-products" (click)="toggleOptions()">
+  <div class="row" *ngIf="sectionData!">
+    <div class="col-lg-9 p-2" [ngStyle]="{
+      'background-image': sectionData.background.image ? 'url(' + sectionData.background.image + ')' : 'none',
+      'background-color': sectionData.background.image || !sectionData.background.hex_color ? '#ffffff' : sectionData.background.hex_color,
+      'opacity': sectionData.background.overlay_opacity,
+      'background-attachment': sectionData.background.fixed_background ? 'fixed' : 'scroll',
+      'background-size': sectionData.background.image ? 'cover' : 'auto'
+    }">
+      <div class="row pb-3 pt-3">
+
+        <div class="col-6 col-md-4 col-lg-3" *ngFor="let product of productsData">
+          <div class="card">
+            <a [routerLink]="['/product', product.id_product]">
+              <img class="card-img-top" [src]="'http://localhost:8000' + product.avatar" alt="Product Image">
+              <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">{{ product.short_description }}</p>
+                <p class="card-text">Precio: {{ product.price }}</p>
+              </div>
+            </a>
+            <button type="button" class="btn btn-primary btn-block">Agregar al
+              carrito</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-edit col-lg-3 p-2">
+
+      <div class="row">
+        <div class="col-12" *ngFor="let product of productsData">
+          <div class="product-container" (click)="deleteProduct(product.id_product)">
+            <img [src]="'http://localhost:8000' + product.avatar" alt="Product Image">
+            <div>
+              <h5>{{ product.name }}</h5>
+              <p>Precio: {{ product.price }} €</p>
+            </div>
+            <ion-icon name="trash" class="delete-icon"></ion-icon>
+          </div>
+        </div>
+      </div>
+    
+      <button (click)="addProduct()" class="add-product-button quickart-button quickart-button-white">
+        <ion-icon name="add-circle-sharp" class="hover-icon"></ion-icon>
+        <span>Add Product</span>
+      </button>
+    
+      <ion-list [inset]="true" class="selected-products-list">
+        <ion-item [button]="true" [detail]="false">
+          <div id="selected-products"></div>
+        </ion-item>
+      </ion-list>
+    
+    </div>
+    
+  </div>
+
+  <div class="section-options" *ngIf="showOptions">
+
+    <button class="option-button" (click)="optionsSection()">
+      <span class="text-button">Edit section</span>
+    </button>
+
+    <hr class="vertical-separator">
+
+    <button class="option-button" (click)="deleteSection()">
+      <ion-icon name="trash-outline"></ion-icon>
+    </button>
+
+    <hr class="vertical-separator">
+
+    <button [disabled]="order === 0" class="option-button" (click)="moveSectionUp()" fill="outline">
+      <ion-icon slot="icon-only" name="arrow-up" [ngClass]="{'disabled-icon': order === 0}"></ion-icon>
+    </button>
+
+    <button class="option-button" (click)="moveSectionDown()" fill="outline">
+      <ion-icon slot="icon-only" name="arrow-down"></ion-icon>
+    </button>
+
+  </div>
+
+</section>
+
+<!--Modo vista-->
+
+<section *ngIf="!editMode && sectionData" class="section-banners pt-5 pb-5" [ngStyle]="{
+  'background-image': sectionData.background.image ? 'url(' + sectionData.background.image + ')' : 'none',
+  'background-color': sectionData.background.image || !sectionData.background.hex_color ? '#ffffff' : sectionData.background.hex_color,
+  'opacity': sectionData.background.overlay_opacity,
+  'background-attachment': sectionData.background.fixed_background ? 'fixed' : 'scroll',
+  'background-size': sectionData.background.image ? 'cover' : 'auto'
+}">
+  <div class="container-xxl">
+    <div class="row pb-3 pt-3">
+      <div class="col-6 col-md-4 col-lg-3" *ngFor="let product of productsData">
+        <div class="card">
+          <a [routerLink]="['/product', product.id_product]">
+            <img class="card-img-top" [src]="'http://localhost:8000' + product.avatar" alt="Product Image">
+            <div class="card-body">
+              <h5 class="card-title">{{ product.name }}</h5>
+              <p class="card-text">{{ product.short_description }}</p>
+              <p class="card-text">Precio: {{ product.price }}</p>
+            </div>
+          </a>
+          <button type="button" class="btn btn-primary btn-block">
+            Agregar al carrito
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

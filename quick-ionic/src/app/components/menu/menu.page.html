@@ -1,0 +1,114 @@
+<ion-menu *ngIf="profile" contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title id="menuTitle">
+        <img
+          src="assets/icon/logo.png"
+          width="45px"
+          class="rounded-circle"
+        />
+        <label>QuickCart</label>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list lines="full" id="menuList">
+      <div *ngIf="isLoggedIn()" [routerLink]="['/home']" id="listElement" [class.active-route]="activeRoute === '/home'">
+        <ion-label>Home</ion-label>
+        <i class="bi bi-house-door-fill"></i>
+      </div>
+      <div *ngIf="isLoggedIn()" [routerLink]="['/profile']" id="listElement" [class.active-route]="activeRoute === '/profile'">
+        <ion-label>Profile</ion-label>
+        <i class="bi bi-person-fill"></i>
+      </div>
+      <div *ngIf="isLoggedIn() && profile.user_type == 'Seller'" [routerLink]="['/seller-shops']" id="listElement" [class.active-route]="activeRoute === '/seller-shops'">
+        <ion-label>My Shops</ion-label>
+        <ion-icon name="construct"></ion-icon>
+      </div>
+      <div *ngIf="isLoggedIn()" [routerLink]="['/web-page-catalog']" id="listElement" [class.active-route]="activeRoute === '/web-page-catalog'">
+        <ion-label>Shops</ion-label>
+        <i class="bi bi-bag-fill"></i>
+      </div>
+      <div *ngIf="isLoggedIn()" [routerLink]="['/catalog']" id="listElement" [class.active-route]="activeRoute === '/catalog'">
+        <ion-label>Products</ion-label>
+        <ion-icon name="pricetags"></ion-icon>
+      </div>
+      <div *ngIf="isLoggedIn()" (click)="logout()" id="listElement" style="margin-top: auto;">
+        <i class="bi bi-box-arrow-left"></i>
+        <ion-label>Log out</ion-label>
+      </div>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <div class="row">
+        <div *ngIf="isLoggedIn() && profile" class="col-12 col-sm-4 l-col">
+          <ion-buttons slot="start" *ngIf="profile.user_type==='Seller'">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+          <ion-title>
+            <div
+              [routerLink]="['/home']"
+              id="homeTitle"
+            >
+              <img
+                src="assets/icon/logo.png"
+                width="35px"
+                class="rounded-circle"
+              />
+              <label class="d-none d-lg-block ms-2">QuickCart</label>
+            </div>
+          </ion-title>
+        </div>
+
+        <div *ngIf="!isLoggedIn()" class="col-6 l-col">
+          <ion-title>
+            <div
+              [routerLink]="['/home']"
+              style="text-decoration: none"
+              id="homeTitle"
+            >
+              <img
+                src="assets/icon/logo.png"
+                width="35px"
+                class="rounded-circle"
+              />
+              <label class="d-none d-lg-block">QuickCart</label>
+            </div>
+          </ion-title>
+        </div>
+
+        <div *ngIf="isLoggedIn()" class="d-none d-sm-flex col-sm-4 justify-content-center" id="menuButtons">
+          <button [routerLink]="['/home']" [class.active-route]="activeRoute === '/home'">Home</button>
+          <hr class="vertical-separator" />
+          <button [routerLink]="['/web-page-catalog']" [class.active-route]="activeRoute === '/web-page-catalog'">Shops</button>
+          <hr class="vertical-separator" />
+          <button [class.active-route]="activeRoute === '/catalog'" [routerLink]="['/catalog']">Products</button>
+        </div>
+
+        <div *ngIf="isLoggedIn()" class="d-none d-sm-flex justify-content-end align-items-center col-sm-4">
+          <ion-fab *ngIf="profile && isLoggedIn()" [routerLink]="['/profile']">
+            <ion-label class=" mx-2" style="font-weight: 500">{{ user!.username }}</ion-label>
+            <hr class="d-none d-sm-block vertical-separator" />
+            <ion-fab-button size="small">
+              <img *ngIf="!profile.avatar" src="/assets/avatar.webp" width="40px" />
+              <img *ngIf="profile.avatar" src="http://127.0.0.1:8000/{{ profile.avatar }}" width="40px" height="40px" />
+            </ion-fab-button>
+            <div *ngIf="isLoggedIn()" (click)="logout()" id="listElement" style="margin-top: auto;">
+              <i class="bi bi-box-arrow-right" style="font-size: 1.2em;"></i>
+            </div>
+          </ion-fab>
+        </div>
+
+        <div *ngIf="!isLoggedIn()" class="col-6 r-col justify-content-end" id="menuButtons">
+          <button [routerLink]="['/login']">Log In</button>
+          <hr class="vertical-separator" />
+          <button [routerLink]="['/register']">Sing Up</button>
+        </div>
+      </div>
+    </ion-toolbar>
+  </ion-header>
+</div>

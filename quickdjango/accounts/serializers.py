@@ -1,0 +1,72 @@
+from rest_framework import serializers
+from .models import Profile
+from django.contrib.auth.models import User
+
+class UserSerializerRegister(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'email', 'password')
+
+
+    def create(self, validated_data):
+        password = validated_data.pop('password', None)
+        user = User.objects.create_user(**validated_data, password=password)
+        return user
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'first_name', 'last_name', 'email')
+
+class UserSerializerUpdate(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'email')
+
+class ProfileSerializerRegister(serializers.ModelSerializer):
+    user_id = serializers.PrimaryKeyRelatedField(source='user', queryset=User.objects.all())
+
+    class Meta:
+        model = Profile
+        fields = ['id_profile', 'user_id', 'user_type']
+        
+class ProfileSerializer(serializers.ModelSerializer):
+    user = UserSerializerUpdate()
+
+    class Meta:
+        model = Profile
+        fields = ['id_profile', 'user', 'phone', 'mobile', 'address', 'socials', 'avatar', 'user_type']
+
+    def update(self, instance, validated_data):
+
+        instance.phone = validated_data.get('phone', instance.phone)
+        instance.mobile = validated_data.get('mobile', instance.mobile)
+        instance.address = validated_data.get('address', instance.address)
+        instance.socials = validated_data.get('socials', instance.socials)
+        instance.avatar = validated_data.get('avatar', instance.avatar)
+
+        user_data = validated_data.pop('user', None)
+        if user_data:
+            user_instance = instance.user
+            user_serializer = UserSerializerUpdate(user_instance, data=user_data)
+            if user_serializer.is_valid():
+                user_serializer.save()
+            else:
+                raise serializers.ValidationError(user_serializer.errors)
+        print(instance)
+        instance.save()
+        return instance
+    
+
+class ProfileSerializerByCode(serializers.ModelSerializer):
+    user = UserSerializer()
+    
+    class Meta:
+        model = Profile
+        fields = ['user', 'phone', 'mobile', 'address', 'socials', 'avatar', 'user_type']
+
+class ProfileSerializerWithoutSocials(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ['id_profile', 'user_name', 'user_type', 'phone', 'mobile', 'address']

@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="cancelChanges()">Cancel</ion-button>
+    </ion-buttons>
+    <ion-title slot="">{{ title }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirmChanges()">Done</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar slot="start" (ionInput)="searchbarInput($event)"></ion-searchbar>
+    <ion-button shape="round" slot="end" (click)="addProduct()">
+      <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content color="light" class="ion-padding">
+  <ion-radio-group [(ngModel)]="selectedItem">
+    <ion-list id="modal-list" [inset]="true" *ngIf="filteredItems">
+      <ion-item *ngFor="let item of filteredItems; trackBy: trackItems">
+        <ion-radio [value]="item.value" (ionChange)="checkboxChange($event)">
+          <ion-label style="display: flex; align-items: center;">
+            <ion-img [src]="item.img" style="height: 45px; width: 45px;"></ion-img>
+            <span>
+              {{ item.text }}
+            </span>
+          </ion-label>
+        </ion-radio>
+      </ion-item>
+    </ion-list>
+  </ion-radio-group>
+</ion-content>
