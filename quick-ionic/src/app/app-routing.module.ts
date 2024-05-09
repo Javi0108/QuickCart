@@ -38,7 +38,7 @@ const routes: Routes = [
     data: { menu: 'edit' }
   },
   {
-    path: 'shop-catalog/:id',
+    path: 'shop-catalog/:name/:id',
     loadChildren: () => import('./pages/shop-catalog/shop-catalog.module').then( m => m.ShopCatalogPageModule),
     data: { menu: 'default' }
   },
@@ -56,6 +56,10 @@ const routes: Routes = [
     path: 'product/:id',
     loadChildren: () => import('./pages/product-detail/product-detail.module').then( m => m.ProductDetailPageModule),
     data: { menu: 'default' }
+  },
+  {
+    path: 'cart/:id',
+    loadChildren: () => import('./pages/cart/cart.module').then( m => m.CartPageModule)
   },
   {
     path: 'change-password',

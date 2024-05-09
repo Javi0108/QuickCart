@@ -154,11 +154,7 @@ export class ProductsManagementPage {
     });
   }
 
-  showDetail(id: number) {
-    console.log('Show detail of product with ID:', id);
-  }
-
-    /**
+   /**
    * Método para manejar el cambio en el término de búsqueda
    * @param event Evento de cambio de la barra de búsqueda
    */

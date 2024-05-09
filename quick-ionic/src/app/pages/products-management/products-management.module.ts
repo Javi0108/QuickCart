@@ -19,7 +19,7 @@ import { EditProductModalModule } from 'src/app/components/edit-product-modal/ed
     IonicModule,
     ProductsManagementPageRoutingModule,
     AddProductModalModule,
-    EditProductModalModule
+    EditProductModalModule  
   ],
   declarations: [ProductsManagementPage]
 })

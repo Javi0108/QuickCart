@@ -101,8 +101,9 @@
         </div>
 
         <div *ngIf="!isLoggedIn()" class="col-6 r-col justify-content-end" id="menuButtons">
-          <button *ngIf="activeRoute === '/register'" [routerLink]="['/login']">Log In</button>
-          <button *ngIf="activeRoute === '/login'" [routerLink]="['/register']">Sing Up</button>
+          <button [routerLink]="['/login']">Log In</button>
+          <hr class="vertical-separator" />
+          <button [routerLink]="['/register']">Sing Up</button>
         </div>
       </div>
     </ion-toolbar>
