@@ -15,6 +15,7 @@
 + Javier García Domínguez
 
 ***Fecha:***  10-05-2024
+
 ***Tutor:*** Alejandro Martín Zarza
 
 
@@ -102,7 +103,7 @@ El proyecto logró cubrir la mayoría de las funcionalidades proyectadasSin emba
 + Barra de búsqueda: Búsqueda por empresas.
 + Sistema de pago: Los clientes pueden pagar los productos mediante Stripe, un intermediario entre el cliente y la empresa, la cual gestiona los pago y las cuentas.
 
-Algunas funciones secundarias, como las valoraciones, quedaron fuera del alcance inicial pero se planean para futuras actualizaciones.
+Algunas funciones secundarias, como las valoraciones de los productos, quedaron fuera del alcance inicial pero se planean para futuras actualizaciones.
 
 ### 8. GRADO DE CUMPLIMIENTO EN TIEMPO. <a name="id8"></a>
 
@@ -128,12 +129,29 @@ Describir el producto final obtenido, qué funcionalidades se han implementado, 
 QuickCart es una plataforma de comercio electrónico que permite a las empresas crear y gestionar sus propias tiendas en línea. El sistema ofrece una gama de funcionalidades clave para facilitar la venta de productos:
 
 + Gestión de cuentas: Registro, inicio de sesión y edición de perfiles.
+***IMAGENES***
 + Gestión de tiendas: Empresas pueden gestionar los productos, las webs de las tiendas para la visualizacion de productos.
+***IMAGENES***
 + Gestión del carrito: Clientes pueden agregar productos, ajustar cantidades y eliminar elementos.
+***IMAGENES***
 + Barra de búsqueda: Búsqueda por empresas.
+***IMAGENES***
 + Sistema de pago: Los clientes pueden pagar los productos mediante Stripe, un intermediario entre el cliente y la empresa, la cual gestiona los pago y las cuentas.
+***IMAGENES***
 
 La implementación con Django y Angular garantiza un sistema estable y escalable. El despliegue en Azure facilita el mantenimiento y la escalabilidad.
     
 ### 12.  EXPERIENCIAS APRENDIDAS A TENER EN CUENTA EN PRÓXIMOS PROYECTOS. <a name="id12"></a>
+
+Durante el desarrollo de QuickCart, se aprendieron varias lecciones importantes:
+
++ Comunicación y colaboración: La comunicación constante en el equipo y el uso de GitHub para el control de versiones fue esencial para el éxito del proyecto.
++ Planificación flexible: Mantener una planificación flexible permitió ajustar el cronograma para compensar retrasos inesperados.
++ Organización: Mantener el proyecto organizado de una manera fácilmente entendible para que en el desarrollo de la aplicación no se hagan difíciles tareas que deberían ser fáciles.
+
+Estas experiencias nos servirán para futuros proyectos, permitiendonos mejorar la planificación y la ejecución del desarrollo.
+
 ### 13.  CONCLUSIONES, COMENTARIOS Y VALORACIÓN FINAL. <a name="id13"></a>
+
+El proyecto de QuickCart ha sido un éxito, el equipo ha logrado los objetivos propuestos y se ha conseguido realizar una aplicación funcional siguiendo la misma idea que se tenía desde el principio. Aunque en el desarrollo del proyecto se presentaron numerosos problemas como la integración de algunas funcionalidades o la desviación de tareas debido a que el tiempo para finalizar el proyecto era bastante limitado.
+En cuanto al equipo, este se encuentra más que satisfecho con el resultado obtenido de la aplicación, y piensa que añadiendo sus debidas actualizaciones para completar así todas las ideas pensadas para el desarrollo, QuickCart podría ser una herramienta valiosa para aquellas empresas que busquen expandirse o digitalizarse pero no tengan los conocimientos suficientes. A lo largo de el desarrollo de la aplicación hemos adquirido ciertas experiencias que nos ayudarán en un futuro no muy lejano a mejorar procesos y el enfoque a la hora de desarrollar una aplicación.
