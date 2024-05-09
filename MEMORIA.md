@@ -129,16 +129,46 @@ Describir el producto final obtenido, qué funcionalidades se han implementado, 
 QuickCart es una plataforma de comercio electrónico que permite a las empresas crear y gestionar sus propias tiendas en línea. El sistema ofrece una gama de funcionalidades clave para facilitar la venta de productos:
 
 + Gestión de cuentas: Registro, inicio de sesión y edición de perfiles.
-***IMAGENES***
-+ Gestión de tiendas: Empresas pueden gestionar los productos, las webs de las tiendas para la visualizacion de productos.
-***IMAGENES***
-+ Gestión del carrito: Clientes pueden agregar productos, ajustar cantidades y eliminar elementos.
-***IMAGENES***
-+ Barra de búsqueda: Búsqueda por empresas.
-***IMAGENES***
-+ Sistema de pago: Los clientes pueden pagar los productos mediante Stripe, un intermediario entre el cliente y la empresa, la cual gestiona los pago y las cuentas.
-***IMAGENES***
+<div align="center">
 
+![](./img/profile_img.png)
+
+</div>
+
++ Gestión de tiendas: Empresas pueden gestionar los productos, las webs de las tiendas para la visualizacion de productos.
+<div align="center">
+
+![](./img/shops_img.png)
+
+</div>
+<div align="center">
+
+![](./img/shops_img(2).png)
+
+</div>
+
++ Gestión del carrito: Clientes pueden agregar productos, ajustar cantidades y eliminar elementos.
+***IMAGEN***
+<!-- <div align="center">
+
+![](./img/cart_img.png)
+
+</div> -->
+
++ Barra de búsqueda: Búsqueda por empresas.
+<div align="center">
+
+![](./img/barra_de_busqueda.png)
+
+</div>
+
++ Sistema de pago: Los clientes pueden pagar los productos mediante Stripe, un intermediario entre el cliente y la empresa, la cual gestiona los pago y las cuentas.
+***IMAGEN***
+<!-- <div align="center">
+
+![](./img/payment_img.png)
+
+</div> -->
 La implementación con Django y Angular garantiza un sistema estable y escalable. El despliegue en Azure facilita el mantenimiento y la escalabilidad.
     
 ### 12.  EXPERIENCIAS APRENDIDAS A TENER EN CUENTA EN PRÓXIMOS PROYECTOS. <a name="id12"></a>
