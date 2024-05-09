@@ -17,10 +17,13 @@
     <h3>Products</h3>
     <ion-list>
       <ion-item *ngFor="let orderProduct of cart.order_products">
-        <ion-label [routerLink]="['/product',orderProduct.product.id_product]">{{ orderProduct.product.name }}</ion-label>
+        <ion-label [routerLink]="['/product', orderProduct.product.id_product]">{{ orderProduct.product.name }}</ion-label>
         <ion-label>{{ orderProduct.product.price }}</ion-label>
-        <ion-note slot="end">{{ orderProduct.quantity }}</ion-note>
-        <ion-button color="danger" slot="end">
+        <ion-input type="number" [(ngModel)]="orderProduct.quantity"></ion-input>
+        <ion-button color="primary" (click)="updateQuantity(orderProduct)">
+          Update
+        </ion-button>
+        <ion-button color="danger" (click)="removeFromCart(orderProduct)">
           <ion-icon name="trash-outline"></ion-icon>
         </ion-button>
       </ion-item>
@@ -30,3 +33,4 @@
     <p>No cart data available.</p>
   </div>
 </ion-content>
+  

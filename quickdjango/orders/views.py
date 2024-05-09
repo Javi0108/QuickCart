@@ -43,3 +43,23 @@ class OrderView(APIView):
         order.remove_product(product)
 
         return Response({'message': 'Product removed from cart'}, status=status.HTTP_204_NO_CONTENT)
+    
+    def put(self, request, pk):
+        order = get_object_or_404(Order, id=pk, profile=request.user.profile, status='Pending')
+        product_id = request.data.get('product_id')
+        quantity = request.data.get('quantity')
+
+        if not product_id or not quantity:
+            return Response({'error': 'Product ID and quantity are required'}, status=status.HTTP_400_BAD_REQUEST)
+
+        product = get_object_or_404(Product, id_product=product_id)
+        order_product = order.products.filter(product=product).first()
+
+        if not order_product:
+            return Response({'error': 'Product not found in cart'}, status=status.HTTP_404_NOT_FOUND)
+
+        order_product.quantity = quantity
+        order_product.save()
+
+        serializer = OrderSerializer(order)
+        return Response(serializer.data)

@@ -23,6 +23,11 @@ export class OrderService {
     return this.http.post<any>(`${this.baseURL}add/`, data, { headers: this.getHeaders() });
   }
   
+  updateProductQuantity(orderId: number, productId: number, quantity: number): Observable<any> {
+    const data = { product_id: productId, quantity };
+    return this.http.put<any>(`${this.baseURL}update/${orderId}/`, data, { headers: this.getHeaders() });
+  }
+
   removeProductFromOrder(orderId: number, productId: number): Observable<any> {
     return this.http.delete<any>(`${this.baseURL}${orderId}/?product_id=${productId}`, { headers: this.getHeaders() });
   }  

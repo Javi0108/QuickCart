@@ -1,42 +1,70 @@
-import { Component, OnInit } from '@angular/core';
-import { OrderService } from '../../services/order.service';
-import { Order, OrderProduct } from '../../interfaces/cart.interface';
-import { ActivatedRoute } from '@angular/router';
+  import { Component, OnInit } from '@angular/core';
+  import { OrderService } from '../../services/order.service';
+  import { Order, OrderProduct } from '../../interfaces/cart.interface';
+  import { ActivatedRoute } from '@angular/router';
+import { Product } from 'src/app/interfaces/product.interface';
 
-@Component({
-  selector: 'app-cart',
-  templateUrl: './cart.page.html',
-  styleUrls: ['./cart.page.scss'],
-})
-export class CartPage implements OnInit {
-  cart: Order | null = null;
-  orderId!: number;
+  @Component({
+    selector: 'app-cart',
+    templateUrl: './cart.page.html',
+    styleUrls: ['./cart.page.scss'],
+  })
+  export class CartPage implements OnInit {
+    cart!: Order;
+    orderId!: number;
 
-  constructor(private route: ActivatedRoute, private orderService: OrderService) { }
+    constructor(private route: ActivatedRoute, private orderService: OrderService) { }
 
-  ngOnInit() {
-    const orderId = this.route.snapshot.paramMap.get('id');
-    if (orderId) {
-      this.orderId = +orderId;
-      this.loadOrders(+orderId);
-    } else {
-      console.error('Order ID not found in URL');
-    }
-  }
-
-  loadOrders(orderId: number) {
-    this.orderService.getOrder(orderId).subscribe(
-      (response: Order) => {
-        this.cart = response;
-        console.log('Loaded cart:', this.cart);
-      },
-      (error: any) => {
-        console.error('Error loading cart:', error);
+    ngOnInit() {
+      const orderId = this.route.snapshot.paramMap.get('id');
+      if (orderId) {
+        this.orderId = +orderId;
+        this.loadOrders(+orderId);
+      } else {
+        console.error('Order ID not found in URL');
       }
-    );
-  }
+    }
 
-  getTotalPrice(orderProduct: OrderProduct): number {
-    return orderProduct.quantity * Number(orderProduct.product.price);
+    loadOrders(orderId: number) {
+      this.orderService.getOrder(orderId).subscribe(
+        (response: Order) => {
+          this.cart = response;
+          console.log('Loaded cart:', this.cart);
+        },
+        (error: any) => {
+          console.error('Error loading cart:', error);
+        }
+      );
+    }
+
+    getTotalPrice(orderProduct: OrderProduct): number {
+      return orderProduct.quantity * Number(orderProduct.product.price);    
+    }
+
+    // updateQuantity(productId: number, quantity:number){
+    //   this.orderService.updateProductQuantity(this.cart.id_order, productId, quantity).subscribe({
+    //     next(response) {
+    //       console.log("Product quantity updated successfully");
+    //       const updatedProduct = this.cart.order_products.find((product:Product) => product.id_product === productId);
+    //       if (updatedProduct) {
+    //         updatedProduct.quantity = quantity;
+    //       }
+    //     },
+    //     error(error) {
+    //       console.error('Error updating product quantity:', error);
+    //     },
+    //   });
+    // }
+
+    removeFromCart(productId: number) {
+      this.orderService.removeProductFromOrder(this.cart.id_order, productId).subscribe({
+        next(response) {
+          console.log("Producto eliminado correctamente del carrito")
+        },
+        error(error) {
+          console.error('Error al obtener los datos del pedido/producto:', error);
+        },
+      });
+    }
+
   }
-}
