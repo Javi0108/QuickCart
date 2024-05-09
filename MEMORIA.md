@@ -115,16 +115,12 @@ El proyecto se mantuvo dentro del presupuesto previsto de **6.427€**. Para evi
 
 ### 10.  CLAUSULAS. <a name="id10"></a>
 
-Indicar alguna cláusula, como qué sucede en caso de retraso, cómo se realizarán los pagos, cómo se controlará la calidad, etc.
-
 En el contrato del proyecto, se especificaron las siguientes cláusulas clave:
 
 + Retrasos: Se acordó un período de 2 meses para retrasos no previstos, con multas en caso de superación significativa.
 + Pagos: Los pagos serán realizados por Stripe, un intermediario que nos ayuda a gestionar los pagos y todas las cuentas.
 
 ### 11.  PRODUCTO FINAL. <a name="id11"></a>
-
-Describir el producto final obtenido, qué funcionalidades se han implementado, que hay que tener en cuenta para usarla, etc. Describirlo como si fuera un pequeño MANUAL DE USO de la aplicación, ya que se usará este punto para corregir el proyecto.
 
 QuickCart es una plataforma de comercio electrónico que permite a las empresas crear y gestionar sus propias tiendas en línea. El sistema ofrece una gama de funcionalidades clave para facilitar la venta de productos:
 
