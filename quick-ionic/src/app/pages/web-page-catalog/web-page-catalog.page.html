@@ -1,3 +1,8 @@
+<ion-content *ngIf="!shops" class="loading-content">
+  <div class="loading-container" style="margin-top: 250px; height: 100vh;">
+    <ion-icon name="rocket-outline" class="moving-icon loading-icon" style="font-size: 300px;"></ion-icon>
+  </div>
+</ion-content>
 <ion-content *ngIf="shops">
   <div class="app-catalog">
     <div class="container">

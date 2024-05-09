@@ -5,41 +5,34 @@
         <ion-row class="ion-align-items-center">
           <ion-col size-lg="6" size-md="12" size="12">
             <div class="product-images">
-
               <div class="image-selected">
-                <img [src]="selectedImage || 'http://localhost:8000' + productData.avatar" id="current" alt="Avatar del producto">
+                <img [src]="'http://localhost:8000' + selectedImage" id="current"
+                  alt="Avatar del producto">
               </div>
               <div class="images">
-                <img *ngFor="let image of productData.images" [src]="'http://localhost:8000' + image" id="current" alt="Imagenes del producto"
-                  (click)="selectImage(image)">
+                <img *ngFor="let productImages of productData.images" [src]="'http://localhost:8000' + productImages.image" id="current"
+                  alt="Imagenes del producto" (click)="selectImage(productImages.image)">
               </div>
             </div>
           </ion-col>
           <ion-col size-lg="6" size-md="12" size="12">
             <div class="product-info">
-              <h2 class="title">Nombre: {{productData.name}}</h2>
-              <p class="category">Etiquetas: {{productData.tags}}</p>
-              <h3 class="price">Precio: {{productData.price}} $</h3>
-              <p class="info-text">Descripcion Corta:{{productData.short_description}}</p>
+              <h2 class="title">{{productData.name}}</h2>
+              <h3 class="price">Price: {{productData.price}} $</h3>
+              <p class="info-text">Short Description: {{productData.short_description}}</p>
               <ion-row>
                 <ion-col size-lg="4" size-md="4" size="12">
+                  Quantity:
                   <ion-item>
-                    <ion-input type="number" #quantity id="quantity" min="1" max="{{productData.stock_quantity}}" value="1" aria-label="Quantity"></ion-input>
+                    <ion-input type="number" #quantity id="quantity" min="1" max="{{productData.stock_quantity}}"
+                      value="1" aria-label="Quantity"></ion-input>
                   </ion-item>
                 </ion-col>
               </ion-row>
               <div class="bottom-buttons">
-                <ion-row class="ion-align-items-end">
-                  <ion-col size-lg="6" size-md="6" size="12">
-                    <ion-button class="cart-button" expand="block" (click)="addToCart()">Add to Cart</ion-button>
-                  </ion-col>
-                  <ion-col size-lg="6" size-md="6" size="12">
-                    <ion-button class="wish-button" expand="block">
-                      <ion-icon name="heart-outline"></ion-icon>
-                      To Wishlist
-                    </ion-button>
-                  </ion-col>
-                </ion-row>
+                <button class="quickart-button quickart-button-violet" expand="block" (click)="addToCart()"><ion-icon
+                    name="cart-outline"></ion-icon> Add to
+                  Cart</button>
               </div>
             </div>
           </ion-col>
@@ -49,17 +42,14 @@
 
     <ion-card class="product-extend-info">
       <ion-card-content>
+        <h2><strong>Details</strong></h2>
         <ion-row>
           <ion-col>
-            <h2 class="title">Details</h2>
+            <h4 class="title">Description</h4>
             <p>{{productData.description}}</p>
           </ion-col>
         </ion-row>
       </ion-card-content>
-    </ion-card>
-
-    <ion-card class="product-reviews">
-
     </ion-card>
   </div>
 </ion-content>

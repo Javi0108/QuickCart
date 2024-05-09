@@ -3,7 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from .models import Shop, Product, ShopSectionOrder, Section, ProductImage
 from .serializers import ShopSerializer, ShopDetailSerializer, ShopSectionSerializer
-from .serializers import ShopSerializer,ProductSerializer
+from .serializers import ShopSerializer,ProductSerializer,ProductImageSerializer
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -182,7 +182,10 @@ class ProductsView(APIView):
             try:
                 product = Product.objects.get(id_product=id_product)
                 serializer = ProductSerializer(product)
-                return Response(serializer.data, status=status.HTTP_200_OK)
+                product_images = ProductImage.objects.filter(product=product)
+                product_data = serializer.data
+                product_data['images'] = ProductImageSerializer(product_images, many=True).data
+                return Response(product_data, status=status.HTTP_200_OK)
             except Product.DoesNotExist:
                 return Response({"message": "Producto no encontrado"}, status=status.HTTP_404_NOT_FOUND)
 

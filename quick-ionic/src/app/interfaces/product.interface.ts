@@ -8,7 +8,7 @@ export interface Product {
     price: number;
     avatar: string; 
     stock_quantity: number;
-    images: ProductImage[] | null;
+    images:  ProductImage[] | null;
     tags: Tag[] | null; 
 }
 

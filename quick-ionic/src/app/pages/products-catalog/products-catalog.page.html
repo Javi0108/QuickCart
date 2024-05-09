@@ -1,6 +1,9 @@
-<ion-spinner *ngIf="!products"></ion-spinner>
-
-<div class="app-catalog">
+<ion-content *ngIf="!pageloaded" class="loading-content">
+  <div class="loading-container" style="margin-top: 250px; height: 100vh;">
+    <ion-icon name="rocket-outline" class="moving-icon loading-icon" style="font-size: 300px;"></ion-icon>
+  </div>
+</ion-content>
+<ion-content class="app-catalog">
   <div class="container">
     <ion-grid>
       <h2 class="title">Catalog</h2>
@@ -36,4 +39,4 @@
       </div>
     </ion-grid>
   </div>
-</div>
+</ion-content>

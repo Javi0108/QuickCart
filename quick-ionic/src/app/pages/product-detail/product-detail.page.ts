@@ -38,7 +38,7 @@ export class ProductDetailPage implements OnInit, AfterViewInit {
     this.productService.getProductById(this.productId).subscribe({
       next: (productData: Product) => {
         this.productData = productData;
-        console.log(productData)
+        this.selectedImage = this.productData.avatar
         if (!this.productData) {
           console.error('No se encontró el producto con el ID proporcionado.');
         }
@@ -49,8 +49,8 @@ export class ProductDetailPage implements OnInit, AfterViewInit {
     });
   }
 
-  selectImage(image: any) {
-    this.selectedImage = image.img;
+  selectImage(image: string) {
+    this.selectedImage = image;
   }
 
   addToCart() {
