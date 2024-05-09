@@ -38,7 +38,7 @@ const routes: Routes = [
     data: { menu: 'edit' }
   },
   {
-    path: 'shop-catalog/:id',
+    path: 'shop-catalog/:name/:id',
     loadChildren: () => import('./pages/shop-catalog/shop-catalog.module').then( m => m.ShopCatalogPageModule),
     data: { menu: 'default' }
   },

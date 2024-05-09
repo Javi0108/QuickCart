@@ -1,11 +1,11 @@
 <ion-content *ngIf="shops">
   <div class="app-catalog">
     <div class="container">
-      <div class="search-container mt-3">
-        <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="onSearchChange($event)"></ion-searchbar>
-      </div>
       <ion-grid>
         <h2 class="title">Shops</h2>
+        <div class="search-container mt-3">
+          <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="onSearchChange($event)"></ion-searchbar>
+        </div>
         <ng-container *ngIf="filteredShops && filteredShops.length">
           <ion-row>
             <ion-col size="12" size-md="6" *ngFor="let shop of filteredShops; let i = index">
@@ -14,19 +14,13 @@
                   <div class="bg-image">
                     <a [routerLink]="['/web-page', shop.name, shop.id_shop]">
                       <img [src]="'http://localhost:8000' + shop.logo" alt="Product Image">
-                      <div class="btn-overlay">
-                        <ion-button>View</ion-button>
-                      </div>
+                      <a class="btn btn-overlay"><strong>View</strong></a>
                     </a>
                   </div>
                   <div class="card-body">
-                    <ion-card-header>
-                      <ion-card-title>{{ shop.name }}</ion-card-title>
-                      <p>{{ shop.title }}</p>
-                    </ion-card-header>
-                    <ion-card-content>
-                      <p>{{ shop.description }}</p>
-                    </ion-card-content>
+                    <h5 class="card-name">{{ shop.name }}</h5>
+                    <p class="card-title">{{ shop.title }}</p>
+                    <p class="card-text">{{ shop.description }}</p>
                   </div>
                 </div>
               </div>
@@ -38,12 +32,11 @@
   </div>
 
   <div>
-    <ion-text *ngIf="!filteredShops || filteredShops.length === 0" class="ion-text-center d-flex flex-column align-items-center justify-content-center">
+    <ion-text *ngIf="!filteredShops || filteredShops.length === 0"
+      class="ion-text-center d-flex flex-column align-items-center justify-content-center">
       <ion-icon name="rocket-outline" class="moving-icon"></ion-icon>
       <h1 class="mt-3">Nothing found</h1>
       <p class="mt-2">Try looking for something else.</p>
     </ion-text>
   </div>
 </ion-content>
-
-

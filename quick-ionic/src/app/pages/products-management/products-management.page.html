@@ -11,7 +11,7 @@
             <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="onSearchChange($event)" show-cancel-button="always" cancel-button-text="Cancel" cancel-button-icon="trash" placeholder="Search"></ion-searchbar>
           </ion-col>
           <ion-col size="1">
-            <ion-button class="btn-add" title="Add Product Form" (click)="openAddModal()"><ion-icon name="add-outline"></ion-icon></ion-button>
+            <button class="quickart-button quickart-button-violet btn-add" title="Add Product Form" (click)="openAddModal()"><ion-icon name="add-outline"></ion-icon></button>
           </ion-col>
         </ion-row>
 
@@ -19,7 +19,7 @@
           <ng-container *ngFor="let product of filteredProducts;">
             <div class="col-lg-3 col-md-6 col-sm-12 card_container">
               <div class="card">
-                <div class="bg-image hover-overlay" mdbRipple rippleColor="light">
+                <div class="bg-image hover-overlay">
                   <ion-img [src]="'http://localhost:8000' + product.avatar" alt="Product Image"></ion-img>
                 </div>
                 <div class="card-body">

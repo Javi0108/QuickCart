@@ -1,14 +1,18 @@
 <ion-spinner *ngIf="!products"></ion-spinner>
-
 <div class="app-catalog">
   <div class="container">
     <ion-grid>
-      <h2 class="title">Tienda {{shopName}} catalog</h2>
+      <h2 class="title">{{shopName}} catalog</h2>
+      <ion-row class="ion-text-end" *ngIf='products'>
+        <ion-col size="12">
+          <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="onSearchChange($event)" show-cancel-button="always" cancel-button-text="Cancel" cancel-button-icon="trash" placeholder="Search"></ion-searchbar>
+        </ion-col>
+      </ion-row>
       <ion-row *ngIf='products'>
-        <ng-container *ngFor="let product of products;">
-          <div class="col-md-3 card_container">
+        <ng-container *ngFor="let product of filteredProducts;">
+          <div class="col-lg-3 col-md-6 col-sm-12 card_container">
             <div class="card">
-              <div class="bg-image hover-overlay" mdbRipple rippleColor="light">
+              <div class="bg-image hover-overlay">
                 <ion-img class="img" [src]="'http://localhost:8000' + product.avatar" alt="Product Image"></ion-img>
                 <a [routerLink]="['/product',product.id_product]" class="btn btn-overlay"> <ion-icon
                     name="cart-outline"></ion-icon> Shop</a>
@@ -22,8 +26,12 @@
           </div>
         </ng-container>
       </ion-row>
-      <div *ngIf="!products || products.length === 0">
-        <p class="title">No hay productos disponibles</p>
+      <div>
+        <ion-text *ngIf="!filteredProducts || filteredProducts.length === 0" class="ion-text-center d-flex flex-column align-items-center justify-content-center">
+          <ion-icon name="rocket-outline" class="moving-icon"></ion-icon>
+          <h1 class="mt-3">Nothing found</h1>
+          <p class="mt-2">Try looking for something else.</p>
+        </ion-text>
       </div>
     </ion-grid>
   </div>
