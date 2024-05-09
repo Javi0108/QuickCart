@@ -51,11 +51,15 @@
 }
 
 .alert-wrapper.sc-ion-alert-md {
-    color: var(--white-color);
-    background-color: black !important;
+    color: #673de6;
+    background-color: #c0c0c0e5 !important;
 
     .alert-title {
-        color: var(--white-color) !important;
+        color: #582ae4;
+    }
+    
+    .alert-message{
+        color: rgb(27, 27, 27) !important;
     }
 
     .alert-radio-group {
@@ -68,11 +72,34 @@
     }
 
     .alert-button {
-        background-color: red !important;
+        color: #201f2e;
+        margin: 0px 5px 0px 0px;
+        background-color: transparent;
+        padding: 10px 23px;
+        font-weight: 600;
+        font-family: DM Sans, sans-serif;
+        cursor: pointer;
+        border-radius: 8px;
+        display: inline-flex;
+        /* Para permitir el alineamiento vertical */
+        align-items: center;
+        /* Alinea el contenido verticalmente */
+        background-color: var(--white-color);
+        font-weight: 700;
+        color: var(--primary-color);
+        border: 1px solid #582ae4 ;
+
+        &:hover {
+            background-color: #e6e6e6;
+        }
     }
 
     .alert-button-inner.sc-ion-alert-md {
-        color: var(--white-color) !important;
+        color: var(--primary-color);
+    }
+
+    .alert-button-role-cancel{
+        border: none;
     }
 }
 
@@ -229,7 +256,7 @@
     color: var(--white-color);
 
     &:hover {
-        background-color: var(--primary-color-hover);
+        background-color: var(--primary-color-hover) !important;
     }
 }
 

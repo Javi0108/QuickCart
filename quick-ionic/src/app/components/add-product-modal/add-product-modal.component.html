@@ -15,11 +15,34 @@
       formControlName="shortDescription"></ion-input>
     <ion-input label="Description" label-placement="floating" fill="outline" formControlName="description"></ion-input>
     <ion-input label="Price" label-placement="floating" fill="outline" formControlName="price"></ion-input>
-    <div class="image-input-container">
+
+
+
+    <div class="image-input-container visually-hidden">
       <ion-img *ngIf="imagePreview" [src]="imagePreview" class="uploaded-image"></ion-img>
       <ion-input id="image-input" label="Logo" fill="outline" type="file" formControlName="image"
         (change)="onFileSelected($event)" class="file-input"></ion-input>
+
+        <input type="file" (change)="onFileSelected($event)" class="zyro-image-selector__input visually-hidden">
+
     </div>
+
+    <div class="zyro-image-selector" (click)="selectImage()">
+      <ion-input id="image-input" label="Logo" fill="outline" type="file" formControlName="image"
+        (change)="onFileSelected($event)" class="file-input visually-hidden"></ion-input>
+      <button class="zyro-image-selector__button" title="Replace image">
+        <ion-icon *ngIf="!imagePreview" class="zyro-image-selector__image" name="image-sharp"></ion-icon>
+        <ion-img *ngIf="imagePreview" class="zyro-image-selector__image" [src]="imagePreview"></ion-img>
+        <div class="zyro-image-selector__description">
+          <ion-icon name="photo_library" class="icon material-symbols-rounded zyro-image-selector__icon"></ion-icon>
+          <p *ngIf="imagePreview" class="text-body-2">Replace image</p>
+          <p *ngIf="!imagePreview" class="text-body-2">Select image</p>
+        </div>
+      </button>
+    </div>
+
+
+
     <ion-input id="image-input" label="Gallery" fill="outline" type="file" formControlName="gallery"
       (change)="onGallerySelected($event)" class="file-input" multiple></ion-input>
     <ion-row *ngIf="galleryPreviews">

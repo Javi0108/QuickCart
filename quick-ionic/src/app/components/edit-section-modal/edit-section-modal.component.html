@@ -17,10 +17,13 @@
       </button>
     </div>
 
-    <ion-button (click)="clearImage()" color="danger" expand="block">Clear Image</ion-button>
-
+    <button class="quickart-button quickart-button-white d-flex justify-content-center mb-3" (click)="clearImage()" style="width: 100%;">
+      <ion-icon name="trash-outline"></ion-icon>
+      <span class="text-button">Clear Image</span>
+    </button>
+    
     <ion-item>
-      <div class="color-preview me-2" [style.background-color]="hexColor" style="padding: 15px; border-radius: 160px;" ></div>
+      <div class="color-preview me-2" [style.background-color]="hexColor" style="padding: 15px; border-radius: 50%; border: 1px solid #673de6;" ></div>
       <ion-label class="text-bold-2">Section Color</ion-label>
       <input type="text" [(ngModel)]="hexColor" placeholder="Enter Hexadecimal Color" class="color-input">
     </ion-item>
