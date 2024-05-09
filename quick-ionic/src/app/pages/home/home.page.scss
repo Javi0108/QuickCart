@@ -1,12 +1,12 @@
 .home-page {
-
   .banner-image {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/assets/banner1.webp");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+      url("/assets/banner2.jpg");
 
     height: 100%;
-    min-height: 400px;
-    max-height: 400px;
-
+    min-height: 50vh;
+    max-height: 50vh;
+    
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -14,12 +14,65 @@
   }
 
   .banner-text {
+    backdrop-filter:  blur(0px);
+
+    width: 100%;
+    height: 100%;
     text-align: center;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
+  }
+
+  .icon_container {
+    gap: 6rem;
+    color: white;
+    font-size: 25px;
+  }
+
+  .icon {
+    width: 100px;
+    background-color: rgba(255, 255, 255, 0.33);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .interestingSites {
+    text-align: center;
+    transition: all .3s ease;  
+
+    & label {
+      padding: 1rem;
+      border-radius: 50%;
+      background-color: var(--primary-color);
+      font-size: 45px;
+      color: white;
+      transition: all .3s ease;
+
+    }
+  }
+
+  .interestingSites {
+    & label:hover {
+      background-color: var(--primary-color-hover);
+    }
+  }
+
+  .accessText {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .card {
+    transition: all .4s ease;
+  }
+
+  .card:hover {
+    box-shadow: 3px 3px 3px var(--primary-color);
+    border: 1px solid var(--primary-color);
   }
 
   .banner-button {
@@ -34,40 +87,21 @@
     cursor: pointer;
   }
 
-  .banner-button:hover {
-    background-color: grey;
-    border-color: black;
-    color: black;
+  img {
+    border-radius: 2px;
   }
 
-  .banner2-image{
-    background-image: url("/assets/logo.webp");
+  .toStartButton {
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    bottom: 30px; /* Posición desde la parte inferior */
+    left: 30px; /* Posición desde la parte derecha */
+    font-size: 30px;
+    color: white;
+    text-align: center;
+    border-radius: 50%;
   }
+
 }
-
-
-// Extra small devices (portrait phones, less than 576px)
-@media (max-width: 575.98px) {
-
-  .home-page {
-
-    .banner-image {
-      min-height: 200px;
-      height: 200px;
-    }
-
-    .banner-text {}
-  }
-}
-
-// Small devices (landscape phones, 576px and up)
-@media (min-width: 576px) and (max-width: 767.98px) {}
-
-// Medium devices (tablets, 768px and up)
-@media (min-width: 768px) and (max-width: 991.98px) {}
-
-// Large devices (desktops, 992px and up)
-@media (min-width: 992px) and (max-width: 1199.98px) {}
-
-// Extra large devices (large desktops, 1200px and up)
-@media (min-width: 1200px) {}

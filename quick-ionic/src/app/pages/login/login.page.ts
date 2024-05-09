@@ -11,9 +11,12 @@ import { Router } from "@angular/router";
 export class LoginPage implements OnInit {
   pageloaded: boolean;
   loginForm: FormGroup;
+  passwordSeen: boolean;
 
   constructor(private formBuilder: FormBuilder, public authService: AuthService, public router: Router) {
     this.pageloaded = false;
+    this.passwordSeen = false;
+    
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', [Validators.required]],
@@ -30,6 +33,27 @@ export class LoginPage implements OnInit {
       error => {
         console.log(error)
       });
+    }
+  }
+
+  showHide(event: any, inputId: string) {
+    const parentElement = document.getElementById(event.target.id);
+    const input = document.getElementById(inputId) as HTMLInputElement;
+    
+    if (input != undefined) {
+      if (parentElement != undefined) {
+        if (this.passwordSeen == false) {
+          input.type = 'text';
+          parentElement.innerHTML =
+            '<ion-icon slot="icon-only" name="eye-off" aria-hidden="true"></ion-icon>';
+          this.passwordSeen = true;
+        } else {
+          input.type = 'password';
+          parentElement.innerHTML =
+            '<ion-icon slot="icon-only" name="eye" aria-hidden="true"></ion-icon>';
+          this.passwordSeen = false;
+        }
+      }
     }
   }
 

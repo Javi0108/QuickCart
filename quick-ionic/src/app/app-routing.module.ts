@@ -75,7 +75,8 @@ const routes: Routes = [
   },
   {
     path: 'not-found',
-    loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
+    loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule),
+    data: { menu: 'edit' }
   },
   {
     path: '',
@@ -84,7 +85,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'home',
+    redirectTo: 'not-found',
     pathMatch: 'full'
   },
 ];

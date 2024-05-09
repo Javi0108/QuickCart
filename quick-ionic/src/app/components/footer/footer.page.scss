@@ -1,3 +1,17 @@
+.titles {
+    color: var(--primary-color);
+}
+
+.content-titles {
+    color: var(--primary-color-hover);
+}
+
+ul {
+    list-style-type: none; /* Sin decoradores */
+    margin: 0; /* Elimina margen */
+    padding-left: 0; /* Elimina padding izquierdo */
+  }
+
 // Extra small devices (portrait phones, less than 576px)
 @media (max-width: 575.98px) {  }
 
