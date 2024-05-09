@@ -7,7 +7,9 @@ from .serializers import OrderSerializer
 from shops.models import Product
 
 class OrderView(APIView):
-    
+    http_methods = ["get", "put", "post", "delete"]
+
+
     def get(self, request, order_id=None):
         if order_id is not None:
             order = get_object_or_404(Order, id_order=order_id)
@@ -32,9 +34,23 @@ class OrderView(APIView):
         serializer = OrderSerializer(order)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-    def delete(self, request, pk):
-        order = get_object_or_404(Order, id=pk, profile=request.user.profile, status='Pending')
+    def put(self, request, pk):
+        order = get_object_or_404(Order, id_order=pk, profile=request.user.profile, status='Pending')
         product_id = request.data.get('product_id')
+        quantity = request.data.get('quantity')
+
+        if not product_id or not quantity:
+            return Response({'error': 'Product ID and quantity are required'}, status=status.HTTP_400_BAD_REQUEST)
+
+        product = get_object_or_404(Product, id_product=product_id)
+        order.update_product_quantity(product, quantity)
+
+        serializer = OrderSerializer(order)
+        return Response(serializer.data)
+    
+    def delete(self, request, pk):
+        order = get_object_or_404(Order, id_order=pk, profile=request.user.profile, status='Pending')
+        product_id = request.query_params.get('product_id')
 
         if not product_id:
             return Response({'error': 'Product ID is required'}, status=status.HTTP_400_BAD_REQUEST)
@@ -44,22 +60,3 @@ class OrderView(APIView):
 
         return Response({'message': 'Product removed from cart'}, status=status.HTTP_204_NO_CONTENT)
     
-    def put(self, request, pk):
-        order = get_object_or_404(Order, id=pk, profile=request.user.profile, status='Pending')
-        product_id = request.data.get('product_id')
-        quantity = request.data.get('quantity')
-
-        if not product_id or not quantity:
-            return Response({'error': 'Product ID and quantity are required'}, status=status.HTTP_400_BAD_REQUEST)
-
-        product = get_object_or_404(Product, id_product=product_id)
-        order_product = order.products.filter(product=product).first()
-
-        if not order_product:
-            return Response({'error': 'Product not found in cart'}, status=status.HTTP_404_NOT_FOUND)
-
-        order_product.quantity = quantity
-        order_product.save()
-
-        serializer = OrderSerializer(order)
-        return Response(serializer.data)

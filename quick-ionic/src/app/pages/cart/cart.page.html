@@ -19,11 +19,11 @@
       <ion-item *ngFor="let orderProduct of cart.order_products">
         <ion-label [routerLink]="['/product', orderProduct.product.id_product]">{{ orderProduct.product.name }}</ion-label>
         <ion-label>{{ orderProduct.product.price }}</ion-label>
-        <ion-input type="number" [(ngModel)]="orderProduct.quantity"></ion-input>
-        <ion-button color="primary" (click)="updateQuantity(orderProduct)">
+        <ion-input aria-label="quantity" type="number" [(ngModel)]="orderProduct.quantity"></ion-input>
+        <ion-button color="primary" (click)="updateQuantity(orderProduct.product.id_product, orderProduct.quantity)">
           Update
         </ion-button>
-        <ion-button color="danger" (click)="removeFromCart(orderProduct)">
+        <ion-button color="danger" (click)="removeFromCart(orderProduct.product.id_product)">
           <ion-icon name="trash-outline"></ion-icon>
         </ion-button>
       </ion-item>

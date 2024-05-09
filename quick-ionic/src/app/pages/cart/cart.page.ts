@@ -19,13 +19,13 @@ import { Product } from 'src/app/interfaces/product.interface';
       const orderId = this.route.snapshot.paramMap.get('id');
       if (orderId) {
         this.orderId = +orderId;
-        this.loadOrders(+orderId);
+        this.loadOrder(+orderId);
       } else {
         console.error('Order ID not found in URL');
       }
     }
 
-    loadOrders(orderId: number) {
+    loadOrder(orderId: number) {
       this.orderService.getOrder(orderId).subscribe(
         (response: Order) => {
           this.cart = response;
@@ -41,20 +41,20 @@ import { Product } from 'src/app/interfaces/product.interface';
       return orderProduct.quantity * Number(orderProduct.product.price);    
     }
 
-    // updateQuantity(productId: number, quantity:number){
-    //   this.orderService.updateProductQuantity(this.cart.id_order, productId, quantity).subscribe({
-    //     next(response) {
-    //       console.log("Product quantity updated successfully");
-    //       const updatedProduct = this.cart.order_products.find((product:Product) => product.id_product === productId);
-    //       if (updatedProduct) {
-    //         updatedProduct.quantity = quantity;
-    //       }
-    //     },
-    //     error(error) {
-    //       console.error('Error updating product quantity:', error);
-    //     },
-    //   });
-    // }
+    updateQuantity(productId: number, quantity: number){
+      this.orderService.updateProductQuantity(this.cart.id_order, productId, quantity).subscribe({
+        next(response) {
+          // console.log("Product quantity updated successfully");
+          // const updatedProduct = this.cart.order_products.find((product: Product) => product.id_product === productId);
+          // if (updatedProduct) {
+          //   updatedProduct.quantity = quantity;
+          // }
+        },
+        error(error) {
+          console.error('Error updating product quantity:', error);
+        },
+      });
+    }
 
     removeFromCart(productId: number) {
       this.orderService.removeProductFromOrder(this.cart.id_order, productId).subscribe({

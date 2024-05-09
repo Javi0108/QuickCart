@@ -21,6 +21,14 @@ class Order(models.Model):
             order_product.delete()
         except OrderProduct.DoesNotExist:
             pass
+    
+    def update_product_quantity(self, product, new_quantity):
+        try:
+            order_product = OrderProduct.objects.get(order=self, product=product)
+            order_product.quantity = new_quantity
+            order_product.save()
+        except OrderProduct.DoesNotExist:
+            pass
 
 class OrderProduct(models.Model):
     order = models.ForeignKey(Order, related_name='order_products', on_delete=models.CASCADE)
