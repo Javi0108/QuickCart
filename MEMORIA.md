@@ -44,22 +44,39 @@
 
 ### 1. INTRODUCCIÓN. <a name="id1"></a>
 
-Muchas empresas de hoy en día aún no tienen página web debido a su bajo conocimiento de la programación o a que no se pueden permitir los costes de un programador que les realice dicha página web. Es aquí donde nace QuickCart, esta es una aplicación web en la que las empresas se podrán registrar y crear sus propias páginas web desde cero utilizando plantillas altamente personalizables, por lo que ninguna página web será igual, esto permite a muchas pymes tener una página web sencilla y con bajos costes, por lo que la digitalización de la empresa será mucho más fácil y menos costosa de realizar.
+En la era digital actual, la presencia en línea es esencial para el éxito de cualquier empresa, independientemente de su tamaño. Sin embargo, muchas empresas, especialmente las pequeñas y medianas, no han dado el salto a tener su propia página web. Esto se debe, en gran parte, a dos factores clave: el escaso conocimiento de programación y el coste que implica contratar a un programador profesional para crear un sitio web desde cero.
+
+Esta barrera de entrada puede ser significativa para muchas pymes que buscan expandir su alcance y llegar a una audiencia más amplia. A menudo, el proceso de creación de un sitio web parece abrumador, con complejidades técnicas y costos imprevistos que desaniman a los propietarios de negocios a seguir adelante. Es en este contexto nace QuickCart.
+
+QuickCart es una aplicación web diseñada para resolver estos problemas. Proporciona a las empresas la oportunidad de registrarse y crear sus propias páginas web sin necesidad de conocimientos avanzados de programación. La plataforma ofrece una variedad de plantillas altamente personalizables, lo que significa que las empresas pueden diseñar sus sitios web según sus necesidades y preferencias específicas. Cada plantilla puede ser modificada y ajustada para que cada página web tenga un estilo único y refleje la identidad de la empresa.
+
+Esto supone una ayuda para las pymes, ya que pueden tener presencia en línea de manera rápida y económica. Al eliminar la necesidad de contratar a un programador dedicado, QuickCart reduce considerablemente el costo asociado con la creación de un sitio web profesional. Además, su interfaz fácil de usar y su diseño intuitivo hacen que la experiencia de creación de páginas web sea accesible para cualquier persona, incluso sin conocimientos previos de programación.
+
+Con QuickCart, las empresas pueden comenzar con una página web sencilla y luego expandirse a medida que crecen y sus necesidades evolucionan. Esta flexibilidad y accesibilidad facilitan el proceso de digitalización, permitiendo a las empresas competir en un mercado cada vez más digitalizado sin tener que invertir grandes sumas de dinero.
+
+En resumen, QuickCart es más que una solución para crear páginas web; es un catalizador para la transformación digital de las empresas. Al democratizar el proceso de creación de sitios web, QuickCart está ayudando a las pymes a nivelar el campo de juego y a establecer una presencia sólida en línea, lo que, en última instancia, contribuye a su crecimiento y éxito a largo plazo.
 
 ### 2. TECNOLOGÍAS UTILIZADAS. <a name="id2"></a>
 
-+ **Front End**:
-    - Angular con TypeScript
-    - Ionic 7
-    - Bootstrap 5.1
-+ **Back End**:
-    - Django 5 con Python
-+ **Base de datos**:
-    - SQLite
+El desarrollo de QuickCart implicó uso de diversas frameworks/librerías y hardware para asegurar un funcionamiento eficiente y escalable de la aplicación. Estos frameworks/librerías desempeñaron un papel crucial tanto en la fase de desarrollo como en la producción final del producto. A continuación, se detallan las tecnologías utilizadas:
 
-Estas tecnologías fueron necesarias tanto para la fase de desarrollo como para la producción.
+**Front End**:
+Para el desarrollo del lado del cliente, QuickCart empleó un conjunto de herramientas que permitieron la creación de interfaces de usuario dinámicas y responsivas:
 
-En cuanto al hardware necesario, QuickCart no requiere de equipamiento adicional significativo, ya que se basa en servicios en la nube para su despliegue y operación.
++ **Angular con TypeScript**: Angular es un framework ampliamente utilizado para la creación de aplicaciones web robustas y de alta calidad. La incorporación de TypeScript, permite una mejor estructura del código y facilita el mantenimiento a largo plazo. Angular facilita la creación de componentes reutilizables y la implementación de lógica compleja en el front-end.
++ **Ionic 7**: Ionic es un framework especializado en la creación de aplicaciones móviles y web con una experiencia de usuario nativa. La versión 7 permite el uso de componentes visuales modernos y herramientas avanzadas para la creación de aplicaciones progresivas (PWA).
++ **Bootstrap 5.1**: Bootstrap es una de las librerías más populares para diseño web, proporcionando estilos y componentes listos para usar. La versión 5.1 incluye mejoras en diseño responsivo y mayor flexibilidad en la personalización. Esto permitió a los desarrolladores de QuickCart crear interfaces atractivas y consistentes sin necesidad de crear estilos desde cero.
+
+**Back End**:
+En el lado del servidor, QuickCart utilizó tecnologías que permiten un desarrollo rápido y fiable:
+
++ **Django 5 con Python**: Django es un framework de alto nivel para el desarrollo de aplicaciones web. Django proporciona a QuickCart un entorno sólido para la creación de funcionalidades de back-end, como autenticación, manejo de datos y gestión de usuarios. Django también incluye herramientas para la creación de interfaces administrativas, facilitando el mantenimiento y la gestión de la aplicación.
++ **SQLite**: Esta base de datos ligera y autónoma es ideal para aplicaciones web que requieren una configuración simple y no necesitan la complejidad de bases de datos más grandes. SQLite ofrece un rendimiento adecuado para aplicaciones como QuickCart.
+
+**Hardware y Despliegue en la Nube**:
+En lo referente al hardware, QuickCart está diseñado para ejecutarse en servicios en la nube, específicamente en Microsoft Azure, para su despliegue y operación. Esto significa que no es necesario contar con equipamiento adicional significativo. El uso de Azure ofrece una gran flexibilidad y escalabilidad, permitiendo a QuickCart el ahorro de inversiones sustanciales en hardware físico. Además, Azure garantiza una alta disponibilidad y facilita la implementación de soluciones avanzadas de seguridad y respaldo de datos, asegurando que la aplicación pueda mantenerse segura y operativa en todo momento.
+
+En resumen, QuickCart fue construido utilizando tecnologías modernas y eficientes, tanto en el front-end como en el back-end, lo que permite una experiencia de usuario fluida y un desarrollo ágil. El uso de la nube para el despliegue y operación minimiza la necesidad de hardware adicional, asegurando la escalabilidad y adaptabilidad a las necesidades futuras.
 
 ### 3. GUIA DE ESTILO DE LA WEB. <a name="id3"></a>
 
@@ -185,5 +202,8 @@ Estas experiencias nos servirán para futuros proyectos, permitiendonos mejorar 
 
 ### 13.  CONCLUSIONES, COMENTARIOS Y VALORACIÓN FINAL. <a name="id13"></a>
 
-El proyecto de QuickCart ha sido un éxito, el equipo ha logrado los objetivos propuestos y ha conseguido realizar una aplicación funcional siguiendo la misma idea que se tenía desde el principio. A pesar de que en el desarrollo del proyecto se presentaron numerosos problemas como la integración de algunas funcionalidades o componentes, o la desviación de tareas debido a que el tiempo para finalizar el proyecto era limitado, se ha conseguido llegar al objetivo propuesto al principio del desarrollo.
-En cuanto al equipo, este se encuentra más que satisfecho con el resultado obtenido de la aplicación, y piensa que añadiendo sus debidas actualizaciones para completar así todas las ideas pensadas para el desarrollo que por desgracia se tuvieron que descartar por la falta de tiempo, QuickCart podría ser una herramienta valiosa para aquellas empresas que busquen expandirse o digitalizarse pero no tengan los conocimientos suficientes. A lo largo de el desarrollo de la aplicación hemos adquirido ciertas experiencias que nos ayudarán en un futuro no muy lejano a mejorar procesos y el enfoque a la hora de desarrollar una aplicación.
+El proyecto QuickCart ha superado las expectativas y ha demostrado ser un éxito rotundo. El equipo ha logrado cumplir con los objetivos planteados inicialmente, creando una aplicación funcional que respeta el concepto original desde el principio. A lo largo del desarrollo, surgieron varios problemas que pusieron a prueba al equipo. Entre ellos, hubo problemas relacionados con la integración de ciertas funcionalidades y componentes, así como la necesidad de ajustar el flujo de trabajo debido a un tiempo limitado para completar el proyecto. A pesar de estas dificultades, el equipo logró avanzar y alcanzar el resultado deseado.
+
+El equipo está satisfecho con la aplicación que se logró construir. No obstante, reconoce que el proyecto tiene potencial para crecer aún más. Hay diversas funcionalidades e ideas que tuvieron que ser descartadas debido a restricciones de tiempo, pero el equipo piensa trabajar en ellas en futuras actualizaciones. Estas actualizaciones podrían convertir a QuickCart en una herramienta aún más valiosa para aquellas empresas que desean expandir su presencia en línea o digitalizarse pero que carecen de los conocimientos técnicos para hacerlo por sí mismas.
+
+En cuanto al impacto del proyecto en el equipo, la experiencia de desarrollar QuickCart ha sido gratificante. Los miembros del equipo han adquirido conocimientos y habilidades valiosas durante el proceso. Han aprendido a abordar problemas de una manera más eficaz, a ser flexibles ante los imprevistos y a mejorar la comunicación y coordinación interna. Estas lecciones serán fundamentales para proyectos futuros, permitiendo al equipo abordar desarrollos similares con mayor eficiencia y precisión.
