@@ -134,9 +134,9 @@ QuickCart ofrece una solución completa para la creación y gestión de páginas
 | Tarea                                | Coste Marzo | Coste Abril | Coste Mayo |
 |--------------------------------------|-------------|-------------|------------|
 | 1. Diseño y desarrollo inicial       | 5 h aprox. |      |            |
-| 2. Diseño y creación de la base de datos | 25 h aprox. | 4 horas aprox.    |            |
-| 3. Desarrollo de la API              | 30 h aprox. | 30 horas aprox.    |  15 horas aprox.   |
-| 4. Desarrollo de la aplicación Angular | 30 h aprox. |   30 horas aprox.         | 15 horas aprox.   |
+| 2. Diseño y creación de la base de datos | 25 h aprox. | 4 h aprox.    |            |
+| 3. Desarrollo de la API              | 30 h aprox. | 30 h aprox.    |  15 h aprox.   |
+| 4. Desarrollo de la aplicación Angular | 30 h aprox. |   30 h aprox.         | 15 h aprox.   |
 <center>
 </center>
 
