@@ -54,8 +54,6 @@ Esto supone una ayuda para las pymes, ya que pueden tener presencia en línea de
 
 Con QuickCart, las empresas pueden comenzar con una página web sencilla y luego expandirse a medida que crecen y sus necesidades evolucionan. Esta flexibilidad y accesibilidad facilitan el proceso de digitalización, permitiendo a las empresas competir en un mercado cada vez más digitalizado sin tener que invertir grandes sumas de dinero.
 
-En resumen, QuickCart es más que una solución para crear páginas web; es un catalizador para la transformación digital de las empresas. Al democratizar el proceso de creación de sitios web, QuickCart está ayudando a las pymes a nivelar el campo de juego y a establecer una presencia sólida en línea, lo que, en última instancia, contribuye a su crecimiento y éxito a largo plazo.
-
 ### 2. TECNOLOGÍAS UTILIZADAS. <a name="id2"></a>
 
 El desarrollo de QuickCart implicó uso de diversas frameworks/librerías y hardware para asegurar un funcionamiento eficiente y escalable de la aplicación. Estos frameworks/librerías desempeñaron un papel crucial tanto en la fase de desarrollo como en la producción final del producto. A continuación, se detallan las tecnologías utilizadas:
@@ -88,12 +86,12 @@ La guía de estilo de la web establece los estándares visuales y de experiencia
 
 ### 4. INVESTIGACIÓN. <a name="id4"></a>
 
-Durante el desarrollo de QuickCart, se llevaron a cabo investigaciones para abordar diversas cuestiones técnicas y de diseño. Algunas áreas clave de investigación incluyeron:
+Durante el desarrollo de QuickCart, se realizaron investigaciones para abordar diversas cuestiones técnicas y de diseño que surgieron a lo largo del proyecto. A través de estas investigaciones, el equipo pudo superar retos importantes y avanzar hacia un producto final sólido. A continuación, se detallan algunas de las áreas clave de investigación:
 
-+ **Integración de tecnologías**: Se investigó el como combinar Django y Angular en un solo proyecto ya que se escapaba de nuestro conocimiento, por lo que tuvimos que aprender a hacer una aplicación con dos frameworks.
-+ **Experiencia de usuario**: Se realizaron estudios para mejorar la usabilidad de la aplicación y que así fuese una experiencia grata y sencilla para el usuario que ingrese a la web, lo que le hará querer volver.
++ **Integración de Tecnologías**: Dado que el equipo no tenía experiencia previa combinando Django y Angular en un solo proyecto, se tuvo que investigar cómo hacer para que estos dos frameworks trabajaran en conjunto de manera eficaz. Este proceso requirió un estudio profundo para entender las interacciones entre ambos frameworks. Fue un reto que llevó tiempo y experimentación, pero resultó ser una experiencia satisfactoria para todo el equipo.
++ **Experiencia de Usuario (UX)**: La usabilidad de la aplicación fue una prioridad desde el principio. Se maximizaron los intentos para asegurarse de que QuickCart ofreciera una experiencia agradable y sencilla para el usuario final. El objetivo era hacer que los visitantes de la aplicación encontraran lo que necesitaban de manera intuitiva y quisieran regresar en el futuro.
 
-No todo funcionó a la primera, algunos desarrollos tuvieron que ser modificados o descartados debido a problemas de dificultad y tiempo. Sin embargo, el proceso de investigación permitió encontrar soluciones para la mayoría de problemas encontrados.
+Aunque el equipo logró avanzar en muchas áreas, no todo funcionó a la primera. Algunos enfoques y desarrollos tuvieron que ser modificados o incluso descartados debido a dificultades técnicas, limitaciones de tiempo o simplemente porque no cumplían con las expectativas.
 
 ### 5. DERECHOS DE AUTOR. <a name="id5"></a>
 
