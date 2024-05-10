@@ -103,7 +103,7 @@ En QuickCart, se incorporaron varios tipos de contenido y recursos multimedia pa
 
 ### 6. RIESGOS Y MEDIDAS. <a name="id6"></a>
 
-Durante el desarrollo del proyecto, surgieron varios problemas, entre ellos:
+Durante el desarrollo del proyecto, surgieron varios problemas que nos obligaron a modificar o descartar funcionalidades, debido a limitaciones de tiempo o simplemente porque no cumplían con las expectativas:
 
 + **Integración de funcionalidades y componentes**: Hubo dificultades al integrar algunas funcionalidades a algunos componentes e integrar algunos componentes en si a la aplicación. Para mitigarlo, el equipo se ayudó al completo y se buscó información para arrelgar dicho error lo antes posible.
 + **Cambios de estilo en componententes de Ionic**: Para estilizar un componente de Ionic es necesario utilizar una sintaxis que no está muy documentada, por lo que para arreglar este error tuvimos que investigar más a fondo como estilar dichos componentes.
@@ -133,28 +133,28 @@ El proyecto se mantuvo dentro del presupuesto previsto de **6.427€**. Para evi
 
 El contrato del proyecto incluye las siguientes cláusulas fundamentales:
 
-**Plazos**: Se otorgó un plazo de 2 meses para retrasos imprevistos, con penalizaciones aplicables para las empresas si el retraso excede considerablemente el límite establecido, con lo que conseguiremos que las empresas que se registren en la aplicación sean fiables y no estafen a los clientes.
-**Procesamiento de Pagos**: Los pagos se realizarán a través de Stripe, un intermediario que se encargará de gestionar las transacciones y todas las cuestiones relacionadas con las cuentas.
++ **Plazos**: Se otorgó un plazo de 2 meses para retrasos imprevistos, con penalizaciones aplicables para las empresas si el retraso excede considerablemente el límite establecido, con lo que conseguiremos que las empresas que se registren en la aplicación sean fiables y no estafen a los clientes.
++ **Procesamiento de Pagos**: Los pagos se realizarán a través de Stripe, un intermediario que se encargará de gestionar las transacciones y todas las cuestiones relacionadas con las cuentas.
 
 ### 11.  PRODUCTO FINAL. <a name="id11"></a>
 
 QuickCart es una plataforma de comercio electrónico diseñada para ayudar a las empresas a crear y gestionar sus propias tiendas en línea. Esta solución permite a las empresas digitalizarse y ahorrar costos, ya que elimina la necesidad de contratar desarrolladores para crear una tienda desde cero. QuickCart proporciona un conjunto de funcionalidades clave que facilitan la venta de productos y la gestión de tiendas online. A continuación, se describen las principales características de la plataforma:
 + **Página Principal (Home)**: La página de inicio actúa como la puerta de entrada a la plataforma, ofreciendo una visión general de los apartados más destacados. Los visitantes pueden navegar fácilmente por las diferentes secciones para encontrar lo que buscan.
-<div align="center">
+<!-- <div align="center">
 
 <img src="/img/home_img.png" width="600px">
 
-</div>
+</div> -->
 
 + **Gestión de cuentas**: Permite a los usuarios registrarse, iniciar sesión y editar sus perfiles de manera sencilla. Los usuarios pueden actualizar su información personal, cambiar contraseñas y gestionar sus cuentas sin complicaciones.
-<div align="center">
+<!-- <div align="center">
 
 <img src="/img/profile_img.png" width="600px">
 
-</div>
+</div> -->
 
 + **Gestión de tiendas**: Las empresas tienen la capacidad de gestionar sus tiendas de manera intuitiva. Esto incluye la administración de productos, el diseño de las páginas web de las tiendas y la visualización de los productos de manera atractiva para los clientes. Las empresas pueden agregar, eliminar o actualizar productos según sea necesario.
-<div align="center">
+<!-- <div align="center">
 
 <img src="/img/shops_img.png" width="600px">
 
@@ -163,10 +163,9 @@ QuickCart es una plataforma de comercio electrónico diseñada para ayudar a las
 
 <img src="/img/shops_img(2).png" width="600px">
 
-</div>
+</div> -->
 
 + **Gestión del carrito**: Los clientes pueden agregar productos a su carrito de compras, ajustar cantidades y eliminar productos con facilidad. Este sistema intuitivo permite a los clientes llevar un seguimiento de sus compras y hacer ajustes antes de proceder al pago.
-***IMAGEN***
 <!-- <div align="center">
 
 <img src="/img/cart_img.png" width="600px">
@@ -174,14 +173,13 @@ QuickCart es una plataforma de comercio electrónico diseñada para ayudar a las
 </div> -->
 
 + **Barra de búsqueda**: QuickCart incluye una barra de búsqueda que permite a los clientes buscar tiendas por diferentes criterios, como nombre, categoría o empresa. Esto facilita la navegación y ayuda a los usuarios a encontrar rápidamente lo que necesitan.
-<div align="center">
+<!-- <div align="center">
 
 <img src="/img/barra_de_busqueda.png" width="600px">
 
-</div>
+</div> -->
 
 + **Sistema de pago**: Los clientes pueden pagar por sus productos utilizando Stripe, una plataforma de pagos segura y confiable. Stripe actúa como intermediario entre el cliente y la empresa, facilitando las transacciones y asegurando la seguridad de los datos financieros.
-***IMAGEN***
 <!-- <div align="center">
 
 <img src="/img/payment_img.png" width="600px">
