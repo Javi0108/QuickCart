@@ -95,10 +95,11 @@ Aunque el equipo logró avanzar en muchas áreas, no todo funcionó a la primera
 
 ### 5. DERECHOS DE AUTOR. <a name="id5"></a>
 
-En QuickCart, se utilizaron diversos tipos de contenido y recursos multimedia. Para garantizar el respeto a los derechos de autor, se implementaron las siguientes acciones:
+En QuickCart, se incorporaron varios tipos de contenido y recursos multimedia para enriquecer la experiencia del usuario y mejorar el aspecto visual de la aplicación. Para garantizar el cumplimiento de las leyes de propiedad intelectual y respetar los derechos de autor, se implementaron las siguientes medidas:
 
-+ **Desarrollo propio**: El logotipo de la aplicación fue creado internamente utilizando Photoshop. Este recurso está publicado bajo una licencia Creative Commons.
-+ **Material de terceros**: Se utilizaron librerías como Google Fonts para la fuente y Ionic o Bootstrap para estilos e iconos. Ambos con licencias que permiten su uso para fines comerciales, sin restricciones de redistribución. También se han utilizado imagenes las cuales ninguna está bajo licencias por lo que son aptas para nuestros objetivos de uso.
++ **Desarrollo Propio**: El logotipo de QuickCart fue diseñado por el equipo interno utilizando Adobe Photoshop, asegurando que el diseño sea original. Este recurso fue publicado bajo una licencia Creative Commons, lo que proporciona cierta flexibilidad para su uso, mientras se mantienen los créditos al creador original.
++ **Uso de Materiales de Terceros**: Para fuentes tipográficas y elementos de estilo, QuickCart hizo uso de recursos ampliamente reconocidos y utilizados, como Google Fonts para las fuentes y Ionic o Bootstrap para estilos e íconos. Ambos son proyectos con licencias que permiten su uso en aplicaciones comerciales, sin restricciones significativas sobre redistribución. Este tipo de licencias asegura que QuickCart puede utilizar estos recursos sin violar derechos de autor o restricciones legales.
++ **Recursos de Imágenes**: En cuanto a imágenes y gráficos utilizados en la aplicación, se seleccionaron cuidadosamente para asegurarse de que no estuvieran sujetos a licencias restrictivas. El equipo eligió imágenes libres de derechos o publicadas bajo licencias que permiten su uso comercial, asegurando que se alinearan con los objetivos de QuickCart sin incurrir en problemas legales.
 
 ### 6. RIESGOS Y MEDIDAS. <a name="id6"></a>
 
@@ -137,22 +138,22 @@ El contrato del proyecto incluye las siguientes cláusulas fundamentales:
 
 ### 11.  PRODUCTO FINAL. <a name="id11"></a>
 
-QuickCart es una plataforma de comercio electrónico en el que se permite a las empresas crear y gestionar sus propias tiendas en línea por lo que las permite digitalizarse ahorrando los gastos que supone contratar a un desarrollador. El sistema ofrece una gama de funcionalidades clave para facilitar la venta de productos:
-+ **Home**: Página principal de la web en la que se aprecian los apartados más destacados.
+QuickCart es una plataforma de comercio electrónico diseñada para ayudar a las empresas a crear y gestionar sus propias tiendas en línea. Esta solución permite a las empresas digitalizarse y ahorrar costos, ya que elimina la necesidad de contratar desarrolladores para crear una tienda desde cero. QuickCart proporciona un conjunto de funcionalidades clave que facilitan la venta de productos y la gestión de tiendas online. A continuación, se describen las principales características de la plataforma:
++ **Página Principal (Home)**: La página de inicio actúa como la puerta de entrada a la plataforma, ofreciendo una visión general de los apartados más destacados. Los visitantes pueden navegar fácilmente por las diferentes secciones para encontrar lo que buscan.
 <div align="center">
 
 <img src="/img/home_img.png" width="600px">
 
 </div>
 
-+ **Gestión de cuentas**: Registro, inicio de sesión y edición de perfiles.
++ **Gestión de cuentas**: Permite a los usuarios registrarse, iniciar sesión y editar sus perfiles de manera sencilla. Los usuarios pueden actualizar su información personal, cambiar contraseñas y gestionar sus cuentas sin complicaciones.
 <div align="center">
 
 <img src="/img/profile_img.png" width="600px">
 
 </div>
 
-+ **Gestión de tiendas**: Empresas pueden gestionar los productos, las webs de las tiendas para la visualizacion de productos.
++ **Gestión de tiendas**: Las empresas tienen la capacidad de gestionar sus tiendas de manera intuitiva. Esto incluye la administración de productos, el diseño de las páginas web de las tiendas y la visualización de los productos de manera atractiva para los clientes. Las empresas pueden agregar, eliminar o actualizar productos según sea necesario.
 <div align="center">
 
 <img src="/img/shops_img.png" width="600px">
@@ -164,7 +165,7 @@ QuickCart es una plataforma de comercio electrónico en el que se permite a las 
 
 </div>
 
-+ **Gestión del carrito**: Clientes pueden agregar productos, ajustar cantidades y eliminar elementos.
++ **Gestión del carrito**: Los clientes pueden agregar productos a su carrito de compras, ajustar cantidades y eliminar productos con facilidad. Este sistema intuitivo permite a los clientes llevar un seguimiento de sus compras y hacer ajustes antes de proceder al pago.
 ***IMAGEN***
 <!-- <div align="center">
 
@@ -172,21 +173,21 @@ QuickCart es una plataforma de comercio electrónico en el que se permite a las 
 
 </div> -->
 
-+ **Barra de búsqueda**: Búsqueda por empresas.
++ **Barra de búsqueda**: QuickCart incluye una barra de búsqueda que permite a los clientes buscar tiendas por diferentes criterios, como nombre, categoría o empresa. Esto facilita la navegación y ayuda a los usuarios a encontrar rápidamente lo que necesitan.
 <div align="center">
 
 <img src="/img/barra_de_busqueda.png" width="600px">
 
 </div>
 
-+ **Sistema de pago**: Los clientes pueden pagar los productos mediante Stripe, un intermediario entre el cliente y la empresa, la cual gestiona los pago y las cuentas.
++ **Sistema de pago**: Los clientes pueden pagar por sus productos utilizando Stripe, una plataforma de pagos segura y confiable. Stripe actúa como intermediario entre el cliente y la empresa, facilitando las transacciones y asegurando la seguridad de los datos financieros.
 ***IMAGEN***
 <!-- <div align="center">
 
 <img src="/img/payment_img.png" width="600px">
 
 </div> -->
-La implementación con Django y Angular garantiza un sistema estable y escalable. El despliegue en Azure facilita el mantenimiento y la escalabilidad.
+La arquitectura de QuickCart, basada en Django y Angular, garantiza un sistema estable y escalable. Django, como framework backend, ofrece una sólida base para la lógica empresarial, mientras que Angular proporciona una experiencia de usuario interactiva y fluida. El despliegue en Microsoft Azure brinda la flexibilidad y escalabilidad necesarias para adaptarse a diferentes niveles de demanda, permitiendo un mantenimiento eficiente y la capacidad de crecer según las necesidades del mercado.
     
 ### 12.  EXPERIENCIAS APRENDIDAS A TENER EN CUENTA EN PRÓXIMOS PROYECTOS. <a name="id12"></a>
 
