@@ -65,8 +65,7 @@ import { StripeService } from 'src/app/services/stripe.service';
     }
 
     makePayment(products: any){
-      console.log("Pagos en proceso")
-      this.stripeService.createCheckoutSession(products).subscribe((data) => {
+      this.stripeService.createCheckoutSession(products, this.cart.id_order).subscribe((data) => {
         window.location.href = data.url;
       });
     }

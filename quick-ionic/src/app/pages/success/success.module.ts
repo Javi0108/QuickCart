@@ -6,7 +6,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { SuccessPageRoutingModule } from './success-routing.module';
 
-import { SuccesPage } from './success.page';
+import { SuccessPage } from './success.page';
 
 @NgModule({
   imports: [
@@ -15,6 +15,6 @@ import { SuccesPage } from './success.page';
     IonicModule,
     SuccessPageRoutingModule
   ],
-  declarations: [SuccesPage]
+  declarations: [SuccessPage]
 })
 export class SuccessPageModule {}

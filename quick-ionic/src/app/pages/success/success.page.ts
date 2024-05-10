@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-succes',
-  templateUrl: './succes.page.html',
-  styleUrls: ['./succes.page.scss'],
+  selector: 'app-success',
+  templateUrl: './success.page.html',
+  styleUrls: ['./success.page.scss'],
 })
-export class SuccesPage implements OnInit {
+export class SuccessPage implements OnInit {
 
   constructor() { }
 
