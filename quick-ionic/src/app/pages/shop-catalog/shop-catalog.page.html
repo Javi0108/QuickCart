@@ -1,9 +1,9 @@
-<ion-content *ngIf="!pageloaded" class="loading-content">
+<ion-content *ngIf="!pageloaded" class="loading-content" fullscreen="true">
   <div class="loading-container" style="margin-top: 250px; height: 100vh;">
     <ion-icon name="rocket-outline" class="moving-icon loading-icon" style="font-size: 300px;"></ion-icon>
   </div>
 </ion-content>
-<ion-content *ngIf="pageloaded" class="app-catalog">
+<div *ngIf="pageloaded" class="app-catalog">
   <div class="container">
     <ion-grid>
       <h2 class="title">{{shopName}} catalog</h2>
@@ -39,4 +39,4 @@
       </div>
     </ion-grid>
   </div>
-</ion-content>
+</div>

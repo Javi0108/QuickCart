@@ -1,4 +1,4 @@
-<ion-content [fullscreen]="true">
+<div>
   <div *ngIf="profile && !edit">
     <div *ngIf="!pageLoaded">
       <ion-spinner></ion-spinner>
@@ -7,26 +7,16 @@
     <div class="row gutters-sm m-3" *ngIf="pageLoaded">
       <div class="col-md-4">
         <ion-card class="mt-2">
-          <ion-card-content
-            class="d-flex flex-column align-items-center text-center"
-          >
-            <img
-              src="http://127.0.0.1:8000/{{ profile.avatar }}"
-              alt="Admin"
-              class="rounded-circle"
-              width="150"
-              height="150"
-            />
+          <ion-card-content class="d-flex flex-column align-items-center text-center">
+            <img src="http://127.0.0.1:8000/{{ profile.avatar }}" alt="Admin" class="rounded-circle" width="150"
+              height="150" />
             <div class="mt-3">
               <h1 style="font-weight: 700">
                 {{ profile.user.first_name }} {{ profile.user.last_name }}
               </h1>
               <p>{{ profile.user_type }}</p>
-              <button
-                *ngIf='profile.user_type == "Seller"'
-                [routerLink]="['/web-page-catalog']"
-                class="profileBtn quickart-button-violet m-2"
-              >
+              <button *ngIf='profile.user_type == "Seller"' [routerLink]="['/web-page-catalog']"
+                class="profileBtn quickart-button-violet m-2">
                 Shops
               </button>
               <button [routerLink]="['/not-found']" class="quickart-button quickart-button-violet">Contact</button>
@@ -34,181 +24,111 @@
           </ion-card-content>
         </ion-card>
 
-      <!-- Formulario Sociales -->
-      <ion-card class="mt-4">
-        <ion-card-content *ngIf='profile.user_type == "Seller"'>
-          <ion-list>
-            <ion-item>
-              <i
-                class="bi bi-instagram"
-                style="font-size: x-large; margin-right: 1rem"
-              ></i>
-              <a href="{{ profile.socials.instagram }}" target="_blank"
-                >{{ profile.socials.instagram }}</a
-              >
-            </ion-item>
-            <ion-item>
-              <i
-                class="bi bi-facebook"
-                style="font-size: x-large; margin-right: 1rem"
-              ></i>
-              <a href="{{ profile.socials.facebook }}" target="_blank"
-                >{{ profile.socials.facebook }}</a
-              >
-            </ion-item>
-            <ion-item>
-              <i
-                class="bi bi-twitter-x"
-                style="font-size: x-large; margin-right: 1rem"
-              ></i>
-              <a href="{{ profile.socials.x }}" target="_blank"
-                >{{ profile.socials.x }}</a
-              >
-            </ion-item>
-            <ion-item>
-              <i
-                class="bi bi-linkedin"
-                style="font-size: x-large; margin-right: 1rem"
-              ></i>
-              <a href="{{ profile.socials.linkedin }}" target="_blank"
-                >{{ profile.socials.linkedin }}</a
-              >
-            </ion-item>
+        <!-- Formulario Sociales -->
+        <ion-card class="mt-4">
+          <ion-card-content *ngIf='profile.user_type == "Seller"'>
+            <ion-list>
+              <ion-item>
+                <i class="bi bi-instagram" style="font-size: x-large; margin-right: 1rem"></i>
+                <a href="{{ profile.socials.instagram }}" target="_blank">{{ profile.socials.instagram }}</a>
+              </ion-item>
+              <ion-item>
+                <i class="bi bi-facebook" style="font-size: x-large; margin-right: 1rem"></i>
+                <a href="{{ profile.socials.facebook }}" target="_blank">{{ profile.socials.facebook }}</a>
+              </ion-item>
+              <ion-item>
+                <i class="bi bi-twitter-x" style="font-size: x-large; margin-right: 1rem"></i>
+                <a href="{{ profile.socials.x }}" target="_blank">{{ profile.socials.x }}</a>
+              </ion-item>
+              <ion-item>
+                <i class="bi bi-linkedin" style="font-size: x-large; margin-right: 1rem"></i>
+                <a href="{{ profile.socials.linkedin }}" target="_blank">{{ profile.socials.linkedin }}</a>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+        <!-- Redes Sociales -->
+      </div>
+
+      <div class="col-md-8">
+        <div class="card mt-2">
+          <ion-list class="card-body">
+            <form [formGroup]="foreignProfileForm" (ngSubmit)="saveChanges()">
+              <div formGroupName="user">
+                <ion-item>
+                  <ion-input formControlName="username" labelPlacement="floating" value="{{ profile.user.username }}"
+                    readonly="true">
+                    <div slot="label">Username</div>
+                  </ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-input formControlName="email" labelPlacement="floating" value="{{ profile.user.email }}"
+                    readonly="true">
+                    <div slot="label">Email</div>
+                  </ion-input>
+                </ion-item>
+
+                <ion-item>
+                  <ion-input formControlName="first_name" labelPlacement="floating"
+                    value="{{ profile.user.first_name }}" readonly="true">
+                    <div slot="label">First name</div>
+                  </ion-input>
+                  <ion-input formControlName="last_name" labelPlacement="floating" value="{{ profile.user.last_name }}"
+                    readonly="true">
+                    <div slot="label">Last name</div>
+                  </ion-input>
+                </ion-item>
+              </div>
+
+              <ion-item>
+                <ion-input formControlName="phone" labelPlacement="floating" value="{{ profile.phone }}"
+                  readonly="true">
+                  <div slot="label">Phone</div>
+                </ion-input>
+
+                <ion-input formControlName="mobile" labelPlacement="floating" value="{{ profile.mobile }}"
+                  readonly="true">
+                  <div slot="label">Mobile</div>
+                </ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-input formControlName="address" labelPlacement="floating" value="{{ profile.address }}"
+                  readonly="true">
+                  <div slot="label">Address</div>
+                </ion-input>
+              </ion-item>
+            </form>
           </ion-list>
-        </ion-card-content>
-      </ion-card>
-      <!-- Redes Sociales -->
-    </div>
-
-    <div class="col-md-8">
-      <div class="card mt-2">
-        <ion-list class="card-body">
-          <form [formGroup]="foreignProfileForm" (ngSubmit)="saveChanges()">
-            <div formGroupName="user">
-              <ion-item>
-                <ion-input
-                  formControlName="username"
-                  labelPlacement="floating"
-                  value="{{ profile.user.username }}"
-                  readonly="true"
-                >
-                  <div slot="label">Username</div>
-                </ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-input
-                  formControlName="email"
-                  labelPlacement="floating"
-                  value="{{ profile.user.email }}"
-                  readonly="true"
-                >
-                  <div slot="label">Email</div>
-                </ion-input>
-              </ion-item>
-
-              <ion-item>
-                <ion-input
-                  formControlName="first_name"
-                  labelPlacement="floating"
-                  value="{{ profile.user.first_name }}"
-                  readonly="true"
-                >
-                  <div slot="label">First name</div>
-                </ion-input>
-                <ion-input
-                  formControlName="last_name"
-                  labelPlacement="floating"
-                  value="{{ profile.user.last_name }}"
-                  readonly="true"
-                >
-                  <div slot="label">Last name</div>
-                </ion-input>
-              </ion-item>
-            </div>
-
-            <ion-item>
-              <ion-input
-                formControlName="phone"
-                labelPlacement="floating"
-                value="{{ profile.phone }}"
-                readonly="true"
-              >
-                <div slot="label">Phone</div>
-              </ion-input>
-
-              <ion-input
-                formControlName="mobile"
-                labelPlacement="floating"
-                value="{{ profile.mobile }}"
-                readonly="true"
-              >
-                <div slot="label">Mobile</div>
-              </ion-input>
-            </ion-item>
-
-            <ion-item>
-              <ion-input
-                formControlName="address"
-                labelPlacement="floating"
-                value="{{ profile.address }}"
-                readonly="true"
-              >
-                <div slot="label">Address</div>
-              </ion-input>
-            </ion-item>
-          </form>
-        </ion-list>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
   <div *ngIf="profile && edit">
     <div *ngIf="!pageLoaded">
       <ion-spinner></ion-spinner>
     </div>
 
-    <div class="pageContent" *ngIf="pageLoaded"> 
+    <div class="pageContent" *ngIf="pageLoaded">
       <div class="row gx-0">
         <div class="col-12 col-md-4">
           <ion-card class="mt-2">
-            <ion-card-content
-              class="d-flex flex-column align-items-center text-center"
-            >
+            <ion-card-content class="d-flex flex-column align-items-center text-center">
               <div id="content">
                 <div id="menu">
                   <div class="rounded-circle hide-show-div" id="front">
-                    <img
-                      *ngIf="profile.avatar != null"
+                    <img *ngIf="profile.avatar != null"
                       [src]="profile.avatar.includes('http') ? profile.avatar : 'http://127.0.0.1:8000/' + profile.avatar"
-                      class="rounded-circle"
-                      width="150"
-                      height="150"
-                      id="avatar"
-                    />
-                    <img
-                      *ngIf="profile.avatar == null"
-                      src="/assets/avatar.webp"
-                      class="rounded-circle"
-                      width="150"
-                      height="150"
-                      id="avatar"
-                    />
+                      class="rounded-circle" width="150" height="150" id="avatar" />
+                    <img *ngIf="profile.avatar == null" src="/assets/avatar.webp" class="rounded-circle" width="150"
+                      height="150" id="avatar" />
                   </div>
                   <div class="hide-show-div" id="back">
-                    <label
-                      for="fileBtn"
-                      class="rounded-circle"
-                      style="font-size: xx-large"
-                    >
+                    <label for="fileBtn" class="rounded-circle" style="font-size: xx-large">
                       <i class="bi bi-pencil-square"></i>
                     </label>
-                    <input
-                      type="file"
-                      (change)="onFileChange($event)"
-                      accept="image/*"
-                      id="fileBtn"
-                    />
+                    <input type="file" (change)="onFileChange($event)" accept="image/*" id="fileBtn" />
                   </div>
                 </div>
                 <div class="mt-3" id="nameInfo">
@@ -216,11 +136,8 @@
                     {{ profile.user.first_name }} {{ profile.user.last_name }}
                   </h1>
                   <p>{{ profile.user_type }}</p>
-                  <button
-                    *ngIf='profile.user_type == "Seller"'
-                    [routerLink]="['/web-page-catalog', profile.id_profile]"
-                    class="profileBtn quickart-button-violet m-2"
-                  >
+                  <button *ngIf='profile.user_type == "Seller"' [routerLink]="['/web-page-catalog', profile.id_profile]"
+                    class="profileBtn quickart-button-violet m-2">
                     My Shops
                   </button>
                   <button [routerLink]="['/not-found']" class="quickart-button quickart-button-white">Message</button>
@@ -229,174 +146,105 @@
             </ion-card-content>
           </ion-card>
 
-      <!-- Formualrio Sociales -->
-      <ion-card class="mt-4">
-        <ion-card-content *ngIf="profile.user_type == 'Seller'">
-          <ion-list [formGroup]="socials">
-            <ion-item>
-              <a
-                href="https://www.instagram.com/{{ profile.socials.instagram }}/"
-                target="_blank"
-                ><i
-                  class="bi bi-instagram"
-                  id="socialsLogo"
-                ></i
-              ></a>
-              <ion-input
-                formControlName="instagram"
-                value="{{ profile.socials.instagram }}"
-              ></ion-input>
-            </ion-item>
-            <ion-item>
-              <a href="{{ profile.socials.facebook }}" target="_blank"
-                ><i
-                  class="bi bi-facebook"
-                  id="socialsLogo"
-                ></i
-              ></a>
-              <ion-input
-                formControlName="facebook"
-                value="{{ profile.socials.facebook }}"
-              ></ion-input>
-            </ion-item>
-            <ion-item>
-              <a
-                href="https://twitter.com/{{ profile.socials.x }}/"
-                target="_blank"
-                ><i
-                  class="bi bi-twitter-x"
-                  id="socialsLogo"
-                ></i
-              ></a>
-              <ion-input
-                formControlName="x"
-                value="{{ profile.socials.x }}"
-              ></ion-input>
-            </ion-item>
-            <ion-item>
-              <a href="{{ profile.socials.linkedin }}" target="_blank"
-                ><i
-                  class="bi bi-linkedin"
-                  id="socialsLogo"
-                ></i
-              ></a>
-              <ion-input
-                formControlName="linkedin"
-                value="{{ profile.socials.linkedin }}"
-              ></ion-input>
-            </ion-item>
-          </ion-list>
-        </ion-card-content>
-      </ion-card>
-    </div>
+          <!-- Formualrio Sociales -->
+          <ion-card class="mt-4">
+            <ion-card-content *ngIf="profile.user_type == 'Seller'">
+              <ion-list [formGroup]="socials">
+                <ion-item>
+                  <a href="https://www.instagram.com/{{ profile.socials.instagram }}/" target="_blank"><i
+                      class="bi bi-instagram" id="socialsLogo"></i></a>
+                  <ion-input formControlName="instagram" value="{{ profile.socials.instagram }}"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <a href="{{ profile.socials.facebook }}" target="_blank"><i class="bi bi-facebook"
+                      id="socialsLogo"></i></a>
+                  <ion-input formControlName="facebook" value="{{ profile.socials.facebook }}"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <a href="https://twitter.com/{{ profile.socials.x }}/" target="_blank"><i class="bi bi-twitter-x"
+                      id="socialsLogo"></i></a>
+                  <ion-input formControlName="x" value="{{ profile.socials.x }}"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <a href="{{ profile.socials.linkedin }}" target="_blank"><i class="bi bi-linkedin"
+                      id="socialsLogo"></i></a>
+                  <ion-input formControlName="linkedin" value="{{ profile.socials.linkedin }}"></ion-input>
+                </ion-item>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+        </div>
 
-    <div class="col-md-8">
-      <ion-card class="mt-2">
-        <ion-list class="card-body">
-          <div [formGroup]="userNameForm">
-            <ion-item>
-              <ion-input
-                formControlName="username"
-                labelPlacement="floating"
-                value="{{ profile.user.username }}"
-                readonly="true"
-              >
-                <div slot="label">Username</div>
-              </ion-input>
-            </ion-item>
-          </div>
-          <form
-            [formGroup]="editProfileForm"
-            (ngSubmit)="saveChanges()"
-            enctype="multipart/form-data"
-          >
-            <div formGroupName="user">
-              <ion-item>
-                <ion-input
-                  formControlName="email"
-                  labelPlacement="floating"
-                  value="{{ profile.user.email }}"
-                >
-                  <div slot="label">Email</div>
-                </ion-input>
-              </ion-item>
-
-              <ion-item>
-                <ion-input
-                  formControlName="first_name"
-                  labelPlacement="floating"
-                  value="{{ profile.user.first_name }}"
-                >
-                  <div slot="label">First name</div>
-                </ion-input>
-                <ion-input
-                  formControlName="last_name"
-                  labelPlacement="floating"
-                  value="{{ profile.user.last_name }}"
-                >
-                  <div slot="label">Last name</div>
-                </ion-input>
-              </ion-item>
-            </div>
-
-            <ion-item>
-              <ion-input
-                formControlName="phone"
-                labelPlacement="floating"
-                value="{{ profile.phone }}"
-              >
-                <div slot="label">Phone</div>
-              </ion-input>
-
-              <ion-input
-                formControlName="mobile"
-                labelPlacement="floating"
-                value="{{ profile.mobile }}"
-              >
-                <div slot="label">Mobile</div>
-              </ion-input>
-            </ion-item>
-
-            <ion-item>
-              <ion-input
-                formControlName="address"
-                labelPlacement="floating"
-                value="{{ profile.address }}"
-              >
-                <div slot="label">Address</div>
-              </ion-input>
-            </ion-item>
-
-            <div class="row mt-4">
-              <div class="col-sm-12" id="buttonGroup">
-                <button
-                  class="quickart-button quickart-button-violet"
-                  *ngIf="this.enableEdit == true"
-                  type="submit"
-                  [disabled]="!editProfileForm.valid"
-                >
-                  Save
-                </button>
-                <button
-                  class="quickart-button quickart-button-white"
-                  *ngIf="this.enableEdit == true"
-                  (click)="cancelChanges()"
-                >
-                  Cancel
-                </button>
-                <button
-                  class="quickart-button quickart-button-violet"
-                  *ngIf="this.enableEdit == false"
-                  (click)="editProfile()"
-                >
-                  Edit
-                </button>
-                <button *ngIf="profile && !enableEdit" class="quickart-button quickart-button-white" [routerLink]="['/change-password']">Change Password</button>
+        <div class="col-md-8">
+          <ion-card class="mt-2">
+            <ion-list class="card-body">
+              <div [formGroup]="userNameForm">
+                <ion-item>
+                  <ion-input formControlName="username" labelPlacement="floating" value="{{ profile.user.username }}"
+                    readonly="true">
+                    <div slot="label">Username</div>
+                  </ion-input>
+                </ion-item>
               </div>
-            </div>
-          </form>
-        </ion-list>
-      </ion-card>
+              <form [formGroup]="editProfileForm" (ngSubmit)="saveChanges()" enctype="multipart/form-data">
+                <div formGroupName="user">
+                  <ion-item>
+                    <ion-input formControlName="email" labelPlacement="floating" value="{{ profile.user.email }}">
+                      <div slot="label">Email</div>
+                    </ion-input>
+                  </ion-item>
+
+                  <ion-item>
+                    <ion-input formControlName="first_name" labelPlacement="floating"
+                      value="{{ profile.user.first_name }}">
+                      <div slot="label">First name</div>
+                    </ion-input>
+                    <ion-input formControlName="last_name" labelPlacement="floating"
+                      value="{{ profile.user.last_name }}">
+                      <div slot="label">Last name</div>
+                    </ion-input>
+                  </ion-item>
+                </div>
+
+                <ion-item>
+                  <ion-input formControlName="phone" labelPlacement="floating" value="{{ profile.phone }}">
+                    <div slot="label">Phone</div>
+                  </ion-input>
+
+                  <ion-input formControlName="mobile" labelPlacement="floating" value="{{ profile.mobile }}">
+                    <div slot="label">Mobile</div>
+                  </ion-input>
+                </ion-item>
+
+                <ion-item>
+                  <ion-input formControlName="address" labelPlacement="floating" value="{{ profile.address }}">
+                    <div slot="label">Address</div>
+                  </ion-input>
+                </ion-item>
+
+                <div class="row mt-4">
+                  <div class="col-sm-12" id="buttonGroup">
+                    <button class="quickart-button quickart-button-violet" *ngIf="this.enableEdit == true" type="submit"
+                      [disabled]="!editProfileForm.valid">
+                      Save
+                    </button>
+                    <button class="quickart-button quickart-button-white" *ngIf="this.enableEdit == true"
+                      (click)="cancelChanges()">
+                      Cancel
+                    </button>
+                    <button class="quickart-button quickart-button-violet" *ngIf="this.enableEdit == false"
+                      (click)="editProfile()">
+                      Edit
+                    </button>
+                    <button *ngIf="profile && !enableEdit" class="quickart-button quickart-button-white"
+                      [routerLink]="['/change-password']">Change Password</button>
+                  </div>
+                </div>
+              </form>
+            </ion-list>
+          </ion-card>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -242,6 +242,7 @@ export class WebPageEditPage implements OnInit {
 
 
   loadProducts(shopId: number) {
+    console.log(shopId)
     this.productService.getShopProducts(shopId).subscribe(
       (response) => {
         this.products = response.map((product: Product) => ({

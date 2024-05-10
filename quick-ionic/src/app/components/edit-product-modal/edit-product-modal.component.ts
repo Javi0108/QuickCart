@@ -109,4 +109,11 @@ export class EditProductModalComponent implements OnInit{
       });
     }
   }
+
+  selectImage() {
+    const inputElement: HTMLInputElement | null = document.querySelector('.zyro-image-selector__input');
+    if (inputElement) {
+      inputElement.click();
+    }
+  }
 }

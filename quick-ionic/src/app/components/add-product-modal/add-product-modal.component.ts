@@ -43,6 +43,7 @@ export class AddProductModalComponent {
     };
     reader.readAsDataURL(file);
   }
+  
   selectImage() {
     const inputElement: HTMLInputElement | null = document.querySelector('.zyro-image-selector__input');
     if (inputElement) {

@@ -8,10 +8,12 @@ import { ProductService } from 'src/app/services/product.service';
   templateUrl: './shop-catalog.page.html',
   styleUrls: ['./shop-catalog.page.scss'],
 })
-export class ShopCatalogPage implements OnInit, AfterViewInit {
+export class ShopCatalogPage implements OnInit {
+  
+  
   @Input() shopName!: string;
-  products: Product[] = [];
   shopId!: number;
+  products: Product[] = [];
   pageloaded: boolean;
   searchTerm: string = '';
   filteredProducts: Product[] = [];
@@ -28,15 +30,14 @@ export class ShopCatalogPage implements OnInit, AfterViewInit {
     });
   }
 
-  ngAfterViewInit() {
-    this.pageloaded = true;
-  }
-
   loadProducts(shopId: number) {
+    console.log(shopId)
     this.productService.getShopProducts(shopId).subscribe(
       (response) => {
         this.products = response;
         this.filteredProducts = response;
+        this.pageloaded = true;
+        console.log(this.products)
       },
       (error) => {
         console.error('Error al cargar los productos:', error);

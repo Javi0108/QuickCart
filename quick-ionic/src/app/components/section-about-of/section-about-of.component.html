@@ -20,7 +20,7 @@
           </div>
         </div>
 
-        <div class="image-right col-6">
+        <div class="image-right col-12 col-md-6">
           <div [routerLink]="sectionData.content.related_product ? ['/product', sectionData.content.related_product] : null" class="image">
             <img [src]="sectionData.content.image">
           </div>
@@ -28,9 +28,9 @@
       </div>
 
       <div *ngIf="sectionData.content.type == '2'" class="row pb-3 pt-3 block-layout-container">
-        <div class="image-right col-6">
+        <div class="image-right col-12 col-md-6">
           <div [routerLink]="sectionData.content.related_product ? ['/product', sectionData.content.related_product] : null" class="image" style="margin: 0px 20px 0px 0px;">
-            <img [src]="sectionData.content.image">
+            <img [src]="sectionData.content.image" class="w-100">
           </div>
         </div>
         
@@ -129,7 +129,7 @@
         </div>
       </div>
 
-      <div class="image-right col-6">
+      <div class="image-right col-12 col-md-6">
         <div [routerLink]="sectionData.content.related_product ? ['/product', sectionData.content.related_product] : null" class="image">
           <img [src]="sectionData.content.image">
         </div>
@@ -138,7 +138,7 @@
 
 
     <div *ngIf="sectionData.content.type == '2'" class="row pb-3 pt-3 block-layout-container">
-      <div class="image-right col-6">
+      <div class="image-right col-12 col-md-6">
         <div [routerLink]="sectionData.content.related_product ? ['/product', sectionData.content.related_product] : null" class="image" style="margin: 0px 20px 0px 0px;">
           <img [src]="sectionData.content.image">
         </div>

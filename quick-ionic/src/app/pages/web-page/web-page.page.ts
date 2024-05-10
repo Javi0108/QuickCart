@@ -30,6 +30,7 @@ export class WebPagePage implements OnInit {
 
   ngOnInit() {
     const shopIdString = this.route.snapshot.paramMap.get('id');
+    console.log("ds", shopIdString)
     if (shopIdString) {
       this.shopId = +shopIdString;
       this.getShop();

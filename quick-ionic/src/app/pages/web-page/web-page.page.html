@@ -1,7 +1,7 @@
 <ion-spinner *ngIf="!shopData"></ion-spinner>
 
 <ion-header *ngIf="shopData">
-  <ion-toolbar color="primary">
+  <ion-toolbar color="tertiary">
     <div slot="start" style="display: flex; align-items: center;" class="ms-5">
       <ion-img [src]="'http://localhost:8000'+shopData.logo" style="width: 50px;"></ion-img>
       <ion-title style="margin-left: 10px;">{{shopData.name}}</ion-title>
@@ -23,7 +23,9 @@
 <div *ngIf="shouldShowIonContentValue">
   <div *ngIf="shopData">
     <div *ngIf="showSections">
-      <div *ngIf="sections">
+      <div *ngIf="sections && shopId">
+        <h1>
+        </h1>
         <app-section-container [sections]="sections" [shopId]="shopId!"></app-section-container>
       </div>
     </div>
@@ -42,7 +44,7 @@
   <div *ngIf="shopData">
     <div *ngIf="showSections">
       <div *ngIf="sections">
-        <app-section-container [sections]="sections"></app-section-container>
+        <app-section-container [sections]="sections" [shopId]="shopId!"></app-section-container>
       </div>
     </div>
 

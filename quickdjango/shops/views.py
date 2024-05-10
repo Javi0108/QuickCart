@@ -290,13 +290,21 @@ class ProductsView(APIView):
             product.avatar = image_data
 
         if "galleryPreviews" in request.data:
-            gallery_images = request.data.getlist('galleryPreviews')
+            gallery_images = request.data['galleryPreviews']
+            gallery_data = []
             for img_data in gallery_images:
                 format, imgstr = img_data.split(';base64,')
                 ext = format.split('/')[-1]
-                image_name = f'gallery_{id_product}_{name}_{len(product.productimage_set.all())}.{ext}'  # Nombre de archivo personalizado
+                image_name = f'gallery_{id_product}_{name}_{len(gallery_data)}.{ext}'  # Nombre de archivo personalizado
                 image_data = ContentFile(base64.b64decode(imgstr), name=image_name)
-                ProductImage.objects.create(product=product, image=image_data)
+                gallery_data.append(image_data)
+
+            # Eliminar todas las imágenes de la galería existentes
+            product.product_images.all().delete()
+            
+            # Crear nuevas imágenes de galería
+            for img in gallery_data:
+                ProductImage.objects.create(product=product, image=img)
 
         # Guardar los cambios en el producto
         product.save()
@@ -304,6 +312,7 @@ class ProductsView(APIView):
         # Serializar y devolver la respuesta actualizada
         serializer = ProductSerializer(product)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
 
     def delete(self, request, id_product):
         try:

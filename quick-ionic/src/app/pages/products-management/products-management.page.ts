@@ -58,6 +58,7 @@ export class ProductsManagementPage {
 
 
   loadProducts(shopId: number) {
+    console.log(shopId)
     this.productService.getShopProducts(shopId).subscribe(
       (response) => {
         this.products = response;

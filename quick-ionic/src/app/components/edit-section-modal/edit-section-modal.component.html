@@ -9,7 +9,7 @@
     <div class="zyro-image-selector" (click)="selectImage()">
       <input type="file" (change)="changeImage($event)" class="zyro-image-selector__input visually-hidden">
       <button class="zyro-image-selector__button" title="Replace image">
-        <ion-img class="zyro-image-selector__image" [src]="image"></ion-img>
+        <ion-img *ngIf="image!" class="zyro-image-selector__image" [src]="image"></ion-img>
         <div class="zyro-image-selector__description">
           <ion-icon name="photo_library" class="icon material-symbols-rounded zyro-image-selector__icon"></ion-icon>
           <p class="text-body-2">Replace image</p>
