@@ -12,7 +12,7 @@
     <p><strong>Status:</strong> {{ cart.status }}</p>
     <p><strong>Total Price:</strong> {{ cart.total_price }}</p>
 
-    <ion-button color="primary" expand="block" (click)="makePayment()">
+    <ion-button color="primary" expand="block" (click)="makePayment(cart.order_products)">
       <ion-icon name="cart-outline" slot="start"></ion-icon>
       Buy now
     </ion-button>

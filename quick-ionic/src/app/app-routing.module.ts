@@ -79,6 +79,14 @@ const routes: Routes = [
     data: { menu: 'edit' }
   },
   {
+    path: 'success',
+    loadChildren: () => import('./pages/success/success.module').then( m => m.SuccessPageModule)
+  },
+  {
+    path: 'cancel',
+    loadChildren: () => import('./pages/cancel/cancel.module').then( m => m.CancelPageModule)
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'

@@ -5,6 +5,8 @@
 // Import the functions you need from the SDKs you need
 export const environment = {
   production: false,
+  stripePublicKey: 'pk_test_51PDlqMK6SUOsEgbaBglMJakeKD97oH60HHNB7fHK1zI4tPbwSB2f5Kom1BIw6WxxQczB13JZZXAzVIDrpOT9vFz700gmyOVMJy',
+
   // firebaseConfig: {
   //   apiKey: "AIzaSyDaYZAxaSFtZaNPlEHkC_QHFsEH17FaAFk",
   //   authDomain: "quickart-e827c.firebaseapp.com",

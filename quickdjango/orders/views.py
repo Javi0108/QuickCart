@@ -6,6 +6,12 @@ from .models import Order, OrderProduct
 from .serializers import OrderSerializer
 from shops.models import Product
 
+#### Stripe 
+import stripe
+from django.conf import settings
+from django.http import JsonResponse
+
+    
 class OrderView(APIView):
     http_methods = ["get", "put", "post", "delete"]
 
@@ -60,3 +66,38 @@ class OrderView(APIView):
 
         return Response({'message': 'Product removed from cart'}, status=status.HTTP_204_NO_CONTENT)
     
+
+
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
+
+class CheckoutSessionView(APIView):
+    def post(self, request, *args, **kwargs):
+        try:
+            order_id = request.data.get('order_id')
+
+            order = Order.objects.get(pk=order_id)
+
+            checkout_session = stripe.checkout.Session.create(
+                payment_method_types=['card'],
+                line_items=[
+                    {
+                        'price_data': {
+                            'currency': 'eur',
+                            'product_data': {
+                                'name': 'Order Payment',
+                            },
+                            'unit_amount': int(order.total_price * 100),
+                        },
+                        'quantity': 1,
+                    },
+                ],
+                mode='payment',
+                success_url='http://localhost:8100/success/',
+                cancel_url='http://localhost:8100/cancel/',
+                client_reference_id=str(order.id), 
+            )
+
+            return JsonResponse({'url': checkout_session.url}, status=200)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=400)

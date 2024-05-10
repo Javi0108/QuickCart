@@ -3,6 +3,7 @@
   import { Order, OrderProduct } from '../../interfaces/cart.interface';
   import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/interfaces/product.interface';
+import { StripeService } from 'src/app/services/stripe.service';
 
   @Component({
     selector: 'app-cart',
@@ -13,7 +14,7 @@ import { Product } from 'src/app/interfaces/product.interface';
     cart!: Order;
     orderId!: number;
 
-    constructor(private route: ActivatedRoute, private orderService: OrderService) { }
+    constructor(private route: ActivatedRoute, private orderService: OrderService, private stripeService: StripeService) { }
 
     ngOnInit() {
       const orderId = this.route.snapshot.paramMap.get('id');
@@ -63,8 +64,11 @@ import { Product } from 'src/app/interfaces/product.interface';
       });
     }
 
-    makePayment(){
+    makePayment(products: any){
       console.log("Pagos en proceso")
+      this.stripeService.createCheckoutSession(products).subscribe((data) => {
+        window.location.href = data.url;
+      });
     }
 
   }
