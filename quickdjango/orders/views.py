@@ -81,9 +81,6 @@ class OrderView(APIView):
         )
 
 
-stripe.api_key = settings.STRIPE_SECRET_KEY
-
-
 class CheckoutSessionView(APIView):
     def post(self, request, *args, **kwargs):
         try:
@@ -95,7 +92,7 @@ class CheckoutSessionView(APIView):
                 "success_url": f"http://localhost:8100/success/{order_id}",
                 "cancel_url": f"http://localhost:8100/cancel/{order_id}",
                 "line_items": [],
-                "automatic_tax": {"enabled": True},
+                #                "automatic_tax": {"enabled": True},
                 "client_reference_id": str(order.id_order),
             }
 
@@ -106,16 +103,23 @@ class CheckoutSessionView(APIView):
                         "price_data": {
                             "currency": "eur",
                             "product_data": {
-                                "name": item.product.name,
-                                "images": (item.product.avatar,),
+                                "name": item["product"]["name"],
+                                "images": (
+                                    f"http://127.0.0.1:8000{item['product']['avatar']}",
+                                ),
                             },
-                            "unit_amount": int(item.product.price * 100),
+                            "unit_amount": int(float(item["product"]["price"]) * 100),
                         },
-                        "quantity": item.quantity,
+                        "quantity": item["quantity"],
                     }
                 )
-            checkout_session = stripe.checkout.Session.create(**session_data)
 
-            return JsonResponse({"url": checkout_session.url}, status=200)
+            checkout_session = stripe.checkout.Session.create(**session_data)
+            print("AAA")
+            return Response({"url": checkout_session.url}, status=200)
+        except Order.DoesNotExist:
+            return Response({"error": "Order not found."}, status=404)
         except Exception as e:
-            return JsonResponse({"error": str(e)}, status=400)
+            # Log the exception for further investigation
+            print(f"Error: {e}")  # Debug: Print the actual error message
+            return Response({"error": str(e)}, status=400)
