@@ -92,7 +92,6 @@ class CheckoutSessionView(APIView):
                 "success_url": f"http://localhost:8100/success/{order_id}",
                 "cancel_url": f"http://localhost:8100/cancel/{order_id}",
                 "line_items": [],
-                #                "automatic_tax": {"enabled": True},
                 "client_reference_id": str(order.id_order),
             }
 
@@ -120,6 +119,4 @@ class CheckoutSessionView(APIView):
         except Order.DoesNotExist:
             return Response({"error": "Order not found."}, status=404)
         except Exception as e:
-            # Log the exception for further investigation
-            print(f"Error: {e}")  # Debug: Print the actual error message
             return Response({"error": str(e)}, status=400)

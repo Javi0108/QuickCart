@@ -1,13 +1,47 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>succes</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
+<ion-content *ngIf="cart">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">succes</ion-title>
+      <ion-title size="large">Success</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <div class="success-content">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>¡Gracias por tu compra!</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Tu pedido ha sido procesado exitosamente. A continuación, se muestra el resumen de tu compra:</p>
+        
+        <ion-list>
+          <ion-item *ngFor="let orderProduct of cart.order_products">
+            <ion-thumbnail slot="start">
+              <img [src]="'http://localhost:8000/' + orderProduct.product.avatar">
+            </ion-thumbnail>
+            <ion-label>
+              <h2>{{ orderProduct.product.name }}</h2>
+              <p>{{ orderProduct.quantity }} x {{ orderProduct.product.price | currency:'EUR' }}</p>
+            </ion-label>
+            <ion-note slot="end">{{ (orderProduct.product.price * orderProduct.quantity) | currency:'EUR' }}</ion-note>
+          </ion-item>
+        </ion-list>
+        
+        <ion-item>
+          <ion-label>
+            <h2>Total:</h2>
+          </ion-label>
+          <ion-note slot="end">{{ cart.total_price | currency:'EUR' }}</ion-note>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-buttons class="buttons">
+      <button class="quickart-button">
+        Cancelar Pedido
+      </button>
+      <button class="quickart-button quickart-button-violet">
+        Seguir Comprando
+      </button>
+    </ion-buttons>
+  </div>
 </ion-content>
