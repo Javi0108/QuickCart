@@ -83,10 +83,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/success/success.module').then( m => m.SuccessPageModule)
   },
   {
-    path: 'cancel/:id',
-    loadChildren: () => import('./pages/cancel/cancel.module').then( m => m.CancelPageModule)
-  },
-  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'

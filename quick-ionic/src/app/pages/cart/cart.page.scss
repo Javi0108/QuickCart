@@ -15,7 +15,6 @@ body {
 .card {
   margin: auto;
   margin-top: 20vh;
-  max-width: 950px;
   width: 90%;
   box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 1rem;
@@ -64,10 +63,6 @@ body {
 
 .summary .col-10 {
   padding: 0;
-}
-
-.row {
-  margin: 0;
 }
 
 .title b {

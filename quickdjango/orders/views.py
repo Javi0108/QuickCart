@@ -19,7 +19,7 @@ class OrderView(APIView):
         if order_id is not None:
             order = get_object_or_404(Order, id_order=order_id)
             serializer = OrderSerializer(order)
-            return Response(serializer.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(
                 {"message": "Order ID is required"}, status=status.HTTP_400_BAD_REQUEST
@@ -76,9 +76,10 @@ class OrderView(APIView):
         product = get_object_or_404(Product, id_product=product_id)
         order.remove_product(product)
 
-        return Response(
-            {"message": "Product removed from cart"}, status=status.HTTP_204_NO_CONTENT
-        )
+        order = get_object_or_404(Order, id_order=pk)
+        serializer = OrderSerializer(order)
+
+        return Response(serializer.data, status=status.HTTP_204_NO_CONTENT)
 
 
 class CheckoutSessionView(APIView):
@@ -87,10 +88,11 @@ class CheckoutSessionView(APIView):
             order_id = request.data.get("order_id")
             print(order_id)
             order = Order.objects.get(id_order=order_id)
+
             session_data = {
                 "mode": "payment",
                 "success_url": f"http://localhost:8100/success/{order_id}",
-                "cancel_url": f"http://localhost:8100/cancel/{order_id}",
+                "cancel_url": f"http://localhost:8100/cart/{order_id}",
                 "line_items": [],
                 "client_reference_id": str(order.id_order),
             }
@@ -114,9 +116,39 @@ class CheckoutSessionView(APIView):
                 )
 
             checkout_session = stripe.checkout.Session.create(**session_data)
-            print("AAA")
+            print(checkout_session.id)
+            order.id_stripe = checkout_session.id
+            order.save()
             return Response({"url": checkout_session.url}, status=200)
         except Order.DoesNotExist:
             return Response({"error": "Order not found."}, status=404)
         except Exception as e:
             return Response({"error": str(e)}, status=400)
+
+
+class CancelPaymentView(APIView):
+    def post(self, request, order_id, *args, **kwargs):
+        try:
+            order = get_object_or_404(Order, id_order=order_id)
+
+            if not order.id_stripe:
+                raise ValueError("The order does not have a valid Stripe session ID.")
+
+            stripe_session = stripe.checkout.Session.retrieve(id=order.id_stripe)
+            stripe_payment_intent = stripe_session.payment_intent
+
+            refund_amount = int(order.total_price * 100)
+            if refund_amount > stripe_session.amount_total:
+                refund_amount = stripe_session.amount_total
+
+            refund = stripe.Refund.create(
+                payment_intent=stripe_payment_intent,
+                amount=refund_amount,
+                reason="requested_by_customer",
+            )
+
+            return JsonResponse(
+                {"message": "Payment canceled successfully"}, status=200
+            )
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=400)

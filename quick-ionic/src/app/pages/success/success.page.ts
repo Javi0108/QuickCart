@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Order } from 'src/app/interfaces/cart.interface';
 import { OrderService } from 'src/app/services/order.service';
+import { StripeService } from 'src/app/services/stripe.service';
 
 @Component({
   selector: 'app-success',
@@ -12,7 +13,7 @@ export class SuccessPage implements OnInit {
   cart!: Order; 
   orderId!: number;
 
-  constructor(private route: ActivatedRoute, private orderService: OrderService) {
+  constructor(private route: ActivatedRoute, private orderService: OrderService, private stripeService: StripeService) {
   }
 
   ngOnInit() {
@@ -36,4 +37,16 @@ export class SuccessPage implements OnInit {
       }
     );
   }
+
+  cancelOrder(){
+    this.stripeService.cancelPayment(""+this.cart.id_order,this.cart.order_products).subscribe({
+      next: (response) => {
+
+      },
+      error: (error) => {
+
+      }
+    });
+  }
+
 }
