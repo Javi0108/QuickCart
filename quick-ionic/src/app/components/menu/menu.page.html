@@ -72,7 +72,6 @@
               <img
                 src="assets/icon/logo.png"
                 width="35px"
-                class="rounded-circle"
               />
               <label class="d-none d-lg-block">QuickCart</label>
             </div>
@@ -105,7 +104,7 @@
           </ion-fab>
         </div>
 
-        <div *ngIf="!isLoggedIn()" class="col-6 r-col justify-content-end" id="menuButtons">
+        <div *ngIf="!isLoggedIn()" class="col-6 justify-content-end" id="menuButtons">
           <button [routerLink]="['/login']">Log In</button>
           <hr class="vertical-separator" />
           <button [routerLink]="['/register']">Sing Up</button>
