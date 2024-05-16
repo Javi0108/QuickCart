@@ -41,6 +41,26 @@ export class ProductService {
     return this.http.put<any>(`${this.baseURL}edit/product/${ProductId}/`, updatedProductData, { headers: this.getHeaders() });
   }
 
+  //comments
+
+  getProductComments(productId: number): Observable<any[]> {
+    return this.http.get<Comment[]>(`${this.baseURL}product/${productId}/comments/`, { headers: this.getHeaders() });
+  }
+
+  addComment(productId: number, newCommentData: any): Observable<any> {
+    const body = JSON.stringify(newCommentData);
+    return this.http.post<Comment>(`${this.baseURL}product/${productId}/comments/add/`, body, { headers: this.getHeaders() });
+  }
+
+  editComment(commentId: number, updatedCommentData: any): Observable<any> {
+    return this.http.put<Comment>(`${this.baseURL}comments/${commentId}/edit/`, updatedCommentData, { headers: this.getHeaders() });
+  }
+
+  deleteComment(commentId: number): Observable<any> {
+    return this.http.delete<any>(`${this.baseURL}comments/${commentId}/delete/`, { headers: this.getHeaders() });
+  }
+
+
   private getHeaders(): HttpHeaders {
     let headers = new HttpHeaders({
       'Content-Type': 'application/json'

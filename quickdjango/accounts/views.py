@@ -4,11 +4,11 @@ from rest_framework import status
 from rest_framework.response import Response
 from django.contrib.auth import authenticate
 from rest_framework.views import APIView
-from .serializers import  ProfileSerializerRegister, UserSerializerRegister, ProfileSerializer, ProfileSerializerByCode
+from .serializers import  ProfileSerializerRegister, UserSerializerRegister, ProfileSerializer, ProfileSerializerByCode, UserSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
-from rest_framework_simplejwt.tokens import RefreshToken, BlacklistMixin
+from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.parsers import MultiPartParser, FormParser
 from django.contrib.auth.hashers import check_password
 from django.shortcuts import get_object_or_404
@@ -45,12 +45,14 @@ class LoginView(APIView):
             username = user_data.get('username')
             password = user_data.get('password')
             user = authenticate(username=username, password=password)
-
             if user is not None:
+                # Serializar los datos del usuario
+                user_serializer = UserSerializer(user)
                 refresh = RefreshToken.for_user(user)
                 return Response({
                     'refresh': str(refresh),
                     'access': str(refresh.access_token),
+                    'user': user_serializer.data,  # Incluir datos del usuario en la respuesta
                 }, status=status.HTTP_200_OK)
             else:
                 return Response({'error': 'Invalid username or password'}, status=status.HTTP_401_UNAUTHORIZED)

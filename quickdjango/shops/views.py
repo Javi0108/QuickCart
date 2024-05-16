@@ -1,9 +1,8 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
-from .models import Shop, Product, ShopSectionOrder, Section, ProductImage
-from .serializers import ShopSerializer, ShopDetailSerializer, ShopSectionSerializer
-from .serializers import ShopSerializer,ProductSerializer,ProductImageSerializer
+from .models import Shop, Product, ShopSectionOrder, Section, ProductImage, Comment
+from .serializers import ShopSerializer, ShopDetailSerializer, ShopSectionSerializer, ProductSerializer,ProductImageSerializer, CommentSerializer, CreateCommentSerializer
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -321,3 +320,59 @@ class ProductsView(APIView):
             return Response({"success": "Producto eliminado exitosamente"}, status=status.HTTP_204_NO_CONTENT)
         except Product.DoesNotExist:
             return Response({"error": "El producto no existe"}, status=status.HTTP_404_NOT_FOUND)
+        
+        
+        
+
+class ProductCommentsView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, id_product):
+        product = get_object_or_404(Product, id_product=id_product)
+        comments = product.product_comments.all().order_by('-date_posted')
+        serializer = CommentSerializer(comments, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request, id_product):
+        try:
+            product = get_object_or_404(Product, id_product=id_product)
+            
+            profile = request.user.profile
+            
+            comment_text = request.data
+            
+            serializer_data = {
+                "product": product.id_product,
+                "author": profile.id_profile,
+                "content": comment_text,
+            }
+            
+            serializer = CreateCommentSerializer(data=serializer_data)
+            
+            if serializer.is_valid():
+                serializer.save()
+                comment = Comment.objects.get(id=serializer.data['id'])
+                comment_serializer = CommentSerializer(comment)
+                
+                return Response(comment_serializer.data, status=status.HTTP_201_CREATED)
+            else:
+                print("Serializer errors:", serializer.errors)
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            print("An exception occurred:", str(e))
+            return Response({"error": "An internal server error occurred."}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    def delete(self, request, id_comment):
+        comment = get_object_or_404(Comment, pk=id_comment)
+        if request.user.profile != comment.author:
+            return Response({'detail': 'No tienes permiso para eliminar este comentario.'}, status=status.HTTP_403_FORBIDDEN)
+        comment.delete()
+        
+        # Obtenemos la lista actualizada de comentarios
+        product_id = comment.product.id_product
+        product = get_object_or_404(Product, id_product=product_id)
+        comments = product.product_comments.all().order_by('-date_posted')
+        serializer = CommentSerializer(comments, many=True)
+        
+        return Response(serializer.data, status=status.HTTP_200_OK)
+

@@ -1,6 +1,6 @@
 from django.db import models
 from accounts.models import Profile
-
+from django.utils import timezone
 # Create your models here.
 
 class Shop(models.Model):
@@ -40,6 +40,7 @@ class Product(models.Model):
     stock_quantity = models.IntegerField()
     images = models.ManyToManyField('ProductImage', related_name='product_images',blank=True)
     tags = models.ManyToManyField('Tag',blank=True)
+    comments = models.ManyToManyField('Comment', related_name='product_comments', blank=True)
         
     #invoices = models.ManyToManyField(Invoice, through='InvoiceProduct')
     #orders = models.ManyToManyField(Order, through='OrderProduct')
@@ -57,3 +58,12 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
+
+class Comment(models.Model):
+    product = models.ForeignKey(Product, related_name='product_comments', on_delete=models.CASCADE)
+    author = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    content = models.TextField()
+    date_posted = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f'Comment by {self.author} on {self.date_posted}'

@@ -178,7 +178,7 @@ export class WebPageEditPage implements OnInit {
         catchError(error => {
           this.notificationToastService.presentToast(
             'It seems there was an issue while trying to save the changes. Some sections could not be saved correctly. Please try again later. If the issue persists, please contact technical support.',
-            'success',
+            'error',
             '../../assets/check.svg'
           );
           return of(null);

@@ -30,9 +30,7 @@ export class AuthService {
         this.token_refresh = response.refresh;
         localStorage.setItem('token', this.token as string);
         localStorage.setItem('token_refresh', this.token_refresh as string);
-        localStorage.setItem('user', JSON.stringify(user));
-        console.log(user)
-        console.log(localStorage.getItem('user'))
+        localStorage.setItem('user', JSON.stringify(response.user));
       })
     );
   }

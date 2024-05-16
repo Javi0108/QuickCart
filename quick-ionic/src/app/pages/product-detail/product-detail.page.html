@@ -6,12 +6,12 @@
           <ion-col size-lg="6" size-md="12" size="12">
             <div class="product-images">
               <div class="image-selected">
-                <img [src]="'http://localhost:8000' + selectedImage" id="current"
-                  alt="Avatar del producto">
+                <img [src]="'http://localhost:8000' + selectedImage" id="current" alt="Avatar del producto">
               </div>
               <div class="images">
-                <img *ngFor="let productImages of productData.images" [src]="'http://localhost:8000' + productImages.image" id="current"
-                  alt="Imagenes del producto" (click)="selectImage(productImages.image)">
+                <img *ngFor="let productImages of productData.images"
+                  [src]="'http://localhost:8000' + productImages.image" id="current" alt="Imagenes del producto"
+                  (click)="selectImage(productImages.image)">
               </div>
             </div>
           </ion-col>
@@ -51,5 +51,49 @@
         </ion-row>
       </ion-card-content>
     </ion-card>
+
+    <div class="row justify-content-center" *ngIf="productComments">
+      <div class="col-md-12">
+        <div class="card card-comment">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h5 class="card-title mb-0">Comments {{ productComments.length }}</h5>
+            </div>
+
+            <form class="mb-3" (ngSubmit)="submitComment()">
+              <div class="d-flex">
+                <ion-textarea class="form-control me-2" id="comment" rows="1" maxlength="500" counter="true"
+                  [(ngModel)]="newComment" [counter]="true" [ngModelOptions]="{standalone: true}"
+                  placeholder="Your Comment"></ion-textarea>
+                <button type="submit" class="quickart-button quickart-button-violet"
+                  style="padding: 0px 30px;">Post</button>
+              </div>
+            </form>
+
+            <div *ngFor="let comment of productComments" class="card p-3 mt-2">
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="user d-flex flex-row align-items-center" style="max-width: 90%;">
+                  <img [src]="'http://localhost:8000/' + comment.author.avatar" width="40" height="40"
+                    class="user-img rounded-circle me-2" style="margin-bottom: auto;">
+                  <span>
+                    <small class="fw-bold text-primary me-1" style="font-size: 0.875em;">{{ comment.author.user.username
+                      }}:</small>
+                    <small class="fw-bold">{{ comment.content }}</small>
+                  </span>
+                </div>
+                <small style="margin-bottom: auto;">{{ calculateDaysAgo(comment.date_posted) }} days ago</small>
+              </div>
+
+              <div class="action d-flex justify-content-end mt-2 align-items-center"
+                *ngIf="comment.author.user.id == currentUserId">
+                <div class="reply" (click)="deleteComment(comment.id)">
+                  <small>Remove</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </ion-content>

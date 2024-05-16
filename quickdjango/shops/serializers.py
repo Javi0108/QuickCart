@@ -1,6 +1,8 @@
 from rest_framework import serializers
-from .models import Shop, Product, Section, ProductImage
-       
+from .models import Shop, Product, Section, ProductImage, Comment
+from accounts.models import Profile
+from django.contrib.auth.models import User
+
  # PRODUCTS
 
 class ProductImageSerializer(serializers.ModelSerializer):
@@ -36,5 +38,28 @@ class ShopSectionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Section
         fields = '__all__'
+        
+class CreateCommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = '__all__'
+        
+        
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username']
 
+class ProfileSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
 
+    class Meta:
+        model = Profile
+        fields = ['user', 'avatar']
+
+class CommentSerializer(serializers.ModelSerializer):
+    author = ProfileSerializer()
+
+    class Meta:
+        model = Comment
+        fields = ['id', 'product', 'author', 'content', 'date_posted']

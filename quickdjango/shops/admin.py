@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Shop, Section, ShopSectionOrder, Product, Tag, ProductImage
+from .models import Shop, Section, ShopSectionOrder, Product, Tag, ProductImage, Comment
 
 # Register your models here.
 
@@ -35,3 +35,10 @@ class TagAdmin(admin.ModelAdmin):
 class ProductImageAdmin(admin.ModelAdmin):
     list_display = ('id', 'product', 'image')
     search_fields = ('product__name',)
+    
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('id', 'product', 'author', 'date_posted', 'content')
+    search_fields = ('product__name', 'author__user__username', 'content')
+    list_filter = ('date_posted', 'author')
+    date_hierarchy = 'date_posted'
