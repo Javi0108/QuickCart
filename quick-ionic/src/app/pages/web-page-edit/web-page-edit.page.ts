@@ -1,5 +1,5 @@
 import { Section } from './../../interfaces/section.interface';
-import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
 import { PopoverController } from '@ionic/angular';
 import { catchError, finalize, forkJoin, of } from 'rxjs';
@@ -20,6 +20,8 @@ export class WebPageEditPage implements OnInit {
 
   @ViewChild('popoverContent', { static: false }) popoverContent: any;
 
+  public showMenu: boolean = true;
+
   shopData!: any;
   shopId!: number;
 
@@ -39,11 +41,11 @@ export class WebPageEditPage implements OnInit {
     private sectionEventService: SectionEventService,
     private productService: ProductService,
     private notificationToastService: NotificationToastService,
-    private popoverController: PopoverController
+    private popoverController: PopoverController,
+    private changeDetector: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
- 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationStart) {
         if (this.router.url.includes('/web-page-edit')) {
@@ -242,7 +244,6 @@ export class WebPageEditPage implements OnInit {
 
 
   loadProducts(shopId: number) {
-    console.log(shopId)
     this.productService.getShopProducts(shopId).subscribe(
       (response) => {
         this.products = response.map((product: Product) => ({
@@ -280,5 +281,12 @@ export class WebPageEditPage implements OnInit {
     }
   }
 
+  ionViewWillEnter() {
+    this.showMenu = true;
+  }
 
+  ionViewWillLeave(): void {
+    this.showMenu = false;
+    this.changeDetector.detectChanges();
+  }
 }

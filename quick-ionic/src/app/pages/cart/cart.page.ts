@@ -29,7 +29,6 @@ import { Product } from 'src/app/interfaces/product.interface';
       this.orderService.getOrder(orderId).subscribe(
         (response: Order) => {
           this.cart = response;
-          console.log('Loaded cart:', this.cart);
         },
         (error: any) => {
           console.error('Error loading cart:', error);

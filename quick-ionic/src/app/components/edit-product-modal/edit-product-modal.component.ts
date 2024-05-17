@@ -24,7 +24,6 @@ export class EditProductModalComponent implements OnInit{
 
   }
   ngOnInit(): void {
-    console.log("modal", this.product)
   }
 
   closeModal(dataToSend?: any) {
@@ -60,9 +59,7 @@ export class EditProductModalComponent implements OnInit{
 
 
   discardImage(index:number){
-    console.log("Imagen numero:" + index)
     this.galleryPreviews.splice(index,1);
-    console.log(this.galleryPreviews  )
   }
 
   convertFilesToDataURL(files: FileList, callback: (imagePreviews: string[]) => void) {
@@ -97,7 +94,6 @@ export class EditProductModalComponent implements OnInit{
         galleryPreviews: this.galleryPreviews
       }
 
-      console.log(data)
 
       this.productService.editProduct(this.product.id_product, data).subscribe({
         next: (response) => {

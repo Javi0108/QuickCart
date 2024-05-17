@@ -41,7 +41,6 @@ export class SectionProductsComponent implements OnInit {
     this.editMode = this.section.editMode;
     this.productsItem = this.section.products;
 
-    console.log(this.shopId)
 
     this.loadProducts();
     

@@ -76,7 +76,8 @@ const routes: Routes = [
   {
     path: 'not-found',
     loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule),
-    data: { menu: 'edit' }
+    data: { menu: 'edit' },
+    runGuardsAndResolvers: 'always',
   },
   {
     path: '',

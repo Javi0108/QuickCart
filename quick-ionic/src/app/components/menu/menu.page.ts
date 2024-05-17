@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observer } from 'rxjs';
@@ -24,7 +24,8 @@ export class MenuPage implements OnInit {
   constructor(
     private authService: AuthService,
     private profileService: ProfileService,
-    private router: Router
+    private router: Router,
+    private changeDetector: ChangeDetectorRef,
   ) {
 
   }
@@ -71,6 +72,7 @@ export class MenuPage implements OnInit {
           this.profile = profile;
         },
         error: (error) => {
+          console.log(error);
         },
       } as Observer<Profile>);
     }

@@ -36,7 +36,6 @@ export class EditWebsiteModalComponent implements OnInit {
         address: this.editWebSiteForm.get('address')?.value,
         logo: this.imagePreview,
       };
-      console.log(this.imagePreview)
       this.editShop(shopData);
     }
   }
