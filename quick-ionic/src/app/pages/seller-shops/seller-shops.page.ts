@@ -18,6 +18,7 @@ export class SellerShopsPage implements OnInit {
   createWebSiteForm: FormGroup;
   filteredShops: ShopData[] = [];
 
+  public window: Window = window;
   constructor(
     private sellerService: SellerService,
     private modalController: ModalController,
@@ -79,7 +80,7 @@ export class SellerShopsPage implements OnInit {
       cssClass: 'add-website-modal',
       componentProps: {
         editWebSiteForm: editWebSiteForm,
-        imagePreview: "http://localhost:8000/" + shopToEdit.logo
+        imagePreview: window.location.protocol + '//' + window.location.hostname + ':8000' + shopToEdit.logo
       }
     });
 

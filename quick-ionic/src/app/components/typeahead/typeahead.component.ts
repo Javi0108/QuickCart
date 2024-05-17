@@ -92,7 +92,7 @@ export class TypeaheadComponent implements OnInit {
         const newProduct = {
           text: data.data.name,
           value: data.data.id_product.toString(),
-          img: "http://localhost:8000" + data.data.avatar
+          img: window.location.protocol + '//' + window.location.hostname + ':8000' + data.data.avatar
         };
   
         this.items.push(newProduct);

@@ -20,7 +20,7 @@ export class MenuPage implements OnInit {
 
   loginSuccessEvent: EventEmitter<void> = new EventEmitter<void>();
 
-
+  public window: Window = window;
   constructor(
     private authService: AuthService,
     private profileService: ProfileService,

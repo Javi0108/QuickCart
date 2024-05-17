@@ -27,6 +27,7 @@ export class ProfilePage implements OnInit {
   foreignProfileForm: FormGroup;
   avatarFile: File | null = null;
 
+  public window: Window = window;
   constructor(
     private profileService: ProfileService,
     private formBuilder: FormBuilder,

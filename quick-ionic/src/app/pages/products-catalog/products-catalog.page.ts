@@ -13,6 +13,7 @@ export class ProductsCatalogPage implements OnInit, AfterViewInit {
   searchTerm: string = '';
   filteredProducts: Product[] = [];
 
+  public window: Window = window;
   constructor(private productService: ProductService) { 
     this.pageloaded = false;
   }

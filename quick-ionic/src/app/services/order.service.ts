@@ -7,7 +7,7 @@ import { Order } from '../interfaces/cart.interface';
   providedIn: 'root'
 })
 export class OrderService {
-  private baseURL = "http://localhost:8000/api/orders/";
+  private baseURL = window.location.protocol + '//' + window.location.hostname + ':8000' + "/api/orders/";
   private token: string | null;
 
   constructor(private http: HttpClient) {

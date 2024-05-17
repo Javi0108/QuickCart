@@ -11,7 +11,7 @@ import { Profile } from '../interfaces/profile.interface';
 })
 export class ProfileService {
 
-  private baseURL = "http://localhost:8000/api/accounts/profile/";
+  private baseURL = window.location.protocol + '//' + window.location.hostname + ':8000' + "/api/accounts/profile/";
   private token: string | null;
 
 

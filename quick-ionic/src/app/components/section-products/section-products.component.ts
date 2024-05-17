@@ -29,6 +29,7 @@ export class SectionProductsComponent implements OnInit {
   productsSelected: number[] = [];
   allProducts: Product[] = [];
 
+  public window: Window = window;
   constructor(
     private sectionEventService: SectionEventService,
     private productService: ProductService,
@@ -40,7 +41,6 @@ export class SectionProductsComponent implements OnInit {
     this.sectionType = this.section.type;
     this.editMode = this.section.editMode;
     this.productsItem = this.section.products;
-
 
     this.loadProducts();
     

@@ -23,6 +23,7 @@ export class WebPagePage implements OnInit {
 
   sections: Section[] = [];
 
+  public window: Window = window;
   constructor(
     private route: ActivatedRoute,
     private shopService: ShopService,

@@ -22,7 +22,7 @@
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 card_container">
               <div class="card w-100">
                 <div class="bg-image hover-overlay">
-                  <ion-img [src]="'http://localhost:8000' + product.avatar" alt="Product Image"></ion-img>
+                  <ion-img [src]="window.location.protocol + '//' + window.location.hostname + ':8000' + product.avatar" alt="Product Image"></ion-img>
                 </div>
                 <div class="card-body">
                   <h5 class="card-title">{{ product.name }}</h5>

@@ -14,6 +14,7 @@ export class WebPageCatalogPage implements OnInit {
   searchTerm: string = '';
   filteredShops: Shop[] = [];
 
+  public window: Window = window;
   constructor(private route: ActivatedRoute, private sellerService: SellerService) { }
 
   ngOnInit() {

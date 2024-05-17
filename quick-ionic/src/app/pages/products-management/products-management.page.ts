@@ -23,7 +23,7 @@ export class ProductsManagementPage {
   shopId!: number;
   filteredProducts: Product[] = [];
 
-
+  public window: Window = window;
   constructor(
     private modalController: ModalController,
     private alertController: AlertController,

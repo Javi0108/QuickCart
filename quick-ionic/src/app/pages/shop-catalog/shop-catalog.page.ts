@@ -18,6 +18,7 @@ export class ShopCatalogPage implements OnInit {
   searchTerm: string = '';
   filteredProducts: Product[] = [];
 
+  public window: Window = window;
   constructor(private productService: ProductService, private route: ActivatedRoute) {
     this.pageloaded = false;
   }

@@ -24,6 +24,7 @@ export class ProductDetailPage implements OnInit {
 
   currentUserId: string | null = null;
 
+  public window: Window = window;
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,

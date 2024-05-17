@@ -9,7 +9,7 @@ import { Product, ProductCreate } from '../interfaces/product.interface';
 })
 export class ProductService {
 
-  private baseURL = "http://localhost:8000/api/shops/";
+  private baseURL = window.location.protocol + '//' + window.location.hostname + ':8000' + "/api/shops/";
   private token: string | null;
 
   constructor(private http: HttpClient, private cookies: CookieService) {

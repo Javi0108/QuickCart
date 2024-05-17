@@ -33,6 +33,10 @@ export class WebPageEditPage implements OnInit {
 
   saving: Boolean = false;
 
+  //personalwebstyles
+  personalWebStylesActive: boolean = false;
+  personalWebStyles: string = "";
+
 
   constructor(
     private router: Router,
@@ -249,7 +253,7 @@ export class WebPageEditPage implements OnInit {
         this.products = response.map((product: Product) => ({
           text: product.name,
           value: product.id_product.toString(),
-          img: "http://localhost:8000" + product.avatar
+          img: window.location.protocol + '//' + window.location.hostname + ':8000' + product.avatar
         }));
         this.getShop();
       },

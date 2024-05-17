@@ -13,7 +13,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class AuthService {
 
-  private baseURL = "http://localhost:8000/api/";
+  private baseURL = window.location.protocol + '//' + window.location.hostname + ':8000' + "/api/";
   private token: string | null = null;
   private token_refresh: string | null = null;
   private user: User | null = null;
