@@ -26,9 +26,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-_w#17r6dof0k8^k7ip*$clv8_s=oi-&!4r5xi655-ol@_j26)a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost','127.0.0.1','172.205.249.131']
 
 
 # Application definition
@@ -82,10 +82,15 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'quickdjango.wsgi.application'
 
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:8100',
-    "http://localhost:4200",
-]
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_HEADERS = [ "accept", "referer", "accept-encoding", "authorization", "content-type", "dnt", "origin", "user-agent", "x-csrftoken", "x-sessionid", "x-requested-with"]
+CORS_EXPOSE_HEADERS = ['Set-Cookie']
+
+#CORS_ALLOWED_ORIGINS = [
+#    'http://localhost:8100',
+#    "http://localhost:4200",
+#    "http://172.205.249.131:80"
+#]
 
 # TOKEN
 
