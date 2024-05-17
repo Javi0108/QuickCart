@@ -2,12 +2,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Order } from '../interfaces/cart.interface';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
-  private baseURL = window.location.protocol + '//' + window.location.hostname + ':8000' + "/api/orders/";
+  private baseURL = environment.backend + "/api/orders/";
   private token: string | null;
 
   constructor(private http: HttpClient) {

@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/interfaces/product.interface';
 import { ProductService } from 'src/app/services/product.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-products-catalog',
@@ -13,7 +14,7 @@ export class ProductsCatalogPage implements OnInit, AfterViewInit {
   searchTerm: string = '';
   filteredProducts: Product[] = [];
 
-  public window: Window = window;
+  public environment = environment;
   constructor(private productService: ProductService) { 
     this.pageloaded = false;
   }

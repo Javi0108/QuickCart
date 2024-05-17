@@ -5,6 +5,7 @@ import { Section } from 'src/app/interfaces/section.interface';
 import { Shop, ShopData } from 'src/app/interfaces/shop.interface';
 import { ProductService } from 'src/app/services/product.service';
 import { ShopService } from 'src/app/services/shop.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-web-page',
@@ -23,7 +24,7 @@ export class WebPagePage implements OnInit {
 
   sections: Section[] = [];
 
-  public window: Window = window;
+  public environment = environment;
   constructor(
     private route: ActivatedRoute,
     private shopService: ShopService,

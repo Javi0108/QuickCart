@@ -5,6 +5,7 @@ import { ProductService } from 'src/app/services/product.service';
 import { IonInput } from '@ionic/angular';
 import { OrderService } from 'src/app/services/order.service';
 import { NotificationToastService } from 'src/app/services/notification-toast.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-product-detail',
@@ -24,7 +25,7 @@ export class ProductDetailPage implements OnInit {
 
   currentUserId: string | null = null;
 
-  public window: Window = window;
+  public environment = environment;
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,

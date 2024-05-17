@@ -5,6 +5,7 @@ import { ShopData } from 'src/app/interfaces/shop.interface';
 import { SellerService } from 'src/app/services/seller.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EditWebsiteModalComponent } from 'src/app/components/edit-website-modal/edit-website-modal.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-seller-shops',
@@ -18,7 +19,7 @@ export class SellerShopsPage implements OnInit {
   createWebSiteForm: FormGroup;
   filteredShops: ShopData[] = [];
 
-  public window: Window = window;
+  public environment = environment;
   constructor(
     private sellerService: SellerService,
     private modalController: ModalController,
@@ -80,7 +81,7 @@ export class SellerShopsPage implements OnInit {
       cssClass: 'add-website-modal',
       componentProps: {
         editWebSiteForm: editWebSiteForm,
-        imagePreview: window.location.protocol + '//' + window.location.hostname + ':8000' + shopToEdit.logo
+        imagePreview: environment.backend + shopToEdit.logo
       }
     });
 

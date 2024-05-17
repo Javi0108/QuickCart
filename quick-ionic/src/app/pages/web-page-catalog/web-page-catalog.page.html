@@ -18,7 +18,7 @@
                 <div class="card">
                   <div class="bg-image">
                     <a [routerLink]="['/web-page', shop.name, shop.id_shop]">
-                      <img [src]="window.location.protocol + '//' + window.location.hostname + ':8000' + shop.logo" alt="Product Image">
+                      <img [src]="environment.backend + shop.logo" alt="Product Image">
                       <a class="btn btn-overlay"><strong>View</strong></a>
                     </a>
                   </div>

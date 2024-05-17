@@ -6,6 +6,7 @@ import { SectionEventService } from 'src/app/services/section-event.service';
 import { ModalController } from '@ionic/angular';
 import { EditSectionModalComponent } from '../edit-section-modal/edit-section-modal.component';
 import { ProductService } from 'src/app/services/product.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-section-products',
@@ -29,7 +30,7 @@ export class SectionProductsComponent implements OnInit {
   productsSelected: number[] = [];
   allProducts: Product[] = [];
 
-  public window: Window = window;
+  public environment = environment;
   constructor(
     private sectionEventService: SectionEventService,
     private productService: ProductService,

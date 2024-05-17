@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { AddProductModalComponent } from '../add-product-modal/add-product-modal.component';
 import { FormBuilder, Validators } from '@angular/forms';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-typeahead',
@@ -92,7 +93,7 @@ export class TypeaheadComponent implements OnInit {
         const newProduct = {
           text: data.data.name,
           value: data.data.id_product.toString(),
-          img: window.location.protocol + '//' + window.location.hostname + ':8000' + data.data.avatar
+          img: environment.backend + data.data.avatar
         };
   
         this.items.push(newProduct);

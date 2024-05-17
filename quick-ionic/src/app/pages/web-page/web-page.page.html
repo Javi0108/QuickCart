@@ -3,7 +3,7 @@
 <ion-header *ngIf="shopData">
   <ion-toolbar color="tertiary">
     <div slot="start" style="display: flex; align-items: center;" class="ms-5">
-      <ion-img [src]="window.location.protocol + '//' + window.location.hostname + ':8000'+shopData.logo" style="width: 50px;"></ion-img>
+      <ion-img [src]="environment.backend+shopData.logo" style="width: 50px;"></ion-img>
       <ion-title style="margin-left: 10px;">{{shopData.name}}</ion-title>
     </div>
     <ion-buttons slot="end">

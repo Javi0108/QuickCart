@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Shop, ShopData } from 'src/app/interfaces/shop.interface';
 import { SellerService } from 'src/app/services/seller.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-web-page-catalog',
@@ -14,7 +15,7 @@ export class WebPageCatalogPage implements OnInit {
   searchTerm: string = '';
   filteredShops: Shop[] = [];
 
-  public window: Window = window;
+  public environment = environment;
   constructor(private route: ActivatedRoute, private sellerService: SellerService) { }
 
   ngOnInit() {

@@ -1,3 +1,4 @@
+import { environment } from "src/environments/environment";
 import { Product } from "./product.interface";
 
 export const defaultSectionHeroData = {
@@ -15,21 +16,21 @@ export const defaultSectionHeroData = {
         price_text: "Combo Only:",
         price: "590$",
         button: "Shop Now",
-        image: window.location.protocol + '//' + window.location.hostname + ':8000' + "/media/sections/default/hero_section/slider-bg1.jpg",
+        image: environment.backend + "/media/sections/default/hero_section/slider-bg1.jpg",
         related_product: null,
     },
     banner_2: {
         subtitle: "New line required",
         title: "iphone 13 pro max",
         price: "590$",
-        image: window.location.protocol + '//' + window.location.hostname + ':8000' + "/media/sections/default/hero_section/slider-bnr.jpg",
+        image: environment.backend + "/media/sections/default/hero_section/slider-bnr.jpg",
         related_product: null,
     },
     banner_3: {
         title: "Weekly Sale!",
         content: "Saving up to 50% off all online store items this week.",
         button: "Shop Now",
-        image: window.location.protocol + '//' + window.location.hostname + ':8000' + "/media/sections/default/hero_section/slider-bg2.jpg",
+        image: environment.backend + "/media/sections/default/hero_section/slider-bg2.jpg",
         related_product: null,
     }
 }

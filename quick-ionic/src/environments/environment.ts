@@ -5,6 +5,7 @@
 // Import the functions you need from the SDKs you need
 export const environment = {
   production: false,
+  backend: 'http://localhost:8000'
   // firebaseConfig: {
   //   apiKey: "AIzaSyDaYZAxaSFtZaNPlEHkC_QHFsEH17FaAFk",
   //   authDomain: "quickart-e827c.firebaseapp.com",

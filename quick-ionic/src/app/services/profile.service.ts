@@ -4,6 +4,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Profile } from '../interfaces/profile.interface';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -11,7 +12,7 @@ import { Profile } from '../interfaces/profile.interface';
 })
 export class ProfileService {
 
-  private baseURL = window.location.protocol + '//' + window.location.hostname + ':8000' + "/api/accounts/profile/";
+  private baseURL = environment.backend + "/api/accounts/profile/";
   private token: string | null;
 
 

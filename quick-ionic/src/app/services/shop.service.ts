@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { Section } from '../interfaces/section.interface';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShopService {
 
-  private baseURL = window.location.protocol + '//' + window.location.hostname + ':8000' + "/api/shops/";
+  private baseURL = environment.backend + "/api/shops/";
   private token: string | null;
 
   constructor(private http: HttpClient, private cookies: CookieService) {

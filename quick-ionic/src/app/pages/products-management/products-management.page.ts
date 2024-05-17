@@ -6,6 +6,7 @@ import { ProductService } from 'src/app/services/product.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AddProductModalComponent } from 'src/app/components/add-product-modal/add-product-modal.component';
 import { EditProductModalComponent } from 'src/app/components/edit-product-modal/edit-product-modal.component';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class ProductsManagementPage {
   shopId!: number;
   filteredProducts: Product[] = [];
 
-  public window: Window = window;
+  public environment = environment;
   constructor(
     private modalController: ModalController,
     private alertController: AlertController,

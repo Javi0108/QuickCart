@@ -6,6 +6,7 @@ import { ProfileService } from 'src/app/services/profile.service';
 import { User } from 'src/app/interfaces/user.interface';
 import { NotificationToastService } from 'src/app/services/notification-toast.service';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-profile',
@@ -27,7 +28,7 @@ export class ProfilePage implements OnInit {
   foreignProfileForm: FormGroup;
   avatarFile: File | null = null;
 
-  public window: Window = window;
+  public environment = environment;
   constructor(
     private profileService: ProfileService,
     private formBuilder: FormBuilder,

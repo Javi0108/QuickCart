@@ -9,6 +9,7 @@ import { NotificationToastService } from 'src/app/services/notification-toast.se
 import { ProductService } from 'src/app/services/product.service';
 import { SectionEventService } from 'src/app/services/section-event.service';
 import { ShopService } from 'src/app/services/shop.service';
+import { environment } from 'src/environments/environment';
 import { v4 as uuidv4 } from 'uuid';
 
 @Component({
@@ -253,7 +254,7 @@ export class WebPageEditPage implements OnInit {
         this.products = response.map((product: Product) => ({
           text: product.name,
           value: product.id_product.toString(),
-          img: window.location.protocol + '//' + window.location.hostname + ':8000' + product.avatar
+          img: environment.backend + product.avatar
         }));
         this.getShop();
       },

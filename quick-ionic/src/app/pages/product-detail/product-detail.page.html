@@ -6,11 +6,11 @@
           <ion-col size-lg="6" size-md="12" size="12">
             <div class="product-images">
               <div class="image-selected">
-                <img [src]="window.location.protocol + '//' + window.location.hostname + ':8000' + selectedImage" id="current" alt="Avatar del producto">
+                <img [src]="environment.backend + selectedImage" id="current" alt="Avatar del producto">
               </div>
               <div class="images">
                 <img *ngFor="let productImages of productData.images"
-                  [src]="window.location.protocol + '//' + window.location.hostname + ':8000' + productImages.image" id="current" alt="Imagenes del producto"
+                  [src]="environment.backend + productImages.image" id="current" alt="Imagenes del producto"
                   (click)="selectImage(productImages.image)">
               </div>
             </div>
@@ -73,7 +73,7 @@
             <div *ngFor="let comment of productComments" class="card p-3 mt-2">
               <div class="d-flex justify-content-between align-items-center">
                 <div class="user d-flex flex-row align-items-center" style="max-width: 90%;">
-                  <img [src]="window.location.protocol + '//' + window.location.hostname + ':8000' + comment.author.avatar" width="40" height="40"
+                  <img [src]="environment.backend + comment.author.avatar" width="40" height="40"
                     class="user-img rounded-circle me-2" style="margin-bottom: auto;">
                   <span>
                     <small class="fw-bold text-primary me-1" style="font-size: 0.875em;">{{ comment.author.user.username

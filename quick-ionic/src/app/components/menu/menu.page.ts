@@ -7,6 +7,7 @@ import { User } from 'src/app/interfaces/user.interface';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProfileService } from 'src/app/services/profile.service';
 import { FormBuilder } from '@angular/forms';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-menu',
@@ -20,7 +21,7 @@ export class MenuPage implements OnInit {
 
   loginSuccessEvent: EventEmitter<void> = new EventEmitter<void>();
 
-  public window: Window = window;
+  public environment = environment;
   constructor(
     private authService: AuthService,
     private profileService: ProfileService,

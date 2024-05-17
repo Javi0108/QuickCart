@@ -12,7 +12,7 @@
         <div class="col-6 col-md-4 col-lg-3" *ngFor="let product of productsData">
           <div class="card">
             <a [routerLink]="['/product', product.id_product]">
-              <img class="card-img-top" [src]="window.location.protocol + '//' + window.location.hostname + ':8000' + product.avatar" alt="Product Image">
+              <img class="card-img-top" [src]="environment.backend + product.avatar" alt="Product Image">
               <div class="card-body">
                 <h5 class="card-title">{{ product.name }}</h5>
                 <p class="card-text">{{ product.short_description }}</p>
@@ -30,7 +30,7 @@
       <div class="row">
         <div class="col-12" *ngFor="let product of productsData">
           <div class="product-container" (click)="deleteProduct(product.id_product)">
-            <img [src]="window.location.protocol + '//' + window.location.hostname + ':8000' + product.avatar" alt="Product Image">
+            <img [src]="environment.backend + product.avatar" alt="Product Image">
             <div>
               <h5>{{ product.name }}</h5>
               <p>Precio: {{ product.price }} €</p>
@@ -95,7 +95,7 @@
       <div class="col-6 col-md-4 col-lg-3" *ngFor="let product of productsData">
         <div class="card">
           <a [routerLink]="['/product', product.id_product]">
-            <img class="card-img-top" [src]="window.location.protocol + '//' + window.location.hostname + ':8000' + product.avatar" alt="Product Image">
+            <img class="card-img-top" [src]="environment.backend + product.avatar" alt="Product Image">
             <div class="card-body">
               <h5 class="card-title">{{ product.name }}</h5>
               <p class="card-text">{{ product.short_description }}</p>

@@ -6,6 +6,7 @@ import { tap } from 'rxjs/operators';
 import { User } from '../interfaces/user.interface';
 import { jwtDecode } from "jwt-decode";
 import { FormGroup } from '@angular/forms';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -13,7 +14,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class AuthService {
 
-  private baseURL = window.location.protocol + '//' + window.location.hostname + ':8000' + "/api/";
+  private baseURL = environment.backend + "/api/";
   private token: string | null = null;
   private token_refresh: string | null = null;
   private user: User | null = null;

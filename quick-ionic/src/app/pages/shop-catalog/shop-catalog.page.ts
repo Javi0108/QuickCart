@@ -2,6 +2,7 @@ import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/interfaces/product.interface';
 import { ProductService } from 'src/app/services/product.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-shop-catalog',
@@ -18,7 +19,7 @@ export class ShopCatalogPage implements OnInit {
   searchTerm: string = '';
   filteredProducts: Product[] = [];
 
-  public window: Window = window;
+  public environment = environment;
   constructor(private productService: ProductService, private route: ActivatedRoute) {
     this.pageloaded = false;
   }
