@@ -58,7 +58,7 @@ const routes: Routes = [
     data: { menu: 'default' }
   },
   {
-    path: 'cart/:id',
+    path: 'cart',
     loadChildren: () => import('./pages/cart/cart.module').then( m => m.CartPageModule)
   },
   {

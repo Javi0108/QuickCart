@@ -15,14 +15,16 @@ from django.http import JsonResponse
 class OrderView(APIView):
     http_methods = ["get", "put", "post", "delete"]
 
-    def get(self, request, order_id=None):
-        if order_id is not None:
-            order = get_object_or_404(Order, id_order=order_id)
+    def get(self, request):
+        profile = request.user.profile
+
+        try:
+            order = Order.objects.filter(profile=profile, status="Pending").latest('order_date')
             serializer = OrderSerializer(order)
             return Response(serializer.data)
-        else:
+        except Order.DoesNotExist:
             return Response(
-                {"message": "Order ID is required"}, status=status.HTTP_400_BAD_REQUEST
+                {"message": "No pending orders found"}, status=status.HTTP_404_NOT_FOUND
             )
 
     def post(self, request):

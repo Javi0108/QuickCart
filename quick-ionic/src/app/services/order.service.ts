@@ -15,8 +15,8 @@ export class OrderService {
     this.token = localStorage.getItem('token');
   }
 
-  getOrder(orderId: number): Observable<Order> {
-    return this.http.get<Order>(`${this.baseURL}${orderId}/`, { headers: this.getHeaders() });
+  getOrder(): Observable<Order> {
+    return this.http.get<Order>(`${this.baseURL}`, { headers: this.getHeaders() });
   }
 
   addProductToOrder(productId: number, quantity: number = 1): Observable<any> {
