@@ -15,4 +15,4 @@ class OrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ['id_order', 'profile', 'order_date', 'status', 'order_products']
+        fields = ['id_order', 'profile', 'order_date', 'status', 'order_products','total_price']

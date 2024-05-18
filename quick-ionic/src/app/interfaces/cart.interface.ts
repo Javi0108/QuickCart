@@ -7,6 +7,7 @@ export interface Order {
     order_date: string; 
     status: string;
     order_products: OrderProduct[];
+    total_price: number;
 }
 
 export interface OrderProduct {

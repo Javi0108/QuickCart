@@ -1,38 +1,52 @@
-<ion-header [translucent]="true">
-  <ion-toolbar color="primary">
-    <ion-title>Cart</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true" class="ion-padding">
-  <ng-container *ngIf="cart; else noCartData">
-    <h2>Order Details</h2>
-    <p><strong>Order ID:</strong> {{ cart.id_order }}</p>
-    <p><strong>Order Date:</strong> {{ cart.order_date | date:'medium' }}</p>
-    <p><strong>Status:</strong> {{ cart.status }}</p>
-
-    <ion-button color="primary" expand="block">
-      <ion-icon name="cart-outline" slot="start"></ion-icon>
-      Buy now
-    </ion-button>
-
-    <h3>Products</h3>
-    <ion-list lines="full">
-      <ion-item *ngFor="let orderProduct of cart.order_products">
-        <ion-label [routerLink]="['/product', orderProduct.product.id_product]" class="trans">{{ orderProduct.product.name }}</ion-label>
-        <ion-label>{{ orderProduct.product.price }}</ion-label>
-        <ion-input aria-label="quantity" type="number" [(ngModel)]="orderProduct.quantity" class="trans"></ion-input>
-        <ion-button color="primary" (click)="updateQuantity(orderProduct.product.id_product, orderProduct.quantity)">
-          Update
-        </ion-button>
-        <ion-button color="danger" (click)="removeFromCart(orderProduct.product.id_product)">
-          <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
-        </ion-button>
-      </ion-item>
-    </ion-list>
-  </ng-container>
-
-  <ng-template #noCartData>
-    <p class="trans">No cart data available.</p>
-  </ng-template>
+<ion-content *ngIf="cart" class="body">
+  <div class="card">
+    <div class="row">
+      <div class="col-md-8 cart">
+        <div class="title">
+          <div class="row">
+            <div class="col">
+              <h4><b>Shopping Cart</b></h4>
+            </div>
+            <div class="col align-self-center text-right text-muted">{{ cart.order_products.length }} items</div>
+          </div>
+        </div>
+        <div class="row border-top border-bottom" *ngFor="let orderProduct of cart.order_products">
+          <div class="row main align-items-center">
+            <div class="col-2"><img class="img-fluid" [src]="'http://localhost:8000/' + orderProduct.product.avatar">
+            </div>
+            <div class="col">
+              <div class="row text-muted">{{ orderProduct.product.name }}</div>
+              <div class="row">{{ orderProduct.product.description }}</div>
+            </div>
+            <div class="col">
+              <ion-input  aria-label="quantity" type="number" [(ngModel)]="orderProduct.quantity"
+                class="border"></ion-input>
+            </div>
+            <div class="col">
+              <button (click)="updateQuantity(orderProduct.product.id_product, orderProduct.quantity)">Update</button>
+            </div>
+            <div class="col">&euro; {{ orderProduct.product.price * orderProduct.quantity }}
+              <span class="close" (click)="removeFromCart(orderProduct.product.id_product)">&#10005;</span>
+            </div>
+          </div>
+        </div>
+        <div class="back-to-shop"><a href="#">&leftarrow;</a><span class="text-muted">Back to shop</span></div>
+      </div>
+      <div class="col-md-4 summary">
+        <div>
+          <h5><b>Summary</b></h5>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col" style="padding-left:0;">ITEMS {{ cart.order_products.length }}</div>
+          <div class="col text-right">&euro; {{ cart.total_price }}</div>
+        </div>
+        <div class="row" style="border-top: 1px solid rgba(0, 0, 0, 0.1); padding: 2vh 0;">
+          <div class="col">TOTAL PRICE</div>
+          <div class="col text-right">&euro; {{ cart.total_price }}</div>
+        </div>
+        <button class="btn quickart-button quickart-button-white" (click)="makePayment(cart.order_products)">CHECKOUT</button>
+      </div>
+    </div>
+  </div>
 </ion-content>

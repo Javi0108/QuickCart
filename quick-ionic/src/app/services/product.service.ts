@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { Product, ProductCreate } from '../interfaces/product.interface';
 import { environment } from 'src/environments/environment';
@@ -13,7 +12,7 @@ export class ProductService {
   private baseURL = environment.backend + "/api/shops/";
   private token: string | null;
 
-  constructor(private http: HttpClient, private cookies: CookieService) {
+  constructor(private http: HttpClient) {
     this.token = localStorage.getItem('token');
   }
 

@@ -3,6 +3,7 @@
   import { Order, OrderProduct } from '../../interfaces/cart.interface';
   import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/interfaces/product.interface';
+import { StripeService } from 'src/app/services/stripe.service';
 
   @Component({
     selector: 'app-cart',
@@ -13,7 +14,7 @@ import { Product } from 'src/app/interfaces/product.interface';
     cart!: Order;
     orderId!: number;
 
-    constructor(private route: ActivatedRoute, private orderService: OrderService) { }
+    constructor(private route: ActivatedRoute, private orderService: OrderService, private stripeService: StripeService) { }
 
     ngOnInit() {
       const orderId = this.route.snapshot.paramMap.get('id');
@@ -59,6 +60,12 @@ import { Product } from 'src/app/interfaces/product.interface';
         error(error) {
           console.error('Error al obtener los datos del pedido/producto:', error);
         },
+      });
+    }
+
+    makePayment(products: any){
+      this.stripeService.createCheckoutSession(products, this.cart.id_order).subscribe((data) => {
+        window.location.href = data.url;
       });
     }
 
