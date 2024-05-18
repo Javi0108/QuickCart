@@ -7,26 +7,7 @@
             <div class="col">
               <h4><b>Shopping Cart</b></h4>
             </div>
-            <div class="col align-self-center text-right text-muted">{{ cart.order_products.length }} items</div>
-          </div>
-        </div>
-        <div class="row border-top border-bottom" *ngFor="let orderProduct of cart.order_products">
-          <div class="row main align-items-center">
-            <div class="col-2"><img class="img-fluid" [src]="'environment.backend' + orderProduct.product.avatar">
-            </div>
-            <div class="col">
-              <div class="row text-muted">{{ orderProduct.product.name }}</div>
-              <div class="row">{{ orderProduct.product.description }}</div>
-            </div>
-            <div class="col">
-              <ion-input aria-label="quantity" type="number" [(ngModel)]="orderProduct.quantity"
-                class="border"></ion-input>
-            </div>
-            <div class="col">
-              <button (click)="updateQuantity(orderProduct.product.id_product, orderProduct.quantity)">Update</button>
-            </div>
-            <div class="col">&euro; {{ orderProduct.product.price * orderProduct.quantity }}
-              <span class="close" (click)="removeFromCart(orderProduct.product.id_product)">&#10005;</span>
+            <div *ngIf="cart" class="col align-self-center text-right text-muted">{{ cart.order_products.length }} items
             </div>
           </div>
         </div>
@@ -34,7 +15,7 @@
           <div class="row border-top border-bottom" *ngFor="let orderProduct of cart.order_products">
             <div class="row main align-items-center">
               <div class="col-2">
-                <img class="img-fluid" [src]="'http://localhost:8000/' + orderProduct.product.avatar">
+                <img class="img-fluid" [src]="'environment.backend' + orderProduct.product.avatar">
               </div>
               <div class="col">
                 <div class="row text-muted">{{ orderProduct.product.name }}</div>

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Order } from 'src/app/interfaces/cart.interface';
+import { NotificationToastService } from 'src/app/services/notification-toast.service';
 import { OrderService } from 'src/app/services/order.service';
 import { StripeService } from 'src/app/services/stripe.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-success',
@@ -10,24 +12,22 @@ import { StripeService } from 'src/app/services/stripe.service';
   styleUrls: ['./success.page.scss'],
 })
 export class SuccessPage implements OnInit {
-  cart!: Order; 
-  orderId!: number;
+  cart!: Order;
 
-  constructor(private route: ActivatedRoute, private orderService: OrderService, private stripeService: StripeService) {
+  public environment = environment;
+  constructor(
+    private orderService: OrderService, 
+    private stripeService: StripeService, 
+    private router: Router,
+    private notificationToastService: NotificationToastService) {
   }
 
   ngOnInit() {
-    const orderId = this.route.snapshot.paramMap.get('id');
-      if (orderId) {
-        this.orderId = +orderId;
-        this.loadOrder(+orderId);
-      } else {
-        console.error('Order ID not found in URL');
-      }
+    this.loadOrder();
   }
 
-  loadOrder(orderId: number) {
-    this.orderService.getOrder(orderId).subscribe(
+  loadOrder() {
+    this.orderService.getOrder().subscribe(
       (response: Order) => {
         this.cart = response;
         console.log('Loaded cart:', this.cart);
@@ -38,13 +38,22 @@ export class SuccessPage implements OnInit {
     );
   }
 
-  cancelOrder(){
-    this.stripeService.cancelPayment(""+this.cart.id_order,this.cart.order_products).subscribe({
+  cancelOrder() {
+    this.stripeService.cancelPayment("" + this.cart.id_order, this.cart.order_products).subscribe({
       next: (response) => {
-
+        this.notificationToastService.presentToast(
+          'Order cancelled successfully',
+          'success',
+          '../../assets/check.svg'
+        );
+        this.router.navigate(['cart']);
       },
       error: (error) => {
-
+        this.notificationToastService.presentToast(
+          'An error occurred while canceling the order',
+          'danger',
+          '../../assets/exclamation.svg'
+        );
       }
     });
   }

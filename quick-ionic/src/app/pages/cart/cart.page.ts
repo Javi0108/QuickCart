@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../../services/order.service';
 import { Order, OrderProduct } from '../../interfaces/cart.interface';
-import { ActivatedRoute } from '@angular/router';
-import { Product } from 'src/app/interfaces/product.interface';
 import { StripeService } from 'src/app/services/stripe.service';
-import { environment } from 'src/environments/environment';
 
   @Component({
     selector: 'app-cart',
@@ -15,7 +12,7 @@ import { environment } from 'src/environments/environment';
     cart!: Order;
     orderId!: number;
 
-  constructor(private route: ActivatedRoute, private orderService: OrderService, private stripeService: StripeService) { }
+  constructor(private orderService: OrderService, private stripeService: StripeService) { }
 
   ngOnInit() {
     this.loadOrder();

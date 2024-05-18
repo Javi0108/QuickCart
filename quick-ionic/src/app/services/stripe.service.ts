@@ -7,13 +7,14 @@ import { environment } from 'src/environments/environment';
 })
 export class StripeService {
 
-  private baseURL = environment.backend + "api/orders/";
+  private baseURL = environment.backend + "/api/orders/";
   private token: string | null;
 
   constructor(private http: HttpClient) {
     this.token = localStorage.getItem('token');
   }
   createCheckoutSession(items: any[], order_id : number) {
+    console.log(`${this.baseURL}create-checkout-session/`)
     return this.http.post<any>(`${this.baseURL}create-checkout-session/`, { items , order_id: order_id , headers: this.getHeaders() });
   }
 

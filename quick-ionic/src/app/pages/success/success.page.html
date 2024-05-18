@@ -10,7 +10,7 @@
         <ion-list>
           <ion-item *ngFor="let orderProduct of cart.order_products">
             <ion-thumbnail slot="start">
-              <img [src]="'http://localhost:8000/' + orderProduct.product.avatar">
+              <img [src]="'environment.backend' + orderProduct.product.avatar">
             </ion-thumbnail>
             <ion-label>
               <h2>{{ orderProduct.product.name }}</h2>
