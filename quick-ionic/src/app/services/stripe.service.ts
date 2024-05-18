@@ -14,11 +14,11 @@ export class StripeService {
     this.token = localStorage.getItem('token');
   }
   createCheckoutSession(items: any[], order_id : number) {
-    return this.http.post<any>(`${this.baseURL}create-checkout-session/`, { items , order_id: order_id });
+    return this.http.post<any>(`${this.baseURL}create-checkout-session/`, { items , order_id: order_id , headers: this.getHeaders() });
   }
 
-  cancelPayment(orderId: string) {
-    return this.http.post<any>(`${this.baseURL}cancel-payment/${orderId}`, {});
+  cancelPayment(orderId: string, items: any[]) {
+    return this.http.post<any>(`${this.baseURL}cancel-payment/${orderId}/`, {items, order_id:orderId, headers: this.getHeaders()});
   }
 
   private getHeaders(): HttpHeaders {

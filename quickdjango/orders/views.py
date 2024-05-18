@@ -21,7 +21,7 @@ class OrderView(APIView):
         try:
             order = Order.objects.filter(profile=profile, status="Pending").latest('order_date')
             serializer = OrderSerializer(order)
-            return Response(serializer.data)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         except Order.DoesNotExist:
             return Response(
                 {"message": "No pending orders found"}, status=status.HTTP_404_NOT_FOUND
@@ -78,12 +78,10 @@ class OrderView(APIView):
         product = get_object_or_404(Product, id_product=product_id)
         order.remove_product(product)
 
-        return Response(
-            {"message": "Product removed from cart"}, status=status.HTTP_204_NO_CONTENT
-        )
+        order = get_object_or_404(Order, id_order=pk)
+        serializer = OrderSerializer(order)
 
-
-stripe.api_key = settings.STRIPE_SECRET_KEY
+        return Response(serializer.data, status=status.HTTP_204_NO_CONTENT)
 
 
 class CheckoutSessionView(APIView):
@@ -92,12 +90,12 @@ class CheckoutSessionView(APIView):
             order_id = request.data.get("order_id")
             print(order_id)
             order = Order.objects.get(id_order=order_id)
+
             session_data = {
                 "mode": "payment",
                 "success_url": f"http://localhost:8100/success/{order_id}",
-                "cancel_url": f"http://localhost:8100/cancel/{order_id}",
+                "cancel_url": f"http://localhost:8100/cart/{order_id}",
                 "line_items": [],
-                "automatic_tax": {"enabled": True},
                 "client_reference_id": str(order.id_order),
             }
 
@@ -108,16 +106,51 @@ class CheckoutSessionView(APIView):
                         "price_data": {
                             "currency": "eur",
                             "product_data": {
-                                "name": item.product.name,
-                                "images": (item.product.avatar,),
+                                "name": item["product"]["name"],
+                                "images": (
+                                    f"http://127.0.0.1:8000{item['product']['avatar']}",
+                                ),
                             },
-                            "unit_amount": int(item.product.price * 100),
+                            "unit_amount": int(float(item["product"]["price"]) * 100),
                         },
-                        "quantity": item.quantity,
+                        "quantity": item["quantity"],
                     }
                 )
-            checkout_session = stripe.checkout.Session.create(**session_data)
 
-            return JsonResponse({"url": checkout_session.url}, status=200)
+            checkout_session = stripe.checkout.Session.create(**session_data)
+            print(checkout_session.id)
+            order.id_stripe = checkout_session.id
+            order.save()
+            return Response({"url": checkout_session.url}, status=200)
+        except Order.DoesNotExist:
+            return Response({"error": "Order not found."}, status=404)
+        except Exception as e:
+            return Response({"error": str(e)}, status=400)
+
+
+class CancelPaymentView(APIView):
+    def post(self, request, order_id, *args, **kwargs):
+        try:
+            order = get_object_or_404(Order, id_order=order_id)
+
+            if not order.id_stripe:
+                raise ValueError("The order does not have a valid Stripe session ID.")
+
+            stripe_session = stripe.checkout.Session.retrieve(id=order.id_stripe)
+            stripe_payment_intent = stripe_session.payment_intent
+
+            refund_amount = int(order.total_price * 100)
+            if refund_amount > stripe_session.amount_total:
+                refund_amount = stripe_session.amount_total
+
+            refund = stripe.Refund.create(
+                payment_intent=stripe_payment_intent,
+                amount=refund_amount,
+                reason="requested_by_customer",
+            )
+
+            return JsonResponse(
+                {"message": "Payment canceled successfully"}, status=200
+            )
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=400)

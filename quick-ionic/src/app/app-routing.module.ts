@@ -80,12 +80,8 @@ const routes: Routes = [
     runGuardsAndResolvers: 'always',
   },
   {
-    path: 'success/:order_id',
+    path: 'success/:id',
     loadChildren: () => import('./pages/success/success.module').then( m => m.SuccessPageModule)
-  },
-  {
-    path: 'cancel/:order_id',
-    loadChildren: () => import('./pages/cancel/cancel.module').then( m => m.CancelPageModule)
   },
   {
     path: '',
