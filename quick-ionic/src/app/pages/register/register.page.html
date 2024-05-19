@@ -32,7 +32,7 @@
           <ion-button id="hover-trigger" class="helpButton" fill="clear"
             slot="end"><i class="bi bi-question-circle"></i></ion-button>
 
-          <ion-button id="buttonToggle1"
+          <ion-button id="buttonToggle1" class="d-none d-sm-block"
             (click)="showHide($event, 'password')" fill="clear" slot="end" aria-label="Show/hide">
             <ion-icon slot="icon-only" name="eye" aria-hidden="true"></ion-icon>
           </ion-button>
@@ -59,7 +59,7 @@
       <!-- Confirm Password input - disabled until user_type is selected -->
       <ion-input type="password" formControlName="confirmPassword" placeholder="Repeat the password"
         labelPlacement="floating" label="Repeat the password" fill="outline" id="confirmPassword">
-        <ion-button id="buttonToggle2" (click)="showHide($event, 'confirmPassword')" fill="clear" slot="end"
+        <ion-button id="buttonToggle2" class="d-none d-sm-block" (click)="showHide($event, 'confirmPassword')" fill="clear" slot="end"
           aria-label="Show/hide">
           <ion-icon slot="icon-only" name="eye" aria-hidden="true"></ion-icon>
         </ion-button>
