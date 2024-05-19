@@ -108,7 +108,7 @@ class CheckoutSessionView(APIView):
                             "product_data": {
                                 "name": item["product"]["name"],
                                 "images": (
-                                    f"http://quickcart.arcania.es{item['product']['avatar']}",
+                                    f"http://quickcart.arcania.es/{item['product']['avatar']}",
                                 ),
                             },
                             "unit_amount": int(float(item["product"]["price"]) * 100),
