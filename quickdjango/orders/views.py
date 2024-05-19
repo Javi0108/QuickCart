@@ -101,7 +101,7 @@ class CheckoutSessionView(APIView):
 
             items = request.data.get("items")
             for item in items:
-                print(item['product']['avatar'])
+                print("dfghjkl   ", item['product']['avatar'])
                 session_data["line_items"].append(
                     {
                         "price_data": {
@@ -109,7 +109,7 @@ class CheckoutSessionView(APIView):
                             "product_data": {
                                 "name": item["product"]["name"],
                                 "images": (
-                                    f"https://quickcart.arcania.es/{item['product']['avatar']}",
+                                    f"https://quickcart.arcania.es{item['product']['avatar']}",
                                 ),
                             },
                             "unit_amount": int(float(item["product"]["price"]) * 100),
