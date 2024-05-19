@@ -15,7 +15,7 @@
           <div class="row border-top border-bottom" *ngFor="let orderProduct of cart.order_products">
             <div class="row main align-items-center">
               <div class="col-2">
-                <img class="img-fluid" [src]="'environment.backend' + orderProduct.product.avatar">
+                <img class="img-fluid" [src]="environment.backend + orderProduct.product.avatar">
               </div>
               <div class="col">
                 <div class="row text-muted">{{ orderProduct.product.name }}</div>

@@ -93,14 +93,15 @@ class CheckoutSessionView(APIView):
 
             session_data = {
                 "mode": "payment",
-                "success_url": f"http://quickcart.arcania.es/success/{order_id}",
-                "cancel_url": f"http://quickcart.arcania.es/cart/{order_id}",
+                "success_url": f"https://quickcart.arcania.es/success/{order_id}",
+                "cancel_url": f"https://quickcart.arcania.es/cart/{order_id}",
                 "line_items": [],
                 "client_reference_id": str(order.id_order),
             }
 
             items = request.data.get("items")
             for item in items:
+                print(item['product']['avatar'])
                 session_data["line_items"].append(
                     {
                         "price_data": {
@@ -108,7 +109,7 @@ class CheckoutSessionView(APIView):
                             "product_data": {
                                 "name": item["product"]["name"],
                                 "images": (
-                                    f"http://quickcart.arcania.es/{item['product']['avatar']}",
+                                    f"https://quickcart.arcania.es/{item['product']['avatar']}",
                                 ),
                             },
                             "unit_amount": int(float(item["product"]["price"]) * 100),
