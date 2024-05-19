@@ -93,8 +93,8 @@ class CheckoutSessionView(APIView):
 
             session_data = {
                 "mode": "payment",
-                "success_url": f"https://quickcart.arcania.es/success/{order_id}",
-                "cancel_url": f"https://quickcart.arcania.es/cart/{order_id}",
+                "success_url": f"https://quickcart.arkania.es/success/{order_id}",
+                "cancel_url": f"https://quickcart.arkania.es/cart/{order_id}",
                 "line_items": [],
                 "client_reference_id": str(order.id_order),
             }
@@ -109,7 +109,7 @@ class CheckoutSessionView(APIView):
                             "product_data": {
                                 "name": item["product"]["name"],
                                 "images": (
-                                    f"https://quickcart.arcania.es{item['product']['avatar']}",
+                                    f"https://quickcart.arkania.es{item['product']['avatar']}",
                                 ),
                             },
                             "unit_amount": int(float(item["product"]["price"]) * 100),
