@@ -44,7 +44,7 @@
   <ion-header>
     <div>
       <div class="row gx-0">
-        <div *ngIf="isLoggedIn() && profile" class="col-6 col-md-4 d-flex flex-row justify-content-start align-items-center">
+        <div *ngIf="isLoggedIn() && profile" class="col-6 col-md-4 d-flex flex-row justify-content-start align-items-center gap-2">
           <ion-buttons slot="start" *ngIf="profile.user_type==='Seller'">
             <ion-menu-button></ion-menu-button>
           </ion-buttons>
@@ -92,7 +92,7 @@
             </div>
             <hr class="vertical-separator" />
             <div class="d-flex flex-row justify-content-center align-items-center" [routerLink]="['/profile']">
-              <ion-label class=" mx-2" style="font-weight: 500">{{ user!.username }}</ion-label>
+              <ion-label class="d-none d-sm-block mx-2" style="font-weight: 500">{{ user!.username }}</ion-label>
               <ion-fab-button size="small"  [routerLink]="['/profile']">
                 <img *ngIf="!profile.avatar" src="/assets/avatar.webp" width="40px" />
                 <img *ngIf="profile.avatar" [src]="environment.backend + profile.avatar" width="40px" height="40px" />
