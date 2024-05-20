@@ -84,3 +84,9 @@ ion-fab {
 .active-route {
   background-color: #673de641 !important; 
 }
+
+@media only screen and (max-width: 600px) {
+  #menuTitle {
+      height: 400px !important;  
+  }
+}
