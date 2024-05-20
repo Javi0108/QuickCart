@@ -29,15 +29,12 @@
       <div class="d-flex flex-row align-items-center gap-2">
         <ion-input type="password" formControlName="password" placeholder="Password" labelPlacement="floating"
           label="Password" fill="outline" id="password">
-          <ion-button id="hover-trigger" class="helpButton" fill="clear"
-            slot="end"><i class="bi bi-question-circle"></i></ion-button>
 
           <ion-button id="buttonToggle1" class="d-none d-sm-block"
             (click)="showHide($event, 'password')" fill="clear" slot="end" aria-label="Show/hide">
             <ion-icon slot="icon-only" name="eye" aria-hidden="true"></ion-icon>
           </ion-button>
         </ion-input>
-
 
         <ion-popover trigger="hover-trigger" side="right" triggerAction="hover">
           <ng-template>
@@ -57,13 +54,18 @@
       </div>
 
       <!-- Confirm Password input - disabled until user_type is selected -->
-      <ion-input type="password" formControlName="confirmPassword" placeholder="Repeat the password"
+      <div class="d-flex flex-row align-items-center">
+        <ion-input type="password" formControlName="confirmPassword" placeholder="Repeat the password"
         labelPlacement="floating" label="Repeat the password" fill="outline" id="confirmPassword">
         <ion-button id="buttonToggle2" class="d-none d-sm-block" (click)="showHide($event, 'confirmPassword')" fill="clear" slot="end"
           aria-label="Show/hide">
           <ion-icon slot="icon-only" name="eye" aria-hidden="true"></ion-icon>
         </ion-button>
       </ion-input>
+      <ion-button id="hover-trigger" class="helpButton" fill="clear" (click)="showHide($event, 'password')"
+      slot="end"><i class="bi bi-question-circle"></i></ion-button>
+      </div>
+
 
       <!-- Submit button - disabled until form is valid -->
       <button class="submitButton" type="submit" [disabled]="!registerForm.valid">

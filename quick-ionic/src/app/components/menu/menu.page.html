@@ -43,12 +43,12 @@
 <div class="ion-page" id="main-content">
   <ion-header>
     <ion-toolbar>
-      <div class="row">
+      <div class="row gx-0">
         <div *ngIf="isLoggedIn() && profile" class="col-6 col-md-4 d-flex flex-row justify-content-start">
           <ion-buttons slot="start" *ngIf="profile.user_type==='Seller'">
             <ion-menu-button></ion-menu-button>
           </ion-buttons>
-          <ion-title>
+          <div>
             <div
               [routerLink]="['/home']"
               id="homeTitle"
@@ -59,11 +59,11 @@
               />
               <label class="d-none d-sm-block ms-2">QuickCart</label>
             </div>
-          </ion-title>
+          </div>
         </div>
 
-        <div *ngIf="!isLoggedIn()" class="col-6 d-flex flex-row justify-content-start">
-          <ion-title>
+        <div *ngIf="!isLoggedIn()" class="col-6 d-flex flex-row justify-content-start align-items-center px-5">
+          <div>
             <div
               [routerLink]="['/home']"
               style="text-decoration: none"
@@ -75,7 +75,7 @@
               />
               <label class="d-none d-sm-block">QuickCart</label>
             </div>
-          </ion-title>
+          </div>
         </div>
 
         <div *ngIf="isLoggedIn()" class="col-md-4 d-none d-md-flex justify-content-center" id="menuButtons">

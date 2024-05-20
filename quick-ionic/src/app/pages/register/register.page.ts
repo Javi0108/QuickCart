@@ -74,7 +74,7 @@ export class RegisterPage implements OnInit {
         },
         error => {
           this.notificationToastService.presentToast(
-            'Error updating password',
+            'Signup failed',
             'danger',
             '../../assets/exclamation.svg'
           );
