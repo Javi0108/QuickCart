@@ -42,9 +42,9 @@
 
 <div class="ion-page" id="main-content">
   <ion-header>
-    <ion-toolbar>
+    <div>
       <div class="row gx-0">
-        <div *ngIf="isLoggedIn() && profile" class="col-6 col-md-4 d-flex flex-row justify-content-start">
+        <div *ngIf="isLoggedIn() && profile" class="col-6 col-md-4 d-flex flex-row justify-content-start align-items-center">
           <ion-buttons slot="start" *ngIf="profile.user_type==='Seller'">
             <ion-menu-button></ion-menu-button>
           </ion-buttons>
@@ -111,6 +111,6 @@
           <button [routerLink]="['/register']">Sing Up</button>
         </div>
       </div>
-    </ion-toolbar>
+    </div>
   </ion-header>
 </div>
