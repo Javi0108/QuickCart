@@ -19,7 +19,9 @@ class OrderView(APIView):
         profile = request.user.profile
 
         try:
-            order = Order.objects.filter(profile=profile, status="Pending").latest('order_date')
+            order = Order.objects.filter(profile=profile, status="Pending").latest(
+                "order_date"
+            )
             serializer = OrderSerializer(order)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except Order.DoesNotExist:
@@ -80,7 +82,7 @@ class OrderView(APIView):
 
         order = get_object_or_404(Order, id_order=pk)
         serializer = OrderSerializer(order)
-        
+
         print(serializer.data)
 
         return Response(serializer.data, status=status.HTTP_204_NO_CONTENT)
@@ -103,7 +105,6 @@ class CheckoutSessionView(APIView):
 
             items = request.data.get("items")
             for item in items:
-                print("dfghjkl   ", item['product']['avatar'])
                 session_data["line_items"].append(
                     {
                         "price_data": {
