@@ -42,8 +42,8 @@ body {
 }
 
 form {
-    height: 575px;
-    width: 450px;
+    height: fit-content;
+    width: fit-content;
     background-color: rgba(255, 255, 255, 0.13);
     position: absolute;
     transform: translate(-50%, -50%);
@@ -141,3 +141,8 @@ form {
     }
 }
 
+@media only screen and (max-width: 600px) {
+    form {
+        width: 300px;   
+    }
+}
