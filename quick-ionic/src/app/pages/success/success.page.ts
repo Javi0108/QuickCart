@@ -27,7 +27,7 @@ export class SuccessPage implements OnInit {
   }
 
   loadOrder() {
-    this.orderService.getOrder().subscribe(
+    this.orderService.getOrderPaid().subscribe(
       (response: Order) => {
         this.cart = response;
         console.log('Loaded cart:', this.cart);

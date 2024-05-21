@@ -19,6 +19,11 @@ export class OrderService {
     return this.http.get<Order>(`${this.baseURL}`, { headers: this.getHeaders() });
   }
 
+  getOrderPaid(): Observable<Order> {
+    return this.http.get<Order>(`${this.baseURL}?status=Paid`, { headers: this.getHeaders() });
+  }
+
+
   addProductToOrder(productId: number, quantity: number = 1): Observable<any> {
     const data = { product_id: productId, quantity };
     return this.http.post<any>(`${this.baseURL}add/`, data, { headers: this.getHeaders() });

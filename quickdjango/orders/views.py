@@ -17,16 +17,18 @@ class OrderView(APIView):
 
     def get(self, request):
         profile = request.user.profile
+        order_status = request.query_params.get("status", "Pending")
 
         try:
-            order = Order.objects.filter(profile=profile, status="Pending").latest(
+            order = Order.objects.filter(profile=profile, status=order_status).latest(
                 "order_date"
             )
             serializer = OrderSerializer(order)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except Order.DoesNotExist:
             return Response(
-                {"message": "No pending orders found"}, status=status.HTTP_404_NOT_FOUND
+                {"message": f"No {order_status.lower()} orders found"},
+                status=status.HTTP_404_NOT_FOUND,
             )
 
     def post(self, request):
