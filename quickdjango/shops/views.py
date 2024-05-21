@@ -127,22 +127,6 @@ class SellerShopSectionView(APIView):
             print(section_serializer.errors)
             return Response({"error": "Datos de sección no válidos"}, status=status.HTTP_400_BAD_REQUEST)
         
-    # def put(self, request, id_shop_section): 
-    #     try:
-    #         section = Section.objects.get(pk=id_shop_section)
-    #     except Section.DoesNotExist: 
-    #         return Response({"error": "La sección de tienda no existe"}, status=status.HTTP_400_BAD_REQUEST)
-        
-    #     shop_data = request.data.get('shop_data')
-    #     section_serializer = ShopSectionSerializer(instance=section, data=shop_data)
-        
-    #     if section_serializer.is_valid():
-    #         section_serializer.save()
-    #         return Response({"success": "Sección de tienda actualizada exitosamente"}, status=status.HTTP_200_OK)
-    #     else:
-    #         print(section_serializer.errors)
-    #         return Response({"error": "Datos de sección no válidos"}, status=status.HTTP_400_BAD_REQUEST)
-    
     def put(self, request, id_shop_section): 
         try:
             section = Section.objects.get(pk=id_shop_section)
@@ -191,8 +175,14 @@ class ProductsView(APIView):
         elif id_shop is not None:
             try:
                 products = Product.objects.filter(shop_id=id_shop)
-                serializer = ProductSerializer(products, many=True)
-                return Response(serializer.data, status=status.HTTP_200_OK)
+                product_data_list = []
+                for product in products:
+                    serializer = ProductSerializer(product)
+                    product_data = serializer.data
+                    product_images = ProductImage.objects.filter(product=product)
+                    product_data['images'] = ProductImageSerializer(product_images, many=True).data
+                    product_data_list.append(product_data)
+                return Response(product_data_list, status=status.HTTP_200_OK)
             except Product.DoesNotExist:
                 return Response({"message": "Productos no encontrados para esta tienda"}, status=status.HTTP_404_NOT_FOUND)
 
@@ -260,10 +250,8 @@ class ProductsView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, id_product):
-        # Obtener el producto existente por su ID
         product = get_object_or_404(Product, id_product=id_product)
 
-        # Extraer los datos de la solicitud
         name = request.data.get('name')
         brand = request.data.get('brand')
         short_description = request.data.get('short_description')
@@ -271,7 +259,6 @@ class ProductsView(APIView):
         price = request.data.get('price')
         stock_quantity = request.data.get('stock_quantity')
 
-        # Actualizar los campos del producto
         product.name = name
         product.brand = brand
         product.short_description = short_description
@@ -279,39 +266,43 @@ class ProductsView(APIView):
         product.price = price
         product.stock_quantity = stock_quantity
 
-        # Verificar si se envió una nueva imagen para actualizarla
         if 'avatar' in request.data:
-            avatar_data = request.data.pop('avatar')
-            format, imgstr = avatar_data.split(';base64,')
-            ext = format.split('/')[-1]
-            image_name = f'avatar_{id_product}_{name}.{ext}'  # Nombre de archivo personalizado
-            image_data = ContentFile(base64.b64decode(imgstr), name=image_name)
-            product.avatar = image_data
+            avatar_data = request.data['avatar']
+            if isinstance(avatar_data, str) and not avatar_data.startswith('/media'):
+                format, imgstr = avatar_data.split(';base64,')
+                ext = format.split('/')[-1]
+                image_name = f'avatar_{id_product}_{name}.{ext}' 
+                image_data = ContentFile(base64.b64decode(imgstr), name=image_name)
+                product.avatar = image_data
+            elif isinstance(avatar_data, dict) and 'url' in avatar_data and not avatar_data['url'].startswith('/media'):
+                pass
 
         if "galleryPreviews" in request.data:
             gallery_images = request.data['galleryPreviews']
-            gallery_data = []
+            new_gallery_images = []
+
+            existing_images = product.images.all()
+            print("Existing Images:", existing_images)
+            for existing_image in existing_images:
+                new_gallery_images.append(existing_image)
+
             for img_data in gallery_images:
-                format, imgstr = img_data.split(';base64,')
-                ext = format.split('/')[-1]
-                image_name = f'gallery_{id_product}_{name}_{len(gallery_data)}.{ext}'  # Nombre de archivo personalizado
-                image_data = ContentFile(base64.b64decode(imgstr), name=image_name)
-                gallery_data.append(image_data)
+                if isinstance(img_data, str) and not img_data.startswith('/media'):
+                    format, imgstr = img_data.split(';base64,')
+                    ext = format.split('/')[-1]
+                    image_name = f'gallery_{id_product}_{name}_{len(new_gallery_images)}.{ext}'
+                    image_data = ContentFile(base64.b64decode(imgstr), name=image_name)
+                    new_gallery_image = ProductImage.objects.create(product=product, image=image_data)
+                    new_gallery_images.append(new_gallery_image)
+                elif isinstance(img_data, dict) and 'url' in img_data and not img_data['url'].startswith('/media'):
+                    pass
 
-            # Eliminar todas las imágenes de la galería existentes
-            product.product_images.all().delete()
-            
-            # Crear nuevas imágenes de galería
-            for img in gallery_data:
-                ProductImage.objects.create(product=product, image=img)
-
-        # Guardar los cambios en el producto
+        product.images.set(new_gallery_images)
         product.save()
 
-        # Serializar y devolver la respuesta actualizada
         serializer = ProductSerializer(product)
+        print("Serializer Data:", serializer.data)
         return Response(serializer.data, status=status.HTTP_200_OK)
-
 
     def delete(self, request, id_product):
         try:

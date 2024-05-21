@@ -8,11 +8,11 @@
 </ion-header>
 
 <ion-content>
-  <form enctype="multipart/form-data" [formGroup]="createProductForm" (ngSubmit)="createProduct()">
+  <form enctype="multipart/form-data" [formGroup]="createProductForm">
     <ion-input label="Name" label-placement="floating" fill="outline" formControlName="name"></ion-input>
     <ion-input label="Brand" label-placement="floating" fill="outline" formControlName="brand"></ion-input>
     <ion-input label="Short description" label-placement="floating" fill="outline"
-      formControlName="shortDescription"></ion-input>
+      formControlName="shortDescription" maxlength="115"></ion-input>
     <ion-input label="Description" label-placement="floating" fill="outline" formControlName="description"></ion-input>
     <ion-input label="Price" label-placement="floating" fill="outline" formControlName="price"></ion-input>
 
@@ -51,6 +51,6 @@
       </ion-col>
     </ion-row>
     <ion-input label="Stock" label-placement="floating" fill="outline" formControlName="stockQuantity"></ion-input>
-    <ion-button type="submit" [disabled]="createProductForm.invalid">Submit</ion-button>
+    <button type="submit" class="quickart-button quickart-button-violet" [disabled]="createProductForm.invalid" (click)="createProduct()">Create</button>
   </form>
 </ion-content>
