@@ -11,15 +11,15 @@
 
         <div class="col-6 col-md-4 col-lg-3" *ngFor="let product of productsData">
           <div class="card">
-            <a [routerLink]="['/product', product.id_product]">
+            <div [routerLink]="['/product', product.id_product]">
               <img class="card-img-top" [src]="environment.backend + product.avatar" alt="Product Image">
               <div class="card-body">
                 <h5 class="card-title">{{ product.name }}</h5>
                 <p class="card-text">{{ product.short_description }}</p>
                 <p class="card-text">Precio: {{ product.price }}</p>
               </div>
-            </a>
-            <button type="button" class="btn btn-primary btn-block">Agregar al
+            </div>
+            <button type="button" class="quickart-button quickart-button-white" style="justify-content:center;">Agregar al
               carrito</button>
           </div>
         </div>
@@ -94,15 +94,15 @@
     <div class="row pb-3 pt-3">
       <div class="col-6 col-md-4 col-lg-3" *ngFor="let product of productsData">
         <div class="card">
-          <a [routerLink]="['/product', product.id_product]">
+          <div [routerLink]="['/product', product.id_product]">
             <img class="card-img-top" [src]="environment.backend + product.avatar" alt="Product Image">
             <div class="card-body">
               <h5 class="card-title">{{ product.name }}</h5>
               <p class="card-text">{{ product.short_description }}</p>
               <p class="card-text">Precio: {{ product.price }}</p>
             </div>
-          </a>
-          <button type="button" class="btn btn-primary btn-block">
+          </div>
+          <button type="button" class="quickart-button quickart-button-white" style="justify-content: center;">
             Agregar al carrito
           </button>
         </div>

@@ -74,7 +74,7 @@ export class RegisterPage implements OnInit {
         },
         error => {
           this.notificationToastService.presentToast(
-            'Signup failed',
+            'Sign Up failed',
             'danger',
             '../../assets/exclamation.svg'
           );
