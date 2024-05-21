@@ -65,4 +65,7 @@ export class CartPage implements OnInit {
     });
   }
 
+  ionViewWillEnter() {
+    this.loadOrder();
+  }
 }

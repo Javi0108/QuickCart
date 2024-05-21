@@ -1,5 +1,5 @@
 import { Section } from './../../interfaces/section.interface';
-import { ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
 import { PopoverController } from '@ionic/angular';
 import { catchError, finalize, forkJoin, of } from 'rxjs';
