@@ -45,11 +45,16 @@
 
     <ion-input id="image-input" label="Gallery" fill="outline" type="file" formControlName="gallery"
       (change)="onGallerySelected($event)" class="file-input" multiple></ion-input>
-    <ion-row *ngIf="galleryPreviews">
-      <ion-col size="6" *ngFor="let image of galleryPreviews">
-        <ion-img [src]="getImageSrc(image)" class="uploaded-image"></ion-img>
-      </ion-col>
-    </ion-row>
+      <ion-row *ngIf="galleryPreviews">
+        <ion-col size="6" *ngFor="let image of galleryPreviews; let i = index">
+          <div class="image-container">
+            <ion-img [src]="getImageSrc(image)" class="uploaded-image"></ion-img>
+            <button class="quickart-button-icon discard-button" (click)="discardImage(i, image.id)">
+              <ion-icon name="trash"></ion-icon>
+            </button>
+          </div>
+        </ion-col>
+      </ion-row>
     <ion-input label="Stock" label-placement="floating" fill="outline" formControlName="stockQuantity" type="number"></ion-input>
     <button type="submit" class="quickart-button quickart-button-violet" [disabled]="editProductForm.invalid" (click)="editProduct()">Edit</button>
   </form>

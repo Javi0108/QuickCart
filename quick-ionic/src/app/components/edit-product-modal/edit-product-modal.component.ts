@@ -4,6 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { ProductService } from 'src/app/services/product.service';
 import { Product } from 'src/app/interfaces/product.interface';
 import { environment } from 'src/environments/environment';
+import { ImageService } from 'src/app/services/image.service';
 
 @Component({
   selector: 'app-edit-product',
@@ -22,7 +23,8 @@ export class EditProductModalComponent implements OnInit{
 
   constructor(
     private modalController: ModalController,
-    private productService: ProductService
+    private productService: ProductService,
+    private imageService: ImageService
   ) {
 
   }
@@ -64,8 +66,15 @@ export class EditProductModalComponent implements OnInit{
   }
 
 
-  discardImage(index:number){
-    this.galleryPreviews.splice(index,1);
+  discardImage(index:number,imageId:number){
+    this.imageService.removeImage(this.product.id_product,imageId).subscribe({
+      next: (response) => {
+        this.galleryPreviews.splice(index,1);
+      },
+      error: (error: any) => {
+        console.error('Error al borrar la foto del producto:', error);
+      },
+    });
   }
 
   convertFilesToDataURL(files: FileList, callback: (imagePreviews: string[]) => void) {

@@ -38,7 +38,7 @@ ion-content {
             margin-top: 12px;
             font-size: 14px;
             font-weight: 300;
-    
+
             &::placeholder {
                 color: #e5e5e5;
             }
@@ -49,27 +49,29 @@ ion-content {
             margin-top: 12px;
             font-size: 14px;
             font-weight: 300;
-    
+
             &::placeholder {
                 color: #e5e5e5;
             }
         }
 
         margin-top: 16px;
+
         ::ng-deep ion-input {
             margin-bottom: 15px;
+
             .input-bottom {
                 padding-right: 6px;
                 margin-top: -25px !important;
             }
-        
+
         }
 
-        ::ng-deep ion-textarea{
+        ::ng-deep ion-textarea {
             margin-bottom: 15px;
             height: auto;
 
-            .native-wrapper{
+            .native-wrapper {
                 padding-bottom: 20px;
             }
 
@@ -82,7 +84,7 @@ ion-content {
 
     .zyro-image-selector {
         margin-bottom: 16px;
-    
+
         .zyro-image-selector__button {
             position: relative;
             display: block;
@@ -92,7 +94,7 @@ ion-content {
             border-radius: 4px;
             background-color: #dadce0;
         }
-    
+
         .zyro-image-selector__image {
             object-fit: var(--z-object-fit, contain);
             width: 100%;
@@ -100,7 +102,7 @@ ion-content {
             object-position: center center;
             border-radius: 4px;
         }
-    
+
         .zyro-image-selector__description {
             position: absolute;
             border-bottom-left-radius: 4px;
@@ -117,10 +119,10 @@ ion-content {
             -webkit-backdrop-filter: blur(2px);
             backdrop-filter: blur(2px);
         }
-    
+
         .zyro-image-selector__icon {
             margin-bottom: 4px;
-    
+
             ion-icon {
                 transition: .3s ease transform;
                 fill: currentColor;
@@ -132,7 +134,7 @@ ion-content {
                 overflow: hidden;
             }
         }
-    
+
         .text-body-2 {
             font-size: 14px;
             font-style: normal;
@@ -141,3 +143,34 @@ ion-content {
         }
     }
 }
+
+.image-container {
+    position: relative;
+    display: inline-block;
+}
+
+.uploaded-image {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.discard-button {
+    position: absolute;
+    bottom: 170px;
+    left: 155px;
+    right: 0px;
+    top: 15px;  
+    background-color: rgba(227, 227, 227, 0);
+
+    ion-icon {
+        color: #000000;
+        font-size: 24px;
+        background-color: white;
+        &:hover{
+            background-color: rgba(255, 0, 0, 0.9);
+            box-shadow: 0px 0px 5px 0px rgba(255, 0, 0, 0.815);  
+        }
+    }
+
+}   
