@@ -22,6 +22,7 @@ import base64
 
 
 class ShopView(APIView):
+
     permission_classes = [IsAuthenticated]
 
     def get(self, request, id_seller=None):
@@ -35,6 +36,10 @@ class ShopView(APIView):
 
 
 class SellerShopsView(APIView):
+    """
+    View for managing sections in a seller's shop.
+    """
+
     permission_classes = [IsAuthenticated]
 
     def get(self, request, id_shop=None):
@@ -65,6 +70,17 @@ class SellerShopsView(APIView):
             )
 
     def post(self, request):
+        """
+        Create a new section in a seller's shop.
+
+        Parameters:
+        - id_shop (int): The ID of the seller's shop.
+        - shop_data (dict): The data for the new section.
+        - order (int): The order of the new section.
+
+        Returns:
+        - Response: A response indicating the success of the operation.
+        """
         profile = request.user.profile
         request_data = request.data.copy()
 
@@ -87,6 +103,17 @@ class SellerShopsView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, id_shop):
+        """
+        Update an existing section in a seller's shop.
+
+        Parameters:
+        - id_shop_section (int): The ID of the section to update.
+        - shop_data (dict): The updated data for the section.
+        - order (int): The updated order of the section.
+
+        Returns:
+        - Response: A response indicating the success of the operation.
+        """
         try:
             shop = Shop.objects.get(id_shop=id_shop)
             if request.user != shop.profile.user:
@@ -120,6 +147,15 @@ class SellerShopsView(APIView):
             )
 
     def delete(self, request, id_shop):
+        """
+        Delete an existing section in a seller's shop.
+
+        Parameters:
+        - id_shop_section (int): The ID of the section to delete.
+
+        Returns:
+        - Response: A response indicating the success of the operation.
+        """
         shop = get_object_or_404(Shop, id_shop=id_shop)
 
         if request.user != shop.profile.user:
@@ -135,9 +171,24 @@ class SellerShopsView(APIView):
 
 
 class SellerShopSectionView(APIView):
+    """
+    View for managing sections in a seller's shop.
+    """
+
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
+        """
+        Create a new section in a seller's shop.
+
+        Parameters:
+        - id_shop (int): The ID of the seller's shop.
+        - shop_data (dict): The data for the new section.
+        - order (int): The order of the new section.
+
+        Returns:
+        - Response: A response indicating the success of the operation.
+        """
         id_shop = request.data.get("id_shop")
         shop_data = request.data.get("shop_data")
         order = request.data.get("order")
@@ -168,21 +219,32 @@ class SellerShopSectionView(APIView):
             )
 
     def put(self, request, id_shop_section):
+        """
+        Update an existing section in a seller's shop.
+
+        Parameters:
+        - id_shop_section (int): The ID of the section to update.
+        - shop_data (dict): The updated data for the section.
+        - order (int): The updated order of the section.
+
+        Returns:
+        - Response: A response indicating the success of the operation.
+        """
         try:
             section = Section.objects.get(pk=id_shop_section)
         except Section.DoesNotExist:
             return Response(
                 {"error": "La sección de tienda no existe"},
-                status=status.HTTP_400_BAD_REQUEST,
+                status=status.HTTP_404_NOT_FOUND,
             )
 
         shop_data = request.data.get("shop_data")
-        order = request.data.get("order")  # Obtener el nuevo orden desde la solicitud
+        order = request.data.get("order")
+
         section_serializer = ShopSectionSerializer(instance=section, data=shop_data)
 
         if section_serializer.is_valid():
             section_serializer.save()
-            # Actualizar el orden en ShopSectionOrder
             ShopSectionOrder.objects.filter(section=section).update(order=order)
             return Response(
                 {"success": "Sección de tienda actualizada exitosamente"},
@@ -196,6 +258,15 @@ class SellerShopSectionView(APIView):
             )
 
     def delete(self, request, id_shop_section):
+        """
+        Delete an existing section in a seller's shop.
+
+        Parameters:
+        - id_shop_section (int): The ID of the section to delete.
+
+        Returns:
+        - Response: A response indicating the success of the operation.
+        """
         try:
             section = Section.objects.get(pk=id_shop_section)
             section.delete()
@@ -214,9 +285,16 @@ class SellerShopSectionView(APIView):
 
 
 class ProductsView(APIView):
+    """
+    View for managing products.
+    """
+
     permission_classes = [IsAuthenticated]
 
     def get(self, request, id_product=None, id_shop=None):
+        """
+        Retrieve products based on the provided parameters.
+        """
         if id_product is not None:
             try:
                 product = Product.objects.get(id_product=id_product)
@@ -258,6 +336,10 @@ class ProductsView(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request):
+        """
+        Create a new product based on the provided data.
+        """
+
         # Extraer los datos de la solicitud
         shop_id = request.data.get("shopId")
         name = request.data.get("name")
@@ -321,6 +403,9 @@ class ProductsView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, id_product):
+        """
+        Update an existing product based on the provided data.
+        """
         product = get_object_or_404(Product, id_product=id_product)
 
         name = request.data.get("name")
@@ -388,6 +473,9 @@ class ProductsView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def delete(self, request, id_product):
+        """
+        Delete a product based on the provided product ID.
+        """
         try:
             product = get_object_or_404(Product, id_product=id_product)
             product.delete()
@@ -402,9 +490,16 @@ class ProductsView(APIView):
 
 
 class ProductImageView(APIView):
+    """
+    View for managing product images.
+    """
+
     permission_classes = [IsAuthenticated]
 
     def delete(self, request, id):
+        """
+        Delete a product image based on the provided image ID.
+        """
         product_id = request.query_params.get("product_id")
         product = get_object_or_404(Product, pk=product_id)
         image = get_object_or_404(ProductImage, pk=id, product=product)
@@ -414,15 +509,25 @@ class ProductImageView(APIView):
 
 
 class ProductCommentsView(APIView):
+    """
+    View for managing product comments.
+    """
+
     permission_classes = [IsAuthenticated]
 
     def get(self, request, id_product):
+        """
+        Retrieve comments for a product based on the provided product ID.
+        """
         product = get_object_or_404(Product, id_product=id_product)
         comments = product.product_comments.all().order_by("-date_posted")
         serializer = CommentSerializer(comments, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request, id_product):
+        """
+        Create a new comment for a product based on the provided data.
+        """
         try:
             product = get_object_or_404(Product, id_product=id_product)
 
@@ -455,6 +560,9 @@ class ProductCommentsView(APIView):
             )
 
     def delete(self, request, id_comment):
+        """
+        Delete a comment based on the provided comment ID.
+        """
         comment = get_object_or_404(Comment, pk=id_comment)
         if request.user.profile != comment.author:
             return Response(

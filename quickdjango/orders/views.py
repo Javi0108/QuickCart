@@ -91,6 +91,7 @@ class OrderView(APIView):
 
 
 class CheckoutSessionView(APIView):
+
     def post(self, request, *args, **kwargs):
         try:
             order_id = request.data.get("order_id")
