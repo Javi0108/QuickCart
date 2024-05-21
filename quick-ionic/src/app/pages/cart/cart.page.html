@@ -40,7 +40,7 @@
         </div>
         <p *ngIf="!cart">There are no products in the order.</p>
         <div class="back-to-shop">
-          <button href="#" class="quickart-button">
+          <button [routerLink]="['/catalog']" class="quickart-button">
             <ion-icon name="arrow-back-sharp"></ion-icon>
             <span class="text-muted">Back to shop</span>
           </button>
