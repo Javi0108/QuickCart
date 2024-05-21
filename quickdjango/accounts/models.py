@@ -5,8 +5,8 @@ import json
 class Profile(models.Model):
     id_profile = models.AutoField(primary_key=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    phone = models.CharField(max_length=20, null=True)
-    mobile = models.CharField(max_length=20, null=False, blank=True)
+    phone = models.CharField(max_length=20, null=True, blank=True)
+    mobile = models.CharField(max_length=20, null=True, blank=True)
     address = models.CharField(max_length=55, null=True, blank=True)
     avatar = models.ImageField(upload_to='avatar/', blank=True, null=True)
     

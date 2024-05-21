@@ -59,12 +59,10 @@ export class ProductsManagementPage {
 
 
   loadProducts(shopId: number) {
-    console.log(shopId)
     this.productService.getShopProducts(shopId).subscribe(
       (response) => {
         this.products = response;
         this.filteredProducts = response;
-        console.log(this.products)
       },
       (error) => {
         console.error('Error loading products:', error);
@@ -90,6 +88,8 @@ export class ProductsManagementPage {
 
   async openEditModal(product: Product) {
 
+    console.log("product", product)
+
     this.editProductForm = this.formBuilder.group({
       name: [product.name, Validators.required],
       brand: [product.brand],
@@ -100,8 +100,6 @@ export class ProductsManagementPage {
       stockQuantity: [product.stock_quantity, [Validators.required, Validators.min(0)]],
       gallery: [product.images]
     });
-
-    console.log("openModal", product)
 
     const modal = await this.modalController.create({
       component: EditProductModalComponent,
@@ -116,7 +114,6 @@ export class ProductsManagementPage {
         if (index !== -1) {
           this.products.splice(index, 1, updatedProduct);
         }
-        console.log('Data received from modal:', data.data);
       }
     });
   

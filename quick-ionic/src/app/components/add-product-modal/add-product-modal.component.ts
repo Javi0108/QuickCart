@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { FormGroup } from '@angular/forms';
 import { ProductService } from 'src/app/services/product.service';
@@ -8,7 +8,7 @@ import { ProductService } from 'src/app/services/product.service';
   templateUrl: './add-product-modal.component.html',
   styleUrls: ['./add-product-modal.component.scss'],
 })
-export class AddProductModalComponent {
+export class AddProductModalComponent implements OnInit{
   @Input() createProductForm!: FormGroup;
   @Input() shopId!: number;
   imagePreview: any;
@@ -17,8 +17,10 @@ export class AddProductModalComponent {
   constructor(
     private modalController: ModalController,
     private productService: ProductService
-  ) {
+  ) {}
 
+  ngOnInit(): void {
+    this.createProductForm.reset();
   }
 
   closeModal(dataToSend?: any) {
@@ -78,6 +80,7 @@ export class AddProductModalComponent {
   }
 
   async createProduct() {
+    console.log("fkdskbdfkjgbkdf")
     if (this.createProductForm.valid) {
 
       const data = {

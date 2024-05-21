@@ -9,7 +9,7 @@
     </div>
 
     <form [formGroup]="loginForm" (ngSubmit)="login()">
-      <h3>Log in</h3>
+      <h3>LogIn</h3>
       <ion-input type="text" formControlName="username" placeholder="Username" labelPlacement="floating"
         label="Username" fill="outline"> </ion-input>
       <ion-input type="password" formControlName="password" placeholder="Password" labelPlacement="floating"
@@ -21,7 +21,7 @@
 
       <button type="submit" [disabled]="!loginForm.valid">Log In</button>
       <div class="social">
-        <span>Don't you have an account yet?<a [routerLink]="['/register']">Sign up here</a></span>
+        <span>Don't you have an account yet?<a [routerLink]="['/register']">Sign Up here</a></span>
       </div>
     </form>
   </div>

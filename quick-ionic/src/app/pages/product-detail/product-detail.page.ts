@@ -58,11 +58,19 @@ export class ProductDetailPage implements OnInit {
         this.productData = productData;
         this.selectedImage = this.productData.avatar
         if (!this.productData) {
-          console.error('No se encontró el producto con el ID proporcionado.');
+          this.notificationToastService.presentToast(
+            'Error',
+            'danger',
+            '/assets/exclamation.svg'
+          );
         }
       },
       error: (error) => {
-        console.error('Error al obtener los datos del producto:', error);
+        this.notificationToastService.presentToast(
+          'Error',
+          'danger',
+          '/assets/exclamation.svg'
+        );
       }
     });
 
@@ -84,12 +92,20 @@ export class ProductDetailPage implements OnInit {
   addToCart() {
     this.quantity_value = Number(this.quantity.value);
     this.orderService.addProductToOrder(this.productId, this.quantity_value).subscribe({
-      next(response) {
-        console.log("Producto añadido correctamente al carrito")
+      next: (response) => {
+        this.notificationToastService.presentToast(
+          'Successfully added to cart',
+          'success',
+          '/assets/check.svg'
+        );
       },
-      error(error) {
-        console.error('Error al obtener los datos del pedido/producto:', error);
-      },
+      error: (error) => {
+        this.notificationToastService.presentToast(
+          'Error when adding to cart',
+          'danger',
+          '/assets/exclamation.svg'
+        );
+      }
     });
   }
   
@@ -123,17 +139,17 @@ export class ProductDetailPage implements OnInit {
       next: (data: any) => {
         this.productComments = data;
         this.notificationToastService.presentToast(
-          'El comentario se eliminó correctamente.',
+          'The comment was successfully deleted.',
           'success',
-          '../../assets/check.svg'
+          '/assets/check.svg'
         );
       },
       error: (error) => {
         console.error('Error al eliminar el comentario:', error);
         this.notificationToastService.presentToast(
-          'Se produjo un error al eliminar el comentario. Por favor, inténtalo de nuevo más tarde.',
-          'error',
-          '../../assets/error.svg'
+          'An error occurred while deleting the comment. Please try again later.',
+          'danger',
+          '/assets/exclamation.svg'
         );
       }
     });

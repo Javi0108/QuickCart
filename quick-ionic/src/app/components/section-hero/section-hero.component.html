@@ -22,9 +22,9 @@
                 <span>{{sectionData.banner_1.price_text}}</span>
                 {{sectionData.banner_1.price}}
               </h3>
-              <div *ngIf="sectionData.banner_1.related_product" class="button">
-                <a [routerLink]="['/product', sectionData.banner_1.related_product]" type="button"
-                  class="btn btn-primary">{{sectionData.banner_1.button}}</a>
+              <div *ngIf="sectionData.banner_1.related_product">
+                <button [routerLink]="['/product', sectionData.banner_1.related_product]"
+                class="quickart-button quickart-button-violet">{{sectionData.banner_1.button}}</button>
               </div>
             </div>
           </div>
@@ -52,9 +52,8 @@
                 <div class="content">
                   <h2>{{sectionData.banner_3.title}}</h2>
                   <p>{{sectionData.banner_3.content}}</p>
-                  <div *ngIf="sectionData.banner_3.related_product" class="button">
-                    <a [routerLink]="['/product', sectionData.banner_3.related_product]" type="button"
-                      class="btn btn-primary">{{sectionData.banner_3.button}}</a>
+                  <div *ngIf="sectionData.banner_3.related_product">
+                    <button [routerLink]="['/product', sectionData.banner_3.related_product]" class="quickart-button quickart-button-white">{{sectionData.banner_3.button}}</button>
                   </div>
                 </div>
               </div>
@@ -212,9 +211,9 @@
               <span>{{sectionData.banner_1.price_text}}</span>
               {{sectionData.banner_1.price}}
             </h3>
-            <div *ngIf="sectionData.banner_1.related_product" class="button">
-              <a [routerLink]="['/product', sectionData.banner_1.related_product]" type="button"
-                class="btn btn-primary">{{sectionData.banner_1.button}}</a>
+            <div *ngIf="sectionData.banner_1.related_product">
+              <button [routerLink]="['/product', sectionData.banner_1.related_product]"
+                class="quickart-button quickart-button-violet">{{sectionData.banner_1.button}}</button>
             </div>
           </div>
         </div>
@@ -242,9 +241,9 @@
               <div class="content">
                 <h2>{{sectionData.banner_3.title}}</h2>
                 <p>{{sectionData.banner_3.content}}</p>
-                <div *ngIf="sectionData.banner_3.related_product" class="button">
-                  <a [routerLink]="['/product', sectionData.banner_3.related_product]" type="button"
-                    class="btn btn-primary">{{sectionData.banner_3.button}}</a>
+                <div *ngIf="sectionData.banner_3.related_product" >
+                  <button [routerLink]="['/product', sectionData.banner_3.related_product]"
+                  class="quickart-button quickart-button-white">{{sectionData.banner_3.button}}</button>
                 </div>
               </div>
             </div>

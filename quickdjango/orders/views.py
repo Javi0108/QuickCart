@@ -121,6 +121,7 @@ class CheckoutSessionView(APIView):
             checkout_session = stripe.checkout.Session.create(**session_data)
             print(checkout_session.id)
             order.id_stripe = checkout_session.id
+            order.status = "Paid"
             order.save()
             return Response({"url": checkout_session.url}, status=200)
         except Order.DoesNotExist:

@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <form enctype="multipart/form-data" [formGroup]="editProductForm" (ngSubmit)="editProduct()">
+  <form enctype="multipart/form-data" [formGroup]="editProductForm">
     <ion-input label="Name" label-placement="floating" fill="outline" formControlName="name"></ion-input>
     <ion-input label="Brand" label-placement="floating" fill="outline" formControlName="brand"></ion-input>
     <ion-input label="Short description" label-placement="floating" fill="outline"
@@ -19,7 +19,7 @@
 
 
     <div class="image-input-container visually-hidden">
-      <ion-img *ngIf="imagePreview" [src]="imagePreview" class="uploaded-image"></ion-img>
+      <ion-img *ngIf="imagePreview" [src]="environment.backend + imagePreview" class="uploaded-image"></ion-img>
       <ion-input id="image-input" label="Logo" fill="outline" type="file" formControlName="image"
         (change)="onFileSelected($event)" class="file-input"></ion-input>
 
@@ -32,7 +32,7 @@
         (change)="onFileSelected($event)" class="file-input visually-hidden"></ion-input>
       <button class="zyro-image-selector__button" title="Replace image">
         <ion-icon *ngIf="!imagePreview" class="zyro-image-selector__image" name="image-sharp"></ion-icon>
-        <ion-img *ngIf="imagePreview" class="zyro-image-selector__image" [src]="imagePreview"></ion-img>
+        <ion-img *ngIf="imagePreview" class="zyro-image-selector__image" [src]="imagePreview.startsWith('data:image/') ? imagePreview : environment.backend + imagePreview"></ion-img>
         <div class="zyro-image-selector__description">
           <ion-icon name="photo_library" class="icon material-symbols-rounded zyro-image-selector__icon"></ion-icon>
           <p *ngIf="imagePreview" class="text-body-2">Replace image</p>
@@ -47,10 +47,10 @@
       (change)="onGallerySelected($event)" class="file-input" multiple></ion-input>
     <ion-row *ngIf="galleryPreviews">
       <ion-col size="6" *ngFor="let image of galleryPreviews">
-        <ion-img [src]="image" class="uploaded-image"></ion-img>
+        <ion-img [src]="getImageSrc(image)" class="uploaded-image"></ion-img>
       </ion-col>
     </ion-row>
     <ion-input label="Stock" label-placement="floating" fill="outline" formControlName="stockQuantity"></ion-input>
-    <ion-button type="submit" [disabled]="editProductForm.invalid">Submit</ion-button>
+    <button type="submit" class="quickart-button quickart-button-violet" [disabled]="editProductForm.invalid" (click)="editProduct()">Edit</button>
   </form>
 </ion-content>

@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { FormGroup } from '@angular/forms';
 import { ProductService } from 'src/app/services/product.service';
 import { Product } from 'src/app/interfaces/product.interface';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-edit-product',
@@ -17,6 +18,8 @@ export class EditProductModalComponent implements OnInit{
 
   imagePreview: any;
 
+  environment = environment;
+
   constructor(
     private modalController: ModalController,
     private productService: ProductService
@@ -24,6 +27,9 @@ export class EditProductModalComponent implements OnInit{
 
   }
   ngOnInit(): void {
+
+    this.galleryPreviews = this.editProductForm.value.gallery
+    this.imagePreview = this.editProductForm.value.image
   }
 
   closeModal(dataToSend?: any) {
@@ -52,7 +58,7 @@ export class EditProductModalComponent implements OnInit{
     const files: FileList = event.target.files;
     if (files && files.length > 0) {
       this.convertFilesToDataURL(files, (imagePreviews: string[]) => {
-        this.galleryPreviews = imagePreviews;
+        this.galleryPreviews.push(...imagePreviews);
       });
     }
   }
@@ -111,5 +117,13 @@ export class EditProductModalComponent implements OnInit{
     if (inputElement) {
       inputElement.click();
     }
+  }
+
+
+  getImageSrc(image: any): string {
+    if (typeof image === 'string' && image.startsWith('data:image/')) {
+      return image;
+    }
+    return this.environment.backend + image.image;
   }
 }
