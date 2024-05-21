@@ -1,12 +1,10 @@
 import { ChangeDetectorRef, Component, EventEmitter, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observer } from 'rxjs';
 import { Profile } from 'src/app/interfaces/profile.interface';
 import { User } from 'src/app/interfaces/user.interface';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProfileService } from 'src/app/services/profile.service';
-import { FormBuilder } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -27,9 +25,7 @@ export class MenuPage implements OnInit {
     private profileService: ProfileService,
     private router: Router,
     private changeDetector: ChangeDetectorRef,
-  ) {
-
-  }
+  ) {}
 
   ngOnInit() {
     this.loadProfile();

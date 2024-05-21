@@ -39,10 +39,10 @@ export class CartPage implements OnInit {
 
   updateQuantity(productId: number, quantity: number) {
     this.orderService.updateProductQuantity(this.cart.id_order, productId, quantity).subscribe({
-      next(response) {
-        console.log("Product quantity updated successfully");
+      next: (response) => {
+        this.loadOrder();
       },
-      error(error) {
+      error: (error) => {
         console.error('Error updating product quantity:', error);
       },
     });
@@ -50,10 +50,10 @@ export class CartPage implements OnInit {
 
   removeFromCart(productId: number) {
     this.orderService.removeProductFromOrder(this.cart.id_order, productId).subscribe({
-      next(response) {
-        console.log("Producto eliminado correctamente del carrito")
+      next: (response) => {
+        this.loadOrder();
       },
-      error(error) {
+      error: (error) => {
         console.error('Error al obtener los datos del pedido/producto:', error);
       },
     });

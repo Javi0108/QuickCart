@@ -80,6 +80,8 @@ class OrderView(APIView):
 
         order = get_object_or_404(Order, id_order=pk)
         serializer = OrderSerializer(order)
+        
+        print(serializer.data)
 
         return Response(serializer.data, status=status.HTTP_204_NO_CONTENT)
 

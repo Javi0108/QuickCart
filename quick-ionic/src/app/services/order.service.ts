@@ -29,8 +29,8 @@ export class OrderService {
     return this.http.put<any>(`${this.baseURL}update/${orderId}/`, data, { headers: this.getHeaders() });
   }
 
-  removeProductFromOrder(orderId: number, productId: number): Observable<Order> {
-    return this.http.delete<Order>(`${this.baseURL}remove/${orderId}/?product_id=${productId}`, { headers: this.getHeaders() });
+  removeProductFromOrder(orderId: number, productId: number): Observable<any> {
+    return this.http.delete<any>(`${this.baseURL}remove/${orderId}/?product_id=${productId}`, { headers: this.getHeaders() });
   }
 
   private getHeaders(): HttpHeaders {
