@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from accounts.models import Profile
 from django.test import TestCase
 
@@ -119,3 +120,5 @@ class PasswordUpdateViewTest(TestCase):
         response = self.client.post(self.url, self.data, format="json")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["success"], "Password updated")
+=======
+>>>>>>> 0baae1021f8ce3dc51b8c40f6e5953888f59b86d
