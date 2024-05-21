@@ -14,7 +14,7 @@
     <ion-input label="Short description" label-placement="floating" fill="outline"
       formControlName="shortDescription" maxlength="115"></ion-input>
     <ion-input label="Description" label-placement="floating" fill="outline" formControlName="description"></ion-input>
-    <ion-input label="Price" label-placement="floating" fill="outline" formControlName="price"></ion-input>
+    <ion-input label="Price" label-placement="floating" fill="outline" formControlName="price" type="number"></ion-input>
 
 
 
@@ -50,7 +50,7 @@
         <ion-img [src]="image" class="uploaded-image"></ion-img>
       </ion-col>
     </ion-row>
-    <ion-input label="Stock" label-placement="floating" fill="outline" formControlName="stockQuantity"></ion-input>
+    <ion-input label="Stock" label-placement="floating" fill="outline" formControlName="stockQuantity" type="number"></ion-input>
     <button type="submit" class="quickart-button quickart-button-violet" [disabled]="createProductForm.invalid" (click)="createProduct()">Create</button>
   </form>
 </ion-content>
