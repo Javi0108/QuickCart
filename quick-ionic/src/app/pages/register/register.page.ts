@@ -68,16 +68,18 @@ export class RegisterPage implements OnInit {
       if (this.validatePassword()) {
         console.log('Password validated');
       }
-      
-      this.authService.register(user).subscribe((data) => {
+
+      this.authService.register(user).subscribe({
+        next: (data) => {
           this.router.navigate(['/login']);
         },
-        error => {
+        error: (error) => {
           this.notificationToastService.presentToast(
             'Sign Up failed',
             'danger',
             '../../assets/exclamation.svg'
           );
+        },
       });
     }
   }
@@ -130,7 +132,7 @@ export class RegisterPage implements OnInit {
   showHide(event: any, inputId: string) {
     const parentElement = document.getElementById(event.target.id);
     const input = document.getElementById(inputId) as HTMLInputElement;
-    
+
     if (input != undefined) {
       if (parentElement != undefined) {
         if (this.passwordSeen == false) {
@@ -148,8 +150,7 @@ export class RegisterPage implements OnInit {
     }
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ngAfterViewInit() {
     this.pageloaded = true;
